@@ -1,7 +1,7 @@
 {
   "metadata": {
     "directory": "C:\\Users\\7Arrt\\Desktop\\Projects\\ecs7search\\data\\mimics",
-    "indexed_at": "Sun Apr  5 18:51:21 2026",
+    "indexed_at": "Sun Apr  5 18:59:59 2026",
     "total_files": 298,
     "total_tags": 5553,
     "total_positions": 20524,
@@ -203,8 +203,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 15.1,
-          "y": 52.75,
+          "x": 29.54,
+          "y": 41.42,
           "func": "POINTVAL"
         },
         {
@@ -221,8 +221,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 15.1,
-          "y": 52.75,
+          "x": 29.54,
+          "y": 41.42,
           "func": "POINTVAL"
         }
       ]
@@ -248,8 +248,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 15.25,
-          "y": 54.5,
+          "x": 29.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         },
         {
@@ -266,8 +266,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 15.25,
-          "y": 54.5,
+          "x": 29.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         }
       ]
@@ -293,8 +293,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 16.25,
-          "y": 54.5,
+          "x": 30.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         },
         {
@@ -311,8 +311,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 16.25,
-          "y": 54.5,
+          "x": 30.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         }
       ]
@@ -338,8 +338,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 17.25,
-          "y": 54.5,
+          "x": 31.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         },
         {
@@ -356,8 +356,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 17.25,
-          "y": 54.5,
+          "x": 31.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         }
       ]
@@ -383,8 +383,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 18.25,
-          "y": 54.5,
+          "x": 32.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         },
         {
@@ -401,8 +401,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 18.25,
-          "y": 54.5,
+          "x": 32.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         }
       ]
@@ -428,8 +428,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 19.25,
-          "y": 54.5,
+          "x": 33.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         },
         {
@@ -446,8 +446,8 @@
         },
         {
           "file": "pavlik_992_mimic_02_new.g",
-          "x": 19.25,
-          "y": 54.5,
+          "x": 33.69,
+          "y": 43.17,
           "func": "flsa_inter_lock"
         }
       ]
@@ -4273,25 +4273,25 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 66.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 85.5,
+          "x": 61.5,
           "y": 66.5,
           "func": "POINTVAL"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 66.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 85.5,
+          "x": 61.5,
           "y": 66.5,
           "func": "POINTVAL"
         }
@@ -4305,25 +4305,25 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 72.5,
+          "x": 48.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 72.5,
+          "x": 48.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         }
@@ -4337,25 +4337,25 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 73.5,
+          "x": 49.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 73.5,
+          "x": 49.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         }
@@ -4369,25 +4369,25 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 74.5,
+          "x": 50.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 74.5,
+          "x": 50.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         }
@@ -4401,25 +4401,25 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 75.5,
+          "x": 51.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 75.5,
+          "x": 51.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         }
@@ -4433,25 +4433,25 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 76.5,
+          "x": 52.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
+          "x": -19.0,
           "y": 65.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 76.5,
+          "x": 52.5,
           "y": 65.5,
           "func": "flsa_inter_lock"
         }
@@ -4466,13 +4466,13 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 62.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 62.5,
           "func": "flsa_grp_select"
         },
@@ -4484,13 +4484,13 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 62.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 62.5,
           "func": "flsa_grp_select"
         },
@@ -4511,13 +4511,13 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 60.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 60.5,
           "func": "flsa_grp_select"
         },
@@ -4529,13 +4529,13 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 60.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 60.5,
           "func": "flsa_grp_select"
         },
@@ -4556,13 +4556,13 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 58.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 58.5,
           "func": "flsa_grp_select"
         },
@@ -4574,13 +4574,13 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 58.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 58.5,
           "func": "flsa_grp_select"
         },
@@ -4601,13 +4601,13 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 56.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 56.5,
           "func": "flsa_grp_select"
         },
@@ -4619,13 +4619,13 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 56.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 56.5,
           "func": "flsa_grp_select"
         },
@@ -4646,13 +4646,13 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 54.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 54.5,
           "func": "flsa_grp_select"
         },
@@ -4664,13 +4664,13 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 54.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 94.0,
+          "x": 70.0,
           "y": 54.5,
           "func": "flsa_grp_select"
         },
@@ -4692,8 +4692,8 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 2.0,
+          "x": -48.0,
+          "y": 4.0,
           "func": "POINTVAL"
         },
         {
@@ -4704,8 +4704,8 @@
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 2.0,
+          "x": -48.0,
+          "y": 4.0,
           "func": "POINTVAL"
         },
         {
@@ -4716,8 +4716,8 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 2.0,
+          "x": -48.0,
+          "y": 4.0,
           "func": "POINTVAL"
         },
         {
@@ -4728,8 +4728,8 @@
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 2.0,
+          "x": -48.0,
+          "y": 4.0,
           "func": "POINTVAL"
         },
         {
@@ -4748,26 +4748,26 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 2.0,
+          "x": -48.0,
+          "y": 4.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 2.0,
+          "x": -48.0,
+          "y": 4.0,
           "func": "POINTVAL"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 2.0,
+          "x": -48.0,
+          "y": 4.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 2.0,
+          "x": -48.0,
+          "y": 4.0,
           "func": "POINTVAL"
         }
       ]
@@ -4781,14 +4781,14 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 50.0,
+          "x": -19.0,
+          "y": 52.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 85.5,
-          "y": 50.5,
+          "x": 61.5,
+          "y": 52.5,
           "func": "POINTVAL"
         },
         {
@@ -4799,14 +4799,14 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 50.0,
+          "x": -19.0,
+          "y": 52.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 85.5,
-          "y": 50.5,
+          "x": 61.5,
+          "y": 52.5,
           "func": "POINTVAL"
         },
         {
@@ -4826,14 +4826,14 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "flsa_grp_select"
         },
         {
@@ -4844,14 +4844,14 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "flsa_grp_select"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "flsa_grp_select"
         },
         {
@@ -4872,8 +4872,8 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
@@ -4884,8 +4884,8 @@
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
@@ -4896,8 +4896,8 @@
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
@@ -4908,8 +4908,8 @@
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
@@ -4928,26 +4928,26 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": -24.0,
-          "y": 4.0,
+          "x": -48.0,
+          "y": 6.0,
           "func": "POINTVAL"
         }
       ]
@@ -4960,26 +4960,26 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 44.0,
+          "x": -19.0,
+          "y": 46.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 85.5,
-          "y": 44.5,
+          "x": 61.5,
+          "y": 46.5,
           "func": "POINTVAL"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 44.0,
+          "x": -19.0,
+          "y": 46.0,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 85.5,
-          "y": 44.5,
+          "x": 61.5,
+          "y": 46.5,
           "func": "POINTVAL"
         }
       ]
@@ -4992,26 +4992,26 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 65.0,
+          "x": -19.0,
+          "y": 67.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 77.5,
-          "y": 65.5,
+          "x": 53.5,
+          "y": 67.5,
           "func": "flsa_inter_lock"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 65.0,
+          "x": -19.0,
+          "y": 67.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 77.5,
-          "y": 65.5,
+          "x": 53.5,
+          "y": 67.5,
           "func": "flsa_inter_lock"
         }
       ]
@@ -5024,26 +5024,26 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 65.0,
+          "x": -19.0,
+          "y": 67.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 78.5,
-          "y": 65.5,
+          "x": 54.5,
+          "y": 67.5,
           "func": "flsa_inter_lock"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 65.0,
+          "x": -19.0,
+          "y": 67.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 78.5,
-          "y": 65.5,
+          "x": 54.5,
+          "y": 67.5,
           "func": "flsa_inter_lock"
         }
       ]
@@ -5056,26 +5056,26 @@
       "positions": [
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 65.0,
+          "x": -19.0,
+          "y": 67.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 79.5,
-          "y": 65.5,
+          "x": 55.5,
+          "y": 67.5,
           "func": "flsa_inter_lock"
         },
         {
           "file": "_pavlik_992_group_01_.g",
-          "x": 5.0,
-          "y": 65.0,
+          "x": -19.0,
+          "y": 67.0,
           "func": "flsa_inter_lock"
         },
         {
           "file": "pavlik_992_group_01.g",
-          "x": 79.5,
-          "y": 65.5,
+          "x": 55.5,
+          "y": 67.5,
           "func": "flsa_inter_lock"
         }
       ]
@@ -8056,8 +8056,8 @@
         },
         {
           "file": "pavlik_spares.g",
-          "x": 132.24,
-          "y": 30.5,
+          "x": 132.12,
+          "y": 11.0,
           "func": "POINTVAL"
         },
         {
@@ -8068,8 +8068,8 @@
         },
         {
           "file": "pavlik_spares.g",
-          "x": 132.24,
-          "y": 30.5,
+          "x": 132.12,
+          "y": 11.0,
           "func": "POINTVAL"
         }
       ]
@@ -8107,8 +8107,8 @@
         },
         {
           "file": "pavlik_spares.g",
-          "x": 132.24,
-          "y": 28.5,
+          "x": 132.12,
+          "y": 9.0,
           "func": "POINTVAL"
         },
         {
@@ -8119,8 +8119,8 @@
         },
         {
           "file": "pavlik_spares.g",
-          "x": 132.24,
-          "y": 28.5,
+          "x": 132.12,
+          "y": 9.0,
           "func": "POINTVAL"
         }
       ]
@@ -10283,8 +10283,8 @@
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 20.0,
-          "y": 34.75,
+          "x": 1.0,
+          "y": 29.75,
           "func": "POINTVAL"
         },
         {
@@ -10301,8 +10301,8 @@
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 20.0,
-          "y": 34.75,
+          "x": 1.0,
+          "y": 29.75,
           "func": "POINTVAL"
         },
         {
@@ -10328,8 +10328,8 @@
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 64.94,
-          "y": 32.5,
+          "x": 0.6,
+          "y": 32.3,
           "func": "pointvalent"
         },
         {
@@ -10346,8 +10346,8 @@
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 64.94,
-          "y": 32.5,
+          "x": 0.6,
+          "y": 32.3,
           "func": "pointvalent"
         },
         {
@@ -10370,14 +10370,14 @@
       "positions": [
         {
           "file": "concept_ball_mill.g",
-          "x": 92.24,
-          "y": 35.04,
+          "x": 19.59,
+          "y": 69.27,
           "func": "FLSA_MOTOR_MILL"
         },
         {
           "file": "concept_ball_mill.g",
-          "x": 94.0,
-          "y": 37.71,
+          "x": 21.34,
+          "y": 71.94,
           "func": "FLSA_MOTOR"
         },
         {
@@ -10400,14 +10400,14 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 92.24,
-          "y": 35.04,
+          "x": 90.97,
+          "y": 31.94,
           "func": "FLSA_MOTOR_MILL"
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 94.0,
-          "y": 37.71,
+          "x": 92.73,
+          "y": 34.61,
           "func": "FLSA_MOTOR"
         },
         {
@@ -10418,14 +10418,14 @@
         },
         {
           "file": "concept_ball_mill.g",
-          "x": 92.24,
-          "y": 35.04,
+          "x": 19.59,
+          "y": 69.27,
           "func": "FLSA_MOTOR_MILL"
         },
         {
           "file": "concept_ball_mill.g",
-          "x": 94.0,
-          "y": 37.71,
+          "x": 21.34,
+          "y": 71.94,
           "func": "FLSA_MOTOR"
         },
         {
@@ -10448,14 +10448,14 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 92.24,
-          "y": 35.04,
+          "x": 90.97,
+          "y": 31.94,
           "func": "FLSA_MOTOR_MILL"
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 94.0,
-          "y": 37.71,
+          "x": 92.73,
+          "y": 34.61,
           "func": "FLSA_MOTOR"
         },
         {
@@ -12057,14 +12057,14 @@
       "positions": [
         {
           "file": "concept_ball_mill.g",
-          "x": 101.24,
-          "y": 24.04,
+          "x": 19.74,
+          "y": 31.59,
           "func": "FLSA_MOTOR_MILL"
         },
         {
           "file": "concept_ball_mill.g",
-          "x": 103.0,
-          "y": 26.71,
+          "x": 21.49,
+          "y": 34.27,
           "func": "FLSA_MOTOR"
         },
         {
@@ -12087,14 +12087,14 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 101.24,
-          "y": 24.04,
+          "x": 97.53,
+          "y": 28.8,
           "func": "FLSA_MOTOR_MILL"
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 103.0,
-          "y": 26.71,
+          "x": 99.29,
+          "y": 31.48,
           "func": "FLSA_MOTOR"
         },
         {
@@ -12105,14 +12105,14 @@
         },
         {
           "file": "concept_ball_mill.g",
-          "x": 101.24,
-          "y": 24.04,
+          "x": 19.74,
+          "y": 31.59,
           "func": "FLSA_MOTOR_MILL"
         },
         {
           "file": "concept_ball_mill.g",
-          "x": 103.0,
-          "y": 26.71,
+          "x": 21.49,
+          "y": 34.27,
           "func": "FLSA_MOTOR"
         },
         {
@@ -12135,14 +12135,14 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 101.24,
-          "y": 24.04,
+          "x": 97.53,
+          "y": 28.8,
           "func": "FLSA_MOTOR_MILL"
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 103.0,
-          "y": 26.71,
+          "x": 99.29,
+          "y": 31.48,
           "func": "FLSA_MOTOR"
         },
         {
@@ -12396,7 +12396,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 76.94,
-          "y": 43.45,
+          "y": 53.45,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -12420,7 +12420,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 76.94,
-          "y": 43.45,
+          "y": 53.45,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -12455,7 +12455,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 73.93,
-          "y": 40.3,
+          "y": 50.3,
           "func": "acesys_pump"
         },
         {
@@ -12485,7 +12485,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 73.93,
-          "y": 40.3,
+          "y": 50.3,
           "func": "acesys_pump"
         },
         {
@@ -12524,7 +12524,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 68.68,
-          "y": 38.34,
+          "y": 48.34,
           "func": "POINTVAL"
         },
         {
@@ -12542,7 +12542,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 68.68,
-          "y": 38.34,
+          "y": 48.34,
           "func": "POINTVAL"
         },
         {
@@ -12570,7 +12570,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 76.94,
-          "y": 6.71,
+          "y": 10.71,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -12594,7 +12594,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 76.94,
-          "y": 6.71,
+          "y": 10.71,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -12629,7 +12629,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 73.93,
-          "y": 3.56,
+          "y": 7.56,
           "func": "acesys_pump"
         },
         {
@@ -12659,7 +12659,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 73.93,
-          "y": 3.56,
+          "y": 7.56,
           "func": "acesys_pump"
         },
         {
@@ -12698,7 +12698,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 68.68,
-          "y": 1.61,
+          "y": 5.61,
           "func": "POINTVAL"
         },
         {
@@ -12716,7 +12716,7 @@
         {
           "file": "concept_ball_mill.g",
           "x": 68.68,
-          "y": 1.61,
+          "y": 5.61,
           "func": "POINTVAL"
         },
         {
@@ -12966,8 +12966,8 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 1.83,
-          "y": 64.43,
+          "x": 1.68,
+          "y": 25.89,
           "func": "pointvalent"
         },
         {
@@ -12984,8 +12984,8 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 1.83,
-          "y": 64.43,
+          "x": 1.68,
+          "y": 25.89,
           "func": "pointvalent"
         },
         {
@@ -13055,8 +13055,8 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 3.74,
-          "y": 25.71,
+          "x": 1.82,
+          "y": 17.95,
           "func": "pointvalent"
         },
         {
@@ -13073,8 +13073,8 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 3.74,
-          "y": 25.71,
+          "x": 1.82,
+          "y": 17.95,
           "func": "pointvalent"
         },
         {
@@ -13274,13 +13274,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 32.33,
-          "y": 44.9,
+          "x": 42.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 30.0,
+          "x": 35.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13298,13 +13298,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 32.33,
-          "y": 44.9,
+          "x": 42.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 30.0,
+          "x": 35.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13332,13 +13332,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 33.33,
-          "y": 44.9,
+          "x": 43.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 31.0,
+          "x": 36.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13356,13 +13356,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 33.33,
-          "y": 44.9,
+          "x": 43.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 31.0,
+          "x": 36.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13390,13 +13390,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 34.33,
-          "y": 44.9,
+          "x": 44.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 32.0,
+          "x": 37.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13414,13 +13414,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 34.33,
-          "y": 44.9,
+          "x": 44.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 32.0,
+          "x": 37.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13448,13 +13448,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 35.33,
-          "y": 44.9,
+          "x": 45.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 33.0,
+          "x": 38.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13472,13 +13472,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 35.33,
-          "y": 44.9,
+          "x": 45.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 33.0,
+          "x": 38.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13506,13 +13506,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 36.33,
-          "y": 44.9,
+          "x": 46.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 34.0,
+          "x": 39.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13530,13 +13530,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 36.33,
-          "y": 44.9,
+          "x": 46.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 34.0,
+          "x": 39.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13564,13 +13564,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 37.33,
-          "y": 44.9,
+          "x": 47.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 35.0,
+          "x": 40.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13588,13 +13588,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 37.33,
-          "y": 44.9,
+          "x": 47.33,
+          "y": 46.2,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 35.0,
+          "x": 40.0,
           "y": 32.5,
           "func": "flsa_inter_lock"
         },
@@ -13622,13 +13622,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 31.5,
-          "y": 42.73,
+          "x": 41.5,
+          "y": 44.04,
           "func": "POINTVAL"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 37.5,
+          "x": 42.5,
           "y": 33.33,
           "func": "POINTVAL"
         },
@@ -13646,13 +13646,13 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 31.5,
-          "y": 42.73,
+          "x": 41.5,
+          "y": 44.04,
           "func": "POINTVAL"
         },
         {
           "file": "concept_pump_840_842_popup_01.g",
-          "x": 37.5,
+          "x": 42.5,
           "y": 33.33,
           "func": "POINTVAL"
         },
@@ -13680,14 +13680,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 30.77,
-          "y": 28.4,
+          "x": 41.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 34.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13704,14 +13704,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 30.77,
-          "y": 28.4,
+          "x": 41.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 34.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13738,14 +13738,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 31.77,
-          "y": 28.4,
+          "x": 42.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 35.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13762,14 +13762,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 31.77,
-          "y": 28.4,
+          "x": 42.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 35.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13796,14 +13796,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 32.77,
-          "y": 28.4,
+          "x": 43.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 36.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13820,14 +13820,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 32.77,
-          "y": 28.4,
+          "x": 43.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 36.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13854,14 +13854,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 33.77,
-          "y": 28.4,
+          "x": 44.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 37.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13878,14 +13878,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 33.77,
-          "y": 28.4,
+          "x": 44.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 37.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13912,14 +13912,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 34.77,
-          "y": 28.4,
+          "x": 45.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 38.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13936,14 +13936,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 34.77,
-          "y": 28.4,
+          "x": 45.99,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 38.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13970,14 +13970,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 35.77,
-          "y": 28.4,
+          "x": 47.0,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 39.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -13994,14 +13994,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 35.77,
-          "y": 28.4,
+          "x": 47.0,
+          "y": 3.4,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 39.44,
-          "y": 33.46,
+          "y": 32.8,
           "func": "flsa_inter_lock"
         },
         {
@@ -14028,14 +14028,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 29.77,
-          "y": 26.26,
+          "x": 41.0,
+          "y": 1.26,
           "func": "POINTVAL"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 42.44,
-          "y": 34.33,
+          "y": 33.66,
           "func": "POINTVAL"
         },
         {
@@ -14052,14 +14052,14 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 29.77,
-          "y": 26.26,
+          "x": 41.0,
+          "y": 1.26,
           "func": "POINTVAL"
         },
         {
           "file": "concept_pump_841_843_popup_01.g",
           "x": 42.44,
-          "y": 34.33,
+          "y": 33.66,
           "func": "POINTVAL"
         },
         {
@@ -16137,7 +16137,7 @@
       "positions": [
         {
           "file": "concept_cyclon150.g",
-          "x": 5.0,
+          "x": 1.0,
           "y": 7.0,
           "func": "POINTVAL"
         },
@@ -16161,7 +16161,7 @@
         },
         {
           "file": "concept_cyclon150.g",
-          "x": 5.0,
+          "x": 1.0,
           "y": 7.0,
           "func": "POINTVAL"
         },
@@ -16195,7 +16195,7 @@
       "positions": [
         {
           "file": "concept_cyclon150.g",
-          "x": 5.0,
+          "x": 1.0,
           "y": 5.0,
           "func": "POINTVAL"
         },
@@ -16219,7 +16219,7 @@
         },
         {
           "file": "concept_cyclon150.g",
-          "x": 5.0,
+          "x": 1.0,
           "y": 5.0,
           "func": "POINTVAL"
         },
@@ -16254,7 +16254,7 @@
       "positions": [
         {
           "file": "concept_cyclon150.g",
-          "x": 5.0,
+          "x": 1.0,
           "y": 3.0,
           "func": "POINTVAL"
         },
@@ -16284,7 +16284,7 @@
         },
         {
           "file": "concept_cyclon150.g",
-          "x": 5.0,
+          "x": 1.0,
           "y": 3.0,
           "func": "POINTVAL"
         },
@@ -16324,7 +16324,7 @@
       "positions": [
         {
           "file": "concept_cyclon150.g",
-          "x": 5.0,
+          "x": 1.0,
           "y": 1.0,
           "func": "POINTVAL"
         },
@@ -16348,7 +16348,7 @@
         },
         {
           "file": "concept_cyclon150.g",
-          "x": 5.0,
+          "x": 1.0,
           "y": 1.0,
           "func": "POINTVAL"
         },
@@ -17372,8 +17372,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 91.38,
-          "y": 8.17,
+          "x": 84.79,
+          "y": 3.46,
           "func": "POINTVAL"
         },
         {
@@ -17402,8 +17402,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 91.38,
-          "y": 8.17,
+          "x": 84.79,
+          "y": 3.46,
           "func": "POINTVAL"
         },
         {
@@ -17441,8 +17441,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 107.32,
-          "y": 26.03,
+          "x": 85.21,
+          "y": 6.61,
           "func": "pointvalent"
         },
         {
@@ -17459,8 +17459,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 107.32,
-          "y": 26.03,
+          "x": 85.21,
+          "y": 6.61,
           "func": "pointvalent"
         },
         {
@@ -17556,8 +17556,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 16.26,
-          "y": 44.13,
+          "x": 10.26,
+          "y": 34.13,
           "func": "pointvalent"
         },
         {
@@ -17574,8 +17574,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 16.26,
-          "y": 44.13,
+          "x": 10.26,
+          "y": 34.13,
           "func": "pointvalent"
         },
         {
@@ -17600,14 +17600,14 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 16.08,
-          "y": 41.38,
+          "x": 10.08,
+          "y": 31.38,
           "func": "POINTVAL"
         },
         {
           "file": "concept_flotacia.g",
-          "x": 20.08,
-          "y": 59.95,
+          "x": 10.08,
+          "y": 57.95,
           "func": "POINTVAL"
         },
         {
@@ -17618,14 +17618,14 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 16.08,
-          "y": 41.38,
+          "x": 10.08,
+          "y": 31.38,
           "func": "POINTVAL"
         },
         {
           "file": "concept_flotacia.g",
-          "x": 20.08,
-          "y": 59.95,
+          "x": 10.08,
+          "y": 57.95,
           "func": "POINTVAL"
         },
         {
@@ -18609,8 +18609,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 102.34,
-          "y": 61.64,
+          "x": 95.5,
+          "y": 3.39,
           "func": "POINTVAL"
         },
         {
@@ -18627,8 +18627,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 102.34,
-          "y": 61.64,
+          "x": 95.5,
+          "y": 3.39,
           "func": "POINTVAL"
         },
         {
@@ -18821,8 +18821,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 24.5,
-          "y": 60.0,
+          "x": 106.51,
+          "y": 48.76,
           "func": "pointvalent"
         },
         {
@@ -18839,8 +18839,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 24.5,
-          "y": 60.0,
+          "x": 106.51,
+          "y": 48.76,
           "func": "pointvalent"
         },
         {
@@ -18867,8 +18867,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 50.76,
-          "y": 18.5,
+          "x": 108.38,
+          "y": 50.76,
           "func": "acesys_sym_unimotor"
         },
         {
@@ -18891,8 +18891,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 50.76,
-          "y": 18.5,
+          "x": 108.38,
+          "y": 50.76,
           "func": "acesys_sym_unimotor"
         },
         {
@@ -18925,8 +18925,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 53.76,
-          "y": 18.75,
+          "x": 111.38,
+          "y": 51.01,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -18949,8 +18949,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 53.76,
-          "y": 18.75,
+          "x": 111.38,
+          "y": 51.01,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -18988,8 +18988,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 30.09,
-          "y": 14.61,
+          "x": -1.01,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19006,8 +19006,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 30.09,
-          "y": 14.61,
+          "x": -1.01,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19033,8 +19033,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 31.09,
-          "y": 14.61,
+          "x": -0.01,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19051,8 +19051,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 31.09,
-          "y": 14.61,
+          "x": -0.01,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19078,8 +19078,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 32.09,
-          "y": 14.61,
+          "x": 0.99,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19096,8 +19096,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 32.09,
-          "y": 14.61,
+          "x": 0.99,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19123,8 +19123,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 33.09,
-          "y": 14.61,
+          "x": 1.99,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19141,8 +19141,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 33.09,
-          "y": 14.61,
+          "x": 1.99,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19168,8 +19168,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 34.09,
-          "y": 14.61,
+          "x": 2.99,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19186,8 +19186,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 34.09,
-          "y": 14.61,
+          "x": 2.99,
+          "y": 7.47,
           "func": "flsa_inter_lock"
         },
         {
@@ -19213,8 +19213,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 42.42,
-          "y": 37.48,
+          "x": 6.41,
+          "y": 8.47,
           "func": "POINTVAL"
         },
         {
@@ -19231,8 +19231,8 @@
         },
         {
           "file": "concept_pump_355_356_popup.g",
-          "x": 42.42,
-          "y": 37.48,
+          "x": 6.41,
+          "y": 8.47,
           "func": "POINTVAL"
         },
         {
@@ -19251,8 +19251,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 91.88,
-          "y": 11.17,
+          "x": 88.77,
+          "y": 40.84,
           "func": "pointvalent"
         },
         {
@@ -19269,8 +19269,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 91.88,
-          "y": 11.17,
+          "x": 88.77,
+          "y": 40.84,
           "func": "pointvalent"
         },
         {
@@ -19577,8 +19577,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 20.26,
-          "y": 62.7,
+          "x": 10.26,
+          "y": 60.7,
           "func": "pointvalent"
         },
         {
@@ -19589,8 +19589,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 20.26,
-          "y": 62.7,
+          "x": 10.26,
+          "y": 60.7,
           "func": "pointvalent"
         },
         {
@@ -20031,8 +20031,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 47.67,
-          "y": 65.4,
+          "x": 37.99,
+          "y": 66.85,
           "func": "flsa_grp_select"
         },
         {
@@ -20049,8 +20049,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 47.67,
-          "y": 65.4,
+          "x": 37.99,
+          "y": 66.85,
           "func": "flsa_grp_select"
         },
         {
@@ -20272,8 +20272,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 47.67,
-          "y": 39.88,
+          "x": 38.3,
+          "y": 41.36,
           "func": "flsa_grp_select"
         },
         {
@@ -20290,8 +20290,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 47.67,
-          "y": 39.88,
+          "x": 38.3,
+          "y": 41.36,
           "func": "flsa_grp_select"
         },
         {
@@ -20394,8 +20394,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 56.22,
-          "y": 64.4,
+          "x": 49.01,
+          "y": 65.5,
           "func": "flsa_grp_select"
         },
         {
@@ -20412,8 +20412,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 56.22,
-          "y": 64.4,
+          "x": 49.01,
+          "y": 65.5,
           "func": "flsa_grp_select"
         },
         {
@@ -20516,8 +20516,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 55.3,
-          "y": 38.28,
+          "x": 48.38,
+          "y": 40.15,
           "func": "flsa_grp_select"
         },
         {
@@ -20534,8 +20534,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 55.3,
-          "y": 38.28,
+          "x": 48.38,
+          "y": 40.15,
           "func": "flsa_grp_select"
         },
         {
@@ -20745,8 +20745,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 65.17,
-          "y": 64.4,
+          "x": 58.34,
+          "y": 65.33,
           "func": "flsa_grp_select"
         },
         {
@@ -20763,8 +20763,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 65.17,
-          "y": 64.4,
+          "x": 58.34,
+          "y": 65.33,
           "func": "flsa_grp_select"
         },
         {
@@ -20955,8 +20955,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 63.97,
-          "y": 37.85,
+          "x": 58.58,
+          "y": 39.99,
           "func": "flsa_grp_select"
         },
         {
@@ -20973,8 +20973,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 63.97,
-          "y": 37.85,
+          "x": 58.58,
+          "y": 39.99,
           "func": "flsa_grp_select"
         },
         {
@@ -21077,8 +21077,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 74.21,
-          "y": 63.27,
+          "x": 68.55,
+          "y": 64.84,
           "func": "flsa_grp_select"
         },
         {
@@ -21095,8 +21095,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 74.21,
-          "y": 63.27,
+          "x": 68.55,
+          "y": 64.84,
           "func": "flsa_grp_select"
         },
         {
@@ -21199,8 +21199,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 73.36,
-          "y": 37.34,
+          "x": 69.33,
+          "y": 39.29,
           "func": "flsa_grp_select"
         },
         {
@@ -21217,8 +21217,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 73.36,
-          "y": 37.34,
+          "x": 69.33,
+          "y": 39.29,
           "func": "flsa_grp_select"
         },
         {
@@ -21421,8 +21421,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 84.91,
-          "y": 63.32,
+          "x": 79.21,
+          "y": 64.66,
           "func": "flsa_grp_select"
         },
         {
@@ -21439,8 +21439,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 84.91,
-          "y": 63.32,
+          "x": 79.21,
+          "y": 64.66,
           "func": "flsa_grp_select"
         },
         {
@@ -21872,8 +21872,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 94.39,
-          "y": 62.82,
+          "x": 90.86,
+          "y": 63.95,
           "func": "flsa_grp_select"
         },
         {
@@ -21890,8 +21890,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 94.39,
-          "y": 62.82,
+          "x": 90.86,
+          "y": 63.95,
           "func": "flsa_grp_select"
         },
         {
@@ -22286,8 +22286,8 @@
       "positions": [
         {
           "file": "concept_flotacia.g",
-          "x": 63.77,
-          "y": 11.17,
+          "x": 24.86,
+          "y": 6.91,
           "func": "pointvalent"
         },
         {
@@ -22298,8 +22298,8 @@
         },
         {
           "file": "concept_flotacia.g",
-          "x": 63.77,
-          "y": 11.17,
+          "x": 24.86,
+          "y": 6.91,
           "func": "pointvalent"
         },
         {
@@ -22863,8 +22863,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 80.39,
-          "y": 44.33,
+          "x": 71.29,
+          "y": 26.09,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -22875,8 +22875,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 80.39,
-          "y": 44.33,
+          "x": 71.29,
+          "y": 26.09,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -22895,8 +22895,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 80.39,
-          "y": 42.02,
+          "x": 71.29,
+          "y": 23.78,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -22907,8 +22907,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 80.39,
-          "y": 42.02,
+          "x": 71.29,
+          "y": 23.78,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -22927,8 +22927,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 73.89,
-          "y": 48.42,
+          "x": 64.79,
+          "y": 30.18,
           "func": "POINTVAL"
         },
         {
@@ -22939,8 +22939,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 73.89,
-          "y": 48.42,
+          "x": 64.79,
+          "y": 30.18,
           "func": "POINTVAL"
         },
         {
@@ -22959,8 +22959,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 73.89,
-          "y": 46.34,
+          "x": 64.79,
+          "y": 28.1,
           "func": "POINTVAL"
         },
         {
@@ -22971,8 +22971,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 73.89,
-          "y": 46.34,
+          "x": 64.79,
+          "y": 28.1,
           "func": "POINTVAL"
         },
         {
@@ -23273,8 +23273,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 53.61,
+          "x": 71.27,
+          "y": 19.61,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23285,8 +23285,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 53.61,
+          "x": 71.27,
+          "y": 19.61,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23305,8 +23305,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 44.3,
+          "x": 71.27,
+          "y": 10.3,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23317,8 +23317,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 44.3,
+          "x": 71.27,
+          "y": 10.3,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23337,8 +23337,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 51.29,
+          "x": 71.27,
+          "y": 17.29,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23349,8 +23349,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 51.29,
+          "x": 71.27,
+          "y": 17.29,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23369,8 +23369,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 48.96,
+          "x": 71.27,
+          "y": 14.96,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23381,8 +23381,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 48.96,
+          "x": 71.27,
+          "y": 14.96,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23401,8 +23401,8 @@
       "positions": [
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 46.63,
+          "x": 71.27,
+          "y": 12.63,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -23413,8 +23413,8 @@
         },
         {
           "file": "concept_Knelson_190.g",
-          "x": 75.27,
-          "y": 46.63,
+          "x": 71.27,
+          "y": 12.63,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -30391,8 +30391,8 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 36.56,
-          "y": 29.53,
+          "x": 36.06,
+          "y": 31.03,
           "func": "POINTVAL"
         },
         {
@@ -30409,8 +30409,8 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 36.56,
-          "y": 29.53,
+          "x": 36.06,
+          "y": 31.03,
           "func": "POINTVAL"
         },
         {
@@ -30436,8 +30436,8 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 36.66,
-          "y": 32.76,
+          "x": 36.16,
+          "y": 34.27,
           "func": "POINTVAL"
         },
         {
@@ -30454,8 +30454,8 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 36.66,
-          "y": 32.76,
+          "x": 36.16,
+          "y": 34.27,
           "func": "POINTVAL"
         },
         {
@@ -30481,8 +30481,8 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 36.7,
-          "y": 31.14,
+          "x": 36.2,
+          "y": 32.64,
           "func": "POINTVAL"
         },
         {
@@ -30499,8 +30499,8 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 36.7,
-          "y": 31.14,
+          "x": 36.2,
+          "y": 32.64,
           "func": "POINTVAL"
         },
         {
@@ -32060,7 +32060,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 8.61,
           "func": "POINTVAL"
         },
@@ -32078,7 +32078,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 8.61,
           "func": "POINTVAL"
         },
@@ -32105,7 +32105,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 10.21,
           "func": "POINTVAL"
         },
@@ -32123,7 +32123,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 10.21,
           "func": "POINTVAL"
         },
@@ -32150,7 +32150,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 11.81,
           "func": "POINTVAL"
         },
@@ -32168,7 +32168,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 11.81,
           "func": "POINTVAL"
         },
@@ -32195,7 +32195,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 3.81,
           "func": "POINTVAL"
         },
@@ -32213,7 +32213,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 3.81,
           "func": "POINTVAL"
         },
@@ -32240,7 +32240,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 5.41,
           "func": "POINTVAL"
         },
@@ -32258,7 +32258,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 5.41,
           "func": "POINTVAL"
         },
@@ -32285,7 +32285,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 7.01,
           "func": "POINTVAL"
         },
@@ -32303,7 +32303,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.68,
+          "x": 61.68,
           "y": 7.01,
           "func": "POINTVAL"
         },
@@ -32330,7 +32330,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.7,
+          "x": 61.7,
           "y": 2.19,
           "func": "POINTVAL"
         },
@@ -32348,7 +32348,7 @@
         },
         {
           "file": "pavlik_991_mimic_04.g",
-          "x": 62.7,
+          "x": 61.7,
           "y": 2.19,
           "func": "POINTVAL"
         },
@@ -33898,8 +33898,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 71.38,
-          "y": 58.03,
+          "x": 103.39,
+          "y": 4.03,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -33922,8 +33922,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 71.38,
-          "y": 58.03,
+          "x": 103.39,
+          "y": 4.03,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -33956,8 +33956,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 66.63,
-          "y": 57.91,
+          "x": 98.65,
+          "y": 3.91,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -33980,8 +33980,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 66.63,
-          "y": 57.91,
+          "x": 98.65,
+          "y": 3.91,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34014,8 +34014,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 58.18,
-          "y": 57.91,
+          "x": 93.19,
+          "y": 3.91,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34038,8 +34038,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 58.18,
-          "y": 57.91,
+          "x": 93.19,
+          "y": 3.91,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34072,8 +34072,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 54.46,
-          "y": 57.98,
+          "x": 89.47,
+          "y": 3.98,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34096,8 +34096,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 54.46,
-          "y": 57.98,
+          "x": 89.47,
+          "y": 3.98,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34130,8 +34130,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 50.75,
-          "y": 58.03,
+          "x": 85.77,
+          "y": 4.03,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34154,8 +34154,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 50.75,
-          "y": 58.03,
+          "x": 85.77,
+          "y": 4.03,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34188,8 +34188,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 45.36,
-          "y": 58.03,
+          "x": 80.38,
+          "y": 4.03,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34212,8 +34212,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 45.36,
-          "y": 58.03,
+          "x": 80.38,
+          "y": 4.03,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34246,8 +34246,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 40.62,
-          "y": 58.03,
+          "x": 75.63,
+          "y": 4.03,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34270,8 +34270,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 40.62,
-          "y": 58.03,
+          "x": 75.63,
+          "y": 4.03,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -34304,8 +34304,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 69.04,
-          "y": 37.27,
+          "x": 36.59,
+          "y": 31.27,
           "func": "POINTVAL"
         },
         {
@@ -34328,8 +34328,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 69.04,
-          "y": 37.27,
+          "x": 36.59,
+          "y": 31.27,
           "func": "POINTVAL"
         },
         {
@@ -34362,8 +34362,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 69.15,
-          "y": 40.51,
+          "x": 36.7,
+          "y": 34.51,
           "func": "POINTVAL"
         },
         {
@@ -34386,8 +34386,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 69.15,
-          "y": 40.51,
+          "x": 36.7,
+          "y": 34.51,
           "func": "POINTVAL"
         },
         {
@@ -34420,8 +34420,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 69.18,
-          "y": 38.88,
+          "x": 36.73,
+          "y": 32.88,
           "func": "POINTVAL"
         },
         {
@@ -34444,8 +34444,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 69.18,
-          "y": 38.88,
+          "x": 36.73,
+          "y": 32.88,
           "func": "POINTVAL"
         },
         {
@@ -34568,8 +34568,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 70.34,
-          "y": 59.23,
+          "x": 102.36,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34592,8 +34592,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 70.34,
-          "y": 59.23,
+          "x": 102.36,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34626,8 +34626,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 65.6,
-          "y": 59.23,
+          "x": 97.61,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34650,8 +34650,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 65.6,
-          "y": 59.23,
+          "x": 97.61,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34684,8 +34684,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 57.23,
-          "y": 59.23,
+          "x": 92.24,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34708,8 +34708,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 57.23,
-          "y": 59.23,
+          "x": 92.24,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34742,8 +34742,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 53.47,
-          "y": 59.23,
+          "x": 88.48,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34766,8 +34766,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 53.47,
-          "y": 59.23,
+          "x": 88.48,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34800,8 +34800,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 49.71,
-          "y": 59.23,
+          "x": 84.73,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34824,8 +34824,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 49.71,
-          "y": 59.23,
+          "x": 84.73,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34858,8 +34858,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 44.32,
-          "y": 59.23,
+          "x": 79.34,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34882,8 +34882,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 44.32,
-          "y": 59.23,
+          "x": 79.34,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34916,8 +34916,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.58,
-          "y": 59.23,
+          "x": 74.59,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -34940,8 +34940,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.58,
-          "y": 59.23,
+          "x": 74.59,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -35019,8 +35019,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 82.24,
-          "y": 59.26,
+          "x": 114.78,
+          "y": 5.26,
           "func": "FLSA_INDICATOR_LEVEL"
         },
         {
@@ -35043,8 +35043,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 82.24,
-          "y": 59.26,
+          "x": 114.78,
+          "y": 5.26,
           "func": "FLSA_INDICATOR_LEVEL"
         },
         {
@@ -35077,8 +35077,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 82.24,
-          "y": 61.01,
+          "x": 114.78,
+          "y": 7.01,
           "func": "FLSA_INDICATOR_FLOW"
         },
         {
@@ -35101,8 +35101,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 82.24,
-          "y": 61.01,
+          "x": 114.78,
+          "y": 7.01,
           "func": "FLSA_INDICATOR_FLOW"
         },
         {
@@ -35180,8 +35180,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 79.99,
-          "y": 61.01,
+          "x": 112.53,
+          "y": 7.01,
           "func": "FLSA_INDICATOR_DIFFERENCE"
         },
         {
@@ -35204,8 +35204,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 79.99,
-          "y": 61.01,
+          "x": 112.53,
+          "y": 7.01,
           "func": "FLSA_INDICATOR_DIFFERENCE"
         },
         {
@@ -35238,8 +35238,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 79.99,
-          "y": 59.26,
+          "x": 112.53,
+          "y": 5.26,
           "func": "FLSA_INDICATOR_PNEUMATIC_CONTROL"
         },
         {
@@ -35262,8 +35262,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 79.99,
-          "y": 59.26,
+          "x": 112.53,
+          "y": 5.26,
           "func": "FLSA_INDICATOR_PNEUMATIC_CONTROL"
         },
         {
@@ -35296,8 +35296,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 79.99,
-          "y": 57.51,
+          "x": 112.53,
+          "y": 3.51,
           "func": "FLSA_INDICATOR_FLOW"
         },
         {
@@ -35320,8 +35320,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 79.99,
-          "y": 57.51,
+          "x": 112.53,
+          "y": 3.51,
           "func": "FLSA_INDICATOR_FLOW"
         },
         {
@@ -35354,8 +35354,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 82.24,
-          "y": 57.51,
+          "x": 114.78,
+          "y": 3.51,
           "func": "FLSA_INDICATOR_THRUSTOR_TEMPERATURE"
         },
         {
@@ -35378,8 +35378,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 82.24,
-          "y": 57.51,
+          "x": 114.78,
+          "y": 3.51,
           "func": "FLSA_INDICATOR_THRUSTOR_TEMPERATURE"
         },
         {
@@ -35412,8 +35412,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 74.92,
-          "y": 59.23,
+          "x": 107.46,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -35436,8 +35436,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 74.92,
-          "y": 59.23,
+          "x": 107.46,
+          "y": 5.23,
           "func": "acesys_pump"
         },
         {
@@ -36519,8 +36519,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 34.61,
+          "x": 62.44,
+          "y": 8.61,
           "func": "POINTVAL"
         },
         {
@@ -36543,8 +36543,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 34.61,
+          "x": 62.44,
+          "y": 8.61,
           "func": "POINTVAL"
         },
         {
@@ -36577,8 +36577,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 36.21,
+          "x": 62.44,
+          "y": 10.21,
           "func": "POINTVAL"
         },
         {
@@ -36601,8 +36601,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 36.21,
+          "x": 62.44,
+          "y": 10.21,
           "func": "POINTVAL"
         },
         {
@@ -36635,8 +36635,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 37.81,
+          "x": 62.44,
+          "y": 11.81,
           "func": "POINTVAL"
         },
         {
@@ -36659,8 +36659,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 37.81,
+          "x": 62.44,
+          "y": 11.81,
           "func": "POINTVAL"
         },
         {
@@ -36693,8 +36693,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 29.81,
+          "x": 62.44,
+          "y": 3.81,
           "func": "POINTVAL"
         },
         {
@@ -36717,8 +36717,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 29.81,
+          "x": 62.44,
+          "y": 3.81,
           "func": "POINTVAL"
         },
         {
@@ -36751,8 +36751,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 31.41,
+          "x": 62.44,
+          "y": 5.41,
           "func": "POINTVAL"
         },
         {
@@ -36775,8 +36775,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 31.41,
+          "x": 62.44,
+          "y": 5.41,
           "func": "POINTVAL"
         },
         {
@@ -36809,8 +36809,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 33.01,
+          "x": 62.44,
+          "y": 7.01,
           "func": "POINTVAL"
         },
         {
@@ -36833,8 +36833,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.94,
-          "y": 33.01,
+          "x": 62.44,
+          "y": 7.01,
           "func": "POINTVAL"
         },
         {
@@ -36867,8 +36867,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.96,
-          "y": 28.19,
+          "x": 62.46,
+          "y": 2.19,
           "func": "POINTVAL"
         },
         {
@@ -36891,8 +36891,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 88.96,
-          "y": 28.19,
+          "x": 62.46,
+          "y": 2.19,
           "func": "POINTVAL"
         },
         {
@@ -37619,8 +37619,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.01,
-          "y": 39.75,
+          "x": 10.25,
+          "y": 23.25,
           "func": "POINTVAL"
         },
         {
@@ -37643,8 +37643,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.01,
-          "y": 39.75,
+          "x": 10.25,
+          "y": 23.25,
           "func": "POINTVAL"
         },
         {
@@ -37677,8 +37677,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.01,
-          "y": 37.75,
+          "x": 10.25,
+          "y": 21.25,
           "func": "POINTVAL"
         },
         {
@@ -37701,8 +37701,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.01,
-          "y": 37.75,
+          "x": 10.25,
+          "y": 21.25,
           "func": "POINTVAL"
         },
         {
@@ -37735,8 +37735,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.01,
-          "y": 35.75,
+          "x": 10.25,
+          "y": 19.25,
           "func": "POINTVAL"
         },
         {
@@ -37759,8 +37759,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.01,
-          "y": 35.75,
+          "x": 10.25,
+          "y": 19.25,
           "func": "POINTVAL"
         },
         {
@@ -37793,8 +37793,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.01,
-          "y": 33.75,
+          "x": 10.25,
+          "y": 17.25,
           "func": "POINTVAL"
         },
         {
@@ -37817,8 +37817,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 39.01,
-          "y": 33.75,
+          "x": 10.25,
+          "y": 17.25,
           "func": "POINTVAL"
         },
         {
@@ -37940,8 +37940,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 35.72,
+          "x": 8.25,
+          "y": 9.72,
           "func": "POINTVAL"
         },
         {
@@ -37958,8 +37958,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 35.72,
+          "x": 8.25,
+          "y": 9.72,
           "func": "POINTVAL"
         }
       ]
@@ -37985,8 +37985,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 34.12,
+          "x": 8.25,
+          "y": 8.12,
           "func": "POINTVAL"
         },
         {
@@ -38003,8 +38003,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 34.12,
+          "x": 8.25,
+          "y": 8.12,
           "func": "POINTVAL"
         }
       ]
@@ -38030,8 +38030,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 32.52,
+          "x": 8.25,
+          "y": 6.52,
           "func": "POINTVAL"
         },
         {
@@ -38048,8 +38048,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 32.52,
+          "x": 8.25,
+          "y": 6.52,
           "func": "POINTVAL"
         }
       ]
@@ -38075,8 +38075,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 30.92,
+          "x": 8.25,
+          "y": 4.92,
           "func": "POINTVAL"
         },
         {
@@ -38093,8 +38093,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 30.92,
+          "x": 8.25,
+          "y": 4.92,
           "func": "POINTVAL"
         }
       ]
@@ -38120,8 +38120,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 29.32,
+          "x": 8.25,
+          "y": 3.32,
           "func": "POINTVAL"
         },
         {
@@ -38138,8 +38138,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 29.32,
+          "x": 8.25,
+          "y": 3.32,
           "func": "POINTVAL"
         }
       ]
@@ -38165,8 +38165,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 27.72,
+          "x": 8.25,
+          "y": 1.72,
           "func": "POINTVAL"
         },
         {
@@ -38183,8 +38183,8 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 34.75,
-          "y": 27.72,
+          "x": 8.25,
+          "y": 1.72,
           "func": "POINTVAL"
         }
       ]
@@ -39346,7 +39346,7 @@
         {
           "file": "pavlik_991_mimic_02.g",
           "x": 134.44,
-          "y": 42.23,
+          "y": 42.73,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -39358,7 +39358,7 @@
         {
           "file": "pavlik_991_mimic_02.g",
           "x": 134.44,
-          "y": 42.23,
+          "y": 42.73,
           "func": "FLSA_INDICATOR_SPEED"
         }
       ]
@@ -39378,7 +39378,7 @@
         {
           "file": "pavlik_991_mimic_02.g",
           "x": 124.44,
-          "y": 42.23,
+          "y": 42.73,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -39390,7 +39390,7 @@
         {
           "file": "pavlik_991_mimic_02.g",
           "x": 124.44,
-          "y": 42.23,
+          "y": 42.73,
           "func": "FLSA_INDICATOR_SPEED"
         }
       ]
@@ -39409,8 +39409,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 129.5,
-          "y": 50.0,
+          "x": 129.51,
+          "y": 51.27,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -39421,8 +39421,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 129.5,
-          "y": 50.0,
+          "x": 129.51,
+          "y": 51.27,
           "func": "FLSA_INDICATOR_SPEED"
         }
       ]
@@ -39441,8 +39441,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 134.5,
-          "y": 50.0,
+          "x": 134.51,
+          "y": 51.27,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -39453,8 +39453,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 134.5,
-          "y": 50.0,
+          "x": 134.51,
+          "y": 51.27,
           "func": "FLSA_INDICATOR_SPEED"
         }
       ]
@@ -39473,8 +39473,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 124.5,
-          "y": 50.01,
+          "x": 124.51,
+          "y": 51.28,
           "func": "FLSA_INDICATOR_SPEED"
         },
         {
@@ -39485,8 +39485,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 124.5,
-          "y": 50.01,
+          "x": 124.51,
+          "y": 51.28,
           "func": "FLSA_INDICATOR_SPEED"
         }
       ]
@@ -39704,7 +39704,7 @@
         {
           "file": "pavlik_991_mimic_02.g",
           "x": 131.0,
-          "y": 41.38,
+          "y": 41.88,
           "func": "acesys_pump"
         },
         {
@@ -39716,7 +39716,7 @@
         {
           "file": "pavlik_991_mimic_02.g",
           "x": 131.0,
-          "y": 41.38,
+          "y": 41.88,
           "func": "acesys_pump"
         }
       ]
@@ -39736,7 +39736,7 @@
         {
           "file": "pavlik_991_mimic_02.g",
           "x": 120.99,
-          "y": 41.38,
+          "y": 41.88,
           "func": "acesys_pump"
         },
         {
@@ -39748,7 +39748,7 @@
         {
           "file": "pavlik_991_mimic_02.g",
           "x": 120.99,
-          "y": 41.38,
+          "y": 41.88,
           "func": "acesys_pump"
         }
       ]
@@ -39767,8 +39767,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 126.05,
-          "y": 48.89,
+          "x": 126.06,
+          "y": 50.17,
           "func": "acesys_pump"
         },
         {
@@ -39779,8 +39779,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 126.05,
-          "y": 48.89,
+          "x": 126.06,
+          "y": 50.17,
           "func": "acesys_pump"
         }
       ]
@@ -39799,8 +39799,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 131.06,
-          "y": 48.89,
+          "x": 131.07,
+          "y": 50.17,
           "func": "acesys_pump"
         },
         {
@@ -39811,8 +39811,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 131.06,
-          "y": 48.89,
+          "x": 131.07,
+          "y": 50.17,
           "func": "acesys_pump"
         }
       ]
@@ -39831,8 +39831,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 121.05,
-          "y": 48.88,
+          "x": 121.06,
+          "y": 50.16,
           "func": "acesys_pump"
         },
         {
@@ -39843,8 +39843,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 121.05,
-          "y": 48.88,
+          "x": 121.06,
+          "y": 50.16,
           "func": "acesys_pump"
         }
       ]
@@ -40373,8 +40373,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 108.0,
-          "y": 31.52,
+          "x": 110.0,
+          "y": 40.52,
           "func": "POINTVAL"
         },
         {
@@ -40385,8 +40385,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 108.0,
-          "y": 31.52,
+          "x": 110.0,
+          "y": 40.52,
           "func": "POINTVAL"
         }
       ]
@@ -40405,8 +40405,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 108.0,
-          "y": 29.38,
+          "x": 110.0,
+          "y": 38.38,
           "func": "POINTVAL"
         },
         {
@@ -40417,8 +40417,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 108.0,
-          "y": 29.38,
+          "x": 110.0,
+          "y": 38.38,
           "func": "POINTVAL"
         }
       ]
@@ -40520,8 +40520,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 87.5,
-          "y": 31.52,
+          "x": 91.5,
+          "y": 40.52,
           "func": "POINTVAL"
         },
         {
@@ -40538,8 +40538,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 87.5,
-          "y": 31.52,
+          "x": 91.5,
+          "y": 40.52,
           "func": "POINTVAL"
         }
       ]
@@ -40558,8 +40558,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 87.5,
-          "y": 29.38,
+          "x": 91.5,
+          "y": 38.38,
           "func": "POINTVAL"
         },
         {
@@ -40570,8 +40570,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 87.5,
-          "y": 29.38,
+          "x": 91.5,
+          "y": 38.38,
           "func": "POINTVAL"
         }
       ]
@@ -40590,8 +40590,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 108.0,
-          "y": 33.64,
+          "x": 110.0,
+          "y": 42.64,
           "func": "POINTVAL"
         },
         {
@@ -40602,8 +40602,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 108.0,
-          "y": 33.64,
+          "x": 110.0,
+          "y": 42.64,
           "func": "POINTVAL"
         }
       ]
@@ -40622,8 +40622,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 108.0,
-          "y": 35.54,
+          "x": 110.0,
+          "y": 44.54,
           "func": "POINTVAL"
         },
         {
@@ -40634,8 +40634,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 108.0,
-          "y": 35.54,
+          "x": 110.0,
+          "y": 44.54,
           "func": "POINTVAL"
         }
       ]
@@ -40737,8 +40737,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 87.5,
-          "y": 33.64,
+          "x": 91.5,
+          "y": 42.64,
           "func": "POINTVAL"
         },
         {
@@ -40761,8 +40761,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 87.5,
-          "y": 33.64,
+          "x": 91.5,
+          "y": 42.64,
           "func": "POINTVAL"
         },
         {
@@ -40794,8 +40794,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 87.52,
-          "y": 35.54,
+          "x": 91.52,
+          "y": 44.54,
           "func": "POINTVAL"
         },
         {
@@ -40812,8 +40812,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 87.52,
-          "y": 35.54,
+          "x": 91.52,
+          "y": 44.54,
           "func": "POINTVAL"
         }
       ]
@@ -40832,8 +40832,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 51.23,
+          "x": 90.5,
+          "y": 60.23,
           "func": "POINTVAL"
         },
         {
@@ -40844,8 +40844,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 51.23,
+          "x": 90.5,
+          "y": 60.23,
           "func": "POINTVAL"
         }
       ]
@@ -40864,8 +40864,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 47.97,
+          "x": 108.5,
+          "y": 56.97,
           "func": "POINTVAL"
         },
         {
@@ -40876,8 +40876,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 47.97,
+          "x": 108.5,
+          "y": 56.97,
           "func": "POINTVAL"
         }
       ]
@@ -40896,8 +40896,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 49.57,
+          "x": 108.5,
+          "y": 58.57,
           "func": "POINTVAL"
         },
         {
@@ -40908,8 +40908,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 49.57,
+          "x": 108.5,
+          "y": 58.57,
           "func": "POINTVAL"
         }
       ]
@@ -40928,8 +40928,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 60.0,
+          "x": 108.5,
+          "y": 60.17,
           "func": "POINTVAL"
         },
         {
@@ -40940,8 +40940,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 60.0,
+          "x": 108.5,
+          "y": 60.17,
           "func": "POINTVAL"
         }
       ]
@@ -40960,8 +40960,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 48.03,
+          "x": 90.5,
+          "y": 57.03,
           "func": "POINTVAL"
         },
         {
@@ -40972,8 +40972,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 48.03,
+          "x": 90.5,
+          "y": 57.03,
           "func": "POINTVAL"
         }
       ]
@@ -40992,8 +40992,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 49.63,
+          "x": 90.5,
+          "y": 58.63,
           "func": "POINTVAL"
         },
         {
@@ -41004,8 +41004,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 49.63,
+          "x": 90.5,
+          "y": 58.63,
           "func": "POINTVAL"
         }
       ]
@@ -41024,8 +41024,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 46.43,
+          "x": 90.5,
+          "y": 55.43,
           "func": "POINTVAL"
         },
         {
@@ -41036,8 +41036,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 46.43,
+          "x": 90.5,
+          "y": 55.43,
           "func": "POINTVAL"
         }
       ]
@@ -41056,8 +41056,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 43.16,
+          "x": 108.5,
+          "y": 52.16,
           "func": "POINTVAL"
         },
         {
@@ -41068,8 +41068,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 43.16,
+          "x": 108.5,
+          "y": 52.16,
           "func": "POINTVAL"
         }
       ]
@@ -41088,8 +41088,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 44.77,
+          "x": 108.5,
+          "y": 53.77,
           "func": "POINTVAL"
         },
         {
@@ -41100,8 +41100,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 44.77,
+          "x": 108.5,
+          "y": 53.77,
           "func": "POINTVAL"
         }
       ]
@@ -41120,8 +41120,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 46.37,
+          "x": 108.5,
+          "y": 55.37,
           "func": "POINTVAL"
         },
         {
@@ -41132,8 +41132,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 46.37,
+          "x": 108.5,
+          "y": 55.37,
           "func": "POINTVAL"
         }
       ]
@@ -41152,8 +41152,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 43.23,
+          "x": 90.5,
+          "y": 52.23,
           "func": "POINTVAL"
         },
         {
@@ -41164,8 +41164,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 43.23,
+          "x": 90.5,
+          "y": 52.23,
           "func": "POINTVAL"
         }
       ]
@@ -41184,8 +41184,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 44.83,
+          "x": 90.5,
+          "y": 53.83,
           "func": "POINTVAL"
         },
         {
@@ -41196,8 +41196,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.5,
-          "y": 44.83,
+          "x": 90.5,
+          "y": 53.83,
           "func": "POINTVAL"
         }
       ]
@@ -41216,8 +41216,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 41.5,
+          "x": 108.5,
+          "y": 50.5,
           "func": "POINTVAL"
         },
         {
@@ -41228,8 +41228,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 106.5,
-          "y": 41.5,
+          "x": 108.5,
+          "y": 50.5,
           "func": "POINTVAL"
         }
       ]
@@ -41248,8 +41248,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.52,
-          "y": 41.61,
+          "x": 90.52,
+          "y": 50.61,
           "func": "POINTVAL"
         },
         {
@@ -41260,8 +41260,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 86.52,
-          "y": 41.61,
+          "x": 90.52,
+          "y": 50.61,
           "func": "POINTVAL"
         }
       ]
@@ -41370,8 +41370,8 @@
       "positions": [
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 541.0,
-          "y": 31.0,
+          "x": 9289.0,
+          "y": 40.0,
           "func": "POINTVAL"
         },
         {
@@ -41382,8 +41382,8 @@
         },
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 541.0,
-          "y": 31.0,
+          "x": 9289.0,
+          "y": 40.0,
           "func": "POINTVAL"
         },
         {
@@ -41401,14 +41401,14 @@
       "positions": [
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 54.0,
-          "y": 29.0,
+          "x": 8802.0,
+          "y": 38.0,
           "func": "POINTVAL"
         },
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 54.0,
-          "y": 29.0,
+          "x": 8802.0,
+          "y": 38.0,
           "func": "POINTVAL"
         }
       ]
@@ -41421,8 +41421,8 @@
       "positions": [
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 7921.0,
-          "y": 31.0,
+          "x": 7953.0,
+          "y": 40.0,
           "func": "POINTVAL"
         },
         {
@@ -41433,8 +41433,8 @@
         },
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 7921.0,
-          "y": 31.0,
+          "x": 7953.0,
+          "y": 40.0,
           "func": "POINTVAL"
         },
         {
@@ -41452,14 +41452,14 @@
       "positions": [
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 9469.0,
-          "y": 29.0,
+          "x": 9501.0,
+          "y": 38.0,
           "func": "POINTVAL"
         },
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 9469.0,
-          "y": 29.0,
+          "x": 9501.0,
+          "y": 38.0,
           "func": "POINTVAL"
         }
       ]
@@ -42135,14 +42135,14 @@
       "positions": [
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 696.0,
-          "y": 28.0,
+          "x": 72694.0,
+          "y": 27.0,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 696.0,
-          "y": 28.0,
+          "x": 72694.0,
+          "y": 27.0,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -42154,14 +42154,14 @@
       "positions": [
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 0.0,
-          "y": 0.0,
+          "x": 71998.0,
+          "y": -1.0,
           "func": "group"
         },
         {
           "file": "concept_oilst_sm_popup_01.g",
-          "x": 0.0,
-          "y": 0.0,
+          "x": 71998.0,
+          "y": -1.0,
           "func": "group"
         }
       ]
@@ -44175,8 +44175,8 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 68.0,
-          "y": 49.56,
+          "x": 43.5,
+          "y": 39.56,
           "func": "pointvalent"
         },
         {
@@ -44193,8 +44193,8 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 68.0,
-          "y": 49.56,
+          "x": 43.5,
+          "y": 39.56,
           "func": "pointvalent"
         },
         {
@@ -44220,8 +44220,8 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 68.5,
-          "y": 21.09,
+          "x": 43.5,
+          "y": 11.09,
           "func": "pointvalent"
         },
         {
@@ -44238,8 +44238,8 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 68.5,
-          "y": 21.09,
+          "x": 43.5,
+          "y": 11.09,
           "func": "pointvalent"
         },
         {
@@ -44308,14 +44308,14 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 12.24,
-          "y": 64.52,
+          "x": 42.8,
+          "y": 23.11,
           "func": "pointvalent"
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 12.24,
-          "y": 64.52,
+          "x": 42.8,
+          "y": 23.11,
           "func": "pointvalent"
         }
       ]
@@ -44327,14 +44327,14 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 12.24,
-          "y": 62.27,
+          "x": 42.8,
+          "y": 20.86,
           "func": "POINTVAL"
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 12.24,
-          "y": 62.27,
+          "x": 42.8,
+          "y": 20.86,
           "func": "POINTVAL"
         }
       ]
@@ -44346,14 +44346,14 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 19.46,
-          "y": 67.56,
+          "x": 50.02,
+          "y": 26.16,
           "func": "FLSA_GRP_SELECT"
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 19.46,
-          "y": 67.56,
+          "x": 50.02,
+          "y": 26.16,
           "func": "FLSA_GRP_SELECT"
         }
       ]
@@ -44367,13 +44367,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 44.68,
-          "y": 1.24,
+          "x": 36.62,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 44.68,
+          "x": 69.68,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44385,13 +44385,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 44.68,
-          "y": 1.24,
+          "x": 36.62,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 44.68,
+          "x": 69.68,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44412,13 +44412,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 45.68,
-          "y": 1.24,
+          "x": 37.62,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 45.68,
+          "x": 70.68,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44430,13 +44430,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 45.68,
-          "y": 1.24,
+          "x": 37.62,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 45.68,
+          "x": 70.68,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44457,13 +44457,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 46.69,
-          "y": 1.24,
+          "x": 38.63,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 46.69,
+          "x": 71.69,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44475,13 +44475,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 46.69,
-          "y": 1.24,
+          "x": 38.63,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 46.69,
+          "x": 71.69,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44502,13 +44502,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 47.68,
-          "y": 1.24,
+          "x": 39.62,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 47.68,
+          "x": 72.68,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44520,13 +44520,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 47.68,
-          "y": 1.24,
+          "x": 39.62,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 47.68,
+          "x": 72.68,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44547,13 +44547,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 48.7,
-          "y": 1.24,
+          "x": 40.63,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 48.7,
+          "x": 73.7,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44565,13 +44565,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 48.7,
-          "y": 1.24,
+          "x": 40.63,
+          "y": 1.55,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 48.7,
+          "x": 73.7,
           "y": 1.24,
           "func": "flsa_inter_lock"
         },
@@ -44592,14 +44592,14 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 53.35,
-          "y": 2.24,
+          "x": 73.53,
+          "y": -62.01,
           "func": "POINTVAL"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 53.35,
-          "y": 2.24,
+          "x": 73.53,
+          "y": -62.01,
           "func": "POINTVAL"
         },
         {
@@ -44610,14 +44610,14 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 53.35,
-          "y": 2.24,
+          "x": 73.53,
+          "y": -62.01,
           "func": "POINTVAL"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 53.35,
-          "y": 2.24,
+          "x": 73.53,
+          "y": -62.01,
           "func": "POINTVAL"
         },
         {
@@ -44637,13 +44637,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 44.68,
-          "y": 32.0,
+          "x": 36.62,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 44.68,
+          "x": 69.68,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44655,13 +44655,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 44.68,
-          "y": 32.0,
+          "x": 36.62,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 44.68,
+          "x": 69.68,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44682,13 +44682,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 45.68,
-          "y": 32.0,
+          "x": 37.62,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 45.68,
+          "x": 70.68,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44700,13 +44700,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 45.68,
-          "y": 32.0,
+          "x": 37.62,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 45.68,
+          "x": 70.68,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44727,13 +44727,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 46.69,
-          "y": 32.0,
+          "x": 38.63,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 46.69,
+          "x": 71.69,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44745,13 +44745,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 46.69,
-          "y": 32.0,
+          "x": 38.63,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 46.69,
+          "x": 71.69,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44772,13 +44772,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 47.68,
-          "y": 32.0,
+          "x": 39.62,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 47.68,
+          "x": 72.68,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44790,13 +44790,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 47.68,
-          "y": 32.0,
+          "x": 39.62,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 47.68,
+          "x": 72.68,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44817,13 +44817,13 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 48.7,
-          "y": 32.0,
+          "x": 40.63,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 48.7,
+          "x": 73.7,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44835,13 +44835,13 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 48.7,
-          "y": 32.0,
+          "x": 40.63,
+          "y": 47.31,
           "func": "flsa_inter_lock"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 48.7,
+          "x": 73.7,
           "y": 32.0,
           "func": "flsa_inter_lock"
         },
@@ -44862,14 +44862,14 @@
       "positions": [
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 53.13,
-          "y": 33.0,
+          "x": 97.31,
+          "y": -0.51,
           "func": "POINTVAL"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 53.13,
-          "y": 33.0,
+          "x": 97.31,
+          "y": -0.51,
           "func": "POINTVAL"
         },
         {
@@ -44880,14 +44880,14 @@
         },
         {
           "file": "concept_pump_140_141_142_popup_01.g",
-          "x": 53.13,
-          "y": 33.0,
+          "x": 97.31,
+          "y": -0.51,
           "func": "POINTVAL"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 53.13,
-          "y": 33.0,
+          "x": 97.31,
+          "y": -0.51,
           "func": "POINTVAL"
         },
         {
@@ -46139,8 +46139,8 @@
       "positions": [
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 7.1,
-          "y": 15.91,
+          "x": 1.78,
+          "y": 15.35,
           "func": "POINTVAL"
         },
         {
@@ -46151,8 +46151,8 @@
         },
         {
           "file": "concept_pump_180_181_182_popup_01.g",
-          "x": 7.1,
-          "y": 15.91,
+          "x": 1.78,
+          "y": 15.35,
           "func": "POINTVAL"
         },
         {
@@ -51589,8 +51589,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 45.0,
-          "y": 50.5,
+          "x": 45.5,
+          "y": 49.5,
           "func": "POINTVAL"
         },
         {
@@ -51607,8 +51607,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 45.0,
-          "y": 50.5,
+          "x": 45.5,
+          "y": 49.5,
           "func": "POINTVAL"
         }
       ]
@@ -51975,8 +51975,8 @@
       "positions": [
         {
           "file": "concept_sag_mill.g",
-          "x": 99.6,
-          "y": 57.62,
+          "x": 127.17,
+          "y": 62.07,
           "func": "pointvalent"
         },
         {
@@ -51993,8 +51993,8 @@
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 99.6,
-          "y": 57.62,
+          "x": 127.17,
+          "y": 62.07,
           "func": "pointvalent"
         },
         {
@@ -52021,8 +52021,8 @@
       "positions": [
         {
           "file": "concept_sag_mill.g",
-          "x": 101.32,
-          "y": 59.93,
+          "x": 128.87,
+          "y": 64.39,
           "func": "acesys_sym_unimotor"
         },
         {
@@ -52033,20 +52033,20 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 101.32,
-          "y": 59.93,
+          "x": 111.69,
+          "y": 54.18,
           "func": "acesys_sym_unimotor"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 101.32,
-          "y": 59.93,
+          "x": 14.39,
+          "y": 60.08,
           "func": "acesys_sym_unimotor"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 101.32,
-          "y": 59.93,
+          "x": 128.87,
+          "y": 64.39,
           "func": "acesys_sym_unimotor"
         },
         {
@@ -52057,14 +52057,14 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 101.32,
-          "y": 59.93,
+          "x": 111.69,
+          "y": 54.18,
           "func": "acesys_sym_unimotor"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 101.32,
-          "y": 59.93,
+          "x": 14.39,
+          "y": 60.08,
           "func": "acesys_sym_unimotor"
         }
       ]
@@ -52079,8 +52079,8 @@
       "positions": [
         {
           "file": "concept_sag_mill.g",
-          "x": 104.68,
-          "y": 60.31,
+          "x": 132.22,
+          "y": 64.77,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -52091,20 +52091,20 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 104.68,
-          "y": 60.31,
+          "x": 115.05,
+          "y": 54.57,
           "func": "FLSA_GRP_SELECT"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 104.68,
-          "y": 60.31,
+          "x": 17.75,
+          "y": 60.46,
           "func": "FLSA_GRP_SELECT"
         },
         {
           "file": "concept_sag_mill.g",
-          "x": 104.68,
-          "y": 60.31,
+          "x": 132.22,
+          "y": 64.77,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -52115,14 +52115,14 @@
         },
         {
           "file": "pavlik_991_mimic_05.g",
-          "x": 104.68,
-          "y": 60.31,
+          "x": 115.05,
+          "y": 54.57,
           "func": "FLSA_GRP_SELECT"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 104.68,
-          "y": 60.31,
+          "x": 17.75,
+          "y": 60.46,
           "func": "FLSA_GRP_SELECT"
         }
       ]
@@ -53185,8 +53185,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 129.4,
-          "y": 63.88,
+          "x": 129.41,
+          "y": 66.12,
           "func": "POINTVAL"
         },
         {
@@ -53209,8 +53209,8 @@
         },
         {
           "file": "pavlik_991_mimic_02.g",
-          "x": 129.4,
-          "y": 63.88,
+          "x": 129.41,
+          "y": 66.12,
           "func": "POINTVAL"
         },
         {
@@ -55454,8 +55454,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 71.39,
-          "y": 47.44,
+          "x": 61.68,
+          "y": 41.82,
           "func": "POINTVAL"
         },
         {
@@ -55466,8 +55466,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 71.39,
-          "y": 47.44,
+          "x": 61.68,
+          "y": 41.82,
           "func": "POINTVAL"
         },
         {
@@ -55485,14 +55485,14 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 72.99,
-          "y": 46.26,
+          "x": 63.28,
+          "y": 40.63,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 72.99,
-          "y": 46.26,
+          "x": 63.28,
+          "y": 40.63,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -55505,8 +55505,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 71.03,
-          "y": 41.06,
+          "x": 61.32,
+          "y": 36.06,
           "func": "POINTVAL"
         },
         {
@@ -55517,8 +55517,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 71.03,
-          "y": 41.06,
+          "x": 61.32,
+          "y": 36.06,
           "func": "POINTVAL"
         },
         {
@@ -55536,14 +55536,14 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 72.99,
-          "y": 40.19,
+          "x": 63.28,
+          "y": 35.19,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 72.99,
-          "y": 40.19,
+          "x": 63.28,
+          "y": 35.19,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -55555,14 +55555,14 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 50.71,
-          "y": 33.33,
+          "x": 64.71,
+          "y": 29.33,
           "func": "Motor15"
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 50.71,
-          "y": 33.33,
+          "x": 64.71,
+          "y": 29.33,
           "func": "Motor15"
         }
       ]
@@ -55926,8 +55926,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 26.76,
-          "y": 44.24,
+          "x": 21.62,
+          "y": 36.24,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -55938,8 +55938,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 26.76,
-          "y": 44.24,
+          "x": 21.62,
+          "y": 36.24,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -55958,8 +55958,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 0.0,
-          "y": 0.0,
+          "x": -5.14,
+          "y": -8.0,
           "func": "group"
         },
         {
@@ -55970,8 +55970,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 0.0,
-          "y": 0.0,
+          "x": -5.14,
+          "y": -8.0,
           "func": "group"
         },
         {
@@ -55990,8 +55990,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 23.97,
-          "y": 42.42,
+          "x": 18.83,
+          "y": 34.42,
           "func": "FLSA_INDICATOR_LEVEL"
         },
         {
@@ -56002,8 +56002,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 23.97,
-          "y": 42.42,
+          "x": 18.83,
+          "y": 34.42,
           "func": "FLSA_INDICATOR_LEVEL"
         },
         {
@@ -56022,8 +56022,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 23.97,
-          "y": 40.63,
+          "x": 18.83,
+          "y": 32.63,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -56034,8 +56034,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 23.97,
-          "y": 40.63,
+          "x": 18.83,
+          "y": 32.63,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -56669,8 +56669,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 90.55,
-          "y": 63.82,
+          "x": 34.55,
+          "y": 49.53,
           "func": "POINTVAL"
         },
         {
@@ -56687,8 +56687,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 90.55,
-          "y": 63.82,
+          "x": 34.55,
+          "y": 49.53,
           "func": "POINTVAL"
         },
         {
@@ -56714,8 +56714,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 90.34,
-          "y": 71.38,
+          "x": 34.34,
+          "y": 57.09,
           "func": "pointvalent"
         },
         {
@@ -56732,8 +56732,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 90.34,
-          "y": 71.38,
+          "x": 34.34,
+          "y": 57.09,
           "func": "pointvalent"
         },
         {
@@ -56759,8 +56759,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 90.01,
-          "y": 68.54,
+          "x": 34.01,
+          "y": 54.25,
           "func": "POINTVAL"
         },
         {
@@ -56777,8 +56777,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 90.01,
-          "y": 68.54,
+          "x": 34.01,
+          "y": 54.25,
           "func": "POINTVAL"
         },
         {
@@ -56803,8 +56803,8 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 96.86,
-          "y": 66.82,
+          "x": 40.86,
+          "y": 52.53,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -56815,8 +56815,8 @@
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 96.86,
-          "y": 66.82,
+          "x": 40.86,
+          "y": 52.53,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -57052,14 +57052,14 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 74.25,
-          "y": 22.0,
+          "x": 74.16,
+          "y": 21.83,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 74.25,
-          "y": 22.0,
+          "x": 74.16,
+          "y": 21.83,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -57071,14 +57071,14 @@
       "positions": [
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 74.25,
-          "y": 23.51,
+          "x": 74.16,
+          "y": 23.34,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
           "file": "concept_thickener_340_popup.g",
-          "x": 74.25,
-          "y": 23.51,
+          "x": 74.16,
+          "y": 23.34,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -68521,7 +68521,7 @@
         {
           "file": "pavlik_floccu2_popup_01.g",
           "x": 35.5,
-          "y": 26.94,
+          "y": 24.94,
           "func": "POINTVAL"
         },
         {
@@ -68545,7 +68545,7 @@
         {
           "file": "pavlik_floccu2_popup_01.g",
           "x": 35.5,
-          "y": 26.94,
+          "y": 24.94,
           "func": "POINTVAL"
         }
       ]
@@ -72985,8 +72985,8 @@
       "positions": [
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 21.67,
+          "x": 125.1,
+          "y": 23.67,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -72997,8 +72997,8 @@
         },
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 21.67,
+          "x": 125.1,
+          "y": 23.67,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73017,8 +73017,8 @@
       "positions": [
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 19.85,
+          "x": 125.1,
+          "y": 21.85,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73029,8 +73029,8 @@
         },
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 19.85,
+          "x": 125.1,
+          "y": 21.85,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73049,8 +73049,8 @@
       "positions": [
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 18.04,
+          "x": 125.1,
+          "y": 20.04,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73061,8 +73061,8 @@
         },
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 18.04,
+          "x": 125.1,
+          "y": 20.04,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73081,8 +73081,8 @@
       "positions": [
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 16.22,
+          "x": 125.1,
+          "y": 18.22,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73093,8 +73093,8 @@
         },
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 16.22,
+          "x": 125.1,
+          "y": 18.22,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73113,8 +73113,8 @@
       "positions": [
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 14.4,
+          "x": 125.1,
+          "y": 16.4,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73125,8 +73125,8 @@
         },
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 14.4,
+          "x": 125.1,
+          "y": 16.4,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73145,8 +73145,8 @@
       "positions": [
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 12.58,
+          "x": 125.1,
+          "y": 14.58,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73157,8 +73157,8 @@
         },
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 12.58,
+          "x": 125.1,
+          "y": 14.58,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73177,8 +73177,8 @@
       "positions": [
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 10.77,
+          "x": 125.1,
+          "y": 12.77,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -73189,8 +73189,8 @@
         },
         {
           "file": "pavlik_900rp100a01_01.g",
-          "x": 105.1,
-          "y": 10.77,
+          "x": 125.1,
+          "y": 12.77,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79659,8 +79659,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 3.0,
-          "y": 36.38,
+          "x": -1.5,
+          "y": 27.38,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79671,8 +79671,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 3.0,
-          "y": 36.38,
+          "x": -1.5,
+          "y": 27.38,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79691,8 +79691,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 38.25,
+          "x": 0.0,
+          "y": 29.25,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79703,8 +79703,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 38.25,
+          "x": 0.0,
+          "y": 29.25,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79723,8 +79723,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 34.38,
+          "x": 0.0,
+          "y": 25.38,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79735,8 +79735,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 34.38,
+          "x": 0.0,
+          "y": 25.38,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79755,8 +79755,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 32.88,
+          "x": 0.0,
+          "y": 23.88,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79767,8 +79767,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 32.88,
+          "x": 0.0,
+          "y": 23.88,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79787,8 +79787,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 12.5,
-          "y": 45.5,
+          "x": 8.0,
+          "y": 36.5,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79799,8 +79799,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 12.5,
-          "y": 45.5,
+          "x": 8.0,
+          "y": 36.5,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79819,8 +79819,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 40.25,
+          "x": 0.0,
+          "y": 31.25,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79831,8 +79831,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 40.25,
+          "x": 0.0,
+          "y": 31.25,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79851,8 +79851,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 36.38,
+          "x": 0.0,
+          "y": 27.38,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79863,8 +79863,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.5,
-          "y": 36.38,
+          "x": 0.0,
+          "y": 27.38,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79883,8 +79883,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 66.5,
+          "x": 9.5,
+          "y": 76.25,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79895,8 +79895,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 66.5,
+          "x": 9.5,
+          "y": 76.25,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79915,8 +79915,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 65.0,
+          "x": 9.5,
+          "y": 74.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79927,8 +79927,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 65.0,
+          "x": 9.5,
+          "y": 74.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79947,8 +79947,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 63.5,
+          "x": 9.5,
+          "y": 73.25,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79959,8 +79959,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 63.5,
+          "x": 9.5,
+          "y": 73.25,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -79979,8 +79979,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 62.0,
+          "x": 9.5,
+          "y": 71.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -79991,8 +79991,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 62.0,
+          "x": 9.5,
+          "y": 71.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80011,8 +80011,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 60.5,
+          "x": 9.5,
+          "y": 70.25,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80023,8 +80023,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 60.5,
+          "x": 9.5,
+          "y": 70.25,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80043,8 +80043,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 59.0,
+          "x": 9.5,
+          "y": 68.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80055,8 +80055,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 59.0,
+          "x": 9.5,
+          "y": 68.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80075,8 +80075,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 12.5,
-          "y": 42.38,
+          "x": 18.0,
+          "y": 52.12,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80087,8 +80087,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 12.5,
-          "y": 42.38,
+          "x": 18.0,
+          "y": 52.12,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80107,8 +80107,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 56.0,
+          "x": 9.5,
+          "y": 65.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80119,8 +80119,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 56.0,
+          "x": 9.5,
+          "y": 65.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80139,8 +80139,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 52.0,
+          "x": 9.5,
+          "y": 61.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80151,8 +80151,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 52.0,
+          "x": 9.5,
+          "y": 61.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80171,8 +80171,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 50.0,
+          "x": 9.5,
+          "y": 59.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80183,8 +80183,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 50.0,
+          "x": 9.5,
+          "y": 59.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80203,8 +80203,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 68.0,
+          "x": 9.5,
+          "y": 77.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80215,8 +80215,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 68.0,
+          "x": 9.5,
+          "y": 77.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80235,8 +80235,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 56.0,
+          "x": 8.0,
+          "y": 65.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80247,8 +80247,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 56.0,
+          "x": 8.0,
+          "y": 65.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80267,8 +80267,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 52.0,
+          "x": 8.0,
+          "y": 61.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80279,8 +80279,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 52.0,
+          "x": 8.0,
+          "y": 61.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80299,8 +80299,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 50.0,
+          "x": 8.0,
+          "y": 59.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80311,8 +80311,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 50.0,
+          "x": 8.0,
+          "y": 59.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80811,8 +80811,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 54.0,
+          "x": 9.5,
+          "y": 63.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80823,8 +80823,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 54.0,
+          "x": 9.5,
+          "y": 63.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80843,8 +80843,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 54.0,
+          "x": 8.0,
+          "y": 63.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80855,8 +80855,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 54.0,
+          "x": 8.0,
+          "y": 63.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80875,8 +80875,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 48.0,
+          "x": 9.5,
+          "y": 57.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80887,8 +80887,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 4.0,
-          "y": 48.0,
+          "x": 9.5,
+          "y": 57.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -80907,8 +80907,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 48.0,
+          "x": 8.0,
+          "y": 57.75,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
@@ -80919,8 +80919,8 @@
         },
         {
           "file": "pavlik_991_config_02.g",
-          "x": 2.5,
-          "y": 48.0,
+          "x": 8.0,
+          "y": 57.75,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -113925,14 +113925,14 @@
         },
         {
           "file": "pavlik_992_mimic_06.g",
-          "x": 102.76,
-          "y": 8.75,
+          "x": 131.37,
+          "y": 12.75,
           "func": "FLSA_GRP_SELECT"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 102.76,
-          "y": 8.75,
+          "x": 106.07,
+          "y": 25.33,
           "func": "FLSA_GRP_SELECT"
         },
         {
@@ -113943,14 +113943,14 @@
         },
         {
           "file": "pavlik_992_mimic_06.g",
-          "x": 102.76,
-          "y": 8.75,
+          "x": 131.37,
+          "y": 12.75,
           "func": "FLSA_GRP_SELECT"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 102.76,
-          "y": 8.75,
+          "x": 106.07,
+          "y": 25.33,
           "func": "FLSA_GRP_SELECT"
         }
       ]
@@ -113970,14 +113970,14 @@
         },
         {
           "file": "pavlik_992_mimic_06.g",
-          "x": 99.76,
-          "y": 8.5,
+          "x": 128.37,
+          "y": 12.5,
           "func": "acesys_sym_unimotor"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 99.76,
-          "y": 8.5,
+          "x": 103.07,
+          "y": 25.08,
           "func": "acesys_sym_unimotor"
         },
         {
@@ -113988,14 +113988,14 @@
         },
         {
           "file": "pavlik_992_mimic_06.g",
-          "x": 99.76,
-          "y": 8.5,
+          "x": 128.37,
+          "y": 12.5,
           "func": "acesys_sym_unimotor"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 99.76,
-          "y": 8.5,
+          "x": 103.07,
+          "y": 25.08,
           "func": "acesys_sym_unimotor"
         }
       ]
@@ -133583,26 +133583,26 @@
       "positions": [
         {
           "file": "pavlik_992_mimic_06.g",
-          "x": 105.5,
-          "y": 9.25,
+          "x": 134.12,
+          "y": 13.25,
           "func": "FLSA_INTER_LOCK"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 105.5,
-          "y": 9.25,
+          "x": 108.82,
+          "y": 25.83,
           "func": "FLSA_INTER_LOCK"
         },
         {
           "file": "pavlik_992_mimic_06.g",
-          "x": 105.5,
-          "y": 9.25,
+          "x": 134.12,
+          "y": 13.25,
           "func": "FLSA_INTER_LOCK"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 105.5,
-          "y": 9.25,
+          "x": 108.82,
+          "y": 25.83,
           "func": "FLSA_INTER_LOCK"
         }
       ]
@@ -133615,26 +133615,26 @@
       "positions": [
         {
           "file": "pavlik_992_mimic_06.g",
-          "x": 97.88,
-          "y": 6.5,
+          "x": 126.5,
+          "y": 10.5,
           "func": "pointvalent"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 97.88,
-          "y": 6.5,
+          "x": 101.2,
+          "y": 23.08,
           "func": "pointvalent"
         },
         {
           "file": "pavlik_992_mimic_06.g",
-          "x": 97.88,
-          "y": 6.5,
+          "x": 126.5,
+          "y": 10.5,
           "func": "pointvalent"
         },
         {
           "file": "pavlik_samplers.g",
-          "x": 97.88,
-          "y": 6.5,
+          "x": 101.2,
+          "y": 23.08,
           "func": "pointvalent"
         }
       ]
@@ -134912,13 +134912,13 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 34.5,
-          "y": 3.25,
+          "y": 1.25,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 34.5,
-          "y": 3.25,
+          "y": 1.25,
           "func": "POINTVAL"
         }
       ]
@@ -134932,7 +134932,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 44.5,
-          "y": 3.25,
+          "y": 1.25,
           "func": "POINTVAL"
         },
         {
@@ -134944,7 +134944,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 44.5,
-          "y": 3.25,
+          "y": 1.25,
           "func": "POINTVAL"
         },
         {
@@ -134963,13 +134963,13 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 50.5,
-          "y": 11.5,
+          "y": 9.5,
           "func": "FLSA_INDICATOR_MISC"
         },
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 50.5,
-          "y": 11.5,
+          "y": 9.5,
           "func": "FLSA_INDICATOR_MISC"
         }
       ]
@@ -134982,13 +134982,13 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 44.5,
-          "y": 5.5,
+          "y": 3.5,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 44.5,
-          "y": 5.5,
+          "y": 3.5,
           "func": "POINTVAL"
         }
       ]
@@ -135001,13 +135001,13 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 34.5,
-          "y": 5.5,
+          "y": 3.5,
           "func": "POINTVAL"
         },
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 34.5,
-          "y": 5.5,
+          "y": 3.5,
           "func": "POINTVAL"
         }
       ]
@@ -135021,7 +135021,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 60.5,
-          "y": 8.5,
+          "y": 1.5,
           "func": "pointvalent"
         },
         {
@@ -135033,7 +135033,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 60.5,
-          "y": 8.5,
+          "y": 1.5,
           "func": "pointvalent"
         },
         {
@@ -135054,7 +135054,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 60.5,
-          "y": 14.5,
+          "y": 7.5,
           "func": "POINTVAL"
         },
         {
@@ -135072,7 +135072,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 60.5,
-          "y": 14.5,
+          "y": 7.5,
           "func": "POINTVAL"
         },
         {
@@ -135098,7 +135098,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 60.5,
-          "y": 13.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
@@ -135110,7 +135110,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 60.5,
-          "y": 13.0,
+          "y": 6.0,
           "func": "POINTVAL"
         },
         {
@@ -135130,7 +135130,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 60.5,
-          "y": 11.5,
+          "y": 4.5,
           "func": "POINTVAL"
         },
         {
@@ -135142,7 +135142,7 @@
         {
           "file": "pavlik_992_mimic_07.g",
           "x": 60.5,
-          "y": 11.5,
+          "y": 4.5,
           "func": "POINTVAL"
         },
         {
@@ -163619,14 +163619,14 @@
       "positions": [
         {
           "file": "pavlik_spares.g",
-          "x": 131.81,
-          "y": 22.76,
+          "x": 131.68,
+          "y": 3.26,
           "func": "pointvalent"
         },
         {
           "file": "pavlik_spares.g",
-          "x": 131.81,
-          "y": 22.76,
+          "x": 131.68,
+          "y": 3.26,
           "func": "pointvalent"
         }
       ]

@@ -135,11 +135,16 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
         else:
             x, y = elem.get('base_x', 0.0), elem.get('base_y', 0.0)
 
-        # Добавляем только собственный .move элемента
-        # Групповые трансформации и .tran не применяем
+        # Добавляем собственный .move элемента
         if elem.get('move'):
             x += elem['move'][0]
             y += elem['move'][1]
+
+        # Добавляем .move родительских групп
+        for grp in group_stack:
+            if grp.get('move'):
+                x += grp['move'][0]
+                y += grp['move'][1]
 
         entry = {
             'file': filename,
