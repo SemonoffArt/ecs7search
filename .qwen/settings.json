@@ -3,7 +3,11 @@
     "allow": [
       "Bash(uv *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git push)",
+      "Bash(.venv\\scripts\\activate)",
+      "Bash(python *)",
+      "Bash(findstr *)"
     ]
   },
   "$version": 3

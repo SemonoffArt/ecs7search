@@ -135,29 +135,11 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
         else:
             x, y = elem.get('base_x', 0.0), elem.get('base_y', 0.0)
 
-        # Добавляем move элемента
+        # Добавляем только собственный .move элемента
+        # Групповые трансформации и .tran не применяем
         if elem.get('move'):
             x += elem['move'][0]
             y += elem['move'][1]
-
-        # Применяем трансформации родительских групп (снизу вверх по стеку)
-        for grp in group_stack:
-            if grp.get('move'):
-                x += grp['move'][0]
-                y += grp['move'][1]
-            if grp.get('scale'):
-                ref_x, ref_y, sx, sy = grp['scale']
-                x = ref_x + (x - ref_x) * sx
-                y = ref_y + (y - ref_y) * sy
-            # .tran группы — визуальная трансформация, не влияющая на позицию
-
-        # Собственные scale/tran элемента
-        if elem.get('scale'):
-            ref_x, ref_y, sx, sy = elem['scale']
-            x = ref_x + (x - ref_x) * sx
-            y = ref_y + (y - ref_y) * sy
-        # .tran не применяем к координатам — это визуальная трансформация (поворот/отражение),
-        # не влияющая на логическое позиционирование тега
 
         entry = {
             'file': filename,
@@ -243,17 +225,37 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
 
         # --- Команды отрисовки (text, line, poly, frect и т.д.) — завершают текущий элемент ---
         # Эти команды не относятся к элементам-тегам, их свойства (.move, .scale, .tran)
-        # не должны применяться к текущему элементу.
+        # не должны применяться к текущему элементу или группе.
+        # После команды отрисовки игнорируем все последующие свойства до следующего inst/group.
         if re.match(
-            r'^\s*(text|line|poly|frect|fcir2|farc|sec2|cspline|'
+            r'^\s*(text|line|poly|frect|rect|fcir2|fcir|farc|sec2|cspline|'
             r'tcolor|bcolor|height|path|font|prec|align|size|'
             r'fcolor|fstyle|finter|fdir|fpercent|ecolor|estyle|ewidth|'
-            r'filled|fgradient|stress|background:)\b',
+            r'filled|fgradient|stress|background:|arc|circle|ellipse|rrect|'
+            r'pict|symbol|marker)\b',
             line
         ):
             if current_element is not None:
                 finalize_element(current_element)
                 current_element = None
+            # Пропускаем эту строку и все последующие свойства (.move, .scale, .tran, .userdata)
+            # до следующего inst/group/endg/endm/renamedvars
+            while i + 1 < len(lines):
+                next_line = lines[i + 1]
+                # Если следующая строка — команда или свойство — пропускаем
+                if re.match(
+                    r'^\s*\.\s+\w+', next_line
+                ) or re.match(
+                    r'^\s*(text|line|poly|frect|rect|fcir2|fcir|farc|sec2|cspline|'
+                    r'tcolor|bcolor|height|path|font|prec|align|size|'
+                    r'fcolor|fstyle|finter|fdir|fpercent|ecolor|estyle|ewidth|'
+                    r'filled|fgradient|stress|background:|arc|circle|ellipse|rrect|'
+                    r'pict|symbol|marker)\b',
+                    next_line
+                ):
+                    i += 1
+                else:
+                    break
             i += 1
             continue
 
