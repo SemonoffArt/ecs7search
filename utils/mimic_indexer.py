@@ -201,6 +201,20 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
             }
             i += 1
             continue
+
+        # --- frect (прямоугольник с координатами и возможным .userdata/.move) ---
+        frect_match = re.match(r'^\s*frect\b\s+([-+]?\d+(?:\.\d+)?)\s+([-+]?\d+(?:\.\d+)?)', line)
+        if frect_match:
+            if current_element is not None:
+                finalize_element(current_element)
+
+            current_element = {
+                'func': 'frect',
+                'base_x': float(frect_match.group(1)),
+                'base_y': float(frect_match.group(2)),
+            }
+            i += 1
+            continue
         
         # --- group (открытие) ---
         if re.match(r'^\s*group\s*$', line):
@@ -249,7 +263,7 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
         # не должны применяться к текущему элементу или группе.
         # После команды отрисовки игнорируем все последующие свойства до следующего inst/group.
         if re.match(
-            r'^\s*(text|line|frect|rect|fcir2|fcir|farc|sec2|cspline|'
+            r'^\s*(text|line|rect|fcir2|fcir|farc|sec2|cspline|'
             r'tcolor|bcolor|height|path|font|prec|align|size|'
             r'fcolor|fstyle|finter|fdir|fpercent|ecolor|estyle|ewidth|'
             r'filled|fgradient|stress|background:|arc|circle|ellipse|rrect|'
@@ -267,7 +281,7 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
                 if re.match(
                     r'^\s*\.\s+\w+', next_line
                 ) or re.match(
-                    r'^\s*(text|line|frect|rect|fcir2|fcir|farc|sec2|cspline|'
+                    r'^\s*(text|line|rect|fcir2|fcir|farc|sec2|cspline|'
                     r'tcolor|bcolor|height|path|font|prec|align|size|'
                     r'fcolor|fstyle|finter|fdir|fpercent|ecolor|estyle|ewidth|'
                     r'filled|fgradient|stress|background:|arc|circle|ellipse|rrect|'
