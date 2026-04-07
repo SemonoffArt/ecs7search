@@ -177,11 +177,27 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
             # Завершаем предыдущий элемент
             if current_element is not None:
                 finalize_element(current_element)
-            
+
             current_element = {
                 'func': inst_match.group(1),
                 'base_x': float(inst_match.group(2)),
                 'base_y': float(inst_match.group(3)),
+            }
+            i += 1
+            continue
+
+        # --- poly (полигон с координатами и возможным .userdata/.move) ---
+        # poly может иметь тег через .userdata. Первые два числа — координаты.
+        poly_match = re.match(r'^\s*poly\b\s+([-+]?\d+(?:\.\d+)?)\s+([-+]?\d+(?:\.\d+)?)', line)
+        if poly_match:
+            # Завершаем предыдущий элемент
+            if current_element is not None:
+                finalize_element(current_element)
+
+            current_element = {
+                'func': 'poly',
+                'base_x': float(poly_match.group(1)),
+                'base_y': float(poly_match.group(2)),
             }
             i += 1
             continue
@@ -233,7 +249,7 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
         # не должны применяться к текущему элементу или группе.
         # После команды отрисовки игнорируем все последующие свойства до следующего inst/group.
         if re.match(
-            r'^\s*(text|line|poly|frect|rect|fcir2|fcir|farc|sec2|cspline|'
+            r'^\s*(text|line|frect|rect|fcir2|fcir|farc|sec2|cspline|'
             r'tcolor|bcolor|height|path|font|prec|align|size|'
             r'fcolor|fstyle|finter|fdir|fpercent|ecolor|estyle|ewidth|'
             r'filled|fgradient|stress|background:|arc|circle|ellipse|rrect|'
@@ -251,7 +267,7 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
                 if re.match(
                     r'^\s*\.\s+\w+', next_line
                 ) or re.match(
-                    r'^\s*(text|line|poly|frect|rect|fcir2|fcir|farc|sec2|cspline|'
+                    r'^\s*(text|line|frect|rect|fcir2|fcir|farc|sec2|cspline|'
                     r'tcolor|bcolor|height|path|font|prec|align|size|'
                     r'fcolor|fstyle|finter|fdir|fpercent|ecolor|estyle|ewidth|'
                     r'filled|fgradient|stress|background:|arc|circle|ellipse|rrect|'
