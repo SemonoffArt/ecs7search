@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Индексатор мимик-файлов SCADA ECS7 (.g)
 
@@ -71,11 +70,12 @@ RE_TAGCODE = re.compile(r'TagCode\s*::\s*"([^"]+)"', re.IGNORECASE)
 def clean_tag(raw_userdata: str) -> Optional[str]:
     """
     Извлекает чистый тег из строки userdata.
-    Пример: "0011020ML060A01             101 " -> "0011020ML060A01"
+    Пример: "0011020ML060A01             101 " -> "020ML060A01"
+    Возвращает ПОСЛЕДНЕЕ совпадение паттерна (основной тег).
     """
-    match = RE_TAG.search(raw_userdata)
-    if match:
-        return match.group(1)
+    matches = RE_TAG.findall(raw_userdata)
+    if matches:
+        return matches[-1]
     return None
 
 
@@ -215,7 +215,21 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
             }
             i += 1
             continue
-        
+
+        # --- rect (прямоугольник с координатами и возможным .userdata/.move) ---
+        rect_match = re.match(r'^\s*rect\b\s+([-+]?\d+(?:\.\d+)?)\s+([-+]?\d+(?:\.\d+)?)', line)
+        if rect_match:
+            if current_element is not None:
+                finalize_element(current_element)
+
+            current_element = {
+                'func': 'rect',
+                'base_x': float(rect_match.group(1)),
+                'base_y': float(rect_match.group(2)),
+            }
+            i += 1
+            continue
+
         # --- group (открытие) ---
         if re.match(r'^\s*group\s*$', line):
             # Завершаем предыдущий element
@@ -263,7 +277,7 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
         # не должны применяться к текущему элементу или группе.
         # После команды отрисовки игнорируем все последующие свойства до следующего inst/group.
         if re.match(
-            r'^\s*(text|line|rect|fcir2|fcir|farc|sec2|cspline|'
+            r'^\s*(text|line|fcir2|fcir|farc|sec2|cspline|'
             r'tcolor|bcolor|height|path|font|prec|align|size|'
             r'fcolor|fstyle|finter|fdir|fpercent|ecolor|estyle|ewidth|'
             r'filled|fgradient|stress|background:|arc|circle|ellipse|rrect|'
@@ -281,7 +295,7 @@ def parse_mimic_file(filepath: Path) -> Dict[str, List[dict]]:
                 if re.match(
                     r'^\s*\.\s+\w+', next_line
                 ) or re.match(
-                    r'^\s*(text|line|rect|fcir2|fcir|farc|sec2|cspline|'
+                    r'^\s*(text|line|fcir2|fcir|farc|sec2|cspline|'
                     r'tcolor|bcolor|height|path|font|prec|align|size|'
                     r'fcolor|fstyle|finter|fdir|fpercent|ecolor|estyle|ewidth|'
                     r'filled|fgradient|stress|background:|arc|circle|ellipse|rrect|'
