@@ -49,6 +49,10 @@ def index():
             flash("Введите имя тега для поиска.", "warning")
             return render_template("index.html", results=None, query=query)
 
+        if len(query) < 3:
+            flash("Минимум 3 символа для поиска.", "warning")
+            return render_template("index.html", results=None, query=query)
+
         if not TAG_PATTERN.match(query):
             flash(
                 "Недопустимые символы. Разрешены буквы, цифры, *, ?, _",
@@ -70,7 +74,13 @@ def index():
             flash(f"Ошибка загрузки индекса: {e}", "danger")
             return render_template("index.html", results=None, query=query)
 
-        results = search_tags(index_data, query)
+        # Если нет wildcard-символов, автоматически оборачиваем в *...* для поиска по подстроке
+        if '*' not in query and '?' not in query:
+            search_query = f"*{query}*"
+        else:
+            search_query = query
+
+        results = search_tags(index_data, search_query)
 
         if not results:
             flash(f"Ничего не найдено по запросу: {query}", "info")
