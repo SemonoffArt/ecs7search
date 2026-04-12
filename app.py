@@ -97,8 +97,13 @@ def index():
 
         image_results = []
         skipped_files = []
+        max_results = 20
+        shown_count = 0
 
         for g_file, positions in file_positions.items():
+            if shown_count >= max_results:
+                skipped_files.append(f"Отображено первые {max_results} результатов. Уточните запрос.")
+                break
             png_path = get_image_for_file(g_file, MIMICS_DIR)
             if png_path is None:
                 skipped_files.append(g_file)
@@ -117,6 +122,7 @@ def index():
                     "png_name": output_name,
                     "positions": positions,
                 })
+                shown_count += 1
             except Exception as e:
                 skipped_files.append(f"{g_file} (ошибка: {e})")
 
