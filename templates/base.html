@@ -112,17 +112,39 @@
             align-items: flex-end;
             flex-wrap: wrap;
         }
-        .search-form input[type="text"] {
-            flex: 1;
+        .search-input-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .search-input-row input[type="text"] {
+            width: 320px;
+            max-width: 100%;
             padding: 10px 14px;
             border-radius: 6px;
             border: 1px solid #cfd8dc;
             font-size: 15px;
         }
-        .search-form input[type="text"]:focus {
+        .search-input-row input[type="text"]:focus {
             outline: none;
             border-color: #18bc9c;
             box-shadow: 0 0 0 2px rgba(24, 188, 156, 0.2);
+        }
+        .detail-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #546e7a;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .detail-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #18bc9c;
         }
         .search-form button {
             padding: 10px 24px;

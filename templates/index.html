@@ -7,20 +7,22 @@
 
     <form method="post" action="/" class="search-form">
         <div style="flex:1;">
-            <input
-                type="text"
-                name="query"
-                class="form-control"
-                placeholder="Введите тег, например: 020MG021M01 или шаблон: 020MG*"
-                value="{{ query }}"
-                autofocus
-            >
+            <div class="search-input-row">
+                <input
+                    type="text"
+                    name="query"
+                    class="form-control"
+                    placeholder="Введите тег, например: 020MG021M01 или шаблон: 020MG*"
+                    value="{{ query }}"
+                    autofocus
+                >
+                <label class="detail-checkbox">
+                    <input type="checkbox" name="detailed" value="1" {% if detailed %}checked{% endif %}>
+                    Расширенная информация по тегу
+                </label>
+            </div>
             <div class="tag-input-hint">Допустимы буквы, цифры, а также <code>*</code> и <code>?</code> для поиска по шаблону</div>
         </div>
-        <label class="detail-checkbox">
-            <input type="checkbox" name="detailed" value="1" {% if detailed %}checked{% endif %}>
-            Расширенная информация по тегу
-        </label>
         <button type="submit" class="btn btn-primary">Найти</button>
     </form>
 </div>

@@ -1,0 +1,66 @@
+"""
+Repository слой — доступ к данным (индекс, tags.json).
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+
+class MimicIndexRepository:
+    """Работа с mimic index JSON файлом."""
+
+    def __init__(self, index_path: Path) -> None:
+        self._index_path = index_path
+
+    def exists(self) -> bool:
+        return self._index_path.exists()
+
+    def load(self) -> dict[str, Any]:
+        with open(self._index_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+
+class TagDetailRepository:
+    """Кэшированное хранилище метаданных тегов из tags.json."""
+
+    def __init__(self, tags_path: Path) -> None:
+        self._tags_path = tags_path
+        self._cache: dict[str, dict[str, Any]] | None = None
+
+    def _load(self) -> dict[str, dict[str, Any]]:
+        if self._cache is not None:
+            return self._cache
+
+        if not self._tags_path.exists():
+            self._cache = {}
+            return self._cache
+
+        try:
+            with open(self._tags_path, "r", encoding="utf-8") as f:
+                records: list[dict[str, Any]] = json.load(f)
+            self._cache = {}
+            for record in records:
+                tag_name = record.get("Tag", "")
+                if tag_name:
+                    self._cache[tag_name] = record
+        except Exception:
+            self._cache = {}
+
+        return self._cache
+
+    def get_flexible(self, tag_name: str) -> dict[str, Any] | None:
+        """Ищет запись с учётом вариаций с/без ведущего '_'."""
+        variants = [tag_name]
+        if tag_name.startswith("_"):
+            variants.append(tag_name[1:])
+        else:
+            variants.append("_" + tag_name)
+
+        for v in variants:
+            rec = self._load().get(v)
+            if rec is not None:
+                return rec
+        return None
