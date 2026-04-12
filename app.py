@@ -9,6 +9,7 @@ ecs7search Web UI — Flask-приложение для поиска тегов 
 import sys
 import os
 import re
+import json
 from pathlib import Path
 
 from flask import Flask, render_template, request, send_from_directory, flash, redirect, url_for
@@ -31,11 +32,64 @@ app.secret_key = "ecs7search-secret-key-change-me"
 # Пути
 MIMICS_DIR = PROJECT_DIR / "data" / "mimics"
 INDEX_PATH = PROJECT_DIR / "data" / "mimics_index.json"
+TAGS_PATH = PROJECT_DIR / "data" / "tags.json"
 TEMP_DIR = PROJECT_DIR / "data" / "temp"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
 # Валидация ввода: только буквы, цифры, *, ?, _
 TAG_PATTERN = re.compile(r"^[A-Za-z0-9*_?]+$")
+
+# Кэш для tags.json
+_tags_cache: dict[str, dict] | None = None
+
+
+def load_tags_index() -> dict[str, dict]:
+    """Загружает tags.json в словарь {tag: record} с кэшированием."""
+    global _tags_cache
+    if _tags_cache is not None:
+        return _tags_cache
+
+    if not TAGS_PATH.exists():
+        _tags_cache = {}
+        return _tags_cache
+
+    try:
+        with open(TAGS_PATH, "r", encoding="utf-8") as f:
+            records = json.load(f)
+        _tags_cache = {}
+        for record in records:
+            tag_name = record.get("Tag", "")
+            if tag_name:
+                _tags_cache[tag_name] = record
+    except Exception:
+        _tags_cache = {}
+
+    return _tags_cache
+
+
+def build_tag_details(tag_names: list[str]) -> list[dict]:
+    """Возвращает список записей из tags.json для найденных имён тегов."""
+    tags_index = load_tags_index()
+    seen: set[str] = set()
+    details: list[dict] = []
+    for tag_name in sorted(tag_names):
+        # Убираем ведущий '_' если есть — в tags.json теги могут быть с '_'
+        variants = {tag_name}
+        if tag_name.startswith("_"):
+            variants.add(tag_name[1:])
+        else:
+            variants.add("_" + tag_name)
+
+        for variant in variants:
+            if variant in tags_index:
+                rec = tags_index[variant]
+                key = rec.get("Tag", "")
+                if key not in seen:
+                    seen.add(key)
+                    details.append(rec)
+                break
+
+    return details
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -43,36 +97,37 @@ def index():
     """Главная страница с формой поиска."""
     if request.method == "POST":
         query = request.form.get("query", "").strip()
+        detailed = request.form.get("detailed") == "1"
 
         # Валидация
         if not query:
             flash("Введите имя тега для поиска.", "warning")
-            return render_template("index.html", results=None, query=query)
+            return render_template("index.html", results=None, query=query, detailed=detailed)
 
         if len(query) < 3:
             flash("Минимум 3 символа для поиска.", "warning")
-            return render_template("index.html", results=None, query=query)
+            return render_template("index.html", results=None, query=query, detailed=detailed)
 
         if not TAG_PATTERN.match(query):
             flash(
                 "Недопустимые символы. Разрешены буквы, цифры, *, ?, _",
                 "danger",
             )
-            return render_template("index.html", results=None, query=query)
+            return render_template("index.html", results=None, query=query, detailed=detailed)
 
         if not INDEX_PATH.exists():
             flash(
                 "Файл индекса не найден. Запустите mimic_indexer.py для создания индекса.",
                 "danger",
             )
-            return render_template("index.html", results=None, query=query)
+            return render_template("index.html", results=None, query=query, detailed=detailed)
 
         # Загрузка индекса и поиск
         try:
             index_data = load_index(str(INDEX_PATH))
         except Exception as e:
             flash(f"Ошибка загрузки индекса: {e}", "danger")
-            return render_template("index.html", results=None, query=query)
+            return render_template("index.html", results=None, query=query, detailed=detailed)
 
         # Если нет wildcard-символов, автоматически оборачиваем в *...* для поиска по подстроке
         if '*' not in query and '?' not in query:
@@ -84,7 +139,11 @@ def index():
 
         if not results:
             flash(f"Ничего не найдено по запросу: {query}", "info")
-            return render_template("index.html", results=None, query=query)
+            return render_template("index.html", results=None, query=query, detailed=detailed)
+
+        # Собираем уникальные теги для расширенной информации
+        all_tag_names = list(results.keys())
+        tag_details = build_tag_details(all_tag_names) if detailed else []
 
         # Группируем по файлам и генерируем изображения
         file_positions: dict[str, list[dict]] = {}
@@ -102,7 +161,7 @@ def index():
 
         for g_file, positions in file_positions.items():
             if shown_count >= max_results:
-                skipped_files.append(f"Отображено первые {max_results} результатов. Уточните запрос.")
+                skipped_files.append(f"Отображено первых {max_results} результатов. Уточните запрос.")
                 break
             png_path = get_image_for_file(g_file, MIMICS_DIR)
             if png_path is None:
@@ -134,11 +193,13 @@ def index():
                 "total_files": len(file_positions),
                 "images": image_results,
                 "skipped": skipped_files,
+                "tag_details": tag_details,
             },
             query=query,
+            detailed=detailed,
         )
 
-    return render_template("index.html", results=None, query="")
+    return render_template("index.html", results=None, query="", detailed=False)
 
 
 @app.route("/temp/<filename>")

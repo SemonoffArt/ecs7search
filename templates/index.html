@@ -17,6 +17,10 @@
             >
             <div class="tag-input-hint">Допустимы буквы, цифры, а также <code>*</code> и <code>?</code> для поиска по шаблону</div>
         </div>
+        <label class="detail-checkbox">
+            <input type="checkbox" name="detailed" value="1" {% if detailed %}checked{% endif %}>
+            Расширенная информация по тегу
+        </label>
         <button type="submit" class="btn btn-primary">Найти</button>
     </form>
 </div>
@@ -60,6 +64,67 @@
                 {% endfor %}
             </ul>
         </div>
+    {% endif %}
+
+    <!-- Расширенная информация по тегам -->
+    {% if detailed and results.tag_details %}
+    <div style="margin-bottom:15px; overflow-x:auto;">
+        <table class="tag-detail-table">
+            <thead>
+                <tr>
+                    <th>Tag</th>
+                    <th>Groups</th>
+                    <th>Description</th>
+                    <th>Algorithms</th>
+                    <th>PLC</th>
+                    <th>Constant1</th>
+                    <th>EngUnitId</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detail in results.tag_details %}
+                <tr>
+                    <td><code>{{ detail.Tag }}</code></td>
+                    <td>{{ detail.Groups }}</td>
+                    <td>
+                        {% if detail.DescEng %}<div>{{ detail.DescEng }}</div>{% endif %}
+                        {% if detail.DescRus %}<div class="tag-desc-rus">{{ detail.DescRus }}</div>{% endif %}
+                        {% if not detail.DescEng and not detail.DescRus %}—{% endif %}
+                    </td>
+                    <td>
+                        {% if detail.Algorithms %}
+                        <div>Conv: {{ detail.Algorithms.ConvAlg }}</div>
+                        <div>Calc: {{ detail.Algorithms.CalcAlg }}</div>
+                        <div>Block: {{ detail.Algorithms.BlockAlg }}</div>
+                        {% else %}
+                        —
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if detail.PLC %}
+                        <div>PLC: {{ detail.PLC.PLCNo }}</div>
+                        <div>FC: {{ detail.PLC.FC }}</div>
+                        {% if detail.PLC.Input %}
+                        <div class="tag-plc-sub">
+                            <div><b>IN:</b> {{ detail.PLC.Input.Type }}, DB{{ detail.PLC.Input.Block }}.DBD{{ detail.PLC.Input.Word }}{% if detail.PLC.Input.Bit is not none %}.{{ detail.PLC.Input.Bit }}{% endif %}</div>
+                        </div>
+                        {% endif %}
+                        {% if detail.PLC.Output %}
+                        <div class="tag-plc-sub">
+                            <div><b>OUT:</b> {{ detail.PLC.Output.Type }}, DB{{ detail.PLC.Output.Block }}.DBD{{ detail.PLC.Output.Word }}{% if detail.PLC.Output.Bit is not none %}.{{ detail.PLC.Output.Bit }}{% endif %}</div>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        —
+                        {% endif %}
+                    </td>
+                    <td>{{ detail.Constant1 if detail.Constant1 is not none else "—" }}</td>
+                    <td>{{ detail.EngUnitId }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% endif %}
 
     <!-- Галерея изображений -->
