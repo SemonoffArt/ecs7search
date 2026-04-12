@@ -145,6 +145,33 @@ def index():
         all_tag_names = list(results.keys())
         tag_details = build_tag_details(all_tag_names) if detailed else []
 
+        # Собираем маппинг тег → список файлов для колонки Screens
+        tag_screens: dict[str, list[str]] = {}
+        for tag_name, positions in results.items():
+            screens: list[str] = []
+            seen_screens: set[str] = set()
+            for pos in positions:
+                g_file = pos.get("file", "")
+                if g_file and g_file not in seen_screens:
+                    seen_screens.add(g_file)
+                    screens.append(g_file)
+            tag_screens[tag_name] = sorted(screens)
+
+        # Добавляем информацию об экранах в tag_details
+        if detailed and tag_details:
+            tags_index = load_tags_index()
+            for detail in tag_details:
+                tag_name = detail.get("Tag", "")
+                # Пробуем найти с/без '_'
+                if tag_name in tag_screens:
+                    detail["_screens"] = tag_screens[tag_name]
+                elif tag_name.startswith("_") and tag_name[1:] in tag_screens:
+                    detail["_screens"] = tag_screens[tag_name[1:]]
+                elif ("_" + tag_name) in tag_screens:
+                    detail["_screens"] = tag_screens["_" + tag_name]
+                else:
+                    detail["_screens"] = []
+
         # Группируем по файлам и генерируем изображения
         file_positions: dict[str, list[dict]] = {}
         for tag_name, positions in results.items():

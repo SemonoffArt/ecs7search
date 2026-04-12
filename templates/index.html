@@ -54,18 +54,6 @@
     </div>
     <hr class="section-separator">
 
-    <!-- Предупреждения о пропущенных файлах -->
-    {% if results.skipped %}
-        <div class="status-banner status-banner-warning">
-            <strong>Пропущенные файлы (нет PNG или ошибка):</strong>
-            <ul class="mb-0 mt-1" style="margin-bottom:0; margin-top:4px;">
-                {% for item in results.skipped %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
     <!-- Расширенная информация по тегам -->
     {% if detailed and results.tag_details %}
     <div style="margin-bottom:15px; overflow-x:auto;">
@@ -77,8 +65,7 @@
                     <th>Description</th>
                     <th>Algorithms</th>
                     <th>PLC</th>
-                    <th>Constant1</th>
-                    <th>EngUnitId</th>
+                    <th>Screens</th>
                 </tr>
             </thead>
             <tbody>
@@ -118,13 +105,32 @@
                         —
                         {% endif %}
                     </td>
-                    <td>{{ detail.Constant1 if detail.Constant1 is not none else "—" }}</td>
-                    <td>{{ detail.EngUnitId }}</td>
+                    <td>
+                        {% if detail._screens and detail._screens|length > 0 %}
+                            {% for scr in detail._screens %}
+                            <div class="tag-screen-item">{{ scr }}</div>
+                            {% endfor %}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+    {% endif %}
+
+    <!-- Предупреждения о пропущенных файлах -->
+    {% if results.skipped %}
+        <div class="status-banner status-banner-warning">
+            <strong>Пропущенные файлы (нет PNG или ошибка):</strong>
+            <ul class="mb-0 mt-1" style="margin-bottom:0; margin-top:4px;">
+                {% for item in results.skipped %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endif %}
 
     <!-- Галерея изображений -->

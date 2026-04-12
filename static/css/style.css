@@ -19,6 +19,8 @@
 .tags-list .badge {
     margin-right: 4px;
     margin-bottom: 4px;
+    font-size: 16px;
+    padding: 3px 10px;
 }
 
 .detail-checkbox {
@@ -68,9 +70,9 @@
 
 .tag-detail-table td code {
     background-color: #f5f5f5;
-    padding: 1px 5px;
+    padding: 2px 7px;
     border-radius: 3px;
-    font-size: 11px;
+    font-size: 16px;
     color: #e74c3c;
 }
 
@@ -86,6 +88,12 @@
     margin-top: 2px;
     padding-left: 8px;
     border-left: 2px solid #cfd8dc;
+}
+
+.tag-screen-item {
+    font-size: 11px;
+    color: #4fc3f7;
+    font-family: monospace;
 }
 
 footer {
