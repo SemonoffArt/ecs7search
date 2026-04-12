@@ -76,13 +76,12 @@
                 {% endfor %}
             </div>
             <div>
-                <a href="{{ url_for('serve_temp_image', filename=image.png_name) }}" target="_blank">
-                    <img
-                        src="{{ url_for('serve_temp_image', filename=image.png_name) }}"
-                        alt="Результат для {{ image.g_file }}"
-                        class="result-img"
-                    >
-                </a>
+                <img
+                    src="{{ url_for('serve_temp_image', filename=image.png_name) }}"
+                    alt="Результат для {{ image.g_file }}"
+                    class="result-img zoomable"
+                    title="Нажмите для увеличения"
+                >
             </div>
         </div>
     {% endfor %}
