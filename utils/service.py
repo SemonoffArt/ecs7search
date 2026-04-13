@@ -13,7 +13,7 @@ from utils.mimic_searcher import (
     get_image_for_file,
     draw_border_on_image,
 )
-from utils.repository import MimicIndexRepository, TagDetailRepository
+from utils.repository import MimicIndexRepository, TagDetailRepository, IOListRepository
 
 TAG_PATTERN = re.compile(r"^[A-Za-z0-9*_?]+$")
 
@@ -25,12 +25,14 @@ class SearchService:
         self,
         index_repo: MimicIndexRepository,
         tag_repo: TagDetailRepository,
+        io_list_repo: IOListRepository,
         mimics_dir: Path,
         temp_dir: Path,
         max_results: int = 20,
     ) -> None:
         self._index_repo = index_repo
         self._tag_repo = tag_repo
+        self._io_list_repo = io_list_repo
         self._mimics_dir = mimics_dir
         self._temp_dir = temp_dir
         self._max_results = max_results
@@ -179,6 +181,24 @@ class SearchService:
                 screens = tag_screens.get(alt, [])
 
             rec = {**rec, "_screens": screens}
+
+            # Найти IO list данные
+            # Пробуем варианты имени тега для поиска в io_list
+            io_variants = [tag_name]
+            if tag_name.startswith("_"):
+                io_variants.append(tag_name[1:])
+            else:
+                io_variants.append("_" + tag_name)
+
+            io_data = None
+            for v in io_variants:
+                io_data = self._io_list_repo.get(v)
+                if io_data is not None:
+                    break
+
+            if io_data:
+                rec["_io_list"] = io_data
+
             details.append(rec)
 
         return details

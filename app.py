@@ -12,7 +12,7 @@ from pathlib import Path
 
 from flask import Flask, flash, render_template, request, send_from_directory
 
-from utils.repository import MimicIndexRepository, TagDetailRepository
+from utils.repository import MimicIndexRepository, TagDetailRepository, IOListRepository
 from utils.service import SearchService
 
 # ─── Инициализация ────────────────────────────────────────────────
@@ -22,6 +22,7 @@ PROJECT_DIR = Path(__file__).resolve().parent
 MIMICS_DIR = PROJECT_DIR / "data" / "mimics"
 INDEX_PATH = PROJECT_DIR / "data" / "mimics_index.json"
 TAGS_PATH = PROJECT_DIR / "data" / "tags.json"
+IO_LIST_PATH = PROJECT_DIR / "data" / "io_list.json"
 TEMP_DIR = PROJECT_DIR / "data" / "temp"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -29,12 +30,14 @@ TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
 index_repo = MimicIndexRepository(INDEX_PATH)
 tag_repo = TagDetailRepository(TAGS_PATH)
+io_list_repo = IOListRepository(IO_LIST_PATH)
 
 # ─── Service слой ─────────────────────────────────────────────────
 
 search_service = SearchService(
     index_repo=index_repo,
     tag_repo=tag_repo,
+    io_list_repo=io_list_repo,
     mimics_dir=MIMICS_DIR,
     temp_dir=TEMP_DIR,
     max_results=20,

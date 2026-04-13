@@ -67,7 +67,9 @@
                     <th>Description</th>
                     <th>Algorithms</th>
                     <th>PLC</th>
+                    <th>IO List</th>
                     <th>Screens</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -107,6 +109,18 @@
                         —
                         {% endif %}
                     </td>
+                    <td class="tag-io-list">
+                        {% if detail._io_list %}
+                            <div><b>PLC:</b> {{ detail._io_list.PLC }}</div>
+                            <div><b>Comp:</b> {{ detail._io_list.Component }}</div>
+                            <div><b>Term:</b> {{ detail._io_list.IOTerminal_Short1 }}</div>
+                            <div><b>Addr:</b> {{ detail._io_list.IOAddress }}</div>
+                            <div><b>Type:</b> {{ detail._io_list.IOType }}</div>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+
                     <td>
                         {% if detail._screens and detail._screens|length > 0 %}
                             {% for scr in detail._screens %}
@@ -116,6 +130,7 @@
                             —
                         {% endif %}
                     </td>
+
                 </tr>
                 {% endfor %}
             </tbody>

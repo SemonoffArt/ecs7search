@@ -64,3 +64,37 @@ class TagDetailRepository:
             if rec is not None:
                 return rec
         return None
+
+
+class IOListRepository:
+    """Кэшированное хранилище данных IO списка (io_list.json)."""
+
+    IO_FIELDS = ["PLC", "Component", "IOTerminal_Short1", "IOAddress", "IOType"]
+
+    def __init__(self, io_list_path: Path) -> None:
+        self._io_list_path = io_list_path
+        self._cache: dict[str, dict[str, Any]] | None = None
+
+    def _load(self) -> dict[str, dict[str, Any]]:
+        if self._cache is not None:
+            return self._cache
+
+        if not self._io_list_path.exists():
+            self._cache = {}
+            return self._cache
+
+        try:
+            with open(self._io_list_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            self._cache = data.get("signals", {})
+        except Exception:
+            self._cache = {}
+
+        return self._cache
+
+    def get(self, signal_code: str) -> dict[str, Any] | None:
+        """Ищет запись по SignalCode."""
+        rec = self._load().get(signal_code)
+        if rec is not None:
+            return {k: rec.get(k) for k in self.IO_FIELDS if k in rec}
+        return None
