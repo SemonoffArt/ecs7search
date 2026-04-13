@@ -78,9 +78,21 @@ class SearchService:
         
         # 2) Ищем в io_list.json
         matched_from_io = set(self._io_list_repo.search(search_query))
+
+        # Дедубликация: нормализуем имена (убираем ведущий '_')
+        # Приоритет у варианта без '_'
+        def normalize(name: str) -> str:
+            return name.lstrip("_")
+
+        # Собираем канонические имена (без '_')
+        seen_normalized: set[str] = set()
+        all_matched_tags: list[str] = []
         
-        # Объединяем все найденные теги
-        all_matched_tags = sorted(matched_from_tags | matched_from_io)
+        for name in sorted(matched_from_tags | matched_from_io):
+            norm = normalize(name)
+            if norm not in seen_normalized:
+                seen_normalized.add(norm)
+                all_matched_tags.append(name)
 
         if not all_matched_tags:
             flashes.append((f"Ничего не найдено по запросу: {query}", "info"))
