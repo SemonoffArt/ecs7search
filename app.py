@@ -26,7 +26,7 @@ TAGS_PATH = PROJECT_DIR / "data" / "tags.json"
 IO_LIST_PATH = PROJECT_DIR / "data" / "io_list.json"
 PDF_INDEX_PATH = PROJECT_DIR / "data" / "pdf_index.json"
 PDF_DIR = PROJECT_DIR / "data" / "pdf"
-WATERMARK_PATH = PROJECT_DIR / "data" / "pdf" / "watermark.pdf"
+CORNER_IMAGE_PATH = PROJECT_DIR / "data" / "images" / "manky.png"
 TEMP_DIR = PROJECT_DIR / "data" / "temp"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -50,7 +50,7 @@ search_service = SearchService(
 pdf_service = PDFSearchService(
     pdf_index_path=PDF_INDEX_PATH,
     pdf_dir=PDF_DIR,
-    watermark_path=WATERMARK_PATH,
+    corner_image_path=CORNER_IMAGE_PATH,
     temp_dir=TEMP_DIR,
 )
 

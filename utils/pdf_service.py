@@ -19,16 +19,19 @@ import fitz  # PyMuPDF
 class PDFSearchService:
     """Поиск тегов в PDF и генерация сводного документа."""
 
+    # Размер изображения в углу (points)
+    CORNER_IMG_SIZE = 60
+
     def __init__(
         self,
         pdf_index_path: Path,
         pdf_dir: Path,
-        watermark_path: Path,
+        corner_image_path: Path,
         temp_dir: Path,
     ) -> None:
         self._pdf_index_path = pdf_index_path
         self._pdf_dir = pdf_dir
-        self._watermark_path = watermark_path
+        self._corner_image_path = corner_image_path
         self._temp_dir = temp_dir
 
     def search(self, query: str) -> tuple[dict[str, list[dict]], list[str]]:
@@ -78,16 +81,13 @@ class PDFSearchService:
 
         messages: list[str] = []
 
-        # Загружаем watermark
-        watermark_doc = None
-        watermark_page = None
-        if self._watermark_path.exists():
+        # Проверяем наличие углового изображения
+        corner_img_data = None
+        if self._corner_image_path.exists():
             try:
-                watermark_doc = fitz.open(str(self._watermark_path))
-                if len(watermark_doc) > 0:
-                    watermark_page = watermark_doc[0]
+                corner_img_data = self._corner_image_path.read_bytes()
             except Exception as e:
-                messages.append(f"Не удалось загрузить watermark: {e}")
+                messages.append(f"Не удалось загрузить изображение: {e}")
 
         # Собираем уникальные (file, page) пары
         seen: set[tuple[str, int]] = set()
@@ -150,13 +150,15 @@ class PDFSearchService:
                         page_num - 1,
                     )
 
-                    # Накладываем watermark
-                    if watermark_page is not None:
-                        new_page.show_pdf_page(
-                            new_page.rect,
-                            watermark_doc,
-                            0,
+                    # Вставляем изображение в левый нижний угол
+                    if corner_img_data is not None:
+                        img_rect = fitz.Rect(
+                            5,  # отступ слева
+                            new_page.rect.height - self.CORNER_IMG_SIZE - 5,  # отступ снизу
+                            5 + self.CORNER_IMG_SIZE,
+                            new_page.rect.height - 5,
                         )
+                        new_page.insert_image(img_rect, stream=corner_img_data)
 
                     src_doc.close()
 
@@ -166,9 +168,8 @@ class PDFSearchService:
             out_doc.save(str(output_path))
             out_doc.close()
 
-        finally:
-            if watermark_doc is not None:
-                watermark_doc.close()
+        except Exception as e:
+            messages.append(f"Ошибка создания PDF: {e}")
 
         if output_path.exists():
             return output_name, messages
