@@ -1,60 +1,50 @@
 #!/usr/bin/env python3
 """
-Сервис поиска тегов в PDF документах и генерации сводного PDF.
+Сервис генерации сводного PDF из найденных страниц.
 
-Поиск по pdf_index.json, извлечение страниц с найденными тегами,
-наложение watermark и создание итогового PDF.
+Использует PDFIndexRepository для поиска и генерирует PDF
+с изображением в углу каждой страницы.
 """
 
 from __future__ import annotations
 
-import json
-import fnmatch
 from pathlib import Path
-from typing import Any
 
 import fitz  # PyMuPDF
 
+from utils.repository import PDFIndexRepository
+
 
 class PDFSearchService:
-    """Поиск тегов в PDF и генерация сводного документа."""
+    """Генерация сводного PDF по результатам поиска в PDF индексе."""
 
     # Размер изображения в углу (points)
     CORNER_IMG_SIZE = 60
 
     def __init__(
         self,
-        pdf_index_path: Path,
+        pdf_repo: PDFIndexRepository,
         pdf_dir: Path,
         corner_image_path: Path,
         temp_dir: Path,
     ) -> None:
-        self._pdf_index_path = pdf_index_path
+        self._pdf_repo = pdf_repo
         self._pdf_dir = pdf_dir
         self._corner_image_path = corner_image_path
         self._temp_dir = temp_dir
 
     def search(self, query: str) -> tuple[dict[str, list[dict]], list[str]]:
-        """Ищет теги в pdf_index.json по шаблону.
-        
+        """Ищет теги в PDF индексе по шаблону.
+
         Возвращает:
             - dict: {тег: [{"file": ..., "page": ..., "count": ...}, ...]}
             - list: сообщения об ошибках/предупреждения
         """
-        if not self._pdf_index_path.exists():
+        if not self._pdf_repo.exists():
             return {}, ["Индекс PDF не найден. Запустите pdf_indexer.py."]
 
-        with open(self._pdf_index_path, "r", encoding="utf-8") as f:
-            index_data = json.load(f)
-
-        tags = index_data.get("tags", {})
         search_query = query if ("*" in query or "?" in query) else f"*{query}*"
-
-        # Фильтрация по шаблону
-        matched: dict[str, list[dict]] = {}
-        for tag_name, tag_data in tags.items():
-            if fnmatch.fnmatch(tag_name, search_query):
-                matched[tag_name] = tag_data.get("positions", [])
+        matched = self._pdf_repo.search(search_query)
 
         if not matched:
             return {}, [f"Ничего не найдено в PDF по запросу: {query}"]

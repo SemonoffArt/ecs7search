@@ -119,8 +119,50 @@ class IOListRepository:
 
     def search(self, pattern: str) -> list[str]:
         """Ищет SignalCode по шаблону с поддержкой * и ?.
-        
+
         Возвращает список имён сигналов, совпадающих с паттерном.
         """
         all_signals = self._load()
         return [name for name in sorted(all_signals) if fnmatch.fnmatch(name, pattern)]
+
+
+class PDFIndexRepository:
+    """Кэшированное хранилище индекса PDF документов (pdf_index.json)."""
+
+    def __init__(self, pdf_index_path: Path) -> None:
+        self._pdf_index_path = pdf_index_path
+        self._cache: dict[str, Any] | None = None
+
+    def exists(self) -> bool:
+        return self._pdf_index_path.exists()
+
+    def _load(self) -> dict[str, Any]:
+        if self._cache is not None:
+            return self._cache
+
+        if not self._pdf_index_path.exists():
+            self._cache = {}
+            return self._cache
+
+        try:
+            with open(self._pdf_index_path, "r", encoding="utf-8") as f:
+                self._cache = json.load(f)
+        except Exception:
+            self._cache = {}
+
+        return self._cache
+
+    def search(self, pattern: str) -> dict[str, list[dict]]:
+        """Ищет теги в PDF индексе по шаблону с поддержкой * и ?.
+
+        Возвращает dict: {тег: [{"file": ..., "page": ..., "count": ...}, ...]}
+        """
+        data = self._load()
+        tags = data.get("tags", {})
+        matched: dict[str, list[dict]] = {}
+
+        for tag_name, tag_data in tags.items():
+            if fnmatch.fnmatch(tag_name, pattern):
+                matched[tag_name] = tag_data.get("positions", [])
+
+        return matched

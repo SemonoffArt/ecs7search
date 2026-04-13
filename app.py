@@ -12,7 +12,12 @@ from pathlib import Path
 
 from flask import Flask, flash, render_template, request, send_from_directory
 
-from utils.repository import MimicIndexRepository, TagDetailRepository, IOListRepository
+from utils.repository import (
+    MimicIndexRepository,
+    TagDetailRepository,
+    IOListRepository,
+    PDFIndexRepository,
+)
 from utils.service import SearchService
 from utils.pdf_service import PDFSearchService
 
@@ -35,6 +40,7 @@ TEMP_DIR.mkdir(parents=True, exist_ok=True)
 index_repo = MimicIndexRepository(INDEX_PATH)
 tag_repo = TagDetailRepository(TAGS_PATH)
 io_list_repo = IOListRepository(IO_LIST_PATH)
+pdf_repo = PDFIndexRepository(PDF_INDEX_PATH)
 
 # ─── Service слой ─────────────────────────────────────────────────
 
@@ -48,7 +54,7 @@ search_service = SearchService(
 )
 
 pdf_service = PDFSearchService(
-    pdf_index_path=PDF_INDEX_PATH,
+    pdf_repo=pdf_repo,
     pdf_dir=PDF_DIR,
     corner_image_path=CORNER_IMAGE_PATH,
     temp_dir=TEMP_DIR,
