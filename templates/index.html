@@ -79,8 +79,9 @@
                     <td>{{ detail.Groups }}</td>
                     <td>
                         {% if detail.DescEng %}<div>{{ detail.DescEng }}</div>{% endif %}
+                        {% if detail._signal_purpose %}<div class="tag-desc-purpose">{{ detail._signal_purpose }}</div>{% endif %}
                         {% if detail.DescRus %}<div class="tag-desc-rus">{{ detail.DescRus }}</div>{% endif %}
-                        {% if not detail.DescEng and not detail.DescRus %}—{% endif %}
+                        {% if not detail.DescEng and not detail.DescRus and not detail._signal_purpose %}—{% endif %}
                     </td>
                     <td>
                         {% if detail.Algorithms %}

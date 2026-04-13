@@ -1,5 +1,9 @@
 """
 Service слой — бизнес-логика поиска тегов и генерации результатов.
+
+Поиск выполняется по tags.json (TagDetailRepository) и io_list.json
+(IOListRepository) как по первичным источникам.
+Позиции на экранах берутся из mimics_index.json.
 """
 
 from __future__ import annotations
@@ -47,8 +51,6 @@ class SearchService:
             return "Минимум 3 символа для поиска.", "warning"
         if not TAG_PATTERN.match(query):
             return "Недопустимые символы. Разрешены буквы, цифры, *, ?, _", "danger"
-        if not self._index_repo.exists():
-            return "Файл индекса не найден. Запустите mimic_indexer.py.", "danger"
         return None
 
     # ─── Поиск ────────────────────────────────────────────────────
@@ -58,6 +60,8 @@ class SearchService:
         Возвращает (results_dict, flashes).
         results_dict — данные для render_template или None.
         flashes — список (message, category).
+        
+        Поиск по tags.json + io_list.json → позиции из mimics_index.json.
         """
         flashes: list[tuple[str, str]] = []
 
@@ -66,21 +70,43 @@ class SearchService:
             flashes.append(validation)
             return None, flashes
 
-        try:
-            index_data = self._index_repo.load()
-        except Exception as e:
-            flashes.append((f"Ошибка загрузки индекса: {e}", "danger"))
-            return None, flashes
-
         # Авто-wildcard
         search_query = query if ("*" in query or "?" in query) else f"*{query}*"
-        raw_results: dict[str, list[dict[str, Any]]] = search_tags(index_data, search_query)
 
-        if not raw_results:
+        # 1) Ищем в tags.json
+        matched_from_tags = set(self._tag_repo.search(search_query))
+        
+        # 2) Ищем в io_list.json
+        matched_from_io = set(self._io_list_repo.search(search_query))
+        
+        # Объединяем все найденные теги
+        all_matched_tags = sorted(matched_from_tags | matched_from_io)
+
+        if not all_matched_tags:
             flashes.append((f"Ничего не найдено по запросу: {query}", "info"))
             return None, flashes
 
-        # Группировка по файлам
+        # 3) Для каждого тега берём позиции из mimics_index.json (если есть)
+        raw_results: dict[str, list[dict[str, Any]]] = {}
+        io_only_tags: set[str] = set()  # теги только из io_list, без позиций
+        
+        for tag_name in all_matched_tags:
+            positions = []
+            # Пробуем найти в индексе с вариациями имени
+            for variant in [tag_name, tag_name.lstrip("_"), "_" + tag_name]:
+                if variant in self._index_repo.load().get("tags", {}):
+                    entry = self._index_repo.load()["tags"][variant]
+                    positions = entry.get("positions", [])
+                    break
+            
+            if positions:
+                raw_results[tag_name] = positions
+            else:
+                # Тег есть в справочниках, но нет на экранах
+                if tag_name in matched_from_io:
+                    io_only_tags.add(tag_name)
+
+        # 4) Группировка по файлам (только для тегов с позициями)
         file_positions: dict[str, list[dict[str, Any]]] = {}
         for tag_name, positions in raw_results.items():
             for pos in positions:
@@ -89,19 +115,29 @@ class SearchService:
                     file_positions[g_file] = []
                 file_positions[g_file].append({**pos, "tag": tag_name})
 
-        # Генерация изображений
+        # Если есть только теги из io_list без позиций — предупреждение, но показываем таблицу
+        if not raw_results and io_only_tags:
+            flashes.append(
+                (f"Найдено {len(io_only_tags)} тегов в справочниках, "
+                 f"но ни один не встречается на экранах.", "warning")
+            )
+
+        # Генерация изображений (только для тегов с позициями)
         image_results, skipped = self._generate_images(file_positions)
 
         # Screens и tag_details
         tag_screens = self._build_tag_screens(raw_results)
+        
+        # Собираем все теги для таблицы: с позициями + io_only
+        all_table_tags = sorted(set(raw_results.keys()) | io_only_tags)
         tag_details = (
-            self._enrich_tag_details(sorted(raw_results.keys()), tag_screens)
+            self._enrich_tag_details(all_table_tags, tag_screens)
             if detailed else []
         )
 
         return {
             "query": query,
-            "total_tags": len(raw_results),
+            "total_tags": len(all_matched_tags),
             "total_files": len(file_positions),
             "images": image_results,
             "skipped": skipped,
@@ -171,8 +207,6 @@ class SearchService:
         details: list[dict] = []
         for tag_name in tag_names:
             rec = self._tag_repo.get_flexible(tag_name)
-            if rec is None:
-                continue
 
             # Найти screens
             screens = tag_screens.get(tag_name, [])
@@ -180,10 +214,7 @@ class SearchService:
                 alt = tag_name[1:] if tag_name.startswith("_") else "_" + tag_name
                 screens = tag_screens.get(alt, [])
 
-            rec = {**rec, "_screens": screens}
-
-            # Найти IO list данные
-            # Пробуем варианты имени тега для поиска в io_list
+            # Найти IO list данные (полные, не только IO_FIELDS)
             io_variants = [tag_name]
             if tag_name.startswith("_"):
                 io_variants.append(tag_name[1:])
@@ -191,14 +222,35 @@ class SearchService:
                 io_variants.append("_" + tag_name)
 
             io_data = None
+            io_full_rec = {}
             for v in io_variants:
                 io_data = self._io_list_repo.get(v)
+                io_full_rec = self._io_list_repo._load().get(v, {})
                 if io_data is not None:
                     break
 
-            if io_data:
-                rec["_io_list"] = io_data
+            # SignalPurpose из io_list
+            signal_purpose = io_full_rec.get("SignalPurpose", "")
 
-            details.append(rec)
+            if rec is not None:
+                # Тег найден в tags.json — стандартная запись
+                rec = {**rec, "_screens": screens, "_signal_purpose": signal_purpose}
+                if io_data:
+                    rec["_io_list"] = io_data
+                details.append(rec)
+            elif io_data is not None:
+                # Тег только в io_list — создаём синтетическую запись
+                synth_rec = {
+                    "Tag": tag_name,
+                    "Groups": "—",
+                    "DescEng": io_full_rec.get("ComponentDescription", ""),
+                    "DescRus": "",
+                    "Algorithms": None,
+                    "PLC": None,
+                    "_screens": [],
+                    "_io_list": io_data,
+                    "_signal_purpose": signal_purpose,
+                }
+                details.append(synth_rec)
 
         return details

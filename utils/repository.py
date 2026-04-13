@@ -4,6 +4,7 @@ Repository слой — доступ к данным (индекс, tags.json).
 
 from __future__ import annotations
 
+import fnmatch
 import json
 from pathlib import Path
 from typing import Any
@@ -65,6 +66,23 @@ class TagDetailRepository:
                 return rec
         return None
 
+    def search(self, pattern: str) -> list[str]:
+        """Ищет теги по шаблону с поддержкой * и ?.
+        
+        Возвращает список имён тегов, совпадающих с паттерном.
+        """
+        all_tags = self._load()
+        # Собираем все варианты (с _ и без)
+        all_names: set[str] = set()
+        for tag in all_tags:
+            all_names.add(tag)
+            if tag.startswith("_"):
+                all_names.add(tag[1:])
+            else:
+                all_names.add("_" + tag)
+
+        return [name for name in sorted(all_names) if fnmatch.fnmatch(name, pattern)]
+
 
 class IOListRepository:
     """Кэшированное хранилище данных IO списка (io_list.json)."""
@@ -98,3 +116,11 @@ class IOListRepository:
         if rec is not None:
             return {k: rec.get(k) for k in self.IO_FIELDS if k in rec}
         return None
+
+    def search(self, pattern: str) -> list[str]:
+        """Ищет SignalCode по шаблону с поддержкой * и ?.
+        
+        Возвращает список имён сигналов, совпадающих с паттерном.
+        """
+        all_signals = self._load()
+        return [name for name in sorted(all_signals) if fnmatch.fnmatch(name, pattern)]
