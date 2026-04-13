@@ -25,12 +25,12 @@ class PDFSearchService:
         self,
         pdf_repo: PDFIndexRepository,
         pdf_dir: Path,
-        corner_image_path: Path,
+        monkey_image_path: Path,
         temp_dir: Path,
     ) -> None:
         self._pdf_repo = pdf_repo
         self._pdf_dir = pdf_dir
-        self._corner_image_path = corner_image_path
+        self._corner_image_path = monkey_image_path
         self._temp_dir = temp_dir
 
     def search(self, query: str) -> tuple[dict[str, list[dict]], list[str]]:
