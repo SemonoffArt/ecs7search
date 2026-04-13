@@ -14,6 +14,7 @@ from flask import Flask, flash, render_template, request, send_from_directory
 
 from utils.repository import MimicIndexRepository, TagDetailRepository, IOListRepository
 from utils.service import SearchService
+from utils.pdf_service import PDFSearchService
 
 # ─── Инициализация ────────────────────────────────────────────────
 
@@ -23,6 +24,9 @@ MIMICS_DIR = PROJECT_DIR / "data" / "mimics"
 INDEX_PATH = PROJECT_DIR / "data" / "mimics_index.json"
 TAGS_PATH = PROJECT_DIR / "data" / "tags.json"
 IO_LIST_PATH = PROJECT_DIR / "data" / "io_list.json"
+PDF_INDEX_PATH = PROJECT_DIR / "data" / "pdf_index.json"
+PDF_DIR = PROJECT_DIR / "data" / "pdf"
+WATERMARK_PATH = PROJECT_DIR / "data" / "pdf" / "watermark.pdf"
 TEMP_DIR = PROJECT_DIR / "data" / "temp"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -43,6 +47,13 @@ search_service = SearchService(
     max_results=20,
 )
 
+pdf_service = PDFSearchService(
+    pdf_index_path=PDF_INDEX_PATH,
+    pdf_dir=PDF_DIR,
+    watermark_path=WATERMARK_PATH,
+    temp_dir=TEMP_DIR,
+)
+
 # ─── Flask приложение (router) ────────────────────────────────────
 
 app = Flask(__name__)
@@ -55,25 +66,82 @@ def index():
     if request.method == "POST":
         query = request.form.get("query", "").strip()
         detailed = request.form.get("detailed") == "1"
+        search_pdf = request.form.get("search_pdf") == "1"
 
+        # Стандартный поиск по мимикам
         results, flashes_list = search_service.execute(query, detailed)
 
         for message, category in flashes_list:
             flash(message, category)
 
-        if results is None:
-            return render_template(
-                "index.html", results=None, query=query, detailed=detailed
-            )
+        # Поиск по PDF
+        pdf_results = None
+        pdf_filename = None
+
+        if search_pdf:
+            matched_tags, pdf_messages = pdf_service.search(query)
+
+            for msg in pdf_messages:
+                flash(msg, "warning" if "Ничего" in msg else "danger")
+
+            if matched_tags:
+                # Генерируем PDF
+                safe_query = "".join(c if c.isalnum() else "_" for c in query[:50])
+                pdf_filename = f"{safe_query}_pdf_srh.pdf"
+                out_name, gen_messages = pdf_service.generate_pdf(
+                    matched_tags, pdf_filename
+                )
+
+                for msg in gen_messages:
+                    if msg:
+                        flash(msg, "warning")
+
+                if out_name:
+                    # Собираем таблицу результатов
+                    pdf_table: list[dict] = []
+                    seen_pages: set[tuple[str, int]] = set()
+
+                    for tag_name, positions in matched_tags.items():
+                        for pos in positions:
+                            key = (pos["file"], pos["page"])
+                            if key not in seen_pages:
+                                seen_pages.add(key)
+                                pdf_table.append({
+                                    "file": pos["file"],
+                                    "page": pos["page"],
+                                    "count": pos["count"],
+                                    "tags": [tag_name],
+                                })
+                            else:
+                                for entry in pdf_table:
+                                    if entry["file"] == pos["file"] and entry["page"] == pos["page"]:
+                                        entry["tags"].append(tag_name)
+                                        break
+
+                    pdf_results = {
+                        "query": query,
+                        "total_tags": len(matched_tags),
+                        "total_pages": len(pdf_table),
+                        "pdf_filename": out_name,
+                        "table": pdf_table,
+                    }
+                else:
+                    for msg in gen_messages:
+                        if msg:
+                            flash(msg, "danger")
 
         return render_template(
             "index.html",
             results=results,
             query=query,
             detailed=detailed,
+            search_pdf=search_pdf,
+            pdf_results=pdf_results,
         )
 
-    return render_template("index.html", results=None, query="", detailed=False)
+    return render_template(
+        "index.html", results=None, query="", detailed=False, search_pdf=False, pdf_results=None
+    )
 
 
 @app.route("/temp/<filename>")

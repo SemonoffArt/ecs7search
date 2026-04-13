@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+"""
+Сервис поиска тегов в PDF документах и генерации сводного PDF.
+
+Поиск по pdf_index.json, извлечение страниц с найденными тегами,
+наложение watermark и создание итогового PDF.
+"""
+
+from __future__ import annotations
+
+import json
+import fnmatch
+from pathlib import Path
+from typing import Any
+
+import fitz  # PyMuPDF
+
+
+class PDFSearchService:
+    """Поиск тегов в PDF и генерация сводного документа."""
+
+    def __init__(
+        self,
+        pdf_index_path: Path,
+        pdf_dir: Path,
+        watermark_path: Path,
+        temp_dir: Path,
+    ) -> None:
+        self._pdf_index_path = pdf_index_path
+        self._pdf_dir = pdf_dir
+        self._watermark_path = watermark_path
+        self._temp_dir = temp_dir
+
+    def search(self, query: str) -> tuple[dict[str, list[dict]], list[str]]:
+        """Ищет теги в pdf_index.json по шаблону.
+        
+        Возвращает:
+            - dict: {тег: [{"file": ..., "page": ..., "count": ...}, ...]}
+            - list: сообщения об ошибках/предупреждения
+        """
+        if not self._pdf_index_path.exists():
+            return {}, ["Индекс PDF не найден. Запустите pdf_indexer.py."]
+
+        with open(self._pdf_index_path, "r", encoding="utf-8") as f:
+            index_data = json.load(f)
+
+        tags = index_data.get("tags", {})
+        search_query = query if ("*" in query or "?" in query) else f"*{query}*"
+
+        # Фильтрация по шаблону
+        matched: dict[str, list[dict]] = {}
+        for tag_name, tag_data in tags.items():
+            if fnmatch.fnmatch(tag_name, search_query):
+                matched[tag_name] = tag_data.get("positions", [])
+
+        if not matched:
+            return {}, [f"Ничего не найдено в PDF по запросу: {query}"]
+
+        return matched, []
+
+    def generate_pdf(
+        self,
+        matched_tags: dict[str, list[dict]],
+        output_name: str,
+    ) -> tuple[str | None, list[str]]:
+        """Генерирует сводный PDF с найденными страницами и watermark.
+        
+        Возвращает:
+            - str: имя выходного файла или None при ошибке
+            - list: сообщения
+        """
+        if not matched_tags:
+            return None, []
+
+        output_path = self._temp_dir / output_name
+        if output_path.exists():
+            output_path.unlink()
+
+        messages: list[str] = []
+
+        # Загружаем watermark
+        watermark_doc = None
+        watermark_page = None
+        if self._watermark_path.exists():
+            try:
+                watermark_doc = fitz.open(str(self._watermark_path))
+                if len(watermark_doc) > 0:
+                    watermark_page = watermark_doc[0]
+            except Exception as e:
+                messages.append(f"Не удалось загрузить watermark: {e}")
+
+        # Собираем уникальные (file, page) пары
+        seen: set[tuple[str, int]] = set()
+        pages_to_extract: list[dict] = []
+
+        for tag_name, positions in matched_tags.items():
+            for pos in positions:
+                file_name = pos.get("file", "")
+                page_num = pos.get("page", 0)
+                key = (file_name, page_num)
+                if key not in seen:
+                    seen.add(key)
+                    pages_to_extract.append({
+                        "file": file_name,
+                        "page": page_num,
+                        "tags": [],
+                    })
+                # Находим запись и добавляем тег
+                for entry in pages_to_extract:
+                    if entry["file"] == file_name and entry["page"] == page_num:
+                        entry["tags"].append(tag_name)
+                        break
+
+        # Сортируем по имени файла, затем по странице
+        pages_to_extract.sort(key=lambda x: (x["file"], x["page"]))
+
+        if not pages_to_extract:
+            return None, ["Нет страниц для генерации PDF."]
+
+        # Создаём итоговый PDF
+        try:
+            out_doc = fitz.open()
+
+            for item in pages_to_extract:
+                pdf_path = self._pdf_dir / item["file"]
+                if not pdf_path.exists():
+                    messages.append(f"Файл не найден: {item['file']}")
+                    continue
+
+                try:
+                    src_doc = fitz.open(str(pdf_path))
+                    page_num = item["page"]
+                    if page_num < 1 or page_num > len(src_doc):
+                        messages.append(
+                            f"Страница {page_num} вне диапазона в {item['file']}"
+                        )
+                        src_doc.close()
+                        continue
+
+                    src_page = src_doc[page_num - 1]
+
+                    # Копируем страницу в новый документ
+                    new_page = out_doc.new_page(
+                        width=src_page.rect.width,
+                        height=src_page.rect.height,
+                    )
+                    new_page.show_pdf_page(
+                        new_page.rect,
+                        src_doc,
+                        page_num - 1,
+                    )
+
+                    # Накладываем watermark
+                    if watermark_page is not None:
+                        new_page.show_pdf_page(
+                            new_page.rect,
+                            watermark_doc,
+                            0,
+                        )
+
+                    src_doc.close()
+
+                except Exception as e:
+                    messages.append(f"Ошибка обработки {item['file']} стр. {page_num}: {e}")
+
+            out_doc.save(str(output_path))
+            out_doc.close()
+
+        finally:
+            if watermark_doc is not None:
+                watermark_doc.close()
+
+        if output_path.exists():
+            return output_name, messages
+
+        return None, messages + ["Не удалось создать PDF."]
