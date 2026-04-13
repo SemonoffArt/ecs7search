@@ -17,12 +17,16 @@
                     autofocus
                 >
                 <label class="detail-checkbox">
-                    <input type="checkbox" name="detailed" value="1" {% if detailed %}checked{% endif %}>
-                    Расширенная информация
+                    <input type="checkbox" name="search_mimics" value="1" {% if search_mimics %}checked{% endif %}>
+                    Поиск по экранам
                 </label>
                 <label class="detail-checkbox">
                     <input type="checkbox" name="search_pdf" value="1" {% if search_pdf %}checked{% endif %}>
                     Поиск по PDF
+                </label>
+                <label class="detail-checkbox">
+                    <input type="checkbox" name="detailed" value="1" {% if detailed %}checked{% endif %}>
+                    Информация по тегам
                 </label>
             </div>
             <div class="tag-input-hint">Допустимы буквы, цифры, а также <code>*</code> и <code>?</code> для поиска по шаблону</div>
@@ -143,6 +147,54 @@
     </div>
     {% endif %}
 
+    <!-- Результаты поиска по PDF -->
+    {% if pdf_results %}
+    <div class="card">
+        <div class="section-title">
+            📄 Результаты поиска в PDF: <code>{{ pdf_results.query }}</code>
+            <span class="badge badge-info">{{ pdf_results.total_tags }} тегов</span>
+            <span class="badge badge-ok">{{ pdf_results.total_pages }} страниц</span>
+        </div>
+        <hr class="section-separator">
+
+        {% if pdf_results.pdf_filename %}
+        <div style="margin-bottom:15px;">
+            <a href="{{ url_for('serve_temp_image', filename=pdf_results.pdf_filename) }}"
+            class="btn btn-primary"
+            target="_blank"
+            style="text-decoration:none;">
+                📥 Скачать PDF с результатами
+            </a>
+        </div>
+        {% endif %}
+
+        <div style="overflow-x:auto;">
+            <table class="tag-detail-table">
+                <thead>
+                    <tr>
+                        <th>PDF файл</th>
+                        <th>Страница</th>
+                        <th>Теги</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in pdf_results.table %}
+                    <tr>
+                        <td>{{ row.file }}</td>
+                        <td style="text-align:center;">{{ row.page }}</td>
+                        <td>
+                            {% for tag in row.tags %}
+                            <code style="background-color:#f5f5f5;padding:1px 5px;border-radius:3px;font-size:11px;color:#e74c3c;">{{ tag }}</code>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
     <!-- Предупреждения о пропущенных файлах -->
     {% if results.skipped %}
         <div class="status-banner status-banner-warning">
@@ -181,52 +233,6 @@
 </div>
 {% endif %}
 
-<!-- Результаты поиска по PDF -->
-{% if pdf_results %}
-<div class="card">
-    <div class="section-title">
-        📄 Результаты поиска в PDF: <code>{{ pdf_results.query }}</code>
-        <span class="badge badge-info">{{ pdf_results.total_tags }} тегов</span>
-        <span class="badge badge-ok">{{ pdf_results.total_pages }} страниц</span>
-    </div>
-    <hr class="section-separator">
 
-    {% if pdf_results.pdf_filename %}
-    <div style="margin-bottom:15px;">
-        <a href="{{ url_for('serve_temp_image', filename=pdf_results.pdf_filename) }}"
-           class="btn btn-primary"
-           target="_blank"
-           style="text-decoration:none;">
-            📥 Скачать PDF с результатами
-        </a>
-    </div>
-    {% endif %}
-
-    <div style="overflow-x:auto;">
-        <table class="tag-detail-table">
-            <thead>
-                <tr>
-                    <th>PDF файл</th>
-                    <th>Страница</th>
-                    <th>Теги</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in pdf_results.table %}
-                <tr>
-                    <td>{{ row.file }}</td>
-                    <td style="text-align:center;">{{ row.page }}</td>
-                    <td>
-                        {% for tag in row.tags %}
-                        <code style="background-color:#f5f5f5;padding:1px 5px;border-radius:3px;font-size:11px;color:#e74c3c;">{{ tag }}</code>
-                        {% endfor %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-{% endif %}
 
 {% endblock %}

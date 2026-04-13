@@ -31,7 +31,7 @@ TAGS_PATH = PROJECT_DIR / "data" / "tags.json"
 IO_LIST_PATH = PROJECT_DIR / "data" / "io_list.json"
 PDF_INDEX_PATH = PROJECT_DIR / "data" / "pdf_index.json"
 PDF_DIR = PROJECT_DIR / "data" / "pdf"
-CORNER_IMAGE_PATH = PROJECT_DIR / "data" / "images" / "manky.png"
+MONKEY_IMAGE_PATH = PROJECT_DIR / "data" / "images" / "manky.png"
 TEMP_DIR = PROJECT_DIR / "data" / "temp"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -56,7 +56,7 @@ search_service = SearchService(
 pdf_service = PDFSearchService(
     pdf_repo=pdf_repo,
     pdf_dir=PDF_DIR,
-    corner_image_path=CORNER_IMAGE_PATH,
+    monkey_image_path=MONKEY_IMAGE_PATH,
     temp_dir=TEMP_DIR,
 )
 
@@ -72,13 +72,18 @@ def index():
     if request.method == "POST":
         query = request.form.get("query", "").strip()
         detailed = request.form.get("detailed") == "1"
+        search_mimics = request.form.get("search_mimics") == "1"
         search_pdf = request.form.get("search_pdf") == "1"
 
-        # Стандартный поиск по мимикам
-        results, flashes_list = search_service.execute(query, detailed)
+        results = None
 
-        for message, category in flashes_list:
-            flash(message, category)
+        # Поиск по мимикам (только если выбран чекбокс)
+        if search_mimics:
+            results, flashes_list = search_service.execute(query, detailed)
+            for message, category in flashes_list:
+                flash(message, category)
+        else:
+            flashes_list = []
 
         # Поиск по PDF
         pdf_results = None
@@ -141,12 +146,13 @@ def index():
             results=results,
             query=query,
             detailed=detailed,
+            search_mimics=search_mimics,
             search_pdf=search_pdf,
             pdf_results=pdf_results,
         )
 
     return render_template(
-        "index.html", results=None, query="", detailed=False, search_pdf=False, pdf_results=None
+        "index.html", results=None, query="", detailed=False, search_mimics=False, search_pdf=False, pdf_results=None
     )
 
 
