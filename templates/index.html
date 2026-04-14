@@ -158,6 +158,14 @@
             <span class="badge badge-ok">{{ pdf_results.total_pages }} страниц</span>
             <span class="badge" style="background-color:#9b59b6;">{{ pdf_results.total_files }} файлов</span>
         </div>
+
+        <!-- Дата создания PDF индекса -->
+        {% if pdf_results.pdf_metadata %}
+        <div style="font-size:11px; color:#888; margin-top:4px; margin-bottom:8px;">
+            Индекс PDF создан: {{ pdf_results.pdf_metadata.indexed_at }}
+        </div>
+        {% endif %}
+
         <hr class="section-separator">
 
         {% if pdf_results.pdf_filename %}
@@ -198,6 +206,13 @@
     </div>
     {% endif %}
     <div class="card">
+        <!-- Дата создания индекса мимиков -->
+        {% if results.index_metadata %}
+        <div style="font-size:11px; color:#888; margin-bottom:8px;">
+            Индекс экранов создан: {{ results.index_metadata.indexed_at }}
+        </div>
+        {% endif %}
+
         <!-- Предупреждения о пропущенных файлах -->
         {% if results.skipped %}
             <div class="status-banner status-banner-warning">

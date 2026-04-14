@@ -80,10 +80,22 @@ def index():
         # Поиск по мимикам (только если выбран чекбокс)
         if search_mimics:
             results, flashes_list = search_service.execute(query, detailed)
+
+            # Добавляем metadata из индекса
+            if results is not None:
+                index_data = index_repo.load()
+                results["index_metadata"] = index_data.get("metadata", {})
+
             for message, category in flashes_list:
                 flash(message, category)
         else:
             flashes_list = []
+            # Для поиска только по PDF всё равно передаём metadata
+            if search_pdf:
+                index_data = index_repo.load()
+                results = {"index_metadata": index_data.get("metadata", {})}
+            else:
+                results = None
 
         # Поиск по PDF
         pdf_results = None
@@ -129,12 +141,15 @@ def index():
                                         entry["tags"].append(tag_name)
                                         break
 
+                    pdf_files = set(row["file"] for row in pdf_table)
                     pdf_results = {
                         "query": query,
                         "total_tags": len(matched_tags),
                         "total_pages": len(pdf_table),
+                        "total_files": len(pdf_files),
                         "pdf_filename": out_name,
                         "table": pdf_table,
+                        "pdf_metadata": pdf_repo._load().get("metadata", {}),
                     }
                 else:
                     for msg in gen_messages:
