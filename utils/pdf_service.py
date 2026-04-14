@@ -128,39 +128,45 @@ class PDFSearchService:
                         continue
 
                     src_page = src_doc[page_num - 1]
+                    rotation = src_page.rotation
 
-                    # Нормализуем поворот — страницы с rotation 90/270 станут альбомными
-                    original_rotation = src_page.rotation
-                    if original_rotation != 0:
+                    # Если страница повёрнута — временно сбрасываем для корректного копирования
+                    if rotation != 0:
                         src_page.set_rotation(0)
 
+                    # Создаём новую страницу с теми же размерами
                     new_page = out_doc.new_page(
                         width=src_page.rect.width,
                         height=src_page.rect.height,
                     )
+                    new_page.show_pdf_page(new_page.rect, src_doc, page_num - 1)
 
-                    # Копируем содержимое страницы
-                    new_page.show_pdf_page(
-                        new_page.rect,
-                        src_doc,
-                        page_num - 1,
-                    )
-                    if original_rotation != 0:
-                        new_page.set_rotation(original_rotation)
+                    # Восстанавливаем повороты
+                    if rotation != 0:
+                        new_page.set_rotation(rotation)
+                        src_page.set_rotation(rotation)
 
-                    # Восстанавливаем поворот исходной страницы
-                    if original_rotation != 0:
-                        src_page.set_rotation(original_rotation)
+                    # Вычисляем позицию изображения (левый нижний угол)
+                    is_rotated = rotation in (90, 270)
+                    margin = 5
+                    size = self.MONKEY_IMG_SIZE
 
-                    # Вставляем изображение в левый нижний угол
+                    if is_rotated:
+                        x0 = new_page.rect.height - size - margin
+                        y0 = new_page.rect.width - size - margin
+                        x1 = new_page.rect.height - margin
+                        y1 = new_page.rect.width - margin
+                    else:
+                        x0 = margin
+                        y0 = new_page.rect.height - size - margin
+                        x1 = margin + size
+                        y1 = new_page.rect.height - margin
+
+                    # Вставляем изображение
                     if monkey_img_data is not None:
-                        img_rect = fitz.Rect(
-                            5,  # отступ слева
-                            new_page.rect.height - self.MONKEY_IMG_SIZE - 5,  # отступ снизу
-                            5 + self.MONKEY_IMG_SIZE,
-                            new_page.rect.height - 5,
-                        )
-                        new_page.insert_image(img_rect, stream=monkey_img_data)
+                        img_rect = fitz.Rect(x0, y0, x1, y1)
+                        img_rotation = 90 if is_rotated else 0
+                        new_page.insert_image(img_rect, stream=monkey_img_data, rotate=img_rotation)
 
                     src_doc.close()
 
