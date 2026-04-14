@@ -145,6 +145,8 @@ class PDFSearchService:
                         src_doc,
                         page_num - 1,
                     )
+                    if original_rotation != 0:
+                        new_page.set_rotation(original_rotation)
 
                     # Восстанавливаем поворот исходной страницы
                     if original_rotation != 0:

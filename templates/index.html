@@ -66,85 +66,87 @@
 
     <!-- Расширенная информация по тегам -->
     {% if detailed and results.tag_details %}
-    <div style="margin-bottom:15px; overflow-x:auto;">
-        <table class="tag-detail-table">
-            <thead>
-                <tr>
-                    <th>Tag</th>
-                    <th>Groups</th>
-                    <th>Description</th>
-                    <th>Algorithms</th>
-                    <th>PLC</th>
-                    <th>IO List</th>
-                    <th>Screens</th>
+    <div class="card">
+        <div style="margin-bottom:15px; overflow-x:auto;">
+            <table class="tag-detail-table">
+                <thead>
+                    <tr>
+                        <th>Tag</th>
+                        <th>Groups</th>
+                        <th>Description</th>
+                        <th>Algorithms</th>
+                        <th>PLC</th>
+                        <th>IO List</th>
+                        <th>Screens</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                {% for detail in results.tag_details %}
-                <tr>
-                    <td><code>{{ detail.Tag }}</code></td>
-                    <td>{{ detail.Groups }}</td>
-                    <td>
-                        {% if detail.DescEng %}<div>{{ detail.DescEng }}</div>{% endif %}
-                        {% if detail._signal_purpose %}<div class="tag-desc-purpose">{{ detail._signal_purpose }}</div>{% endif %}
-                        {% if detail.DescRus %}<div class="tag-desc-rus">{{ detail.DescRus }}</div>{% endif %}
-                        {% if not detail.DescEng and not detail.DescRus and not detail._signal_purpose %}—{% endif %}
-                    </td>
-                    <td>
-                        {% if detail.Algorithms %}
-                        <div>Conv: {{ detail.Algorithms.ConvAlg }}</div>
-                        <div>Calc: {{ detail.Algorithms.CalcAlg }}</div>
-                        <div>Block: {{ detail.Algorithms.BlockAlg }}</div>
-                        {% else %}
-                        —
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if detail.PLC %}
-                        <div>PLC: {{ detail.PLC.PLCNo }}</div>
-                        <div>FC: {{ detail.PLC.FC }}</div>
-                        {% if detail.PLC.Input %}
-                        <div class="tag-plc-sub">
-                            <div><b>IN:</b> {{ detail.PLC.Input.Type }}, DB{{ detail.PLC.Input.Block }}.DBD{{ detail.PLC.Input.Word }}{% if detail.PLC.Input.Bit is not none %}.{{ detail.PLC.Input.Bit }}{% endif %}</div>
-                        </div>
-                        {% endif %}
-                        {% if detail.PLC.Output %}
-                        <div class="tag-plc-sub">
-                            <div><b>OUT:</b> {{ detail.PLC.Output.Type }}, DB{{ detail.PLC.Output.Block }}.DBD{{ detail.PLC.Output.Word }}{% if detail.PLC.Output.Bit is not none %}.{{ detail.PLC.Output.Bit }}{% endif %}</div>
-                        </div>
-                        {% endif %}
-                        {% else %}
-                        —
-                        {% endif %}
-                    </td>
-                    <td class="tag-io-list">
-                        {% if detail._io_list %}
-                            <!-- <div><b>PLC:</b> {{ detail._io_list.PLC }}</div> -->
-                            <div><b>Comp:</b> {{ detail._io_list.Component }}</div>
-                            <div><b>Term:</b> {{ detail._io_list.IOTerminal_Short1 }}</div>
-                            <div><b>Addr:</b> {{ detail._io_list.IOAddress }}</div>
-                            <div><b>Type:</b> {{ detail._io_list.IOType }}</div>
-                        {% else %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in results.tag_details %}
+                    <tr>
+                        <td><code>{{ detail.Tag }}</code></td>
+                        <td>{{ detail.Groups }}</td>
+                        <td>
+                            {% if detail.DescEng %}<div>{{ detail.DescEng }}</div>{% endif %}
+                            {% if detail._signal_purpose %}<div class="tag-desc-purpose">{{ detail._signal_purpose }}</div>{% endif %}
+                            {% if detail.DescRus %}<div class="tag-desc-rus">{{ detail.DescRus }}</div>{% endif %}
+                            {% if not detail.DescEng and not detail.DescRus and not detail._signal_purpose %}—{% endif %}
+                        </td>
+                        <td>
+                            {% if detail.Algorithms %}
+                            <div>Conv: {{ detail.Algorithms.ConvAlg }}</div>
+                            <div>Calc: {{ detail.Algorithms.CalcAlg }}</div>
+                            <div>Block: {{ detail.Algorithms.BlockAlg }}</div>
+                            {% else %}
                             —
-                        {% endif %}
-                    </td>
-
-                    <td>
-                        {% if detail._screens and detail._screens|length > 0 %}
-                            {% for scr in detail._screens %}
-                            <div class="tag-screen-item">{{ scr }}</div>
-                            {% endfor %}
-                        {% else %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if detail.PLC %}
+                            <div>PLC: {{ detail.PLC.PLCNo }}</div>
+                            <div>FC: {{ detail.PLC.FC }}</div>
+                            {% if detail.PLC.Input %}
+                            <div class="tag-plc-sub">
+                                <div><b>IN:</b> {{ detail.PLC.Input.Type }}, DB{{ detail.PLC.Input.Block }}.DBD{{ detail.PLC.Input.Word }}{% if detail.PLC.Input.Bit is not none %}.{{ detail.PLC.Input.Bit }}{% endif %}</div>
+                            </div>
+                            {% endif %}
+                            {% if detail.PLC.Output %}
+                            <div class="tag-plc-sub">
+                                <div><b>OUT:</b> {{ detail.PLC.Output.Type }}, DB{{ detail.PLC.Output.Block }}.DBD{{ detail.PLC.Output.Word }}{% if detail.PLC.Output.Bit is not none %}.{{ detail.PLC.Output.Bit }}{% endif %}</div>
+                            </div>
+                            {% endif %}
+                            {% else %}
                             —
-                        {% endif %}
-                    </td>
+                            {% endif %}
+                        </td>
+                        <td class="tag-io-list">
+                            {% if detail._io_list %}
+                                <!-- <div><b>PLC:</b> {{ detail._io_list.PLC }}</div> -->
+                                <div><b>Comp:</b> {{ detail._io_list.Component }}</div>
+                                <div><b>Term:</b> {{ detail._io_list.IOTerminal_Short1 }}</div>
+                                <div><b>Addr:</b> {{ detail._io_list.IOAddress }}</div>
+                                <div><b>Type:</b> {{ detail._io_list.IOType }}</div>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
 
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                        <td>
+                            {% if detail._screens and detail._screens|length > 0 %}
+                                {% for scr in detail._screens %}
+                                <div class="tag-screen-item">{{ scr }}</div>
+                                {% endfor %}
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>    
     {% endif %}
 
     <!-- Результаты поиска по PDF -->
@@ -154,6 +156,7 @@
             📄 Результаты поиска в PDF: <code>{{ pdf_results.query }}</code>
             <span class="badge badge-info">{{ pdf_results.total_tags }} тегов</span>
             <span class="badge badge-ok">{{ pdf_results.total_pages }} страниц</span>
+            <span class="badge" style="background-color:#9b59b6;">{{ pdf_results.total_files }} файлов</span>
         </div>
         <hr class="section-separator">
 
@@ -194,42 +197,43 @@
         </div>
     </div>
     {% endif %}
+    <div class="card">
+        <!-- Предупреждения о пропущенных файлах -->
+        {% if results.skipped %}
+            <div class="status-banner status-banner-warning">
+                <strong>Пропущенные файлы (нет PNG или ошибка):</strong>
+                <ul class="mb-0 mt-1" style="margin-bottom:0; margin-top:4px;">
+                    {% for item in results.skipped %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
 
-    <!-- Предупреждения о пропущенных файлах -->
-    {% if results.skipped %}
-        <div class="status-banner status-banner-warning">
-            <strong>Пропущенные файлы (нет PNG или ошибка):</strong>
-            <ul class="mb-0 mt-1" style="margin-bottom:0; margin-top:4px;">
-                {% for item in results.skipped %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
-    <!-- Галерея изображений -->
-    {% for image in results.images %}
-        <div class="result-item">
-            <div style="margin-bottom:8px;">
-                📄 <code style="font-size:14px;">{{ image.g_file }}</code>
-                <span class="badge badge-info" style="margin-left:6px;">{{ image.positions|length }} позиций</span>
+        <!-- Галерея изображений -->
+        {% for image in results.images %}
+            <div class="result-item">
+                <div style="margin-bottom:8px;">
+                    📄 <code style="font-size:14px;">{{ image.g_file }}</code>
+                    <span class="badge badge-info" style="margin-left:6px;">{{ image.positions|length }} позиций</span>
+                </div>
+                <div class="tags-list" style="margin-bottom:10px;">
+                    {% set unique_tags = image.positions | map(attribute='tag') | unique | list %}
+                    {% for tag in unique_tags %}
+                        <span class="badge" style="background-color:#18bc9c; color:#ffffff;">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <div>
+                    <img
+                        src="{{ url_for('serve_temp_image', filename=image.png_name) }}"
+                        alt="Результат для {{ image.g_file }}"
+                        class="result-img zoomable"
+                        title="Нажмите для увеличения"
+                    >
+                </div>
             </div>
-            <div class="tags-list" style="margin-bottom:10px;">
-                {% set unique_tags = image.positions | map(attribute='tag') | unique | list %}
-                {% for tag in unique_tags %}
-                    <span class="badge" style="background-color:#18bc9c; color:#ffffff;">{{ tag }}</span>
-                {% endfor %}
-            </div>
-            <div>
-                <img
-                    src="{{ url_for('serve_temp_image', filename=image.png_name) }}"
-                    alt="Результат для {{ image.g_file }}"
-                    class="result-img zoomable"
-                    title="Нажмите для увеличения"
-                >
-            </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>    
 </div>
 <!-- {% endif %} -->
 
