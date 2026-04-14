@@ -19,7 +19,7 @@ class PDFSearchService:
     """Генерация сводного PDF по результатам поиска в PDF индексе."""
 
     # Размер изображения в углу (points)
-    CORNER_IMG_SIZE = 60
+    MONKEY_IMG_SIZE = 60
 
     def __init__(
         self,
@@ -72,10 +72,10 @@ class PDFSearchService:
         messages: list[str] = []
 
         # Проверяем наличие углового изображения
-        corner_img_data = None
+        monkey_img_data = None
         if self._corner_image_path.exists():
             try:
-                corner_img_data = self._corner_image_path.read_bytes()
+                monkey_img_data = self._corner_image_path.read_bytes()
             except Exception as e:
                 messages.append(f"Не удалось загрузить изображение: {e}")
 
@@ -129,26 +129,36 @@ class PDFSearchService:
 
                     src_page = src_doc[page_num - 1]
 
-                    # Копируем страницу в новый документ
+                    # Нормализуем поворот — страницы с rotation 90/270 станут альбомными
+                    original_rotation = src_page.rotation
+                    if original_rotation != 0:
+                        src_page.set_rotation(0)
+
                     new_page = out_doc.new_page(
                         width=src_page.rect.width,
                         height=src_page.rect.height,
                     )
+
+                    # Копируем содержимое страницы
                     new_page.show_pdf_page(
                         new_page.rect,
                         src_doc,
                         page_num - 1,
                     )
 
+                    # Восстанавливаем поворот исходной страницы
+                    if original_rotation != 0:
+                        src_page.set_rotation(original_rotation)
+
                     # Вставляем изображение в левый нижний угол
-                    if corner_img_data is not None:
+                    if monkey_img_data is not None:
                         img_rect = fitz.Rect(
                             5,  # отступ слева
-                            new_page.rect.height - self.CORNER_IMG_SIZE - 5,  # отступ снизу
-                            5 + self.CORNER_IMG_SIZE,
+                            new_page.rect.height - self.MONKEY_IMG_SIZE - 5,  # отступ снизу
+                            5 + self.MONKEY_IMG_SIZE,
                             new_page.rect.height - 5,
                         )
-                        new_page.insert_image(img_rect, stream=corner_img_data)
+                        new_page.insert_image(img_rect, stream=monkey_img_data)
 
                     src_doc.close()
 
