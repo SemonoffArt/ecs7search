@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <div class="section-title">⚙️ Настройки</div>
+    <hr class="section-separator">
+
+    <!-- Информация об индексах -->
+    <div class="section-subtitle">📊 Состояние индексов</div>
+
+    <div class="stats-grid">
+        <!-- Mimics Index -->
+        <div class="stat-card">
+            <div class="stat-card-title">🖼️ Индекс экранов</div>
+            <div class="stat-card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Файлов:</span>
+                    <span class="stat-value">{{ mimics_stats.total_files }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Изображений:</span>
+                    <span class="stat-value">{{ mimics_stats.total_images }}</span>
+                </div>
+                {% if mimics_stats.metadata %}
+                <div class="stat-row">
+                    <span class="stat-label">Создан:</span>
+                    <span class="stat-value">{{ mimics_stats.metadata.indexed_at }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Тегов:</span>
+                    <span class="stat-value">{{ mimics_stats.metadata.total_tags }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- PDF Index -->
+        <div class="stat-card">
+            <div class="stat-card-title">📄 Индекс PDF</div>
+            <div class="stat-card-body">
+                <div class="stat-row">
+                    <span class="stat-label">PDF файлов:</span>
+                    <span class="stat-value">{{ pdf_stats.total_files }}</span>
+                </div>
+                {% if pdf_stats.metadata %}
+                <div class="stat-row">
+                    <span class="stat-label">Создан:</span>
+                    <span class="stat-value">{{ pdf_stats.metadata.indexed_at }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Тегов:</span>
+                    <span class="stat-value">{{ pdf_stats.metadata.total_tags }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Вхождений:</span>
+                    <span class="stat-value">{{ pdf_stats.metadata.total_occurrences }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Tags Index -->
+        <div class="stat-card">
+            <div class="stat-card-title">🏷️ Теги</div>
+            <div class="stat-card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Всего тегов:</span>
+                    <span class="stat-value">{{ tags_stats.total_tags }}</span>
+                </div>
+                {% if tags_stats.indexed_at %}
+                <div class="stat-row">
+                    <span class="stat-label">Создан:</span>
+                    <span class="stat-value">{{ tags_stats.indexed_at }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- IO List -->
+        <div class="stat-card">
+            <div class="stat-card-title">📋 IO List</div>
+            <div class="stat-card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Записей:</span>
+                    <span class="stat-value">{{ io_stats.total_records }}</span>
+                </div>
+                {% if io_stats.generated_at %}
+                <div class="stat-row">
+                    <span class="stat-label">Создан:</span>
+                    <span class="stat-value">{{ io_stats.generated_at }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-separator">
+
+    <!-- Конфигурация -->
+    <div class="section-subtitle">🔧 Пути к данным</div>
+
+    <div class="config-table">
+        <div class="config-row">
+            <span class="config-label">Проект:</span>
+            <code class="config-value">{{ config.project_dir }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">Экраны:</span>
+            <code class="config-value">{{ config.mimics_dir }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">PDF:</span>
+            <code class="config-value">{{ config.pdf_dir }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">Временные:</span>
+            <code class="config-value">{{ config.temp_dir }}</code>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

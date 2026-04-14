@@ -8,6 +8,7 @@ ecs7search Web UI — Flask-приложение для поиска тегов 
 Архитектура: router → service → repository
 """
 
+import json
 from pathlib import Path
 
 from flask import Flask, flash, render_template, request, send_from_directory
@@ -176,6 +177,71 @@ def serve_temp_image(filename):
     """Отдача изображений из data/temp/."""
     safe_path = Path(filename).name
     return send_from_directory(str(TEMP_DIR), safe_path)
+
+
+def _safe_file_count(directory: Path, pattern: str = "*") -> int:
+    """Безопасно считает файлы в директории."""
+    try:
+        return len(list(directory.glob(pattern)))
+    except Exception:
+        return 0
+
+
+def _load_json_safe(path: Path) -> dict:
+    """Загружает JSON файл безопасно."""
+    try:
+        if path.exists():
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+    except Exception:
+        pass
+    return {}
+
+
+@app.route("/settings")
+def settings():
+    """Страница настроек — информация об индексах и конфигурации."""
+    mimics_index = _load_json_safe(INDEX_PATH)
+    pdf_index = _load_json_safe(PDF_INDEX_PATH)
+    tags_index = _load_json_safe(TAGS_PATH)
+    io_list = _load_json_safe(IO_LIST_PATH)
+
+    config = {
+        "project_dir": str(PROJECT_DIR),
+        "mimics_dir": str(MIMICS_DIR),
+        "pdf_dir": str(PDF_DIR),
+        "temp_dir": str(TEMP_DIR),
+    }
+
+    mimics_stats = {
+        "total_files": _safe_file_count(MIMICS_DIR, "*.g"),
+        "total_images": _safe_file_count(MIMICS_DIR, "*.png"),
+        "metadata": mimics_index.get("metadata", {}),
+    }
+
+    pdf_stats = {
+        "total_files": _safe_file_count(PDF_DIR, "*.pdf"),
+        "metadata": pdf_index.get("metadata", {}),
+    }
+
+    tags_stats = {
+        "total_tags": len(tags_index) if isinstance(tags_index, list) else tags_index.get("metadata", {}).get("total_tags", 0),
+        "indexed_at": tags_index.get("metadata", {}).get("indexed_at", "") if isinstance(tags_index, dict) else "",
+    }
+
+    io_stats = {
+        "total_records": len(io_list) - 1 if isinstance(io_list, dict) else len(io_list) if isinstance(io_list, list) else 0,
+        "generated_at": io_list.get("metadata", {}).get("generated_at", "") if isinstance(io_list, dict) else "",
+    }
+
+    return render_template(
+        "settings.html",
+        config=config,
+        mimics_stats=mimics_stats,
+        pdf_stats=pdf_stats,
+        tags_stats=tags_stats,
+        io_stats=io_stats,
+    )
 
 
 if __name__ == "__main__":
