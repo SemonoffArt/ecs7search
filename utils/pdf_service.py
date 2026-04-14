@@ -51,6 +51,49 @@ class PDFSearchService:
 
         return matched, []
 
+    def build_pdf_results(
+        self,
+        matched_tags: dict[str, list[dict]],
+        query: str,
+    ) -> dict | None:
+        """Формирует структуру результатов PDF поиска для отображения.
+
+        Возвращает dict с таблицей результатов или None.
+        """
+        if not matched_tags:
+            return None
+
+        pdf_table: list[dict] = []
+        seen_pages: set[tuple[str, int]] = set()
+
+        for tag_name, positions in matched_tags.items():
+            for pos in positions:
+                key = (pos["file"], pos["page"])
+                if key not in seen_pages:
+                    seen_pages.add(key)
+                    pdf_table.append({
+                        "file": pos["file"],
+                        "page": pos["page"],
+                        "count": pos["count"],
+                        "tags": [tag_name],
+                    })
+                else:
+                    for entry in pdf_table:
+                        if entry["file"] == pos["file"] and entry["page"] == pos["page"]:
+                            entry["tags"].append(tag_name)
+                            break
+
+        pdf_files = set(row["file"] for row in pdf_table)
+
+        return {
+            "query": query,
+            "total_tags": len(matched_tags),
+            "total_pages": len(pdf_table),
+            "total_files": len(pdf_files),
+            "table": pdf_table,
+            "pdf_metadata": self._pdf_repo._load().get("metadata", {}),
+        }
+
     def generate_pdf(
         self,
         matched_tags: dict[str, list[dict]],

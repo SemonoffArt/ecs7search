@@ -154,6 +154,7 @@ class SearchService:
             "images": image_results,
             "skipped": skipped,
             "tag_details": tag_details,
+            "index_metadata": self._index_repo.load().get("metadata", {}),
         }, flashes
 
     # ─── Приватные методы ─────────────────────────────────────────
