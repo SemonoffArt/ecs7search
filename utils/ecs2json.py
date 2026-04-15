@@ -437,11 +437,20 @@ class TagsHelper(object):
         print(f"{Fore.YELLOW}Оборудование сохранено в: {Fore.GREEN}  {_DATA_DIR / 'equips1.json'}  {Style.RESET_ALL}")
 
     def save_json(self, tags=None):
-        """Сохраняет теги в JSON файл"""
+        """Сохраняет теги в JSON файл с метаданными"""
         import json
         tags = tags or self.tags
+        output = {
+            "metadata": {
+                "directory": str(_TAG_DB_DIR),
+                "indexed_at": time.ctime(),
+                "total_tags": len(tags),
+                "indexing_time_sec": round(self.index_time, 2),
+            },
+            "tags": tags,
+        }
         with open(_DATA_DIR / "tags.json", "w", encoding="utf-8") as f:
-            json.dump(tags, f, ensure_ascii=False, indent=4)
+            json.dump(output, f, ensure_ascii=False, indent=4)
         print(f"{Fore.YELLOW}Теги сохранены в:{Fore.GREEN}  {_DATA_DIR / 'tags.json'}  {Style.RESET_ALL}")
 
 

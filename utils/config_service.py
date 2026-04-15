@@ -64,14 +64,20 @@ class ConfigService:
     def get_tags_stats(self) -> dict:
         """Статистика по тегам."""
         index_data = self._load_json_safe(self._tags_path)
-        total_tags = (
-            len(index_data) if isinstance(index_data, list)
-            else index_data.get("metadata", {}).get("total_tags", 0)
-        )
-        indexed_at = (
-            index_data.get("metadata", {}).get("indexed_at", "")
-            if isinstance(index_data, dict) else ""
-        )
+
+        # Новый формат: {"metadata": {...}, "tags": [...]}
+        if isinstance(index_data, dict):
+            metadata = index_data.get("metadata", {})
+            total_tags = metadata.get("total_tags", 0)
+            indexed_at = metadata.get("indexed_at", "")
+        # Старый формат: [...]
+        elif isinstance(index_data, list):
+            total_tags = len(index_data)
+            indexed_at = ""
+        else:
+            total_tags = 0
+            indexed_at = ""
+
         return {
             "total_tags": total_tags,
             "indexed_at": indexed_at,

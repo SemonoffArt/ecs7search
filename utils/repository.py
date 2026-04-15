@@ -41,7 +41,16 @@ class TagDetailRepository:
 
         try:
             with open(self._tags_path, "r", encoding="utf-8") as f:
-                records: list[dict[str, Any]] = json.load(f)
+                data = json.load(f)
+
+            # Поддержка двух форматов:
+            # Новый: {"metadata": {...}, "tags": [...]}
+            # Старый: [...]
+            if isinstance(data, dict):
+                records: list[dict[str, Any]] = data.get("tags", [])
+            else:
+                records = data
+
             self._cache = {}
             for record in records:
                 tag_name = record.get("Tag", "")
