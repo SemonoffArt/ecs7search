@@ -117,6 +117,263 @@
             <code class="config-value">{{ config.temp_dir }}</code>
         </div>
     </div>
+
+    <hr class="section-separator">
+
+    <!-- Индексирование -->
+    <div class="section-subtitle">🔄 Индексирование данных</div>
+
+    <!-- Статус текущего индексирования -->
+    <div id="indexing-status-panel" class="status-panel" style="display:none;">
+        <div class="status-header">
+            <span id="indexing-task-name" class="status-task-name"></span>
+            <span id="indexing-spinner" class="spinner">⏳</span>
+        </div>
+        <div class="status-progress-bar">
+            <div id="indexing-progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="status-info">
+            <span id="indexing-progress-text" class="progress-text"></span>
+            <span id="indexing-message" class="status-message"></span>
+        </div>
+        <div id="indexing-result" class="status-result" style="display:none;"></div>
+    </div>
+
+    <!-- Кнопки запуска -->
+    <div id="indexing-actions" class="indexing-actions">
+        <button onclick="startIndexing('mimics')" class="btn btn-index" id="btn-index-mimics">
+            🖼️ Индексировать экраны
+        </button>
+        <button onclick="startIndexing('pdf')" class="btn btn-index" id="btn-index-pdf">
+            📄 Индексировать PDF
+        </button>
+        <button onclick="startIndexing('io_list')" class="btn btn-index" id="btn-index-io">
+            📋 Индексировать IO List
+        </button>
+    </div>
 </div>
+
+<script>
+let pollingInterval = null;
+
+function startIndexing(task) {
+    const btn = document.getElementById(`btn-index-${task === 'io_list' ? 'io' : task}`);
+    btn.disabled = true;
+    btn.dataset.originalText = btn.textContent.trim();
+    btn.textContent = 'Запуск...';
+
+    fetch(`/settings/index/${task}`, { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                startPolling();
+            } else {
+                resetButton(btn);
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            resetButton(btn);
+        });
+}
+
+function resetButton(btn) {
+    btn.disabled = false;
+    btn.textContent = btn.dataset.originalText || btn.textContent;
+}
+
+function startPolling() {
+    if (pollingInterval) return;
+    
+    const panel = document.getElementById('indexing-status-panel');
+    panel.style.display = 'block';
+    
+    pollingInterval = setInterval(() => {
+        fetch('/settings/index/status')
+            .then(res => res.json())
+            .then(status => {
+                updateStatusUI(status);
+                if (!status.is_running) {
+                    stopPolling();
+                }
+            })
+            .catch(err => {
+                console.error('Polling error:', err);
+            });
+    }, 1000);
+}
+
+function stopPolling() {
+    if (pollingInterval) {
+        clearInterval(pollingInterval);
+        pollingInterval = null;
+        document.getElementById('indexing-spinner').textContent = '✅';
+        // Восстанавливаем все кнопки
+        document.querySelectorAll('.btn-index').forEach(resetButton);
+    }
+}
+
+function updateStatusUI(status) {
+    const panel = document.getElementById('indexing-status-panel');
+    const taskName = document.getElementById('indexing-task-name');
+    const spinner = document.getElementById('indexing-spinner');
+    const progressFill = document.getElementById('indexing-progress-fill');
+    const progressText = document.getElementById('indexing-progress-text');
+    const message = document.getElementById('indexing-message');
+    const resultDiv = document.getElementById('indexing-result');
+
+    panel.style.display = 'block';
+    taskName.textContent = status.task_name || '';
+    message.textContent = status.message || '';
+
+    if (status.is_running) {
+        spinner.textContent = '⏳';
+        spinner.style.animation = 'spin 1s linear infinite';
+        const progress = status.total > 0 
+            ? Math.round((status.progress / status.total) * 100) 
+            : 0;
+        progressFill.style.width = `${progress}%`;
+        progressText.textContent = status.total > 0 
+            ? `${status.progress} / ${status.total} (${progress}%)` 
+            : `${status.progress}`;
+        resultDiv.style.display = 'none';
+    } else if (status.completed_at) {
+        spinner.textContent = '✅';
+        spinner.style.animation = '';
+        progressFill.style.width = '100%';
+        progressText.textContent = `Завершено в ${status.completed_at}`;
+        
+        if (status.result) {
+            resultDiv.style.display = 'block';
+            let html = '<div class="result-details">';
+            for (const [key, value] of Object.entries(status.result)) {
+                html += `<div><span class="result-label">${key}:</span> ${value}</div>`;
+            }
+            html += '</div>';
+            resultDiv.innerHTML = html;
+        }
+    }
+}
+
+// Сохраняем оригинальный текст кнопок
+document.querySelectorAll('.btn-index').forEach(btn => {
+    btn.dataset.originalText = btn.textContent;
+});
+
+// При загрузке страницы проверяем текущий статус
+document.addEventListener('DOMContentLoaded', () => {
+    const status = {{ indexing_status | tojson }};
+    if (status.is_running) {
+        startPolling();
+    } else if (status.completed_at) {
+        updateStatusUI(status);
+    }
+});
+</script>
+
+<style>
+.status-panel {
+    background: #f0f9ff;
+    border: 1px solid #90caf9;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.status-task-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #2c3e50;
+}
+
+.spinner {
+    font-size: 20px;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.status-progress-bar {
+    background: #e0e0e0;
+    border-radius: 4px;
+    height: 24px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #18bc9c, #4fc3f7);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+.status-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #7f8c8d;
+}
+
+.status-message {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.status-result {
+    margin-top: 12px;
+    padding: 12px;
+    background: #d4edda;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.result-details div {
+    margin: 4px 0;
+}
+
+.result-label {
+    font-weight: 600;
+    color: #546e7a;
+}
+
+.indexing-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.btn-index {
+    background-color: #18bc9c;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.btn-index:hover:not(:disabled) {
+    background-color: #149f82;
+}
+
+.btn-index:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>
 
 {% endblock %}

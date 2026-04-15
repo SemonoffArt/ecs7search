@@ -13,6 +13,7 @@ from pathlib import Path
 from flask import Flask, flash, render_template, request, send_from_directory
 
 from utils.config_service import ConfigService
+from utils.indexing_service import IndexingService, indexing_status
 from utils.pdf_service import PDFSearchService
 from utils.repository import (
     IOListRepository,
@@ -70,6 +71,15 @@ config_service = ConfigService(
     pdf_index_path=PDF_INDEX_PATH,
     tags_path=TAGS_PATH,
     io_list_path=IO_LIST_PATH,
+)
+
+indexing_service = IndexingService(
+    mimics_dir=MIMICS_DIR,
+    pdf_dir=PDF_DIR,
+    index_path=INDEX_PATH,
+    pdf_index_path=PDF_INDEX_PATH,
+    io_list_path=IO_LIST_PATH,
+    io_output_path=PROJECT_DIR / "data" / "io_list.json",
 )
 
 # ─── Flask приложение (router) ────────────────────────────────────
@@ -154,7 +164,32 @@ def settings():
         pdf_stats=config_service.get_pdf_stats(),
         tags_stats=config_service.get_tags_stats(),
         io_stats=config_service.get_io_stats(),
+        indexing_status=indexing_status.status,
     )
+
+
+@app.route("/settings/index/<task>", methods=["POST"])
+def start_indexing(task: str):
+    """Запуск индексирования mimics, pdf или io_list."""
+    task_map = {
+        "mimics": indexing_service.start_mimics_indexing,
+        "pdf": indexing_service.start_pdf_indexing,
+        "io_list": indexing_service.start_io_list_indexing,
+    }
+
+    if task not in task_map:
+        flash(f"Неизвестная задача: {task}", "danger")
+        return {"success": False, "message": f"Неизвестная задача: {task}"}
+
+    result = task_map[task]()
+    flash(result.get("message", ""), "success" if result.get("success") else "warning")
+    return result
+
+
+@app.route("/settings/index/status")
+def indexing_status_endpoint():
+    """Возвращает текущий статус индексирования."""
+    return indexing_status.status
 
 
 @app.route("/temp/<filename>")
