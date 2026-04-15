@@ -6,7 +6,7 @@
     <hr class="section-separator">
 
     <form method="post" action="/" class="search-form">
-        <div style="flex:1;">
+        <div class="search-input-group">
             <div class="search-input-row">
                 <input
                     type="text"
@@ -16,6 +16,9 @@
                     value="{{ query }}"
                     autofocus
                 >
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </div>
+            <div class="search-input-row">
                 <label class="detail-checkbox">
                     <input type="checkbox" name="search_mimics" value="1" {% if search_mimics or search_mimics is not defined %}checked{% endif %}>
                     Поиск по экранам
@@ -31,7 +34,6 @@
             </div>
             <div class="tag-input-hint">Допустимы буквы, цифры, а также <code>*</code> и <code>?</code> для поиска по шаблону</div>
         </div>
-        <button type="submit" class="btn btn-primary">Найти</button>
     </form>
 </div>
 

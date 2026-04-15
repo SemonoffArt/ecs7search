@@ -126,8 +126,15 @@
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
-            align-items: flex-end;
+            align-items: center;
             flex-wrap: wrap;
+        }
+        .search-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+            min-width: 280px;
         }
         .search-input-row {
             display: flex;
@@ -166,6 +173,7 @@
         .search-form button {
             padding: 10px 24px;
             font-size: 15px;
+            white-space: nowrap;
         }
         .result-item {
             border-bottom: 1px solid #eceff1;
