@@ -17,7 +17,7 @@
                     autofocus
                 >
                 <label class="detail-checkbox">
-                    <input type="checkbox" name="search_mimics" value="1" {% if search_mimics %}checked{% endif %}>
+                    <input type="checkbox" name="search_mimics" value="1" {% if search_mimics or search_mimics is not defined %}checked{% endif %}>
                     Поиск по экранам
                 </label>
                 <label class="detail-checkbox">

@@ -98,7 +98,7 @@ def index():
             results=None,
             query="",
             detailed=False,
-            search_mimics=False,
+            search_mimics=True,
             search_pdf=False,
             pdf_results=None,
         )
