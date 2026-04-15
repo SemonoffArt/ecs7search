@@ -139,20 +139,87 @@
         <div id="indexing-result" class="status-result" style="display:none;"></div>
     </div>
 
-    <!-- Кнопки запуска -->
-    <div id="indexing-actions" class="indexing-actions">
-        <button onclick="startIndexing('mimics')" class="btn btn-index" id="btn-index-mimics">
-            🖼️ Индексировать экраны
-        </button>
-        <button onclick="startIndexing('pdf')" class="btn btn-index" id="btn-index-pdf">
-            📄 Индексировать PDF
-        </button>
-        <button onclick="startIndexing('io_list')" class="btn btn-index" id="btn-index-io">
-            📋 Индексировать IO List
-        </button>
-        <button onclick="startIndexing('mdb')" class="btn btn-index btn-index-mdb" id="btn-index-mdb">
-            🗄️ Извлечь теги из MDB
-        </button>
+    <!-- Инструкции по индексированию -->
+    <div class="indexing-instructions">
+        <!-- Мнемосхемы -->
+        <div class="instruction-card">
+            <div class="instruction-header">
+                <span class="instruction-icon">🖼️</span>
+                <span class="instruction-title">Индексировать экраны</span>
+            </div>
+            <div class="instruction-body">
+                <ol class="instruction-steps">
+                    <li>Скопируйте файлы мнемосхем с расширением <code>.g</code> в папку:
+                        <code class="path-code">{{ config.mimics_dir }}</code>
+                    </li>
+                    <li>Нажмите кнопку <strong>«Индексировать экраны»</strong> и дождитесь завершения процесса.</li>
+                    <li>Убедитесь, что на карточке <strong>«Индекс экранов»</strong> обновилась дата создания.</li>
+                </ol>
+                <button onclick="startIndexing('mimics')" class="btn btn-index" id="btn-index-mimics">
+                    🖼️ Индексировать экраны
+                </button>
+            </div>
+        </div>
+
+        <!-- PDF -->
+        <div class="instruction-card">
+            <div class="instruction-header">
+                <span class="instruction-icon">📄</span>
+                <span class="instruction-title">Индексировать PDF</span>
+            </div>
+            <div class="instruction-body">
+                <ol class="instruction-steps">
+                    <li>Скопируйте актуальные PDF-файлы электросхем в папку:
+                        <code class="path-code">{{ config.pdf_dir }}</code>
+                    </li>
+                    <li>Нажмите кнопку <strong>«Индексировать PDF»</strong> и дождитесь завершения процесса.</li>
+                    <li>Убедитесь, что на карточке <strong>«Индекс PDF»</strong> обновилась дата создания.</li>
+                </ol>
+                <button onclick="startIndexing('pdf')" class="btn btn-index" id="btn-index-pdf">
+                    📄 Индексировать PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- IO List -->
+        <div class="instruction-card">
+            <div class="instruction-header">
+                <span class="instruction-icon">📋</span>
+                <span class="instruction-title">Индексировать IO List</span>
+            </div>
+            <div class="instruction-body">
+                <ol class="instruction-steps">
+                    <li>Скопируйте актуальную таблицу <code>IO_list.xlsx</code> в папку:
+                        <code class="path-code">{{ config.project_dir }}/data/</code>
+                    </li>
+                    <li>Нажмите кнопку <strong>«Индексировать IO List»</strong> и дождитесь завершения процесса.</li>
+                    <li>Убедитесь, что на карточке <strong>«IO List»</strong> обновилась дата создания.</li>
+                </ol>
+                <button onclick="startIndexing('io_list')" class="btn btn-index" id="btn-index-io">
+                    📋 Индексировать IO List
+                </button>
+            </div>
+        </div>
+
+        <!-- MDB -->
+        <div class="instruction-card">
+            <div class="instruction-header">
+                <span class="instruction-icon">🗄️</span>
+                <span class="instruction-title">Извлечь теги из MDB</span>
+            </div>
+            <div class="instruction-body">
+                <ol class="instruction-steps">
+                    <li>Скопируйте актуальные MDB-файлы базы данных ECS в папку:
+                        <code class="path-code">{{ config.project_dir }}/data/FlsaProDb/</code>
+                    </li>
+                    <li>Нажмите кнопку <strong>«Извлечь теги из MDB»</strong> и дождитесь завершения процесса.</li>
+                    <li>Убедитесь, что на карточке <strong>«Теги»</strong> обновилась дата создания.</li>
+                </ol>
+                <button onclick="startIndexing('mdb')" class="btn btn-index btn-index-mdb" id="btn-index-mdb">
+                    🗄️ Извлечь теги из MDB
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -384,6 +451,102 @@ document.addEventListener('DOMContentLoaded', () => {
 
 .btn-index-mdb:hover:not(:disabled) {
     background-color: #8e44ad;
+}
+
+/* Инструкции по индексированию */
+.indexing-instructions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.instruction-card {
+    background: #ffffff;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.instruction-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.instruction-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #e0e6ed;
+}
+
+.instruction-icon {
+    font-size: 20px;
+}
+
+.instruction-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: #2c3e50;
+}
+
+.instruction-body {
+    padding: 16px;
+}
+
+.instruction-steps {
+    margin: 0 0 16px 0;
+    padding-left: 20px;
+    counter-reset: step-counter;
+    list-style: none;
+}
+
+.instruction-steps li {
+    counter-increment: step-counter;
+    position: relative;
+    padding: 8px 0 8px 32px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #546e7a;
+}
+
+.instruction-steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #18bc9c;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instruction-steps li strong {
+    color: #2c3e50;
+}
+
+.path-code {
+    display: inline-block;
+    margin-top: 4px;
+    background: #f0f4f8;
+    color: #e74c3c;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.instruction-body .btn-index {
+    width: 100%;
 }
 </style>
 
