@@ -17,6 +17,7 @@ from typing import Any
 from utils.iolist_indexer import parse_io_list
 from utils.mimic_indexer import build_index
 from utils.pdf_indexer import index_pdf_directory
+from utils.ecs2json import TagsHelper
 
 
 class IndexingStatus:
@@ -92,6 +93,7 @@ class IndexingService:
         pdf_index_path: Path,
         io_list_path: Path,
         io_output_path: Path,
+        tags_output_path: Path,
     ) -> None:
         self._mimics_dir = mimics_dir
         self._pdf_dir = pdf_dir
@@ -99,6 +101,7 @@ class IndexingService:
         self._pdf_index_path = pdf_index_path
         self._io_list_path = io_list_path
         self._io_output_path = io_output_path
+        self._tags_output_path = tags_output_path
 
     def start_mimics_indexing(self) -> dict:
         """Запускает индексацию мнемосхем в фоновом потоке."""
@@ -200,6 +203,36 @@ class IndexingService:
                 json.dump(result, f, ensure_ascii=False, indent=2)
 
             indexing_status.complete(True, msg, meta)
+
+        except Exception as e:
+            indexing_status.complete(False, f"Ошибка: {e}")
+
+    def start_mdb_tag_extraction(self) -> dict:
+        """Запускает извлечение тегов из MDB баз в фоновом потоке."""
+        if indexing_status.is_running:
+            return {"success": False, "message": "Индексирование уже запущено"}
+
+        threading.Thread(
+            target=self._run_mdb_extraction,
+            daemon=True,
+        ).start()
+
+        return {"success": True, "message": "Извлечение тегов из MDB запущено"}
+
+    def _run_mdb_extraction(self) -> None:
+        indexing_status.start("Извлечение тегов из MDB")
+
+        try:
+            tags_helper = TagsHelper("", with_mimic=False)
+            tags_helper.save_json()
+
+            total_tags = len(tags_helper)
+            msg = f"Готово! Извлечено {total_tags} тегов"
+
+            indexing_status.complete(True, msg, {
+                "total_tags": total_tags,
+                "output_file": str(self._tags_output_path),
+            })
 
         except Exception as e:
             indexing_status.complete(False, f"Ошибка: {e}")

@@ -150,6 +150,9 @@
         <button onclick="startIndexing('io_list')" class="btn btn-index" id="btn-index-io">
             📋 Индексировать IO List
         </button>
+        <button onclick="startIndexing('mdb')" class="btn btn-index btn-index-mdb" id="btn-index-mdb">
+            🗄️ Извлечь теги из MDB
+        </button>
     </div>
 </div>
 
@@ -373,6 +376,14 @@ document.addEventListener('DOMContentLoaded', () => {
 .btn-index:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.btn-index-mdb {
+    background-color: #9b59b6;
+}
+
+.btn-index-mdb:hover:not(:disabled) {
+    background-color: #8e44ad;
 }
 </style>
 

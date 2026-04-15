@@ -80,6 +80,7 @@ indexing_service = IndexingService(
     pdf_index_path=PDF_INDEX_PATH,
     io_list_path=IO_LIST_PATH,
     io_output_path=PROJECT_DIR / "data" / "io_list.json",
+    tags_output_path=TAGS_PATH,
 )
 
 # ─── Flask приложение (router) ────────────────────────────────────
@@ -170,11 +171,12 @@ def settings():
 
 @app.route("/settings/index/<task>", methods=["POST"])
 def start_indexing(task: str):
-    """Запуск индексирования mimics, pdf или io_list."""
+    """Запуск индексирования mimics, pdf, io_list или mdb."""
     task_map = {
         "mimics": indexing_service.start_mimics_indexing,
         "pdf": indexing_service.start_pdf_indexing,
         "io_list": indexing_service.start_io_list_indexing,
+        "mdb": indexing_service.start_mdb_tag_extraction,
     }
 
     if task not in task_map:
