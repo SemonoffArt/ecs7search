@@ -365,7 +365,48 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayResults(data) {
         let html = '';
 
-        // Результаты поиска по мимикам
+        // Результаты поиска по PDF (показываем первыми)
+        if (data.pdf_results) {
+            html += '<div class="card">';
+            html += `<div class="section-title">📄 Результаты поиска в PDF: <code>${data.query}</code>`;
+            html += `<span class="badge badge-info">${data.pdf_results.total_tags} тегов</span>`;
+            html += `<span class="badge badge-ok">${data.pdf_results.total_pages} страниц</span>`;
+            html += `<span class="badge" style="background-color:#9b59b6;">${data.pdf_results.total_files} файлов</span>`;
+            html += '</div>';
+
+            if (data.pdf_results.pdf_metadata) {
+                html += `<div style="font-size:11px; color:#888; margin-top:4px; margin-bottom:8px;">Индекс PDF создан: ${data.pdf_results.pdf_metadata.indexed_at}</div>`;
+            }
+
+            html += '<hr class="section-separator">';
+
+            if (data.pdf_results.pdf_filename) {
+                html += '<div style="margin-bottom:15px;">';
+                html += `<a href="/temp/${data.pdf_results.pdf_filename}" class="btn btn-primary" target="_blank" style="text-decoration:none;">📥 Скачать PDF с результатами</a>`;
+                html += '</div>';
+            }
+
+            html += '<div style="overflow-x:auto;">';
+            html += '<table class="tag-detail-table"><thead><tr>';
+            html += '<th>PDF файл</th><th>Страница</th><th>Теги</th>';
+            html += '</tr></thead><tbody>';
+
+            data.pdf_results.table.forEach(row => {
+                html += '<tr>';
+                html += `<td>${row.file}</td>`;
+                html += `<td style="text-align:center;">${row.page}</td>`;
+                html += '<td>';
+                row.tags.forEach(tag => {
+                    html += `<code style="background-color:#f5f5f5;padding:1px 5px;border-radius:3px;font-size:11px;color:#e74c3c;">${tag}</code>`;
+                });
+                html += '</td>';
+                html += '</tr>';
+            });
+
+            html += '</tbody></table></div></div>';
+        }
+
+        // Результаты поиска по мимикам (показываем после PDF)
         if (data.results && data.results.images) {
             html += '<div class="card">';
             html += `<div class="section-title">Результаты поиска: <code>${data.query}</code>`;
@@ -459,47 +500,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             html += '</div>';
-        }
-
-        // Результаты поиска по PDF
-        if (data.pdf_results) {
-            html += '<div class="card">';
-            html += `<div class="section-title">📄 Результаты поиска в PDF: <code>${data.query}</code>`;
-            html += `<span class="badge badge-info">${data.pdf_results.total_tags} тегов</span>`;
-            html += `<span class="badge badge-ok">${data.pdf_results.total_pages} страниц</span>`;
-            html += `<span class="badge" style="background-color:#9b59b6;">${data.pdf_results.total_files} файлов</span>`;
-            html += '</div>';
-
-            if (data.pdf_results.pdf_metadata) {
-                html += `<div style="font-size:11px; color:#888; margin-top:4px; margin-bottom:8px;">Индекс PDF создан: ${data.pdf_results.pdf_metadata.indexed_at}</div>`;
-            }
-
-            html += '<hr class="section-separator">';
-
-            if (data.pdf_results.pdf_filename) {
-                html += '<div style="margin-bottom:15px;">';
-                html += `<a href="/temp/${data.pdf_results.pdf_filename}" class="btn btn-primary" target="_blank" style="text-decoration:none;">📥 Скачать PDF с результатами</a>`;
-                html += '</div>';
-            }
-
-            html += '<div style="overflow-x:auto;">';
-            html += '<table class="tag-detail-table"><thead><tr>';
-            html += '<th>PDF файл</th><th>Страница</th><th>Теги</th>';
-            html += '</tr></thead><tbody>';
-
-            data.pdf_results.table.forEach(row => {
-                html += '<tr>';
-                html += `<td>${row.file}</td>`;
-                html += `<td style="text-align:center;">${row.page}</td>`;
-                html += '<td>';
-                row.tags.forEach(tag => {
-                    html += `<code style="background-color:#f5f5f5;padding:1px 5px;border-radius:3px;font-size:11px;color:#e74c3c;">${tag}</code>`;
-                });
-                html += '</td>';
-                html += '</tr>';
-            });
-
-            html += '</tbody></table></div></div>';
         }
 
         resultsContainer.innerHTML = html;
