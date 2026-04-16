@@ -155,6 +155,68 @@ def index():
     )
 
 
+@app.route("/api/search", methods=["POST"])
+def api_search():
+    """AJAX endpoint для поиска без перезагрузки страницы."""
+    data = request.get_json()
+    query = data.get("query", "").strip()
+    detailed = data.get("detailed", False)
+    search_mimics = data.get("search_mimics", True)
+    search_pdf = data.get("search_pdf", False)
+
+    if not query:
+        return {
+            "success": False,
+            "messages": [("Введите запрос для поиска", "warning")],
+            "results": None,
+            "pdf_results": None,
+        }
+
+    results = None
+    pdf_results = None
+    messages = []
+
+    # Поиск по мимикам
+    if search_mimics:
+        results, flashes_list = search_service.execute(query, detailed)
+        messages.extend(flashes_list)
+    elif search_pdf:
+        results = {"index_metadata": config_service.get_index_metadata()}
+
+    # Поиск по PDF
+    if search_pdf:
+        matched_tags, pdf_messages = pdf_service.search(query)
+        for msg in pdf_messages:
+            messages.append((msg, "warning" if "Ничего" in msg else "danger"))
+
+        if matched_tags:
+            safe_query = "".join(c if c.isalnum() else "_" for c in query[:50])
+            pdf_filename = f"{safe_query}_pdf_srh.pdf"
+            out_name, gen_messages = pdf_service.generate_pdf(matched_tags, pdf_filename)
+
+            for msg in gen_messages:
+                if msg:
+                    messages.append((msg, "warning"))
+
+            if out_name:
+                pdf_results = pdf_service.build_pdf_results(matched_tags, query)
+                if pdf_results:
+                    pdf_results["pdf_filename"] = out_name
+            else:
+                for msg in gen_messages:
+                    if msg:
+                        messages.append((msg, "danger"))
+
+    return {
+        "success": True,
+        "messages": messages,
+        "results": results,
+        "pdf_results": pdf_results,
+        "query": query,
+        "detailed": detailed,
+    }
+
+
 @app.route("/settings")
 def settings():
     """Страница настроек — информация об индексах и конфигурации."""

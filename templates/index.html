@@ -5,32 +5,33 @@
     <div class="section-title">🔎 Поиск тега</div>
     <hr class="section-separator">
 
-    <form method="post" action="/" class="search-form">
+    <form id="search-form" class="search-form">
         <img src="{{ url_for('static', filename='images/manky.png') }}" alt="Manky" class="search-logo">
         <div class="search-input-group">
             <div class="search-input-row">
 
                 <input
                     type="text"
+                    id="search-query"
                     name="query"
                     class="form-control"
                     placeholder="Введите тег, например: 020MG021M01 или шаблон: 020MG*"
                     value="{{ query }}"
                     autofocus
                 >
-                <button type="submit" class="btn btn-primary">Найти</button>
+                <button type="submit" id="search-button" class="btn btn-primary">Найти</button>
             </div>
             <div class="search-input-row">
                 <label class="detail-checkbox">
-                    <input type="checkbox" name="search_mimics" value="1" {% if search_mimics or search_mimics is not defined %}checked{% endif %}>
+                    <input type="checkbox" id="search-mimics" name="search_mimics" value="1" {% if search_mimics or search_mimics is not defined %}checked{% endif %}>
                     Поиск по экранам
                 </label>
                 <label class="detail-checkbox">
-                    <input type="checkbox" name="search_pdf" value="1" {% if search_pdf %}checked{% endif %}>
+                    <input type="checkbox" id="search-pdf" name="search_pdf" value="1" {% if search_pdf %}checked{% endif %}>
                     Поиск по PDF
                 </label>
                 <label class="detail-checkbox">
-                    <input type="checkbox" name="detailed" value="1" {% if detailed %}checked{% endif %}>
+                    <input type="checkbox" id="search-detailed" name="detailed" value="1" {% if detailed %}checked{% endif %}>
                     Информация по тегам
                 </label>
             </div>
@@ -40,6 +41,7 @@
 </div>
 
 <!-- Сообщения (flash) -->
+<div id="messages-container">
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
@@ -57,10 +59,17 @@
         {% endfor %}
     {% endif %}
 {% endwith %}
+</div>
+
+<!-- Индикатор загрузки -->
+<div id="loading-indicator" style="display: none;">
+    <div class="status-banner status-banner-info">
+        ⏳ Выполняется поиск...
+    </div>
+</div>
 
 <!-- Результаты поиска -->
-<!-- {% if results %} -->
-<div class="card">
+<div id="results-container">
     <div class="section-title">
         Результаты поиска: <code>{{ results.query }}</code>
         <span class="badge badge-info">{{ results.total_tags }} тегов</span>
@@ -254,8 +263,238 @@
         {% endfor %}
     </div>    
 </div>
-<!-- {% endif %} -->
+</div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('search-form');
+    const searchQuery = document.getElementById('search-query');
+    const searchButton = document.getElementById('search-button');
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const messagesContainer = document.getElementById('messages-container');
+    const resultsContainer = document.getElementById('results-container');
 
+    searchForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const query = searchQuery.value.trim();
+        if (!query) {
+            showMessage('Введите запрос для поиска', 'warning');
+            return;
+        }
+
+        const searchMimics = document.getElementById('search-mimics').checked;
+        const searchPdf = document.getElementById('search-pdf').checked;
+        const detailed = document.getElementById('search-detailed').checked;
+
+        // Показываем индикатор загрузки
+        loadingIndicator.style.display = 'block';
+        searchButton.disabled = true;
+        searchButton.textContent = 'Поиск...';
+
+        try {
+            const response = await fetch('/api/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    query: query,
+                    detailed: detailed,
+                    search_mimics: searchMimics,
+                    search_pdf: searchPdf
+                })
+            });
+
+            const data = await response.json();
+
+            // Скрываем индикатор загрузки
+            loadingIndicator.style.display = 'none';
+            searchButton.disabled = false;
+            searchButton.textContent = 'Найти';
+
+            // Отображаем сообщения
+            messagesContainer.innerHTML = '';
+            if (data.messages && data.messages.length > 0) {
+                data.messages.forEach(([message, category]) => {
+                    showMessage(message, category);
+                });
+            }
+
+            // Отображаем результаты
+            if (data.results || data.pdf_results) {
+                displayResults(data);
+            } else {
+                resultsContainer.innerHTML = '<div class="card"><div class="status-banner status-banner-warning">Результаты не найдены</div></div>';
+            }
+
+        } catch (error) {
+            loadingIndicator.style.display = 'none';
+            searchButton.disabled = false;
+            searchButton.textContent = 'Найти';
+            showMessage('Ошибка при выполнении поиска: ' + error.message, 'danger');
+        }
+    });
+
+    function showMessage(message, category) {
+        let bannerClass = 'status-banner-info';
+        if (category === 'danger') {
+            bannerClass = 'status-banner-danger';
+        } else if (category === 'warning') {
+            bannerClass = 'status-banner-warning';
+        } else if (category === 'success') {
+            bannerClass = 'status-banner-ok';
+        }
+
+        const banner = document.createElement('div');
+        banner.className = `status-banner ${bannerClass}`;
+        banner.textContent = message;
+        messagesContainer.appendChild(banner);
+    }
+
+    function displayResults(data) {
+        let html = '';
+
+        // Результаты поиска по мимикам
+        if (data.results && data.results.images) {
+            html += '<div class="card">';
+            html += `<div class="section-title">Результаты поиска: <code>${data.query}</code>`;
+            html += `<span class="badge badge-info">${data.results.total_tags} тегов</span>`;
+            html += `<span class="badge badge-ok">${data.results.total_files} файлов</span>`;
+            html += `</div>`;
+            html += '<hr class="section-separator">';
+
+            // Расширенная информация по тегам
+            if (data.detailed && data.results.tag_details) {
+                html += '<div class="card"><div style="margin-bottom:15px; overflow-x:auto;">';
+                html += '<table class="tag-detail-table"><thead><tr>';
+                html += '<th>Tag</th><th>Groups</th><th>Description</th><th>Algorithms</th><th>PLC</th><th>IO List</th><th>Screens</th>';
+                html += '</tr></thead><tbody>';
+
+                data.results.tag_details.forEach(detail => {
+                    html += '<tr>';
+                    html += `<td><code>${detail.Tag}</code></td>`;
+                    html += `<td>${detail.Groups}</td>`;
+                    html += '<td>';
+                    if (detail.DescEng) html += `<div>${detail.DescEng}</div>`;
+                    if (detail._signal_purpose) html += `<div class="tag-desc-purpose">${detail._signal_purpose}</div>`;
+                    if (detail.DescRus) html += `<div class="tag-desc-rus">${detail.DescRus}</div>`;
+                    if (!detail.DescEng && !detail.DescRus && !detail._signal_purpose) html += '—';
+                    html += '</td>';
+                    html += '<td>';
+                    if (detail.Algorithms) {
+                        html += `<div>Conv: ${detail.Algorithms.ConvAlg}</div>`;
+                        html += `<div>Calc: ${detail.Algorithms.CalcAlg}</div>`;
+                        html += `<div>Block: ${detail.Algorithms.BlockAlg}</div>`;
+                    } else {
+                        html += '—';
+                    }
+                    html += '</td>';
+                    html += '<td>';
+                    if (detail.PLC) {
+                        html += `<div>PLC: ${detail.PLC.PLCNo}</div>`;
+                        html += `<div>FC: ${detail.PLC.FC}</div>`;
+                        if (detail.PLC.Input) {
+                            const bit = detail.PLC.Input.Bit !== null ? `.${detail.PLC.Input.Bit}` : '';
+                            html += `<div class="tag-plc-sub"><div><b>IN:</b> ${detail.PLC.Input.Type}, DB${detail.PLC.Input.Block}.DBD${detail.PLC.Input.Word}${bit}</div></div>`;
+                        }
+                        if (detail.PLC.Output) {
+                            const bit = detail.PLC.Output.Bit !== null ? `.${detail.PLC.Output.Bit}` : '';
+                            html += `<div class="tag-plc-sub"><div><b>OUT:</b> ${detail.PLC.Output.Type}, DB${detail.PLC.Output.Block}.DBD${detail.PLC.Output.Word}${bit}</div></div>`;
+                        }
+                    } else {
+                        html += '—';
+                    }
+                    html += '</td>';
+                    html += '<td class="tag-io-list">';
+                    if (detail._io_list) {
+                        html += `<div><b>Comp:</b> ${detail._io_list.Component}</div>`;
+                        html += `<div><b>Term:</b> ${detail._io_list.IOTerminal_Short1}</div>`;
+                        html += `<div><b>Addr:</b> ${detail._io_list.IOAddress}</div>`;
+                        html += `<div><b>Type:</b> ${detail._io_list.IOType}</div>`;
+                    } else {
+                        html += '—';
+                    }
+                    html += '</td>';
+                    html += '<td>';
+                    if (detail._screens && detail._screens.length > 0) {
+                        detail._screens.forEach(scr => {
+                            html += `<div class="tag-screen-item">${scr}</div>`;
+                        });
+                    } else {
+                        html += '—';
+                    }
+                    html += '</td>';
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table></div></div>';
+            }
+
+            // Результаты поиска по изображениям
+            data.results.images.forEach(image => {
+                html += '<div class="result-item">';
+                html += `<div><b>${image.g_file}</b> - тегов на странице: ${image.tags_on_page}</div>`;
+                if (image.unique_tags && image.unique_tags.length > 0) {
+                    html += '<div class="tags-list">';
+                    image.unique_tags.forEach(tag => {
+                        html += `<span class="badge" style="background-color:#18bc9c; color:#ffffff;">${tag}</span>`;
+                    });
+                    html += '</div>';
+                }
+                html += '<div>';
+                html += `<img src="/temp/${image.png_name}" alt="Результат для ${image.g_file}" class="result-img zoomable" title="Нажмите для увеличения">`;
+                html += '</div>';
+                html += '</div>';
+            });
+
+            html += '</div>';
+        }
+
+        // Результаты поиска по PDF
+        if (data.pdf_results) {
+            html += '<div class="card">';
+            html += `<div class="section-title">📄 Результаты поиска в PDF: <code>${data.query}</code>`;
+            html += `<span class="badge badge-info">${data.pdf_results.total_tags} тегов</span>`;
+            html += `<span class="badge badge-ok">${data.pdf_results.total_pages} страниц</span>`;
+            html += `<span class="badge" style="background-color:#9b59b6;">${data.pdf_results.total_files} файлов</span>`;
+            html += '</div>';
+
+            if (data.pdf_results.pdf_metadata) {
+                html += `<div style="font-size:11px; color:#888; margin-top:4px; margin-bottom:8px;">Индекс PDF создан: ${data.pdf_results.pdf_metadata.indexed_at}</div>`;
+            }
+
+            html += '<hr class="section-separator">';
+
+            if (data.pdf_results.pdf_filename) {
+                html += '<div style="margin-bottom:15px;">';
+                html += `<a href="/temp/${data.pdf_results.pdf_filename}" class="btn btn-primary" target="_blank" style="text-decoration:none;">📥 Скачать PDF с результатами</a>`;
+                html += '</div>';
+            }
+
+            html += '<div style="overflow-x:auto;">';
+            html += '<table class="tag-detail-table"><thead><tr>';
+            html += '<th>PDF файл</th><th>Страница</th><th>Теги</th>';
+            html += '</tr></thead><tbody>';
+
+            data.pdf_results.table.forEach(row => {
+                html += '<tr>';
+                html += `<td>${row.file}</td>`;
+                html += `<td style="text-align:center;">${row.page}</td>`;
+                html += '<td>';
+                row.tags.forEach(tag => {
+                    html += `<code style="background-color:#f5f5f5;padding:1px 5px;border-radius:3px;font-size:11px;color:#e74c3c;">${tag}</code>`;
+                });
+                html += '</td>';
+                html += '</tr>';
+            });
+
+            html += '</tbody></table></div></div>';
+        }
+
+        resultsContainer.innerHTML = html;
+    }
+});
+</script>
 
 {% endblock %}
