@@ -287,6 +287,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchPdf = document.getElementById('search-pdf').checked;
         const detailed = document.getElementById('search-detailed').checked;
 
+        // Показываем анимированный GIF во время поиска
+        const searchLogo = document.querySelector('.search-logo');
+        const staticLogoSrc = searchLogo.src;
+        searchLogo.src = "{{ url_for('static', filename='images/manky.gif') }}";
+
         // Показываем индикатор загрузки
         loadingIndicator.style.display = 'block';
         searchButton.disabled = true;
@@ -313,6 +318,9 @@ document.addEventListener('DOMContentLoaded', function() {
             searchButton.disabled = false;
             searchButton.textContent = 'Найти';
 
+            // Возвращаем статическую картинку
+            searchLogo.src = staticLogoSrc;
+
             // Отображаем сообщения
             messagesContainer.innerHTML = '';
             if (data.messages && data.messages.length > 0) {
@@ -332,6 +340,8 @@ document.addEventListener('DOMContentLoaded', function() {
             loadingIndicator.style.display = 'none';
             searchButton.disabled = false;
             searchButton.textContent = 'Найти';
+            // Возвращаем статическую картинку при ошибке
+            searchLogo.src = staticLogoSrc;
             showMessage('Ошибка при выполнении поиска: ' + error.message, 'danger');
         }
     });
