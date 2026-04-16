@@ -6,8 +6,10 @@
     <hr class="section-separator">
 
     <form method="post" action="/" class="search-form">
+        <img src="{{ url_for('static', filename='images/manky.png') }}" alt="Manky" class="search-logo">
         <div class="search-input-group">
             <div class="search-input-row">
+
                 <input
                     type="text"
                     name="query"

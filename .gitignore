@@ -3,8 +3,6 @@ __pycache__/
 *.py[codz]
 *$py.class
 
-# ECS7 mimic files (screens data)
-*.g
 
 # C extensions
 *.so
@@ -213,3 +211,8 @@ pos_man_calc.ods
 m_alert/
 !data/pdf/watermark.pdf
 data/pdf/
+data/temp/
+data/FlsaProDb/
+
+# ECS7 mimic files (screens data)
+*.g

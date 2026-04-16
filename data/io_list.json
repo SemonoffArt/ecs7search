@@ -1,14 +1,14 @@
 {
   "metadata": {
     "source_file": "C:\\Users\\7Arrt\\Desktop\\Projects\\ecs7search\\data\\IO_list.xlsx",
-    "generated_at": "Mon Apr 13 09:21:48 2026",
+    "generated_at": "Wed Apr 15 17:40:18 2026",
     "total_sheets": 2,
     "sheet_names": [
       "991",
       "992"
     ],
     "total_signals": 1766,
-    "parsing_time_sec": 0.42
+    "parsing_time_sec": 0.45
   },
   "signals": {
     "060TN340A01K17_24": {

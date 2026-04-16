@@ -7,7 +7,26 @@
       "Bash(git push)",
       "Bash(.venv\\scripts\\activate)",
       "Bash(python *)",
-      "Bash(findstr *)"
+      "Bash(findstr *)",
+      "Bash(select-string *)",
+      "Bash(select-object *)",
+      "Bash(del *)",
+      "Bash(git checkout *)",
+      "Bash(mkdir *)",
+      "Bash(pip install *)",
+      "Bash(.venv\\scripts\\python.exe *)",
+      "Bash(.venv\\scripts\\pip.exe *)",
+      "Bash(dir *)",
+      "Bash(curl *)",
+      "Bash(tasklist *)",
+      "Bash(taskkill *)",
+      "Bash(from *)",
+      "Bash(with *)",
+      "Bash(r *)",
+      "Bash('/')",
+      "Bash(print)",
+      "Bash(eof)",
+      "Bash(git rm *)"
     ]
   },
   "$version": 3
