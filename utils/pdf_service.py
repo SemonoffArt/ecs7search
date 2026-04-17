@@ -211,6 +211,35 @@ class PDFSearchService:
                         img_rotation = 90 if is_rotated else 0
                         new_page.insert_image(img_rect, stream=monkey_img_data, rotate=img_rotation)
 
+                    # Добавляем текстовую информацию о документе и тегах
+                    text_margin = margin + size + 10
+                    text_y = new_page.rect.height - margin - 5
+                    
+                    # Формируем текст с информацией
+                    source_text = f"Source: {item['file']} (стр. {item['page']})"
+                    tags_text = f"Tags: {', '.join(item['tags'])}"
+                    
+                    # Добавляем текст в правом нижнем углу
+                    text_x = new_page.rect.width - 50  # Отступ справа
+                    
+                    # Вставляем источник документа
+                    new_page.insert_text(
+                        (text_margin, text_y - 15),
+                        source_text,
+                        fontsize=8,
+                        color=(0.3, 0.3, 0.3),
+                        rotate=img_rotation
+                    )
+                    
+                    # Вставляем список тегов
+                    new_page.insert_text(
+                        (text_margin, text_y),
+                        tags_text,
+                        fontsize=8,
+                        color=(0.2, 0.4, 0.8),
+                        rotate=img_rotation
+                    )
+
                     src_doc.close()
 
                 except Exception as e:
