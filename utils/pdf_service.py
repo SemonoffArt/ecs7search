@@ -216,7 +216,7 @@ class PDFSearchService:
                     text_y = new_page.rect.height - margin - 5
                     
                     # Формируем текст с информацией
-                    source_text = f"Source: {item['file']} (стр. {item['page']})"
+                    source_text = f"Source: {item['file']} (page {item['page']})"
                     tags_text = f"Tags: {', '.join(item['tags'])}"
                     
                     # Добавляем текст в правом нижнем углу
