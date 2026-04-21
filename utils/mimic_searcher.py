@@ -63,7 +63,7 @@ def search_tags(index_data: dict, query: str) -> dict:
 
 def get_image_for_file(g_file: str, sources_dir: Path) -> Path | None:
     """Возвращает путь к PNG по имени .g файла."""
-    png_name = Path(g_file).with_suffix(".png").name
+    png_name = Path(g_file).with_suffix(".g.png").name
     png_path = sources_dir / png_name
     return png_path if png_path.exists() else None
 

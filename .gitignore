@@ -216,3 +216,5 @@ data/FlsaProDb/
 
 # ECS7 mimic files (screens data)
 *.g
+
+temp/
