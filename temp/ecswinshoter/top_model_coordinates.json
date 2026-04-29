@@ -1,0 +1,467 @@
+{
+  "top_model": {
+    "name": "Гл.меню",
+    "desc": "Экран главного меню",
+    "type": "sys",
+    "coords": [10,50],
+    "file": "pavlik_topmodel.g"
+  },
+  "global": {
+    "name": "Павлик",
+    "desc": "Вся технология на одном экране",
+    "type": "menu",
+    "coords": [925,85],
+    "file": "pavlik_overview.g"
+  },
+  "test_sag": {
+    "name": "МПСИ",
+    "desc": "МПСИ и гидроциклоны",
+    "type": "menu",
+    "coords": [125,250],
+    "file":"concept_sag_mill.g"
+  },
+
+  "test_ball": {
+    "name": "МШЦ",
+    "desc": "МШЦ и концентраторы",
+    "type": "menu",
+    "coords": [250,250],
+    "file": "concept_ball_mill.g"
+  } ,
+  "test_flot": {
+    "name": "Флотация",
+    "desc": "Основная и контрольная флотация",
+    "type": "menu",
+    "coords": [400,250],
+    "file": "concept_flotacia.g"
+  },
+  "crusher": {
+    "name": "Дробилка",
+    "desc": "Дробильное отделение",
+    "type": "menu",
+    "coords": [150,485],
+    "file": "pavlik_991_mimic_01.g"
+  },
+  "sag_mill": {
+    "name": "МПСИ",
+    "desc": "МПСИ",
+    "type": "menu",
+    "coords": [375,465],
+    "file": "pavlik_991_mimic_02.g"
+  },
+  "sag_sump": {
+    "name": "Зумпф МПСИ",
+    "desc": "Зумпф МПСИ и насосы питания циклонов",
+    "type": "menu",
+    "coords": [375,495],
+    "file": "pavlik_991_mimic_03.g"
+  } ,
+  "ball1": {
+    "name": "МШЦ1",
+    "desc": "Шаровая мельница 1",
+    "type": "menu",
+    "coords": [605,445],
+    "file": "pavlik_991_mimic_04.g"
+  } ,
+  "ball2": {
+    "name": "МШЦ2",
+    "desc": "Шаровая мельница 2",
+    "type": "menu",
+    "coords": [605,475],
+    "file": "pavlik_991_mimic_05.g"
+  },
+  "ball_sump": {
+    "name": "Зумпф МШЦ",
+    "desc": "Зумпфовые насосы шаровых мельниц",
+    "type": "menu",
+    "coords": [605,510],
+    "file": "pavlik_991_mimic_06.g"
+  },
+  "gc_pumps": {
+    "name": "Зумпф 170",
+    "desc": "Зумпфовые насосы питания концентраторов",
+    "type": "menu",
+    "coords": [850,430],
+    "file": "pavlik_991_mimic_07.g"
+  },
+  "gc_a": {
+    "name": "ГК А",
+    "desc": "Первичные А концентраторы",
+    "type": "menu",
+    "coords": [850,475],
+    "file": "pavlik_991_mimic_08.g"
+  },
+  "gc_b": {
+    "name": "ГК B",
+    "desc": "Первичные B концентраторы",
+    "type": "menu",
+    "coords": [850,510],
+    "file": "pavlik_991_mimic_09.g"
+  },
+  "acacia_0": {
+    "name": "Акация ХЗ",
+    "desc": "ILR-CONCEPT Акация",
+    "type": "menu",
+    "coords": [905,285],
+    "file": "pavlik_991_mimic_14.g"
+  },
+  "acacia_1": {
+    "name": "Акация 1",
+    "desc": "Акация 1",
+    "type": "menu",
+    "coords": [860,320],
+    "file": "pavlik_991_mimic_16.g"
+  },
+  "acacia_2": {
+    "name": "Акация 2",
+    "desc": "Акация 2",
+    "type": "menu",
+    "coords": [950,320],
+    "file": "pavlik_991_mimic_17.g"
+  },
+  "gc_sec": {
+    "name": "ГК вторичные",
+    "desc": "Вторичные концентраторы",
+    "type": "menu",
+    "coords": [865,605],
+    "file": "pavlik_991_mimic_10.g"
+  },
+  "flot_clr": {
+    "name": "Флот. перечистная",
+    "desc": "Флотация перечистная",
+    "type": "menu",
+    "coords": [865,635],
+    "file": "pavlik_991_mimic_11.g"
+  } ,
+  "flot_clr_tst": {
+    "name": "Флот. пер-ная тест",
+    "desc": "Флотация перечистная",
+    "type": "menu",
+    "coords": [865,705],
+    "file": "pavlik_991_mimic_11_local.g"
+  } ,
+  "flot_main": {
+    "name": "Флот. основная",
+    "desc": "Флотация основная и контрольная",
+    "type": "menu",
+    "coords": [865,670],
+    "file": "pavlik_991_mimic_12.g"
+  } ,
+  "thickener_340": {
+    "name": "Сгуст. 340",
+    "desc": "Сгуститель хвостов флотации",
+    "type": "menu",
+    "coords": [1135,672],
+    "file": "pavlik_991_mimic_15.g"
+  },
+  "thickener_450": {
+    "name": "Сгуст. 450",
+    "desc": "Сгуститель концентрата",
+    "type": "menu",
+    "coords": [1135,600],
+    "file": "pavlik_992_mimic_13.g"
+  },
+  "thickener_590": {
+    "name": "Сгуст. 590",
+    "desc": "УВР Сгуститель хвостов",
+    "type": "menu",
+    "coords": [1640,315],
+    "file": "pavlik_992_mimic_05.g"
+  },
+  "detox": {
+    "name": "Обезврежка",
+    "desc": "Ёмкости обезвреживания",
+    "type": "menu",
+    "coords": [1640,345],
+    "file": "pavlik_992_mimic_06.g"
+  },
+  "cil": {
+    "name": "Сорбция",
+    "desc": "Уголь в пульпе(УВП) Сорбция",
+    "type": "menu",
+    "coords": [1400,600],
+    "file": "pavlik_992_mimic_sorb.g"
+  },
+  "steam": {
+    "name": "Пар",
+    "desc": "Горячее цианирование, парогенераторы",
+    "type": "menu",
+    "coords": [1400,640],
+    "file": "pavlik_992_mimic_04.g"
+  },
+    "steam": {
+    "name": "Пар Титаны",
+    "desc": "Горячее цианирование, парогенераторы",
+    "type": "menu",
+    "coords": [1400,666],
+    "file": "pavlik_992_mimic_041.g"
+  },
+  "cil_tails": {
+    "name": "Хвосты сорбции",
+    "desc": "УВР. Хвосты сорбции",
+    "type": "menu",
+    "coords": [1760,575],
+    "file": "pavlik_992_mimic_03.g"
+  },
+  "flotation_tails": {
+    "name": "Хвосты флотации",
+    "desc": "Насосы хвостов флотации",
+    "type": "menu",
+    "coords": [1760,605],
+    "file": "pavlik_991_mimic_13.g"
+  },
+  "water": {
+    "name": "Вода",
+    "desc": "Технологическая и сальниковая вода",
+    "type": "menu",
+    "coords": [1760,640],
+    "file":"pavlik_992_mimic_02_new.g"
+  },
+  "adr_acid": {
+    "name": "АДР Кислотка",
+    "desc": "АДР Отмывка кислотой и расщепление угля",
+    "type": "menu",
+    "coords": [1375,280],
+    "file": "pavlik_992_mimic_16.g"
+  },
+  "adr_strip": {
+    "name": "АДР Десорбция",
+    "desc": "АДР Десорбция",
+    "type": "menu",
+    "coords": [1375,310],
+    "file": "pavlik_992_mimic_15.g"
+  },
+  "adr_cond": {
+    "name": "АДР Востановление",
+    "desc": "АДР Востановление угля",
+    "type": "menu",
+    "coords": [1375,345],
+    "file": "pavlik_992_mimic_17.g"
+  },
+  "adr_foundry": {
+    "name": "Плавильня",
+    "desc": "Плавильня",
+    "type": "menu",
+    "coords": [1375,375],
+    "file": "pavlik_992_mimic_11.g"
+  },
+  "electrowinning": {
+    "name": "Электролизёры",
+    "desc": "Электролизёры Акации",
+    "type": "menu",
+    "coords": [1375,410],
+    "file": "pavlik_992_mimic_12.g"
+  },
+  "compressors": {
+    "name": "Компрессоры",
+    "desc": "Компрессоры",
+    "type": "menu",
+    "coords": [1760,670],
+    "file": "pavlik_compressors.g"
+  },
+  "drainage_pumps": {
+    "name": "Дренажники",
+    "desc": "Насосы дренажа",
+    "type": "menu",
+    "coords": [1760,700],
+    "file": "pavlik_drainage.g"
+  },
+    "samplers": {
+    "name": "Пробоотборники",
+    "desc": "Пробоотборники",
+    "type": "menu",
+    "coords": [1760,735],
+    "file": "pavlik_samplers.g"
+  },
+  "tayra": {
+    "name": "Тайра",
+    "desc": "Тайра",
+    "type": "menu",
+    "coords": [1825,905],
+    "file": "pavlik_tayras.g"
+  },
+  "tayra2": {
+    "name": "Тайра58",
+    "desc": "Тайра 58",
+    "type": "menu",
+    "coords": [1825,945],
+    "file": "pavlik_tayras_1.g"
+  },
+
+  "funs": {
+    "name": "Вентиляция",
+    "desc": "Вентиляция ЗИФ",
+    "type": "menu",
+    "coords": [1825,980],
+    "file": "pavlik_ventilation.g"
+  },
+    "reagent_900": {
+    "name": "Реаг. 900",
+    "desc": "900 Ксантогинат",
+    "type": "menu",
+    "coords": [1130,340],
+    "file": "pavlik_900rp100a01.g"
+  },
+  "reagent_905": {
+    "name": "Реаг. 905,910",
+    "desc": "905 Т92, 910 Гипохлорит кальция",
+    "type": "menu",
+    "coords": [1130,390],
+    "file": "pavlik_900rp100a01_01.g"
+  },
+  "reagent_915": {
+    "name": "Реаг. 915,920",
+    "desc": "915 Известь, 920 Медный купорос",
+    "type": "menu",
+    "coords": [1130,420],
+    "file": "pavlik_900rp100a02.g"
+  } ,
+  "reagent_925": {
+    "name": "Реаг. 925,940",
+    "desc": "925 Щёлочь, 940 Соляная кислота",
+    "type": "menu",
+    "coords": [1130,455],
+    "file": "pavlik_900rp100a03.g"
+  },
+  "reagent_930": {
+    "name": "Реаг. 930",
+    "desc": "930 Цианид",
+    "type": "menu",
+    "coords": [1130,500],
+    "file": "pavlik_930rp100a01.g"
+  },
+  "sys_config": {
+    "name": "Системный",
+    "desc": "Павлик. Конфигурация сети",
+    "type": "sys",
+    "coords": [165,700],
+    "file":"pavlik_configuration.g"
+  } ,
+  "power_feed": {
+    "name": "Эл. питание",
+    "desc": "Однолинейная схема",
+    "type": "menu",
+    "coords": [165,730],
+    "file": "pavlik_power_01.g"
+  } ,
+
+  "power_feed2": {
+    "name": "Эл. питание 2",
+    "desc": "Однолинейная схема ЗРУ",
+    "type": "menu",
+    "coords": [290,732],
+    "file": "pavlik_power_02.g"
+  } ,
+  "counters": {
+    "name": "Сумматоры",
+    "desc": "Сумматоры",
+    "type": "menu",
+    "coords": [165,835],
+    "file": "pavlik_adders.g"
+  } ,
+  "run_hours1": {
+    "name": "Моточасы",
+    "desc": "Моточасы оборудования",
+    "type": "sys",
+    "coords": [165,760],
+    "file": "pavlik_motorhours_01.g"
+  } ,
+  "run_hours2": {
+    "name": "Моточасы 2",
+    "desc": "Моточасы оборудования 2",
+    "type": "sys",
+    "coords": [],
+    "file": "pavlik_motorhours_02.g"
+  } ,
+  "run_hours3": {
+    "name": "Моточасы 3",
+    "desc": "Моточасы оборудования3",
+    "type": "sys",
+    "coords": [],
+    "file": "pavlik_motorhours_03.g"
+  } ,
+  "maint_hours1": {
+    "name": "Техобсл. 1",
+    "desc": "Техобслуживание 1",
+    "type": "sys",
+    "coords": [180, 795],
+    "file": "pavlik_maintenance_991.g"
+  } ,
+  "maint_hours2": {
+    "name": "Техобсл. 2",
+    "desc": "Техобслуживание 2",
+    "type": "sys",
+    "coords": [],
+    "file": "pavlik_maintenance_02.g"
+  } ,
+  "991GRP01": {
+    "name": "Группы-1",
+    "desc": "Группы ПЛК 991-1",
+    "type": "sys",
+    "coords": [77, 985],
+    "file": "pavlik_991_group_01.g"
+  } ,
+  "991GRP02": {
+    "name": "Группы-2",
+    "desc": "Группы ПЛК 991-2",
+    "type": "sys",
+    "coords": [185, 985],
+    "file": "pavlik_991_group_02.g"
+  } ,
+  "991GRP04": {
+    "name": "Группы-4",
+    "desc": "Группы ПЛК 991-4",
+    "type": "sys",
+    "coords": [285, 985],
+    "file": "pavlik_991_group_04.g"
+  } ,
+  "991GRP6": {
+    "name": "Группы-6",
+    "desc": "Группы ПЛК 991-6",
+    "type": "sys",
+    "coords": [385, 985],
+    "file": "pavlik_991_group_06.g"
+  } ,
+   "992GRP01": {
+    "name": "Группы 992-1",
+    "desc": "Группы ПЛК 992 1",
+    "type": "sys",
+    "coords": [77, 935],
+    "file": "pavlik_992_group_01.g"
+  } ,
+  "992GRP02": {
+    "name": "Группы 992-2",
+    "desc": "Группы ПЛК 992-2",
+    "type": "sys",
+    "coords": [185, 935],
+    "file": "pavlik_992_group_02.g"
+  } ,
+  "991GRP03": {
+    "name": "Группы 992-3",
+    "desc": "Группы ПЛК 992-3",
+    "type": "sys",
+    "coords": [285, 935],
+    "file": "pavlik_992_group_03.g"
+  } ,
+  "991GRP4": {
+    "name": "Группы 992-4",
+    "desc": "Группы ПЛК 992-4",
+    "type": "sys",
+    "coords": [385, 935],
+    "file": "pavlik_992_group_04.g"
+  } ,
+  "SPARES": {
+    "name": "Помойка",
+    "desc": "Помойка",
+    "type": "sys",
+    "coords": [800, 985],
+    "file": "pavlik_spares.g"
+  } ,
+  "win_start": {
+    "name": "Системный",
+    "desc": "Кнопка Пуск Windows",
+    "type": "sys",
+    "coords": [15, 1070],
+    "file":""
+  }
+}

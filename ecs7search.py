@@ -202,4 +202,10 @@ def serve_temp_image(filename):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5942)
+    import os
+
+    # Debug mode can be enabled via env var: set ECS7_DEBUG=1
+    debug_mode = os.environ.get("ECS7_DEBUG", "0") == "1"
+    host = os.environ.get("ECS7_HOST", "0.0.0.0")
+    port = int(os.environ.get("ECS7_PORT", "5942"))
+    app.run(debug=debug_mode, host=host, port=port, use_reloader=False)
