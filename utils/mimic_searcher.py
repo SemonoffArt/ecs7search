@@ -107,7 +107,6 @@ def draw_border_on_image(
         )
 
     img.save(output_path)
-    print(f"  Сохранено: {output_path}")
 
 
 def main():
