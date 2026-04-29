@@ -17,7 +17,10 @@ from pathlib import Path
 import pandas as pd
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
-IO_LIST_PATH = PROJECT_DIR / "data" / "IO_list.xlsx"
+IO_LIST_PATHS = [
+    PROJECT_DIR / "data" / "IO_list.xlsx",
+    PROJECT_DIR / "data" / "IO_list_992CS111A01(desorb).xlsx",
+]
 OUTPUT_PATH = PROJECT_DIR / "data" / "io_list.json"
 
 # Колонки, которые переносим в JSON (SignalCode — ключ)
@@ -36,58 +39,73 @@ VALUE_COLUMNS = [
 ]
 
 
-def parse_io_list() -> dict:
-    """Парсит IO_list.xlsx и возвращает структуру для JSON."""
+def parse_io_list(io_list_paths: list[Path]) -> dict:
+    """Парсит список IO_list.xlsx файлов и возвращает единую структуру для JSON."""
     start_time = time.time()
-
-    xl = pd.ExcelFile(str(IO_LIST_PATH))
-    sheet_names = xl.sheet_names
 
     # signal_code → {fields..., sheets: [list of sheet names]}
     tags: dict[str, dict] = {}
+    all_sheet_names: list[str] = []
+    source_files: list[str] = []
 
-    for sheet_name in sheet_names:
-        df = pd.read_excel(xl, sheet_name=sheet_name, header=0)
+    for io_list_path in io_list_paths:
+        if not io_list_path.exists():
+            print(f"  Пропуск: файл не найден — {io_list_path}")
+            continue
 
-        # Заголовки в строке 0
-        real_headers = df.iloc[0].tolist()
-        df.columns = real_headers
-        df = df.iloc[1:].reset_index(drop=True)
+        print(f"  Обработка: {io_list_path.name}")
+        source_files.append(str(io_list_path))
 
-        # Убираем колонку NaN если есть
-        df = df.loc[:, ~df.columns.isna()]
+        xl = pd.ExcelFile(str(io_list_path))
+        sheet_names = xl.sheet_names
 
-        for _, row in df.iterrows():
-            signal_code = row.get("SignalCode")
-            if pd.isna(signal_code):
-                continue
+        for sheet_name in sheet_names:
+            df = pd.read_excel(xl, sheet_name=sheet_name, header=0)
 
-            signal_code = str(signal_code).strip()
-            if not signal_code:
-                continue
+            # Заголовки в строке 0
+            real_headers = df.iloc[0].tolist()
+            df.columns = real_headers
+            df = df.iloc[1:].reset_index(drop=True)
 
-            if signal_code not in tags:
-                # Собираем поля
-                entry: dict[str, str | None | list] = {}
-                for col in VALUE_COLUMNS:
-                    if col in df.columns:
-                        val = row.get(col)
-                        entry[col] = None if pd.isna(val) else str(val).strip()
-                entry["sheets"] = []
-                tags[signal_code] = entry
+            # Убираем колонку NaN если есть
+            df = df.loc[:, ~df.columns.isna()]
 
-            # Добавляем лист, если ещё нет
-            if sheet_name not in tags[signal_code]["sheets"]:
-                tags[signal_code]["sheets"].append(sheet_name)
+            # Уникальное имя листа для избежания конфликтов между файлами
+            qualified_sheet = f"{io_list_path.stem}::{sheet_name}"
+            if qualified_sheet not in all_sheet_names:
+                all_sheet_names.append(qualified_sheet)
+
+            for _, row in df.iterrows():
+                signal_code = row.get("SignalCode")
+                if pd.isna(signal_code):
+                    continue
+
+                signal_code = str(signal_code).strip()
+                if not signal_code:
+                    continue
+
+                if signal_code not in tags:
+                    # Собираем поля
+                    entry: dict[str, str | None | list] = {}
+                    for col in VALUE_COLUMNS:
+                        if col in df.columns:
+                            val = row.get(col)
+                            entry[col] = None if pd.isna(val) else str(val).strip()
+                    entry["sheets"] = []
+                    tags[signal_code] = entry
+
+                # Добавляем лист, если ещё нет
+                if sheet_name not in tags[signal_code]["sheets"]:
+                    tags[signal_code]["sheets"].append(sheet_name)
 
     elapsed = time.time() - start_time
 
     result = {
         "metadata": {
-            "source_file": str(IO_LIST_PATH),
+            "source_files": source_files,
             "generated_at": datetime.now().strftime("%a %b %d %H:%M:%S %Y"),
-            "total_sheets": len(sheet_names),
-            "sheet_names": sheet_names,
+            "total_sheets": len(all_sheet_names),
+            "sheet_names": all_sheet_names,
             "total_signals": len(tags),
             "parsing_time_sec": round(elapsed, 2),
         },
@@ -98,15 +116,19 @@ def parse_io_list() -> dict:
 
 
 def main() -> None:
-    if not IO_LIST_PATH.exists():
-        print(f"Ошибка: файл не найден — {IO_LIST_PATH}")
+    existing = [p for p in IO_LIST_PATHS if p.exists()]
+    if not existing:
+        print("Ошибка: ни один из входных файлов не найден:")
+        for p in IO_LIST_PATHS:
+            print(f"  - {p}")
         return
 
-    print(f"Парсинг {IO_LIST_PATH.name}...")
-    result = parse_io_list()
+    print("Парсинг IO list файлов...")
+    result = parse_io_list(IO_LIST_PATHS)
 
     meta = result["metadata"]
-    print(f"  Листов: {meta['total_sheets']} ({', '.join(meta['sheet_names'])})")
+    print(f"  Файлов: {len(meta['source_files'])}")
+    print(f"  Листов: {meta['total_sheets']}")
     print(f"  Сигналов: {meta['total_signals']}")
     print(f"  Время: {meta['parsing_time_sec']}с")
 

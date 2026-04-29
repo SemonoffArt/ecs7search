@@ -14,7 +14,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from utils.iolist_indexer import parse_io_list
+from utils.iolist_indexer import IO_LIST_PATHS, parse_io_list
 from utils.mimic_indexer import build_index
 from utils.pdf_indexer import index_pdf_directory
 from utils.ecs2json import TagsHelper
@@ -191,7 +191,7 @@ class IndexingService:
         indexing_status.start("Индексирование IO List")
 
         try:
-            result = parse_io_list()
+            result = parse_io_list(IO_LIST_PATHS)
 
             meta = result.get("metadata", {})
             msg = (
