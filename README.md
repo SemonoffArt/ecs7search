@@ -152,7 +152,7 @@ ecs7search/
 └── 📁 data/                      # Индексированные данные и источники
     ├── mimics/                   # .g файлы + .png скриншоты
     ├── pdf/                      # PDF-документы
-    ├── FlsaProDb/                # БД ABB .mdb
+    ├── FlsaProDb/                # БД ECS .mdb
     ├── mimics_index.json         # Индекс тегов мнемосхем
     ├── pdf_index.json            # Индекс тегов PDF
     ├── io_list.json              # Индекс сигналов I/O
