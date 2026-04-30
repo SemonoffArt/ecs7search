@@ -124,7 +124,10 @@ def index():
     if search_pdf:
         matched_tags, pdf_messages = pdf_service.search(query)
         for msg in pdf_messages:
-            flash(msg, "warning" if "Ничего" in msg else "danger")
+            if "Минимум" in msg or "Ничего" in msg:
+                flash(msg, "warning")
+            else:
+                flash(msg, "danger")
 
         if matched_tags:
             safe_query = "".join(c if c.isalnum() else "_" for c in query[:50])

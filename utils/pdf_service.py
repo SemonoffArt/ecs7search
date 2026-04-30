@@ -40,6 +40,11 @@ class PDFSearchService:
             - dict: {тег: [{"file": ..., "page": ..., "count": ...}, ...]}
             - list: сообщения об ошибках/предупреждения
         """
+        # Валидация: минимум 3 символа (без учёта подстановочных символов)
+        meaningful = query.replace("*", "").replace("?", "").strip()
+        if len(meaningful) < 3:
+            return {}, ["Минимум 3 символа для поиска в PDF."]
+
         if not self._pdf_repo.exists():
             return {}, ["Индекс PDF не найден. Запустите pdf_indexer.py."]
 
