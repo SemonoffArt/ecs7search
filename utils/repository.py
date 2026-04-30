@@ -23,6 +23,10 @@ class MimicIndexRepository:
         with open(self._index_path, "r", encoding="utf-8") as f:
             return json.load(f)
 
+    def invalidate_cache(self) -> None:
+        """Нет кэша — ничего не делает. Для единообразия API."""
+        return
+
 
 class TagDetailRepository:
     """Кэшированное хранилище метаданных тегов из tags.json."""
@@ -60,6 +64,10 @@ class TagDetailRepository:
             self._cache = {}
 
         return self._cache
+
+    def invalidate_cache(self) -> None:
+        """Сбрасывает кэш — следующий запрос перечитает файл с диска."""
+        self._cache = None
 
     def get_flexible(self, tag_name: str) -> dict[str, Any] | None:
         """Ищет запись с учётом вариаций с/без ведущего '_'."""
@@ -119,6 +127,10 @@ class IOListRepository:
 
         return self._cache
 
+    def invalidate_cache(self) -> None:
+        """Сбрасывает кэш — следующий запрос перечитает файл с диска."""
+        self._cache = None
+
     def get(self, signal_code: str) -> dict[str, Any] | None:
         """Ищет запись по SignalCode."""
         rec = self._load().get(signal_code)
@@ -160,6 +172,10 @@ class PDFIndexRepository:
             self._cache = {}
 
         return self._cache
+
+    def invalidate_cache(self) -> None:
+        """Сбрасывает кэш — следующий запрос перечитает файл с диска."""
+        self._cache = None
 
     def search(self, pattern: str) -> dict[str, list[dict]]:
         """Ищет теги в PDF индексе по шаблону с поддержкой * и ?.

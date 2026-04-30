@@ -18,6 +18,12 @@ from utils.iolist_indexer import IO_LIST_PATHS, parse_io_list
 from utils.mimic_indexer import build_index
 from utils.pdf_indexer import index_pdf_directory
 from utils.ecs2json import TagsHelper
+from utils.repository import (
+    IOListRepository,
+    MimicIndexRepository,
+    PDFIndexRepository,
+    TagDetailRepository,
+)
 
 
 class IndexingStatus:
@@ -94,6 +100,10 @@ class IndexingService:
         io_list_path: Path,
         io_output_path: Path,
         tags_output_path: Path,
+        mimic_index_repo: MimicIndexRepository | None = None,
+        tag_repo: TagDetailRepository | None = None,
+        io_list_repo: IOListRepository | None = None,
+        pdf_repo: PDFIndexRepository | None = None,
     ) -> None:
         self._mimics_dir = mimics_dir
         self._pdf_dir = pdf_dir
@@ -102,6 +112,11 @@ class IndexingService:
         self._io_list_path = io_list_path
         self._io_output_path = io_output_path
         self._tags_output_path = tags_output_path
+        # Репозитории для инвалидации кэша после успешной переиндексации
+        self._mimic_index_repo = mimic_index_repo
+        self._tag_repo = tag_repo
+        self._io_list_repo = io_list_repo
+        self._pdf_repo = pdf_repo
 
     def start_mimics_indexing(self) -> dict:
         """Запускает индексацию мнемосхем в фоновом потоке."""
@@ -133,6 +148,10 @@ class IndexingService:
 
             with open(self._index_path, "w", encoding="utf-8") as f:
                 json.dump(result, f, ensure_ascii=False, indent=2)
+
+            # Сбрасываем кэш, чтобы поиск использовал новый индекс сразу
+            if self._mimic_index_repo is not None:
+                self._mimic_index_repo.invalidate_cache()
 
             indexing_status.complete(True, msg, result.get("metadata"))
 
@@ -170,6 +189,10 @@ class IndexingService:
             with open(self._pdf_index_path, "w", encoding="utf-8") as f:
                 json.dump(result, f, ensure_ascii=False, indent=2)
 
+            # Сбрасываем кэш PDF, чтобы поиск использовал новый индекс сразу
+            if self._pdf_repo is not None:
+                self._pdf_repo.invalidate_cache()
+
             indexing_status.complete(True, msg, result.get("metadata"))
 
         except Exception as e:
@@ -202,6 +225,10 @@ class IndexingService:
             with open(self._io_output_path, "w", encoding="utf-8") as f:
                 json.dump(result, f, ensure_ascii=False, indent=2)
 
+            # Сбрасываем кэш IO списка, чтобы поиск использовал новые данные сразу
+            if self._io_list_repo is not None:
+                self._io_list_repo.invalidate_cache()
+
             indexing_status.complete(True, msg, meta)
 
         except Exception as e:
@@ -228,6 +255,10 @@ class IndexingService:
 
             total_tags = len(tags_helper)
             msg = f"Готово! Извлечено {total_tags} тегов"
+
+            # Сбрасываем кэш тегов, чтобы поиск использовал новые данные сразу
+            if self._tag_repo is not None:
+                self._tag_repo.invalidate_cache()
 
             indexing_status.complete(True, msg, {
                 "total_tags": total_tags,

@@ -81,6 +81,10 @@ indexing_service = IndexingService(
     io_list_path=IO_LIST_PATH,
     io_output_path=PROJECT_DIR / "data" / "io_list.json",
     tags_output_path=TAGS_PATH,
+    mimic_index_repo=index_repo,
+    tag_repo=tag_repo,
+    io_list_repo=io_list_repo,
+    pdf_repo=pdf_repo,
 )
 
 # ─── Flask приложение (router) ────────────────────────────────────
