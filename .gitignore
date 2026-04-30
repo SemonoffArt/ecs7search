@@ -75,5 +75,6 @@ flask_output.log
 *.log
 test_*.png
 logo_verification.png
+nssm.exe
 m_alert/
 pos_man_calc.ods
