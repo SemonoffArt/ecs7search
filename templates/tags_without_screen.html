@@ -21,6 +21,16 @@
             Запускает сканирование и пересоздаёт <code>tags_without_screen_index.json</code>.
         </span>
     </form>
+
+    {% if results and results.tag_details %}
+    <div style="margin-top:12px;">
+        <label class="detail-checkbox">
+            <input type="checkbox" id="only-a-tags">
+            Только <strong>«А» </strong> точки
+        </label>
+        <span id="visible-count" style="font-size:12px; color:#7f8c8d; margin-left:10px;"></span>
+    </div>
+    {% endif %}
 </div>
 
 <!-- Flash сообщения -->
@@ -94,7 +104,7 @@
             </thead>
             <tbody>
                 {% for detail in results.tag_details %}
-                <tr>
+                <tr data-tag-id="{{ detail.Id if detail.Id is not none else '' }}">
                     <td><code>{{ detail.Tag }}</code></td>
                     <td>{{ detail.Groups }}</td>
                     <td>
@@ -171,5 +181,36 @@
     </div>
 </div>
 {% endif %}
+
+<script>
+(function() {
+    const checkbox = document.getElementById("only-a-tags");
+    const counter = document.getElementById("visible-count");
+    if (!checkbox) return;
+
+    const rows = document.querySelectorAll("table.tag-detail-table tbody tr");
+    const totalRows = rows.length;
+
+    function applyFilter() {
+        const onlyA = checkbox.checked;
+        let visible = 0;
+        rows.forEach(row => {
+            const raw = row.getAttribute("data-tag-id");
+            const id = raw === "" || raw === null ? NaN : Number(raw);
+            const show = !onlyA || (!isNaN(id) && id > 0);
+            row.style.display = show ? "" : "none";
+            if (show) visible += 1;
+        });
+        if (counter) {
+            counter.textContent = onlyA
+                ? "Показано: " + visible + " из " + totalRows
+                : "Всего: " + totalRows;
+        }
+    }
+
+    checkbox.addEventListener("change", applyFilter);
+    applyFilter();
+})();
+</script>
 
 {% endblock %}
