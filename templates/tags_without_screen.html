@@ -28,6 +28,10 @@
             <input type="checkbox" id="only-a-tags">
             Только <strong>«А» </strong> точки
         </label>
+        <label class="detail-checkbox">
+            <input type="checkbox" id="no-pid-tags" checked>
+            Не показывать PID
+        </label>
         <span id="visible-count" style="font-size:12px; color:#7f8c8d; margin-left:10px;"></span>
     </div>
     {% endif %}
@@ -104,7 +108,7 @@
             </thead>
             <tbody>
                 {% for detail in results.tag_details %}
-                <tr data-tag-id="{{ detail.Id if detail.Id is not none else '' }}">
+                <tr data-tag-id="{{ detail.Id if detail.Id is not none else '' }}" data-tag="{{ detail.Tag }}">
                     <td><code>{{ detail.Tag }}</code></td>
                     <td>{{ detail.Groups }}</td>
                     <td>
@@ -184,31 +188,47 @@
 
 <script>
 (function() {
-    const checkbox = document.getElementById("only-a-tags");
+    const aTagsCheckbox = document.getElementById("only-a-tags");
+    const noPidCheckbox = document.getElementById("no-pid-tags");
     const counter = document.getElementById("visible-count");
-    if (!checkbox) return;
+    if (!aTagsCheckbox && !noPidCheckbox) return;
 
     const rows = document.querySelectorAll("table.tag-detail-table tbody tr");
     const totalRows = rows.length;
 
+    const PID_SUFFIXES = ["SPM", "SPMH", "SPAH", "SPA"];
+
+    function endsWithPidSuffix(tag) {
+        const upper = tag.toUpperCase();
+        for (const suffix of PID_SUFFIXES) {
+            if (upper.endsWith(suffix)) return true;
+        }
+        return false;
+    }
+
     function applyFilter() {
-        const onlyA = checkbox.checked;
+        const onlyA = aTagsCheckbox ? aTagsCheckbox.checked : false;
+        const noPid = noPidCheckbox ? noPidCheckbox.checked : false;
         let visible = 0;
         rows.forEach(row => {
             const raw = row.getAttribute("data-tag-id");
+            const tag = row.getAttribute("data-tag") || "";
             const id = raw === "" || raw === null ? NaN : Number(raw);
-            const show = !onlyA || (!isNaN(id) && id > 0);
+
+            let show = true;
+            if (onlyA && (isNaN(id) || id <= 0)) show = false;
+            if (noPid && endsWithPidSuffix(tag)) show = false;
+
             row.style.display = show ? "" : "none";
             if (show) visible += 1;
         });
         if (counter) {
-            counter.textContent = onlyA
-                ? "Показано: " + visible + " из " + totalRows
-                : "Всего: " + totalRows;
+            counter.textContent = "Показано: " + visible + " из " + totalRows;
         }
     }
 
-    checkbox.addEventListener("change", applyFilter);
+    if (aTagsCheckbox) aTagsCheckbox.addEventListener("change", applyFilter);
+    if (noPidCheckbox) noPidCheckbox.addEventListener("change", applyFilter);
     applyFilter();
 })();
 </script>
