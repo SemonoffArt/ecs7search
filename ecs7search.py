@@ -10,7 +10,7 @@ ecs7search Web UI — Flask-приложение для поиска тегов 
 
 from pathlib import Path
 
-from flask import Flask, flash, render_template, request, send_from_directory
+from flask import Flask, flash, redirect, render_template, request, send_from_directory, url_for
 
 from utils.config_service import ConfigService
 from utils.indexing_service import IndexingService, indexing_status
@@ -35,6 +35,7 @@ PDF_INDEX_PATH = PROJECT_DIR / "data" / "pdf_index.json"
 PDF_DIR = PROJECT_DIR / "data" / "pdf"
 MONKEY_IMAGE_PATH = PROJECT_DIR / "data" / "images" / "manky.png"
 TEMP_DIR = PROJECT_DIR / "data" / "temp"
+TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "tags_without_screen_index.json"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
 # ─── Repository слой ─────────────────────────────────────────────
@@ -160,6 +161,32 @@ def index():
         search_pdf=search_pdf,
         pdf_results=pdf_results,
     )
+
+
+@app.route("/tags-without-screen")
+def tags_without_screen():
+    """Страница со списком тегов, не используемых на экранах.
+
+    При открытии поиск автоматически не запускается — таблица
+    формируется из предварительно сохранённого tags_without_screen_index.json.
+    """
+    results = search_service.load_tags_without_screens(TAGS_WITHOUT_SCREEN_INDEX_PATH)
+    return render_template("tags_without_screen.html", results=results)
+
+
+@app.route("/tags-without-screen/scan", methods=["POST"])
+def tags_without_screen_scan():
+    """Запускает сканирование .g файлов и пересоздаёт индекс."""
+    index_data = search_service.scan_tags_without_screens(TAGS_WITHOUT_SCREEN_INDEX_PATH)
+    meta = index_data.get("metadata", {})
+    flash(
+        f"Сканирование завершено: проверено тегов — {meta.get('total_candidates', 0)}, "
+        f"просканировано файлов — {meta.get('total_scanned_files', 0)}, "
+        f"без экранов — {meta.get('total_without_screens', 0)}, "
+        f"время — {meta.get('scan_time_sec', 0)} с.",
+        "success",
+    )
+    return redirect(url_for("tags_without_screen"))
 
 
 @app.route("/settings")

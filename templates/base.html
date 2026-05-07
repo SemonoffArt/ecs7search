@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ecs7search — Поиск тегов SCADA ECS7</title>
+    <title>ecs7search — Поиск тегов SCADA ECS7 ЗИФ2</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -22,9 +22,11 @@
     </div>
 
     <div class="navbar">
-        <div class="navbar-title">🔍 ecs7search — Поиск тегов SCADA ECS7</div>
+        <div class="navbar-title">🔍 ecs7search — Поиск тегов SCADA ECS7 ЗИФ2</div>
         <nav>
             <a href="/">Поиск</a>
+            <span style="color:#7f8c8d; margin:0 6px;">|</span>
+            <a href="/tags-without-screen">Теги без экрана</a>
             <span style="color:#7f8c8d; margin:0 6px;">|</span>
             <a href="/settings">Настройки</a>
         </nav>
@@ -34,7 +36,7 @@
         {% block content %}{% endblock %}
 
         <footer>
-            <a href="https://github.com/SemonoffArt/ecs7search" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">ecs7search</a> — SCADA ECS7 Mimic Files Search Tool
+            <a href="https://github.com/SemonoffArt/ecs7search" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">ecs7search</a> — Поиск тегов SCADA ECS7 ЗИФ2
         </footer>
     </div>
 

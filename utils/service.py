@@ -8,7 +8,9 @@ Service слой — бизнес-логика поиска тегов и ген
 
 from __future__ import annotations
 
+import json
 import re
+import time
 from pathlib import Path
 from typing import Any
 
@@ -156,6 +158,105 @@ class SearchService:
             "tag_details": tag_details,
             "index_metadata": self._index_repo.load().get("metadata", {}),
         }, flashes
+
+    # ─── Теги без экрана ──────────────────────────────────────────
+
+    def scan_tags_without_screens(self, output_path: Path) -> dict:
+        """Сканирует .g файлы в mimics_dir и сохраняет индекс тегов без экранов.
+
+        Источник кандидатов: только tags.json.
+        Для каждого тега выполняется поиск вхождения имени (с нормализацией
+        ведущего '_') во всех .g файлах. Если имя не встречается —
+        тег попадает в итоговый индекс.
+
+        Сохраняет результат в output_path в формате:
+        {
+            "metadata": {...},
+            "tags": ["tag1", "tag2", ...]
+        }
+        Возвращает сохранённый словарь.
+        """
+        start_time = time.time()
+
+        all_tag_records = self._tag_repo._load()
+
+        def normalize(name: str) -> str:
+            return name.lstrip("_")
+
+        # Дедубликация кандидатов по нормализованному имени
+        seen_norm: set[str] = set()
+        unique_candidates: list[str] = []
+        for name in sorted(all_tag_records.keys()):
+            norm = normalize(name)
+            if not norm or norm in seen_norm:
+                continue
+            seen_norm.add(norm)
+            unique_candidates.append(name)
+
+        # Объединяем содержимое всех .g файлов в одну строку
+        all_content_parts: list[str] = []
+        total_files = 0
+        if self._mimics_dir.is_dir():
+            for g_file in self._mimics_dir.rglob("*.g"):
+                try:
+                    all_content_parts.append(
+                        g_file.read_text(encoding="utf-8", errors="ignore")
+                    )
+                    total_files += 1
+                except Exception:
+                    continue
+        all_content = "".join(all_content_parts)
+
+        # Фильтруем: оставляем теги, которых нет в содержимом файлов
+        unused: list[str] = []
+        for name in unique_candidates:
+            norm = normalize(name)
+            if norm in all_content:
+                continue
+            unused.append(name)
+
+        elapsed = round(time.time() - start_time, 2)
+
+        index_data = {
+            "metadata": {
+                "scanned_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                "mimics_dir": str(self._mimics_dir),
+                "total_candidates": len(unique_candidates),
+                "total_scanned_files": total_files,
+                "total_without_screens": len(unused),
+                "scan_time_sec": elapsed,
+            },
+            "tags": unused,
+        }
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(index_data, f, ensure_ascii=False, indent=2)
+
+        return index_data
+
+    def load_tags_without_screens(self, index_path: Path) -> dict | None:
+        """Загружает tags_without_screen_index.json и обогащает детали тегов.
+
+        Возвращает None, если файл не существует или не читается.
+        """
+        if not index_path.exists():
+            return None
+
+        try:
+            with open(index_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            return None
+
+        tag_names = data.get("tags", [])
+        tag_details = self._enrich_tag_details(tag_names, {})
+
+        return {
+            "metadata": data.get("metadata", {}),
+            "total_tags": len(tag_names),
+            "tag_details": tag_details,
+        }
 
     # ─── Приватные методы ─────────────────────────────────────────
 

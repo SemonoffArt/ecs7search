@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <div class="section-title">
+        🚫 Теги без экрана
+        {% if results %}
+        <span class="badge badge-info">{{ results.total_tags }} тегов</span>
+        {% endif %}
+    </div>
+    <hr class="section-separator">
+
+    <div style="font-size:13px; color:#546e7a; margin-bottom:10px;">
+        Теги из справочника <code>tags.json</code>, имена которых не встречаются
+        ни в одном из <code>.g</code> файлов папки <code>data/mimics/</code>.
+    </div>
+
+    <form method="post" action="{{ url_for('tags_without_screen_scan') }}" style="margin-top:10px;">
+        <button type="submit" class="btn btn-primary">🔍 Поиск</button>
+        <span style="font-size:12px; color:#7f8c8d; margin-left:10px;">
+            Запускает сканирование и пересоздаёт <code>tags_without_screen_index.json</code>.
+        </span>
+    </form>
+</div>
+
+<!-- Flash сообщения -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% set banner_class = "status-banner-info" %}
+            {% if category == "danger" %}
+                {% set banner_class = "status-banner-danger" %}
+            {% elif category == "warning" %}
+                {% set banner_class = "status-banner-warning" %}
+            {% elif category == "success" %}
+                {% set banner_class = "status-banner-ok" %}
+            {% endif %}
+            <div class="status-banner {{ banner_class }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% if results %}
+<div class="card">
+    <div class="section-subtitle">📊 Статистика последнего поиска</div>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-card-body">
+                {% if results.metadata.scanned_at %}
+                <div class="stat-row">
+                    <span class="stat-label">Дата сканирования:</span>
+                    <span class="stat-value">{{ results.metadata.scanned_at }}</span>
+                </div>
+                {% endif %}
+                <div class="stat-row">
+                    <span class="stat-label">Проверено тегов:</span>
+                    <span class="stat-value">{{ results.metadata.total_candidates or 0 }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Просканировано .g файлов:</span>
+                    <span class="stat-value">{{ results.metadata.total_scanned_files or 0 }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Тегов без экранов:</span>
+                    <span class="stat-value">{{ results.metadata.total_without_screens or 0 }}</span>
+                </div>
+                {% if results.metadata.scan_time_sec is defined %}
+                <div class="stat-row">
+                    <span class="stat-label">Время сканирования:</span>
+                    <span class="stat-value">{{ results.metadata.scan_time_sec }} с</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if results.tag_details %}
+<div class="card">
+    <div style="margin-bottom:15px; overflow-x:auto;">
+        <table class="tag-detail-table">
+            <thead>
+                <tr>
+                    <th>Tag</th>
+                    <th>Groups</th>
+                    <th>Description</th>
+                    <th>Algorithms</th>
+                    <th>PLC</th>
+                    <th>IO List</th>
+                    <th>Screens</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detail in results.tag_details %}
+                <tr>
+                    <td><code>{{ detail.Tag }}</code></td>
+                    <td>{{ detail.Groups }}</td>
+                    <td>
+                        {% if detail.DescEng %}<div>{{ detail.DescEng }}</div>{% endif %}
+                        {% if detail._signal_purpose %}<div class="tag-desc-purpose">{{ detail._signal_purpose }}</div>{% endif %}
+                        {% if detail.DescRus %}<div class="tag-desc-rus">{{ detail.DescRus }}</div>{% endif %}
+                        {% if not detail.DescEng and not detail.DescRus and not detail._signal_purpose %}—{% endif %}
+                    </td>
+                    <td>
+                        {% if detail.Algorithms %}
+                        <div>Conv: {{ detail.Algorithms.ConvAlg }}</div>
+                        <div>Calc: {{ detail.Algorithms.CalcAlg }}</div>
+                        <div>Block: {{ detail.Algorithms.BlockAlg }}</div>
+                        {% else %}
+                        —
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if detail.PLC %}
+                        <div>PLC: {{ detail.PLC.PLCNo }}</div>
+                        <div>FC: {{ detail.PLC.FC }}</div>
+                        {% if detail.PLC.Input %}
+                        <div class="tag-plc-sub">
+                            <div><b>IN:</b> {{ detail.PLC.Input.Type }}, DB{{ detail.PLC.Input.Block }}.DBD{{ detail.PLC.Input.Word }}{% if detail.PLC.Input.Bit is not none %}.{{ detail.PLC.Input.Bit }}{% endif %}</div>
+                        </div>
+                        {% endif %}
+                        {% if detail.PLC.Output %}
+                        <div class="tag-plc-sub">
+                            <div><b>OUT:</b> {{ detail.PLC.Output.Type }}, DB{{ detail.PLC.Output.Block }}.DBD{{ detail.PLC.Output.Word }}{% if detail.PLC.Output.Bit is not none %}.{{ detail.PLC.Output.Bit }}{% endif %}</div>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        —
+                        {% endif %}
+                    </td>
+                    <td class="tag-io-list">
+                        {% if detail._io_list %}
+                            <div><b>Comp:</b> {{ detail._io_list.Component }}</div>
+                            <div><b>Term:</b> {{ detail._io_list.IOTerminal_Short1 }}</div>
+                            <div><b>Addr:</b> {{ detail._io_list.IOAddress }}</div>
+                            <div><b>Type:</b> {{ detail._io_list.IOType }}</div>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if detail._screens and detail._screens|length > 0 %}
+                            {% for scr in detail._screens %}
+                            <div class="tag-screen-item">{{ scr }}</div>
+                            {% endfor %}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="card">
+    <div class="status-banner status-banner-info">
+        По результату последнего сканирования тегов без экранов не найдено.
+    </div>
+</div>
+{% endif %}
+
+{% else %}
+<div class="card">
+    <div class="status-banner status-banner-info">
+        Индекс <code>tags_without_screen_index.json</code> ещё не сформирован.
+        Нажмите кнопку «Поиск», чтобы выполнить сканирование и сформировать таблицу.
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
