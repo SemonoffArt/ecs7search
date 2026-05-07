@@ -1,8 +1,8 @@
 {
     "metadata": {
         "directory": "C:\\Users\\7Arrt\\Desktop\\Projects\\ecs7search\\data\\FlsaProDb",
-        "indexed_at": "Sat Apr 18 02:33:12 2026",
-        "total_tags": 7903,
+        "indexed_at": "Fri May  8 05:18:39 2026",
+        "total_tags": 7902,
         "indexing_time_sec": 0.32
     },
     "tags": [
@@ -11525,8 +11525,8 @@
             "Id": -1741,
             "Tag": "010BC011M01INT04",
             "Groups": "990CD100G14",
-            "DescEng": "SA: Current BC12 >= 325A & T>5s",
-            "DescRus": "SA: Ток BC12  >= 325A & T>5s",
+            "DescEng": "SA: Current BC12 >= 340A & T>25s",
+            "DescRus": "SA: Ток BC12  >= 340A & T>25s",
             "Algorithms": {
                 "ConvAlg": "34 Off/On (V7.7)",
                 "CalcAlg": 0,
@@ -11682,7 +11682,7 @@
                     "Bit": 0
                 },
                 "Output": {
-                    "Type": "Float",
+                    "Type": null,
                     "Block": 9,
                     "Word": 1336,
                     "Bit": 0
@@ -12487,7 +12487,7 @@
                     "Bit": 0
                 },
                 "Output": {
-                    "Type": "Float",
+                    "Type": null,
                     "Block": 9,
                     "Word": 172,
                     "Bit": 0
@@ -16075,8 +16075,8 @@
             "Id": -3979,
             "Tag": "010CR010M01INT10",
             "Groups": "990CD100G14",
-            "DescEng": "---",
-            "DescRus": "---",
+            "DescEng": "PR: Lim Motor Start",
+            "DescRus": "PR: Ограничение запусков",
             "Algorithms": {
                 "ConvAlg": "34 Off/On (V7.7)",
                 "CalcAlg": 0,
@@ -46452,41 +46452,6 @@
             "EngUnitId": "mm"
         },
         {
-            "Id": 3062,
-            "Tag": "020CR020PS_SP_old",
-            "Groups": "991CD100G777",
-            "DescEng": "Preset Setting SP,mm",
-            "DescRus": "",
-            "Algorithms": {
-                "ConvAlg": "4 Int/Ext",
-                "CalcAlg": 50,
-                "BlockAlg": "42 Siemens V77 Ext AI"
-            },
-            "PLC": {
-                "PLCNo": "991",
-                "FC": 0,
-                "Input": {
-                    "Type": "16 Bit",
-                    "Block": 111,
-                    "Word": 70,
-                    "Bit": 0
-                },
-                "Output": {
-                    "Type": "16 Bit",
-                    "Block": 111,
-                    "Word": 70,
-                    "Bit": 0
-                }
-            },
-            "PLC_INP": "%DB111.DBD70",
-            "Constant1": 1.0,
-            "SignalLow": 0.0,
-            "SignalHigh": 50.0,
-            "AlarmLow": 0.0,
-            "AlarmHigh": 0.0,
-            "EngUnitId": "mm"
-        },
-        {
             "Id": 3300,
             "Tag": "020CR020PS_SP_TGA",
             "Groups": "991CD100G333",
@@ -47356,7 +47321,7 @@
             "PLC_INP": "%DB15.DBD4656",
             "Constant1": 1.0,
             "SignalLow": 0.0,
-            "SignalHigh": 180.0,
+            "SignalHigh": 300.0,
             "AlarmLow": 0.0,
             "AlarmHigh": 0.0,
             "EngUnitId": "m3/h"
@@ -47879,9 +47844,9 @@
                 }
             },
             "PLC_INP": "%DB20.DBD400",
-            "Constant1": 180.0,
+            "Constant1": 300.0,
             "SignalLow": 0.0,
-            "SignalHigh": 180.0,
+            "SignalHigh": 300.0,
             "AlarmLow": 0.0,
             "AlarmHigh": 0.0,
             "EngUnitId": "m3/h"
@@ -48301,7 +48266,7 @@
             "PLC_INP": "%DB15.DBD4800",
             "Constant1": 1.0,
             "SignalLow": 0.0,
-            "SignalHigh": 180.0,
+            "SignalHigh": 300.0,
             "AlarmLow": 0.0,
             "AlarmHigh": 0.0,
             "EngUnitId": "m3/h"
@@ -48824,9 +48789,9 @@
                 }
             },
             "PLC_INP": "%DB20.DBD424",
-            "Constant1": 180.0,
+            "Constant1": 300.0,
             "SignalLow": 0.0,
-            "SignalHigh": 180.0,
+            "SignalHigh": 300.0,
             "AlarmLow": 0.0,
             "AlarmHigh": 0.0,
             "EngUnitId": "m3/h"
@@ -52781,8 +52746,8 @@
             "PLC_INP": "%DB6705.DBD10",
             "Constant1": 1.0,
             "SignalLow": 0.0,
-            "SignalHigh": 500.0,
-            "AlarmLow": 0.0,
+            "SignalHigh": 20000.0,
+            "AlarmLow": -1000000.0,
             "AlarmHigh": 20000.0,
             "EngUnitId": "h"
         },
@@ -68424,41 +68389,6 @@
                 }
             },
             "PLC_INP": "%DB333.DBD0",
-            "Constant1": null,
-            "SignalLow": null,
-            "SignalHigh": null,
-            "AlarmLow": null,
-            "AlarmHigh": null,
-            "EngUnitId": ""
-        },
-        {
-            "Id": -4834,
-            "Tag": "020TGA01HB01_TEST",
-            "Groups": "991CD100G333",
-            "DescEng": "Taiga  Heart Beat Testing",
-            "DescRus": "Тайга HeartBeat",
-            "Algorithms": {
-                "ConvAlg": "35 Stop/Run (V7.7)",
-                "CalcAlg": 0,
-                "BlockAlg": "0 No Algorithm"
-            },
-            "PLC": {
-                "PLCNo": "991",
-                "FC": 0,
-                "Input": {
-                    "Type": "8 Bit",
-                    "Block": 333,
-                    "Word": 3,
-                    "Bit": 0
-                },
-                "Output": {
-                    "Type": null,
-                    "Block": 0,
-                    "Word": 0,
-                    "Bit": 0
-                }
-            },
-            "PLC_INP": "%DB333.DBD3",
             "Constant1": null,
             "SignalLow": null,
             "SignalHigh": null,
@@ -87499,9 +87429,9 @@
                 }
             },
             "PLC_INP": "%DB20.DBD344",
-            "Constant1": 1500.0,
+            "Constant1": 300.0,
             "SignalLow": 0.0,
-            "SignalHigh": 1500.0,
+            "SignalHigh": 300.0,
             "AlarmLow": 0.0,
             "AlarmHigh": 0.0,
             "EngUnitId": "m3/h"
@@ -87954,9 +87884,9 @@
                 }
             },
             "PLC_INP": "%DB20.DBD352",
-            "Constant1": 1500.0,
+            "Constant1": 300.0,
             "SignalLow": 0.0,
-            "SignalHigh": 1500.0,
+            "SignalHigh": 300.0,
             "AlarmLow": 0.0,
             "AlarmHigh": 0.0,
             "EngUnitId": "m3/h"
@@ -129540,41 +129470,6 @@
             "AlarmLow": null,
             "AlarmHigh": null,
             "EngUnitId": ""
-        },
-        {
-            "Id": 2969,
-            "Tag": "060PU348M01I01",
-            "Groups": "991CD100G24",
-            "DescEng": "Pump Current",
-            "DescRus": "Ток насоса",
-            "Algorithms": {
-                "ConvAlg": "4 Int/Ext",
-                "CalcAlg": 1,
-                "BlockAlg": "0 No Algorithm"
-            },
-            "PLC": {
-                "PLCNo": "991",
-                "FC": 0,
-                "Input": {
-                    "Type": "Float",
-                    "Block": 2522,
-                    "Word": 34,
-                    "Bit": 0
-                },
-                "Output": {
-                    "Type": null,
-                    "Block": 0,
-                    "Word": 0,
-                    "Bit": 0
-                }
-            },
-            "PLC_INP": "%DB2522.DBD34",
-            "Constant1": 1.0,
-            "SignalLow": 0.0,
-            "SignalHigh": 100.0,
-            "AlarmLow": -1000000.0,
-            "AlarmHigh": 9999999.0,
-            "EngUnitId": "A"
         },
         {
             "Id": -149,
@@ -196287,6 +196182,41 @@
             "EngUnitId": "m3"
         },
         {
+            "Id": 748,
+            "Tag": "090HX303Y01Z11",
+            "Groups": "992CD100G08",
+            "DescEng": "Water Valve SP",
+            "DescRus": "Задвижка на воду Зад",
+            "Algorithms": {
+                "ConvAlg": "4 Int/Ext",
+                "CalcAlg": 1,
+                "BlockAlg": "0 No Algorithm"
+            },
+            "PLC": {
+                "PLCNo": "992",
+                "FC": 0,
+                "Input": {
+                    "Type": "Float",
+                    "Block": 17,
+                    "Word": 324,
+                    "Bit": 0
+                },
+                "Output": {
+                    "Type": "Float",
+                    "Block": 17,
+                    "Word": 324,
+                    "Bit": 0
+                }
+            },
+            "PLC_INP": "%DB17.DBD324",
+            "Constant1": 1.0,
+            "SignalLow": 0.0,
+            "SignalHigh": 100.0,
+            "AlarmLow": 0.0,
+            "AlarmHigh": 0.0,
+            "EngUnitId": "%"
+        },
+        {
             "Id": -2896,
             "Tag": "090KL645A01C31",
             "Groups": "992CD100G06",
@@ -203629,6 +203559,41 @@
                 }
             },
             "PLC_INP": "%DB19.DBD40",
+            "Constant1": null,
+            "SignalLow": null,
+            "SignalHigh": null,
+            "AlarmLow": null,
+            "AlarmHigh": null,
+            "EngUnitId": ""
+        },
+        {
+            "Id": -2023,
+            "Tag": "090TK640Y07",
+            "Groups": "992CD100G08",
+            "DescEng": "Desorb Valve",
+            "DescRus": "Desorb Valve",
+            "Algorithms": {
+                "ConvAlg": "32 Valve Open/Close (V7.7)",
+                "CalcAlg": 0,
+                "BlockAlg": "37 Siemens V77 Valve"
+            },
+            "PLC": {
+                "PLCNo": "992",
+                "FC": 2811,
+                "Input": {
+                    "Type": "16 Bit",
+                    "Block": 4,
+                    "Word": 1244,
+                    "Bit": 0
+                },
+                "Output": {
+                    "Type": "16 Bit",
+                    "Block": 2811,
+                    "Word": 14,
+                    "Bit": 0
+                }
+            },
+            "PLC_INP": "%DB4.DBD1244",
             "Constant1": null,
             "SignalLow": null,
             "SignalHigh": null,
@@ -234088,10 +234053,10 @@
         },
         {
             "Id": 1393,
-            "Tag": "905RP100A01WORD66",
+            "Tag": "080AG505N01T01",
             "Groups": "992CD100G04",
-            "DescEng": "Reagents Preparation,  Process V",
-            "DescRus": "Подготовка реагентов, Процесс V",
+            "DescEng": "Reducer AG505, Temperature",
+            "DescRus": "Редуктор AG505, температура",
             "Algorithms": {
                 "ConvAlg": "1 Off/On",
                 "CalcAlg": 50,
@@ -234099,11 +234064,11 @@
             },
             "PLC": {
                 "PLCNo": "992",
-                "FC": 3146,
+                "FC": 3411,
                 "Input": {
                     "Type": "Flt/Trig/Sts",
                     "Block": 15,
-                    "Word": 1752,
+                    "Word": 4932,
                     "Bit": 0
                 },
                 "Output": {
@@ -234113,7 +234078,7 @@
                     "Bit": 0
                 }
             },
-            "PLC_INP": "%DB15.DBD1752",
+            "PLC_INP": "%DB15.DBD4932",
             "Constant1": 1.0,
             "SignalLow": 0.0,
             "SignalHigh": 100.0,
@@ -275807,41 +275772,6 @@
             "EngUnitId": ""
         },
         {
-            "Id": -2023,
-            "Tag": "PLC02VALVE05",
-            "Groups": "PLC02_SPARE",
-            "DescEng": "VALVE05",
-            "DescRus": "",
-            "Algorithms": {
-                "ConvAlg": "32 Valve Open/Close (V7.7)",
-                "CalcAlg": 0,
-                "BlockAlg": "37 Siemens V77 Valve"
-            },
-            "PLC": {
-                "PLCNo": "spare",
-                "FC": 2811,
-                "Input": {
-                    "Type": "16 Bit",
-                    "Block": 4,
-                    "Word": 1244,
-                    "Bit": 0
-                },
-                "Output": {
-                    "Type": "16 Bit",
-                    "Block": 2811,
-                    "Word": 14,
-                    "Bit": 0
-                }
-            },
-            "PLC_INP": "%DB4.DBD1244",
-            "Constant1": null,
-            "SignalLow": null,
-            "SignalHigh": null,
-            "AlarmLow": null,
-            "AlarmHigh": null,
-            "EngUnitId": ""
-        },
-        {
             "Id": -4909,
             "Tag": "PLC02VALVE06",
             "Groups": "PLC02_SPARE",
@@ -276610,6 +276540,41 @@
             "AlarmLow": null,
             "AlarmHigh": null,
             "EngUnitId": ""
+        },
+        {
+            "Id": 2969,
+            "Tag": "010CR010M01TIM04",
+            "Groups": "990CD100G14",
+            "DescEng": "Cooling Motor Time CntDn",
+            "DescRus": "Время охл. мотора (об. отсчёт)",
+            "Algorithms": {
+                "ConvAlg": "4 Int/Ext",
+                "CalcAlg": 1,
+                "BlockAlg": "0 No Algorithm"
+            },
+            "PLC": {
+                "PLCNo": "990",
+                "FC": 0,
+                "Input": {
+                    "Type": "32 Bit",
+                    "Block": 4765,
+                    "Word": 16,
+                    "Bit": 0
+                },
+                "Output": {
+                    "Type": "32 Bit",
+                    "Block": 4765,
+                    "Word": 16,
+                    "Bit": 0
+                }
+            },
+            "PLC_INP": "%DB4765.DBD16",
+            "Constant1": 1.0,
+            "SignalLow": 0.0,
+            "SignalHigh": 10.0,
+            "AlarmLow": 0.0,
+            "AlarmHigh": 0.0,
+            "EngUnitId": "min"
         }
     ]
 }

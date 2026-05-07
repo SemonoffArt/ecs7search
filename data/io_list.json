@@ -1,14 +1,18 @@
 {
   "metadata": {
-    "source_file": "C:\\Users\\7Arrt\\Desktop\\Projects\\ecs7search\\data\\IO_list.xlsx",
-    "generated_at": "Wed Apr 15 17:40:18 2026",
-    "total_sheets": 2,
-    "sheet_names": [
-      "991",
-      "992"
+    "source_files": [
+      "C:\\Users\\7Arrt\\Desktop\\Projects\\ecs7search\\data\\IO_list.xlsx",
+      "C:\\Users\\7Arrt\\Desktop\\Projects\\ecs7search\\data\\IO_list_992CS111A01(desorb).xlsx"
     ],
-    "total_signals": 1766,
-    "parsing_time_sec": 0.45
+    "generated_at": "Fri May 08 05:18:32 2026",
+    "total_sheets": 3,
+    "sheet_names": [
+      "IO_list::991",
+      "IO_list::992",
+      "IO_list_992CS111A01(desorb)::IM151"
+    ],
+    "total_signals": 1800,
+    "parsing_time_sec": 0.6
   },
   "signals": {
     "060TN340A01K17_24": {
@@ -636,13 +640,13 @@
         "991"
       ]
     },
-    "020MC150N04F01": {
+    "030VS160N01F01": {
       "PLC": "991CS100",
       "Component": "991CS100A02",
       "IOTerminal_Short1": "X52.01.A:07",
       "IOAddress": "991CS100::IW800",
       "IOType": "AI",
-      "ComponentDescription": "Cyclone Cluster",
+      "ComponentDescription": "Vibrating Screen",
       "SignalPurpose": "Flow",
       "PLCDescription": "Department 1",
       "JunctionBoxTerm": null,
@@ -700,13 +704,13 @@
         "991"
       ]
     },
-    "020MC151N04F01": {
+    "030VS161N01F01": {
       "PLC": "991CS100",
       "Component": "991CS100A02",
       "IOTerminal_Short1": "X52.02.A:03",
       "IOAddress": "991CS100::IW840",
       "IOType": "AI",
-      "ComponentDescription": "Cyclone Cluster",
+      "ComponentDescription": "Vibrating Screen",
       "SignalPurpose": "Flow",
       "PLCDescription": "Department 1",
       "JunctionBoxTerm": null,
@@ -1004,13 +1008,13 @@
         "991"
       ]
     },
-    "030VS160N01F01": {
+    "020MC150N04F01": {
       "PLC": "991CS100",
       "Component": "991CS100A02",
       "IOTerminal_Short1": "X52.04.A:06",
       "IOAddress": "991CS100::IW942",
       "IOType": "AI",
-      "ComponentDescription": "Vibrating Screen",
+      "ComponentDescription": "Cyclone Cluster",
       "SignalPurpose": "Flow",
       "PLCDescription": "Department 1",
       "JunctionBoxTerm": null,
@@ -1020,13 +1024,13 @@
         "991"
       ]
     },
-    "030VS161N01F01": {
+    "020MC151N04F01": {
       "PLC": "991CS100",
       "Component": "991CS100A02",
       "IOTerminal_Short1": "X52.04.A:07",
       "IOAddress": "991CS100::IW944",
       "IOType": "AI",
-      "ComponentDescription": "Vibrating Screen",
+      "ComponentDescription": "Cyclone Cluster",
       "SignalPurpose": "Flow",
       "PLCDescription": "Department 1",
       "JunctionBoxTerm": null,
@@ -1615,13 +1619,13 @@
         "991"
       ]
     },
-    "030VS160Y02Z11": {
+    "020MC150Y06Z11": {
       "PLC": "991CS100",
       "Component": "991CS100A02",
       "IOTerminal_Short1": "X55.02.A:02",
       "IOAddress": "991CS100::QW806",
       "IOType": "AO",
-      "ComponentDescription": "Process Water To Screen 160",
+      "ComponentDescription": "Cyclone Launder Flush",
       "SignalPurpose": "Position Setpoint",
       "PLCDescription": "Department 1",
       "JunctionBoxTerm": null,
@@ -1647,13 +1651,13 @@
         "991"
       ]
     },
-    "030VS161Y02Z11": {
+    "020MC151Y06Z11": {
       "PLC": "991CS100",
       "Component": "991CS100A02",
       "IOTerminal_Short1": "X55.02.A:04",
       "IOAddress": "991CS100::QW810",
       "IOType": "AO",
-      "ComponentDescription": "Process Water To Screen 161",
+      "ComponentDescription": "Cyclone Launder Flush",
       "SignalPurpose": "Position Setpoint",
       "PLCDescription": "Department 1",
       "JunctionBoxTerm": null,
@@ -2159,13 +2163,13 @@
         "991"
       ]
     },
-    "020MC150Y06Z11": {
+    "030VS160Y02Z11": {
       "PLC": "991CS100",
       "Component": "991CS100A02",
       "IOTerminal_Short1": "X55.10.A:04",
       "IOAddress": "991CS100::QW1002",
       "IOType": "AO",
-      "ComponentDescription": "Cyclone Launder Flush",
+      "ComponentDescription": "Process Water To Screen 160",
       "SignalPurpose": "Position Setpoint",
       "PLCDescription": "Department 1",
       "JunctionBoxTerm": null,
@@ -2175,13 +2179,13 @@
         "991"
       ]
     },
-    "020MC151Y06Z11": {
+    "030VS161Y02Z11": {
       "PLC": "991CS100",
       "Component": "991CS100A02",
       "IOTerminal_Short1": "X55.11.A:01",
       "IOAddress": "991CS100::QW1012",
       "IOType": "AO",
-      "ComponentDescription": "Cyclone Launder Flush",
+      "ComponentDescription": "Process Water To Screen 161",
       "SignalPurpose": "Position Setpoint",
       "PLCDescription": "Department 1",
       "JunctionBoxTerm": null,
@@ -28255,7 +28259,7 @@
         "992"
       ]
     },
-    "080AG506N01T01": {
+    "080AG504N01T01": {
       "PLC": "992CS100",
       "Component": "992CS100A04",
       "IOTerminal_Short1": "X52.01.A:06",
@@ -28269,6 +28273,550 @@
       "RevisionType": null,
       "sheets": [
         "992"
+      ]
+    },
+    "080AG505N01T01": {
+      "PLC": "992CS100",
+      "Component": "992CS100A04",
+      "IOTerminal_Short1": "X52.01.A:07",
+      "IOAddress": "992CS100::IW134",
+      "IOType": "AI",
+      "ComponentDescription": "Датчик температуры редуктора мешалки",
+      "SignalPurpose": null,
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "992"
+      ]
+    },
+    "090PU653Y01Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I0.0-A:01",
+      "IOAddress": "992CS111::I220.0",
+      "IOType": "DI",
+      "ComponentDescription": "Strip Tank Carbon Out",
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090PU653Y01Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I0.1-A:02",
+      "IOAddress": "992CS111::I220.1",
+      "IOType": "DI",
+      "ComponentDescription": "Strip Tank Carbon Out",
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y02Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I0.2-A:03",
+      "IOAddress": "992CS111::I220.2",
+      "IOType": "DI",
+      "ComponentDescription": "Feed Solution",
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y02Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I0.3-A:04",
+      "IOAddress": "992CS111::I220.3",
+      "IOType": "DI",
+      "ComponentDescription": "Feed Solution",
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y03Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I0.4-A:05",
+      "IOAddress": "992CS111::I220.4",
+      "IOType": "DI",
+      "ComponentDescription": "Acid Wash Feed",
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y03Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I0.5-A:06",
+      "IOAddress": "992CS111::I220.5",
+      "IOType": "DI",
+      "ComponentDescription": "Acid Wash Feed",
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y04Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I0.6-A:07",
+      "IOAddress": "992CS111::I220.6",
+      "IOType": "DI",
+      "ComponentDescription": "Heater Skid Return",
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y04Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I0.7-A:08",
+      "IOAddress": "992CS111::I220.7",
+      "IOType": "DI",
+      "ComponentDescription": "Heater Skid Return",
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y05Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I1.0-A:09",
+      "IOAddress": "992CS111::I221.0",
+      "IOType": "DI",
+      "ComponentDescription": "Strip Tank Drain",
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y05Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I1.1-A:10",
+      "IOAddress": "992CS111::I221.1",
+      "IOType": "DI",
+      "ComponentDescription": "Strip Tank Drain",
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y06Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I1.2-A:11",
+      "IOAddress": "992CS111::I221.2",
+      "IOType": "DI",
+      "ComponentDescription": "Strip Solution Out",
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y06Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I1.3-A:12",
+      "IOAddress": "992CS111::I221.3",
+      "IOType": "DI",
+      "ComponentDescription": "Strip Solution Out",
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y07Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I1.4-A:13",
+      "IOAddress": "992CS111::I221.4",
+      "IOType": "DI",
+      "ComponentDescription": null,
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y07Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I1.5-A:14",
+      "IOAddress": "992CS111::I221.5",
+      "IOType": "DI",
+      "ComponentDescription": null,
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090PU653Y03Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I1.6-A:15",
+      "IOAddress": "992CS111::I221.6",
+      "IOType": "DI",
+      "ComponentDescription": "Carbon Out To Dewatering",
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090PU653Y03Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I1.7-A:16",
+      "IOAddress": "992CS111::I221.7",
+      "IOType": "DI",
+      "ComponentDescription": "Carbon Out To Dewatering",
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090PU653Y04Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I2.0-A:17",
+      "IOAddress": "992CS111::I222.0",
+      "IOType": "DI",
+      "ComponentDescription": "Carbon to SN655",
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090PU653Y04Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I2.1-A:18",
+      "IOAddress": "992CS111::I222.1",
+      "IOType": "DI",
+      "ComponentDescription": "Carbon to SN655",
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK640Y07Z41": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I2.2-A:19",
+      "IOAddress": "992CS111::I222.2",
+      "IOType": "DI",
+      "ComponentDescription": null,
+      "SignalPurpose": "Opened",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK640Y07Z42": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT02.I2.3-A:20",
+      "IOAddress": "992CS111::I222.3",
+      "IOType": "DI",
+      "ComponentDescription": null,
+      "SignalPurpose": "Closed",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090PU653Y01C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q0.0-A:01",
+      "IOAddress": "991CS111::Q220.0",
+      "IOType": "DO",
+      "ComponentDescription": "Strip Tank Carbon Out",
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y02C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q0.1-A:02",
+      "IOAddress": "991CS111::Q220.1",
+      "IOType": "DO",
+      "ComponentDescription": "Feed Solution",
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y03C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q0.2-A:03",
+      "IOAddress": "991CS111::Q220.2",
+      "IOType": "DO",
+      "ComponentDescription": "Acid Wash Feed",
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y04C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q0.3-A:04",
+      "IOAddress": "991CS111::Q220.3",
+      "IOType": "DO",
+      "ComponentDescription": "Heater Skid Return",
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y05C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q0.4-A:05",
+      "IOAddress": "991CS111::Q220.4",
+      "IOType": "DO",
+      "ComponentDescription": "Strip Tank Drain",
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y06C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q0.5-A:06",
+      "IOAddress": "991CS111::Q220.5",
+      "IOType": "DO",
+      "ComponentDescription": "Strip Tank Drain",
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650Y07C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q0.6-A:07",
+      "IOAddress": "991CS111::Q220.6",
+      "IOType": "DO",
+      "ComponentDescription": null,
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090PU653Y03C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q0.7-A:08",
+      "IOAddress": "991CS111::Q220.7",
+      "IOType": "DO",
+      "ComponentDescription": "Carbon Out To Dewatering",
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090PU653Y04C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q1.0-A:09",
+      "IOAddress": "991CS111::Q221.0",
+      "IOType": "DO",
+      "ComponentDescription": "Carbon to SN655",
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK640Y07C31": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT03.Q1.1-A:10",
+      "IOAddress": "991CS111::Q221.1",
+      "IOType": "DO",
+      "ComponentDescription": null,
+      "SignalPurpose": "Command",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650N01L01": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT04.IW0-/IW0+.A:01",
+      "IOAddress": "991CS111::IW1100",
+      "IOType": "AI",
+      "ComponentDescription": "Strip Vessel",
+      "SignalPurpose": "Level",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090TK650N01P01": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT04.IW1-/IW1+.A:02",
+      "IOAddress": "991CS111::IW1102",
+      "IOType": "AI",
+      "ComponentDescription": "Strip Vessel",
+      "SignalPurpose": "Pressure",
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
+      ]
+    },
+    "090HX303Y01Z11": {
+      "PLC": "992CS111A01",
+      "Component": null,
+      "IOTerminal_Short1": "XT05.QW0-/QW0+.A:01",
+      "IOAddress": "991CS111::QW1100",
+      "IOType": "AO",
+      "ComponentDescription": "аналоговый позиционер на воду охлаждения",
+      "SignalPurpose": null,
+      "PLCDescription": "Department 2",
+      "JunctionBoxTerm": null,
+      "Revision": null,
+      "RevisionType": null,
+      "sheets": [
+        "IM151"
       ]
     }
   }

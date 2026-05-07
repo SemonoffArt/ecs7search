@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "scanned_at": "2026-05-08 03:08:21",
+    "scanned_at": "2026-05-08 05:18:59",
     "mimics_dir": "C:\\Users\\7Arrt\\Desktop\\Projects\\ecs7search\\data\\mimics",
-    "total_candidates": 7899,
+    "total_candidates": 7898,
     "total_scanned_files": 149,
     "total_without_screens": 1879,
-    "scan_time_sec": 8.01
+    "scan_time_sec": 7.23
   },
   "tags": [
     "010AC014_Button02",
@@ -65,7 +65,6 @@
     "010CR010M01INT07",
     "010CR010M01INT08",
     "010CR010M01INT09",
-    "010CR010M01INT10",
     "010CR011M01_RD1",
     "010GG032H01C31",
     "010GG032U01INT01",
@@ -232,6 +231,8 @@
     "020SU136Y02I01_SPAH",
     "020SU136Y02I01_SPM",
     "020SU136Y02I01_SPMH",
+    "020TGA01HB01",
+    "020TGA01_EN_CTRL",
     "020TK155Y01I01_AUTH",
     "020TK155Y01I01_SPAH",
     "020TK155Y01I01_SPM",
@@ -1622,7 +1623,6 @@
     "PLC02SELECT27",
     "PLC02SELECT28",
     "PLC02Sequence21",
-    "PLC02VALVE05",
     "PLC02VALVE06",
     "PLC02VALVE07",
     "PLC02VALVE08",

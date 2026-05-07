@@ -2283,4 +2283,32 @@ pavlik_992_mimic_15: model
     text "Y04" 12.5 60.5
     . tran -0.916726 -8.57962e-008 0 7.87499e-008 -0.841437 0
     . move 14.9591 85.4069
+    inst acesys_sym_valve 0 0
+    . tran 1 9.35898e-008 0 -9.35898e-008 1 0
+    . move 34.25 59.375
+    renamedvars  \
+        TagCode :: "090TK640Y07"
+    group
+    . tran 4.67949e-008 -1 0 1.5 7.01923e-008 0
+    . move 134 21.5
+        fcolor 24
+        fstyle 5
+        ecolor 24
+        poly \
+            29 52 29 51 30.5 52 \
+            30.5 51 29 52 
+        . filled 1
+        . move 9.66667 0
+        . scale 9.66667 0 0.666667 1
+        line 29.5 51.5 29.5 52.5 
+        line 29 52.5 30 52.5 
+        sec2 29.5 52.5 30 52.5 29 52.5 
+    endg
+    inst pointvalent 0 0
+    . userdata "0033090HX303Y01Z11          "
+    . move 75.2045 64.5
+    . scale 75.2045 64.5 0.417356 0.8
+    text "Y07" 12.5 60.5
+    . tran -1 0 0 0 1 0
+    . move 48.3807 0.582047
 endm

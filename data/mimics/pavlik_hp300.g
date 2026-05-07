@@ -435,10 +435,6 @@ pavlik_hp300: model
     text "Размер:" 56.5 34
     . move -700.122 -23.404
     . scale -700.122 -23.404 12.9561 0.981503
-    inst pointvalent 0 0
-    . userdata "0033020CR020PS_SP_old       "
-    . move 57.9008 8.89949
-    . scale 57.9008 8.89949 0.381668 0.880408
     text "/" 56.5 34
     . move -1052.06 -21.9841
     . scale -1052.06 -21.9841 19.4002 0.938834
@@ -702,20 +698,9 @@ pavlik_hp300: model
     . userdata "0033020CR020PS_SP           "
     . move 45.9342 8.98059
     . scale 45.9342 8.98059 0.361948 0.858252
-    fcolor 31
-    fstyle 2
-    finter 3
-    ecolor 0
-    estyle 0
-    ewidth 1
-    frect 11 69.5 18 67 
-    . move 42.4286 -85.55
-    . scale 42.4286 -85.55 1.14286 1.4
     fcolor 24
-    fstyle 1
-    finter 1
     ecolor 24
-    estyle 1
+    ewidth 1
     frect 79.5 70 80 69.5 
     . userdata "0011020BC021Y01INT02        101 "
     . move -136.5 -96.5

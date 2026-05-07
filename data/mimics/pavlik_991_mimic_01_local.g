@@ -2676,8 +2676,8 @@ pavlik_991_mimic_01_local: model
             (= 1  \
               (vis 1)  \
               (vis 0) ))
-    . move -10.5 -19.0117
-    . scale -10.5 -19.0117 1 0.82664
+    . move -11 1.98827
+    . scale -11 1.98827 1 0.82664
     inst flsa_grp_select 0 0
     . userdata "0011010CR010M01S01          101 "
     . move 24.25 52.25
@@ -2887,4 +2887,36 @@ pavlik_991_mimic_01_local: model
     . userdata "0020010AC014M01I01          "
     . move 84.1136 21
     . scale 84.1136 21 0.615702 0.75
+    group
+    . dynprop   \
+          (pntbit(__BIT_MSW, pointno("010CR010M01INT10"), 0)   \
+            (= 1  \
+              (vis 1)  \
+              (vis 0) ))
+    . move -46.6281 -28
+        tcolor 1
+        height 1.20972
+        align 2 3
+        text "Оставшееся время\nохлаждения\nмотора дробилки" 12.5 60.5
+        . dynprop   \
+              (pntbit(__BIT_MSW, pointno("010CR010M01INT10"), 0)   \
+                (= 1  \
+                  (vis 1)  \
+                  (vis 0) ))
+        . move 57.1281 13.9883
+        . scale 57.1281 13.9883 1 0.82664
+        inst POINTVAL 0 0
+        . dynprop   \
+              (pntbit(__BIT_MSW, pointno("010CR010M01INT10"), 0)   \
+                (= 1  \
+                  (vis 1)  \
+                  (vis 0) ))
+        . userdata "0020010CR010M01TIM04        "
+        . move 66.3636 59.75
+        . scale 66.3636 59.75 0.615702 0.75
+        ecolor 1
+        rect 62.5 66.5 77 59 
+        . move 0 9.38052e-016
+        . scale 0 9.38052e-016 1 1
+    endg
 endm
