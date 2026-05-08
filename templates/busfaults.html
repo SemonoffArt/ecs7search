@@ -1,0 +1,515 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <div class="section-title">
+        ⚡ ECS8 BusFaults — аналитика аварий Bus Fault
+        <span id="bf-total-badge" class="badge badge-info" style="display:none;"></span>
+    </div>
+    <hr class="section-separator">
+    <div style="font-size:13px; color:#546e7a; margin-bottom:10px;">
+        Отчёт строится на основе <code>data/bus_fault_events.json</code>
+        (источник — CSV-журналы событий в <code>data/ecs8busfaults/</code>).
+    </div>
+
+    <!-- Фильтры -->
+    <div class="bf-filters">
+        <div class="bf-filter-row">
+            <label class="bf-filter">
+                <span class="bf-filter-label">Тег (подстрока)</span>
+                <input type="text" id="bf-tag" placeholder="напр. SP14, 2065PU, 2080AG">
+            </label>
+            <label class="bf-filter">
+                <span class="bf-filter-label">Период с</span>
+                <input type="date" id="bf-from">
+            </label>
+            <label class="bf-filter">
+                <span class="bf-filter-label">по</span>
+                <input type="date" id="bf-to">
+            </label>
+            <label class="bf-filter">
+                <span class="bf-filter-label">Топ-N</span>
+                <input type="number" id="bf-topn" value="10" min="1" max="50" style="width:80px;">
+            </label>
+        </div>
+        <div class="bf-filter-row">
+            <div class="bf-quick">
+                <span class="bf-filter-label">Быстро:</span>
+                <button type="button" class="btn bf-chip" data-days="7">Неделя</button>
+                <button type="button" class="btn bf-chip" data-days="14">2 недели</button>
+                <button type="button" class="btn bf-chip" data-days="30">Месяц</button>
+                <button type="button" class="btn bf-chip" data-days="90">Квартал</button>
+                <button type="button" class="btn bf-chip" data-days="">Весь период</button>
+            </div>
+            <div class="bf-actions">
+                <button type="button" class="btn btn-primary" id="bf-apply">🔎 Применить</button>
+                <button type="button" class="btn btn-reset" id="bf-reset">↺ Сброс</button>
+                <button type="button" class="btn btn-reindex" id="bf-reindex">🔄 Переиндексировать CSV</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статус индексации -->
+    <div id="bf-indexing-panel" class="status-panel" style="display:none;">
+        <div class="status-header">
+            <span id="bf-indexing-task" class="status-task-name"></span>
+            <span id="bf-indexing-spin" class="spinner">⏳</span>
+        </div>
+        <div class="status-progress-bar">
+            <div id="bf-indexing-fill" class="progress-fill"></div>
+        </div>
+        <div class="status-info">
+            <span id="bf-indexing-progress" class="progress-text"></span>
+            <span id="bf-indexing-message" class="status-message"></span>
+        </div>
+    </div>
+
+    <!-- Информация о файле -->
+    <div style="margin-top:10px; font-size:12px; color:#7f8c8d;">
+        Файл отчёта: <code>{{ 'есть' if file_exists else 'нет' }}</code>
+        {% if file_mtime %}&nbsp;•&nbsp; обновлён: <code>{{ file_mtime }}</code>{% endif %}
+        <span id="bf-file-info"></span>
+    </div>
+</div>
+
+<!-- Сводка -->
+<div class="card" id="bf-summary-card" style="display:none;">
+    <div class="section-subtitle">📊 Сводка</div>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-card-body">
+                <div class="stat-row"><span class="stat-label">Период:</span><span class="stat-value" id="bf-s-period">—</span></div>
+                <div class="stat-row"><span class="stat-label">Длительность:</span><span class="stat-value" id="bf-s-days">—</span></div>
+                <div class="stat-row"><span class="stat-label">Всего событий:</span><span class="stat-value" id="bf-s-records">—</span></div>
+                <div class="stat-row"><span class="stat-label">Затронуто тегов:</span><span class="stat-value" id="bf-s-tags">—</span></div>
+                <div class="stat-row"><span class="stat-label">Тенденция:</span><span class="stat-value" id="bf-s-trend">—</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Баннер: пусто/ошибка -->
+<div id="bf-empty" class="card" style="display:none;">
+    <div class="status-banner status-banner-info" id="bf-empty-msg">Нет данных</div>
+</div>
+
+<!-- Помесячная динамика -->
+<div class="card" id="bf-monthly-card" style="display:none;">
+    <div class="section-subtitle">📈 Помесячная динамика — всё оборудование</div>
+    <div class="bf-chart-box"><canvas id="bf-chart-monthly"></canvas></div>
+</div>
+
+<!-- Дневная динамика -->
+<div class="card" id="bf-daily-card" style="display:none;">
+    <div class="section-subtitle">📆 Динамика по дням</div>
+    <div class="bf-chart-box"><canvas id="bf-chart-daily"></canvas></div>
+</div>
+
+<!-- Топ по частоте/мес -->
+<div class="card" id="bf-topprob-card" style="display:none;">
+    <div class="section-subtitle">🏆 Самое проблемное оборудование (событ/мес)</div>
+    <div class="bf-chart-box bf-chart-big"><canvas id="bf-chart-topprob"></canvas></div>
+    <div style="overflow-x:auto; margin-top:10px;">
+        <table class="tag-detail-table">
+            <thead><tr>
+                <th>#</th><th>Тег</th><th>Описание</th>
+                <th>IP</th><th>Remote Station</th>
+                <th>Событий</th><th>Дней</th><th>Событ/мес</th>
+            </tr></thead>
+            <tbody id="bf-topprob-tbody"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Помесячная разбивка топ-тегов -->
+<div class="card" id="bf-topmonthly-card" style="display:none;">
+    <div class="section-subtitle">📊 Топ-тегов — помесячная разбивка</div>
+    <div class="bf-chart-box bf-chart-big"><canvas id="bf-chart-topmonthly"></canvas></div>
+</div>
+
+<!-- Понедельная разбивка топ-тегов -->
+<div class="card" id="bf-topweekly-card" style="display:none;">
+    <div class="section-subtitle">📋 Топ-тегов — понедельная разбивка</div>
+    <div class="bf-chart-box bf-chart-big"><canvas id="bf-chart-topweekly"></canvas></div>
+</div>
+
+<!-- Кластеры Remote Station -->
+<div class="card" id="bf-clusters-card" style="display:none;">
+    <div class="section-subtitle">🔌 Кластеры по Remote Station (уровень инфраструктуры)</div>
+    <div style="overflow-x:auto;">
+        <table class="tag-detail-table">
+            <thead><tr>
+                <th>#</th><th>Remote Station</th>
+                <th>Событий</th><th>Тегов</th><th>Топ-тегов</th>
+            </tr></thead>
+            <tbody id="bf-clusters-tbody"></tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+.bf-filters { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.bf-filter-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.bf-filter { display: flex; flex-direction: column; gap: 4px; }
+.bf-filter-label { font-size: 11px; color: #7f8c8d; }
+.bf-filter input { padding: 6px 10px; border: 1px solid #cfd8dc; border-radius: 6px; font-size: 13px; }
+.bf-filter input:focus { outline: none; border-color: #18bc9c; box-shadow: 0 0 0 2px rgba(24,188,156,0.2); }
+.bf-quick { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.bf-actions { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+.bf-chip {
+    background-color: #eceff1; color: #2c3e50; padding: 6px 12px; font-size: 12px;
+    border-radius: 16px; border: 1px solid #cfd8dc; cursor: pointer; transition: background-color .15s;
+}
+.bf-chip:hover { background-color: #cfd8dc; }
+.bf-chip.active { background-color: #18bc9c; color: #ffffff; border-color: #18bc9c; }
+.btn-reset {
+    background-color: #eceff1; color: #2c3e50; border: 1px solid #cfd8dc;
+}
+.btn-reset:hover { background-color: #cfd8dc; }
+.btn-reindex { background-color: #f39c12; color: #ffffff; }
+.btn-reindex:hover { background-color: #d88911; }
+.btn-reindex:disabled { opacity: 0.5; cursor: not-allowed; }
+.bf-chart-box { position: relative; width: 100%; height: 340px; }
+.bf-chart-big { height: 480px; }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(function() {
+    const TREND_LABELS = {
+        improving: "✓ СИТУАЦИЯ УЛУЧШАЕТСЯ",
+        degrading: "✗ СИТУАЦИЯ УХУДШАЕТСЯ",
+        stable:    "~ Стабильная динамика",
+    };
+
+    // Палитра (HSL → детерминированная по индексу)
+    function color(i, alpha) {
+        const hue = (i * 47) % 360;
+        return `hsla(${hue}, 62%, 52%, ${alpha === undefined ? 0.85 : alpha})`;
+    }
+
+    // Состояние графиков
+    const charts = {
+        monthly: null, daily: null, topprob: null,
+        topmonthly: null, topweekly: null,
+    };
+    function destroy(name) {
+        if (charts[name]) { charts[name].destroy(); charts[name] = null; }
+    }
+
+    // Настройки фильтров
+    const el = {
+        tag: document.getElementById("bf-tag"),
+        from: document.getElementById("bf-from"),
+        to: document.getElementById("bf-to"),
+        topn: document.getElementById("bf-topn"),
+        apply: document.getElementById("bf-apply"),
+        reset: document.getElementById("bf-reset"),
+        reindex: document.getElementById("bf-reindex"),
+        chips: document.querySelectorAll(".bf-chip"),
+    };
+    let lastDays = null;
+
+    el.chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            el.chips.forEach(c => c.classList.remove("active"));
+            chip.classList.add("active");
+            lastDays = chip.dataset.days ? parseInt(chip.dataset.days, 10) : null;
+            if (lastDays) {
+                el.from.value = "";
+                el.to.value = "";
+            }
+            loadData();
+        });
+    });
+
+    el.apply.addEventListener("click", () => {
+        lastDays = null;
+        el.chips.forEach(c => c.classList.remove("active"));
+        loadData();
+    });
+    el.reset.addEventListener("click", () => {
+        el.tag.value = ""; el.from.value = ""; el.to.value = ""; el.topn.value = "10";
+        lastDays = null;
+        el.chips.forEach(c => c.classList.remove("active"));
+        loadData();
+    });
+    el.tag.addEventListener("keydown", e => {
+        if (e.key === "Enter") { el.apply.click(); }
+    });
+
+    function showOnly(opts) {
+        const ids = ["bf-summary-card", "bf-empty", "bf-monthly-card", "bf-daily-card",
+                     "bf-topprob-card", "bf-topmonthly-card", "bf-topweekly-card", "bf-clusters-card"];
+        ids.forEach(id => {
+            const n = document.getElementById(id);
+            if (n) n.style.display = opts.indexOf(id) >= 0 ? "" : "none";
+        });
+    }
+
+    function fmtPeriod(p) {
+        if (!p || !p.from || !p.to) return "—";
+        return p.from + " — " + p.to;
+    }
+
+    async function loadData() {
+        const params = new URLSearchParams();
+        if (el.tag.value.trim()) params.set("tag", el.tag.value.trim());
+        if (el.from.value) params.set("from", el.from.value);
+        if (el.to.value) params.set("to", el.to.value);
+        if (el.topn.value) params.set("top_n", el.topn.value);
+        if (lastDays) params.set("last_days", String(lastDays));
+        const url = "/busfaults/api/analyze?" + params.toString();
+
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            render(data);
+        } catch (e) {
+            showOnly(["bf-empty"]);
+            document.getElementById("bf-empty-msg").textContent = "Ошибка загрузки: " + e;
+        }
+    }
+
+    function render(data) {
+        const badge = document.getElementById("bf-total-badge");
+        if (!data.has_data) {
+            badge.style.display = "none";
+            showOnly(["bf-empty"]);
+            document.getElementById("bf-empty-msg").textContent = data.message || "Нет данных";
+            return;
+        }
+
+        showOnly(["bf-summary-card", "bf-monthly-card", "bf-daily-card",
+                  "bf-topprob-card", "bf-topmonthly-card", "bf-topweekly-card",
+                  "bf-clusters-card"]);
+
+        // Сводка
+        document.getElementById("bf-s-period").textContent = fmtPeriod(data.period);
+        const d = data.period ? data.period.days : 0;
+        document.getElementById("bf-s-days").textContent = `${d} дн (${(d/7).toFixed(1)} нед, ${(d/30.4).toFixed(1)} мес)`;
+        document.getElementById("bf-s-records").textContent =
+            `${data.totals.records} / ${data.totals.original_records}`;
+        document.getElementById("bf-s-tags").textContent =
+            `${data.totals.tags} / ${data.totals.original_tags}`;
+        const tr = data.trend || {};
+        const trendLabel = TREND_LABELS[tr.label] || "—";
+        document.getElementById("bf-s-trend").textContent =
+            `${trendLabel} (${tr.change_pct > 0 ? "+" : ""}${tr.change_pct || 0}%)`;
+        badge.style.display = "";
+        badge.textContent = `${data.totals.records} событий · ${data.totals.tags} тегов`;
+
+        renderMonthly(data.monthly);
+        renderDaily(data.daily);
+        renderTopProblematic(data.top_problematic);
+        renderTopMonthly(data.top_tags_monthly);
+        renderTopWeekly(data.top_tags_weekly);
+        renderClusters(data.remote_station_clusters);
+    }
+
+    function renderMonthly(monthly) {
+        destroy("monthly");
+        const labels = Object.keys(monthly || {});
+        const values = labels.map(k => monthly[k]);
+        charts.monthly = new Chart(document.getElementById("bf-chart-monthly"), {
+            type: "bar",
+            data: { labels, datasets: [{ label: "Событий/мес", data: values, backgroundColor: color(2) }] },
+            options: { responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } } },
+        });
+    }
+
+    function renderDaily(daily) {
+        destroy("daily");
+        const labels = Object.keys(daily || {});
+        const values = labels.map(k => daily[k]);
+        charts.daily = new Chart(document.getElementById("bf-chart-daily"), {
+            type: "line",
+            data: { labels,
+                datasets: [{ label: "Событий/день", data: values, borderColor: color(8),
+                    backgroundColor: color(8, 0.25), fill: true, tension: 0.25,
+                    pointRadius: 2 }] },
+            options: { responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } } },
+        });
+    }
+
+    function renderTopProblematic(rows) {
+        destroy("topprob");
+        rows = rows || [];
+        const shown = rows.slice(0, 20);
+        charts.topprob = new Chart(document.getElementById("bf-chart-topprob"), {
+            type: "bar",
+            data: {
+                labels: shown.map(r => r.tag),
+                datasets: [{ label: "Событ/мес", data: shown.map(r => r.freq_per_month),
+                    backgroundColor: shown.map((_, i) => color(i)) }],
+            },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: "y",
+                plugins: { legend: { display: false },
+                    tooltip: { callbacks: {
+                        afterLabel: (ctx) => {
+                            const r = shown[ctx.dataIndex];
+                            return [`${r.description || ""}`,
+                                    `IP: ${r.ip || "—"}  RS: ${r.remote_station || "—"}`,
+                                    `${r.count} событий за ${r.days} дн`].filter(Boolean);
+                        } } } },
+                scales: { x: { beginAtZero: true } } },
+        });
+
+        const tbody = document.getElementById("bf-topprob-tbody");
+        tbody.innerHTML = shown.map((r, i) => `
+            <tr>
+                <td>${i + 1}</td>
+                <td><code>${esc(r.tag)}</code></td>
+                <td>${esc(r.description || "")}</td>
+                <td>${esc(r.ip || "")}</td>
+                <td>${esc(r.remote_station || "")}</td>
+                <td>${r.count}</td>
+                <td>${r.days}</td>
+                <td><b>${r.freq_per_month}</b></td>
+            </tr>`).join("");
+    }
+
+    function renderTopMonthly(list) {
+        destroy("topmonthly");
+        list = list || [];
+        if (!list.length) return;
+        const labels = Object.keys(list[0].monthly || {});
+        const datasets = list.map((item, i) => ({
+            label: item.tag,
+            data: labels.map(m => item.monthly[m] || 0),
+            backgroundColor: color(i),
+            stack: "s1",
+        }));
+        charts.topmonthly = new Chart(document.getElementById("bf-chart-topmonthly"), {
+            type: "bar",
+            data: { labels, datasets },
+            options: { responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: "bottom" },
+                    tooltip: { mode: "index", intersect: false } },
+                scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } },
+        });
+    }
+
+    function renderTopWeekly(list) {
+        destroy("topweekly");
+        list = list || [];
+        if (!list.length) return;
+        const labels = Object.keys(list[0].weekly || {});
+        const datasets = list.map((item, i) => ({
+            label: item.tag,
+            data: labels.map(m => item.weekly[m] || 0),
+            borderColor: color(i),
+            backgroundColor: color(i, 0.15),
+            fill: false,
+            tension: 0.2,
+            pointRadius: 2,
+        }));
+        charts.topweekly = new Chart(document.getElementById("bf-chart-topweekly"), {
+            type: "line",
+            data: { labels, datasets },
+            options: { responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: "bottom" },
+                    tooltip: { mode: "index", intersect: false } },
+                scales: { y: { beginAtZero: true } } },
+        });
+    }
+
+    function renderClusters(list) {
+        list = list || [];
+        const tbody = document.getElementById("bf-clusters-tbody");
+        tbody.innerHTML = list.map((c, i) => {
+            const top5 = (c.tag_list || []).slice(0, 5)
+                .map(t => `<div><code>${esc(t.tag)}</code> — ${t.count}`
+                       + (t.description ? ` <span style="color:#7f8c8d;">(${esc(t.description)})</span>` : "")
+                       + "</div>").join("");
+            return `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td><code>${esc(c.remote_station || "—")}</code></td>
+                    <td><b>${c.total_events}</b></td>
+                    <td>${c.affected_tags}</td>
+                    <td>${top5}${(c.tag_list || []).length > 5 ? `<div style="font-size:11px; color:#7f8c8d;">+ ещё ${c.tag_list.length - 5}</div>` : ""}</td>
+                </tr>`;
+        }).join("");
+    }
+
+    function esc(s) {
+        return String(s == null ? "" : s)
+            .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    // ─── Переиндексация ──────────────────────────────────────────
+    let reindexPoll = null;
+
+    el.reindex.addEventListener("click", () => {
+        if (!confirm("Переиндексировать все CSV-файлы Bus Fault?\nЭто может занять несколько минут.")) return;
+        el.reindex.disabled = true;
+        el.reindex.dataset.orig = el.reindex.textContent;
+        el.reindex.textContent = "Запуск...";
+        fetch("/settings/index/busfaults", { method: "POST" })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("bf-indexing-panel").style.display = "block";
+                    startPollingReindex();
+                } else {
+                    resetReindex();
+                    alert(data.message || "Не удалось запустить");
+                }
+            })
+            .catch(err => { resetReindex(); alert("Ошибка: " + err); });
+    });
+
+    function resetReindex() {
+        el.reindex.disabled = false;
+        el.reindex.textContent = el.reindex.dataset.orig || "🔄 Переиндексировать CSV";
+    }
+
+    function startPollingReindex() {
+        if (reindexPoll) return;
+        reindexPoll = setInterval(() => {
+            fetch("/settings/index/status").then(r => r.json()).then(updateReindexUI)
+                .catch(err => console.error(err));
+        }, 1000);
+    }
+
+    function updateReindexUI(status) {
+        const panel = document.getElementById("bf-indexing-panel");
+        panel.style.display = "block";
+        document.getElementById("bf-indexing-task").textContent = status.task_name || "";
+        document.getElementById("bf-indexing-message").textContent = status.message || "";
+        const pct = status.total > 0 ? Math.round(status.progress / status.total * 100) : 0;
+        document.getElementById("bf-indexing-fill").style.width = pct + "%";
+        document.getElementById("bf-indexing-progress").textContent =
+            status.total > 0 ? `${status.progress} / ${status.total} (${pct}%)` : `${status.progress}`;
+        const sp = document.getElementById("bf-indexing-spin");
+
+        if (!status.is_running) {
+            clearInterval(reindexPoll); reindexPoll = null;
+            sp.textContent = "✅"; sp.style.animation = "";
+            resetReindex();
+            // Обновляем данные после успешной индексации
+            if (status.completed_at) {
+                loadData();
+            }
+        } else {
+            sp.textContent = "⏳"; sp.style.animation = "spin 1s linear infinite";
+        }
+    }
+
+    // Инициализация
+    const initStatus = {{ indexing_status | tojson }};
+    if (initStatus && initStatus.is_running && (initStatus.task_name || "").indexOf("Bus Fault") >= 0) {
+        document.getElementById("bf-indexing-panel").style.display = "block";
+        startPollingReindex();
+    }
+    loadData();
+})();
+</script>
+
+{% endblock %}

@@ -70,6 +70,11 @@ data/FlsaProDb/
 *.xlsx
 *.ods
 
+# ── ECS7SEARCH: Bus Fault data ──────────────────────────
+data/bus_fault_events.json
+data/ecs8busfaults/
+temp/ecs7_events_busfault_extractor/
+
 # ── ECS7SEARCH: Misc artifacts ─────────────────────────
 flask_output.log
 *.log

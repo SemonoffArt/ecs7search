@@ -14,6 +14,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from utils.busfault_indexer import rebuild_bus_fault_index
 from utils.iolist_indexer import IO_LIST_PATHS, parse_io_list
 from utils.mimic_indexer import build_index
 from utils.pdf_indexer import index_pdf_directory
@@ -104,6 +105,9 @@ class IndexingService:
         tag_repo: TagDetailRepository | None = None,
         io_list_repo: IOListRepository | None = None,
         pdf_repo: PDFIndexRepository | None = None,
+        busfault_dir: Path | None = None,
+        busfault_output_path: Path | None = None,
+        busfault_service=None,
     ) -> None:
         self._mimics_dir = mimics_dir
         self._pdf_dir = pdf_dir
@@ -117,6 +121,10 @@ class IndexingService:
         self._tag_repo = tag_repo
         self._io_list_repo = io_list_repo
         self._pdf_repo = pdf_repo
+        # Bus Fault (ECS8) индексатор
+        self._busfault_dir = busfault_dir
+        self._busfault_output_path = busfault_output_path
+        self._busfault_service = busfault_service
 
     def start_mimics_indexing(self) -> dict:
         """Запускает индексацию мнемосхем в фоновом потоке."""
@@ -245,6 +253,53 @@ class IndexingService:
         ).start()
 
         return {"success": True, "message": "Извлечение тегов из MDB запущено"}
+
+    # ─── Bus Fault ECS8 ────────────────────────────────────────────
+
+    def start_busfault_indexing(self) -> dict:
+        """Запускает переиндексацию Bus Fault CSV в фоновом потоке."""
+        if indexing_status.is_running:
+            return {"success": False, "message": "Индексирование уже запущено"}
+        if self._busfault_dir is None or self._busfault_output_path is None:
+            return {
+                "success": False,
+                "message": "Пути Bus Fault не сконфигурированы",
+            }
+
+        threading.Thread(
+            target=self._run_busfault_indexing,
+            daemon=True,
+        ).start()
+        return {"success": True, "message": "Переиндексация Bus Fault запущена"}
+
+    def _run_busfault_indexing(self) -> None:
+        try:
+            total = len(list(self._busfault_dir.glob("*.csv")))
+        except Exception:
+            total = 0
+        indexing_status.start("Индексирование Bus Fault", total)
+
+        def _cb(progress: int, tot: int, msg: str) -> None:
+            indexing_status.update(progress, msg)
+
+        try:
+            result = rebuild_bus_fault_index(
+                data_dir=self._busfault_dir,
+                output_path=self._busfault_output_path,
+                progress_cb=_cb,
+            )
+            msg = (
+                f"Готово! Обработано {result['total_files']} CSV, "
+                f"{result['total_records']} событий, {result['total_tags']} тегов"
+            )
+            if self._busfault_service is not None:
+                try:
+                    self._busfault_service.invalidate_cache()
+                except Exception:
+                    pass
+            indexing_status.complete(True, msg, result)
+        except Exception as e:
+            indexing_status.complete(False, f"Ошибка: {e}")
 
     def _run_mdb_extraction(self) -> None:
         indexing_status.start("Извлечение тегов из MDB")

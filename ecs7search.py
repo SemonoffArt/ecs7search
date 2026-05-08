@@ -10,8 +10,9 @@ ecs7search Web UI — Flask-приложение для поиска тегов 
 
 from pathlib import Path
 
-from flask import Flask, flash, redirect, render_template, request, send_from_directory, url_for
+from flask import Flask, flash, jsonify, redirect, render_template, request, send_from_directory, url_for
 
+from utils.busfault_service import BusFaultService
 from utils.config_service import ConfigService
 from utils.indexing_service import IndexingService, indexing_status
 from utils.pdf_service import PDFSearchService
@@ -36,6 +37,8 @@ PDF_DIR = PROJECT_DIR / "data" / "pdf"
 MONKEY_IMAGE_PATH = PROJECT_DIR / "data" / "images" / "manky.png"
 TEMP_DIR = PROJECT_DIR / "data" / "temp"
 TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "tags_without_screen_index.json"
+BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "bus_fault_events.json"
+BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "ecs8busfaults"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
 # ─── Repository слой ─────────────────────────────────────────────
@@ -74,6 +77,8 @@ config_service = ConfigService(
     io_list_path=IO_LIST_PATH,
 )
 
+busfault_service = BusFaultService(json_path=BUS_FAULT_EVENTS_PATH)
+
 indexing_service = IndexingService(
     mimics_dir=MIMICS_DIR,
     pdf_dir=PDF_DIR,
@@ -86,6 +91,9 @@ indexing_service = IndexingService(
     tag_repo=tag_repo,
     io_list_repo=io_list_repo,
     pdf_repo=pdf_repo,
+    busfault_dir=BUS_FAULT_DATA_DIR,
+    busfault_output_path=BUS_FAULT_EVENTS_PATH,
+    busfault_service=busfault_service,
 )
 
 # ─── Flask приложение (router) ────────────────────────────────────
@@ -211,6 +219,7 @@ def start_indexing(task: str):
         "pdf": indexing_service.start_pdf_indexing,
         "io_list": indexing_service.start_io_list_indexing,
         "mdb": indexing_service.start_mdb_tag_extraction,
+        "busfaults": indexing_service.start_busfault_indexing,
     }
 
     if task not in task_map:
@@ -233,6 +242,52 @@ def serve_temp_image(filename):
     """Отдача изображений из data/temp/."""
     safe_path = Path(filename).name
     return send_from_directory(str(TEMP_DIR), safe_path)
+
+
+@app.route("/busfaults")
+def busfaults():
+    """Страница аналитики ECS8 Bus Fault."""
+    return render_template(
+        "busfaults.html",
+        file_exists=busfault_service.exists(),
+        file_mtime=busfault_service.file_mtime(),
+        indexing_status=indexing_status.status,
+    )
+
+
+@app.route("/busfaults/api/analyze")
+def busfaults_analyze():
+    """JSON API для аналитики Bus Fault (AJAX)."""
+    tag_filter = request.args.get("tag", "").strip()
+    date_from = request.args.get("from", "").strip()
+    date_to = request.args.get("to", "").strip()
+    last_days_raw = request.args.get("last_days", "").strip()
+    top_n_raw = request.args.get("top_n", "").strip()
+
+    last_days = None
+    if last_days_raw:
+        try:
+            last_days = int(last_days_raw)
+            if last_days <= 0:
+                last_days = None
+        except ValueError:
+            last_days = None
+
+    top_n = 10
+    if top_n_raw:
+        try:
+            top_n = max(1, min(50, int(top_n_raw)))
+        except ValueError:
+            top_n = 10
+
+    result = busfault_service.analyze(
+        tag_filter=tag_filter,
+        date_from=date_from,
+        date_to=date_to,
+        last_days=last_days,
+        top_n=top_n,
+    )
+    return jsonify(result)
 
 
 if __name__ == "__main__":
