@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="section-title">
-        ⚡ ECS8 BusFaults — аналитика аварий Bus Fault
+        ⚡ЗИФ2 ECS8 BusFaults — аналитика аварий Bus Fault
         <span id="bf-total-badge" class="badge badge-info" style="display:none;"></span>
     </div>
     <hr class="section-separator">
@@ -29,7 +29,7 @@
             </label>
             <label class="bf-filter">
                 <span class="bf-filter-label">Топ-N</span>
-                <input type="number" id="bf-topn" value="10" min="1" max="50" style="width:80px;">
+                <input type="number" id="bf-topn" value="20" min="1" max="50" style="width:80px;">
             </label>
         </div>
         <div class="bf-filter-row">
@@ -105,9 +105,19 @@
     <div class="bf-chart-box"><canvas id="bf-chart-daily"></canvas></div>
 </div>
 
+<!-- Дневная динамика 2: день/ночь -->
+<div class="card" id="bf-daily2-card" style="display:none;">
+    <div class="section-subtitle">🌓 Динамика по дням 2 — день (08–20) / ночь (20–08)</div>
+    <div class="bf-chart-box"><canvas id="bf-chart-daily2"></canvas></div>
+</div>
+
 <!-- Топ по частоте/мес -->
 <div class="card" id="bf-topprob-card" style="display:none;">
-    <div class="section-subtitle">🏆 Самое проблемное оборудование (событ/мес)</div>
+    <div class="section-subtitle">🏆 Самое проблемное оборудование (событ/мес)
+        <span style="font-size:11px; color:#95a5a6; font-weight:normal; margin-left:8px;">
+            Событ/мес = Событий / (Дней / 30)
+        </span>
+    </div>
     <div class="bf-chart-box bf-chart-big"><canvas id="bf-chart-topprob"></canvas></div>
     <div style="overflow-x:auto; margin-top:10px;">
         <table class="tag-detail-table">
@@ -190,7 +200,7 @@
 
     // Состояние графиков
     const charts = {
-        monthly: null, daily: null, topprob: null,
+        monthly: null, daily: null, daily2: null, topprob: null,
         topmonthly: null, topweekly: null,
     };
     function destroy(name) {
@@ -240,7 +250,8 @@
 
     function showOnly(opts) {
         const ids = ["bf-summary-card", "bf-empty", "bf-monthly-card", "bf-daily-card",
-                     "bf-topprob-card", "bf-topmonthly-card", "bf-topweekly-card", "bf-clusters-card"];
+                     "bf-daily2-card", "bf-topprob-card", "bf-topmonthly-card",
+                     "bf-topweekly-card", "bf-clusters-card"];
         ids.forEach(id => {
             const n = document.getElementById(id);
             if (n) n.style.display = opts.indexOf(id) >= 0 ? "" : "none";
@@ -281,8 +292,8 @@
         }
 
         showOnly(["bf-summary-card", "bf-monthly-card", "bf-daily-card",
-                  "bf-topprob-card", "bf-topmonthly-card", "bf-topweekly-card",
-                  "bf-clusters-card"]);
+                  "bf-daily2-card", "bf-topprob-card", "bf-topmonthly-card",
+                  "bf-topweekly-card", "bf-clusters-card"]);
 
         // Сводка
         document.getElementById("bf-s-period").textContent = fmtPeriod(data.period);
@@ -301,6 +312,7 @@
 
         renderMonthly(data.monthly);
         renderDaily(data.daily);
+        renderDaily2(data.daily_day_night);
         renderTopProblematic(data.top_problematic);
         renderTopMonthly(data.top_tags_monthly);
         renderTopWeekly(data.top_tags_weekly);
@@ -336,10 +348,46 @@
         });
     }
 
+    function renderDaily2(ddn) {
+        destroy("daily2");
+        ddn = ddn || {};
+        const labels = Object.keys(ddn);
+        const dayVals = labels.map(k => (ddn[k] && ddn[k].day) || 0);
+        const nightVals = labels.map(k => (ddn[k] && ddn[k].night) || 0);
+        charts.daily2 = new Chart(document.getElementById("bf-chart-daily2"), {
+            type: "bar",
+            data: {
+                labels,
+                datasets: [
+                    { label: "☀ День (08–20)",  data: dayVals,
+                      backgroundColor: "rgba(241, 196, 15, 0.85)",
+                      borderColor: "rgba(218, 165, 32, 1)", borderWidth: 1,
+                      stack: "s1" },
+                    { label: "🌙 Ночь (20–08)", data: nightVals,
+                      backgroundColor: "rgba(52, 73, 94, 0.85)",
+                      borderColor: "rgba(44, 62, 80, 1)", borderWidth: 1,
+                      stack: "s1" },
+                ],
+            },
+            options: { responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: "bottom" },
+                    tooltip: { mode: "index", intersect: false,
+                        callbacks: {
+                            footer: (items) => {
+                                const total = items.reduce((s, it) => s + (it.parsed.y || 0), 0);
+                                return "Итого: " + total;
+                            } } } },
+                scales: { x: { stacked: true },
+                    y: { stacked: true, beginAtZero: true,
+                        title: { display: true, text: "Событий за смену" } } } },
+        });
+    }
+
     function renderTopProblematic(rows) {
         destroy("topprob");
         rows = rows || [];
-        const shown = rows.slice(0, 20);
+        const n = parseInt(el.topn.value, 10) || 10;
+        const shown = rows.slice(0, n);
         charts.topprob = new Chart(document.getElementById("bf-chart-topprob"), {
             type: "bar",
             data: {

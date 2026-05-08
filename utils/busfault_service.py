@@ -187,7 +187,7 @@ class BusFaultService:
                     "date_to": date_to,
                 }
             )
-        rows.sort(key=lambda r: r["freq_per_month"], reverse=True)
+        rows.sort(key=lambda r: r["count"], reverse=True)
         return rows[:top_n]
 
     @staticmethod
@@ -209,6 +209,51 @@ class BusFaultService:
                 if dt:
                     counts[dt.strftime("%Y-%m-%d")] += 1
         return dict(sorted(counts.items()))
+
+    @staticmethod
+    def _daily_day_night(data: dict) -> dict[str, dict[str, int]]:
+        """Разбивка событий по суткам на день/ночь.
+
+        День:  08:00–20:00 (вкл. 8, искл. 20)
+        Ночь: 20:00–08:00 следующего дня.
+
+        Ночные события с 00:00 до 08:00 относятся к предыдущей смене:
+        в качестве ключа берётся предыдущий календарный день.
+        """
+        out: dict[str, dict[str, int]] = defaultdict(
+            lambda: {"day": 0, "night": 0}
+        )
+        for tag_data in data.values():
+            for rec in tag_data.get("records", []):
+                dt = _parse_dt(rec.get("In Time", ""))
+                if not dt:
+                    continue
+                h = dt.hour
+                if 8 <= h < 20:
+                    # дневная смена — текущий день
+                    key = dt.strftime("%Y-%m-%d")
+                    out[key]["day"] += 1
+                else:
+                    # ночная смена: 20:00–23:59 — текущий день,
+                    # 00:00–07:59 — относим к предыдущему календарному дню
+                    if h < 8:
+                        shift_day = (dt - timedelta(days=1)).strftime("%Y-%m-%d")
+                    else:
+                        shift_day = dt.strftime("%Y-%m-%d")
+                    out[shift_day]["night"] += 1
+        # Добавляем нулевые дни между min и max, чтобы провалов на графике не было
+        if not out:
+            return {}
+        keys = sorted(out.keys())
+        start = datetime.strptime(keys[0], "%Y-%m-%d")
+        end = datetime.strptime(keys[-1], "%Y-%m-%d")
+        full: dict[str, dict[str, int]] = {}
+        cur = start
+        while cur <= end:
+            k = cur.strftime("%Y-%m-%d")
+            full[k] = out.get(k, {"day": 0, "night": 0})
+            cur += timedelta(days=1)
+        return full
 
     @staticmethod
     def _top_tags_monthly(data: dict, top_n: int = 10) -> list[dict]:
@@ -440,6 +485,7 @@ class BusFaultService:
         period = self._period_info(data)
         monthly = self._monthly_trend(data)
         daily = self._daily_trend(data)
+        daily_dn = self._daily_day_night(data)
         trend = self._trend_direction(monthly)
 
         # Длительность окна для рейтинга (events/month). Приоритет:
@@ -485,6 +531,7 @@ class BusFaultService:
             "trend": trend,
             "monthly": monthly,
             "daily": daily,
+            "daily_day_night": daily_dn,
             "top_problematic": top_problematic,
             "top_tags_monthly": top_tags_monthly,
             "top_tags_weekly": top_tags_weekly,
