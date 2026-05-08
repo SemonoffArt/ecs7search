@@ -19,11 +19,13 @@ from pathlib import Path
 from typing import Any
 
 _ENCODINGS = ("utf-16", "utf-8-sig", "cp1251", "utf-8")
+# _EVENT_MARKERS = (
+#     "Running  -> Bus Fault",
+#     "Interval Start  -> Bus Fault",
+# )
 _EVENT_MARKERS = (
-    "Running  -> Bus Fault",
-    "Interval Start  -> Bus Fault",
+    "Bus Fault",
 )
-
 
 def _open_csv(csv_path: Path):
     """Пробует открыть CSV в разных кодировках."""

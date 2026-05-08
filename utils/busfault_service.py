@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import json
+import re
 import threading
 from collections import defaultdict
 from datetime import datetime, timedelta
@@ -99,6 +100,32 @@ class BusFaultService:
             return data
         p = pattern.lower()
         return {k: v for k, v in data.items() if p in k.lower()}
+
+    # Регулярка для событий "Running -> Bus Fault" (любое количество пробелов)
+    _RUN_TO_BF_RE = re.compile(r"Running\s*->\s*Bus\s*Fault", re.IGNORECASE)
+
+    @classmethod
+    def _filter_run_to_busfault(cls, data: dict) -> dict:
+        """Оставить только записи с Event Text вида 'Running -> Bus Fault'."""
+        result: dict = {}
+        for tag, tag_data in data.items():
+            kept = [
+                rec for rec in tag_data.get("records", [])
+                if cls._RUN_TO_BF_RE.search(str(rec.get("Event Text", "")))
+            ]
+            if not kept:
+                continue
+            kept.sort(key=lambda x: x.get("In Time", ""))
+            new_info = dict(tag_data.get("tag_info", {}))
+            new_info["statistics"] = {
+                "record_count": len(kept),
+                "date_range": {
+                    "from": kept[0].get("In Time", ""),
+                    "to": kept[-1].get("In Time", ""),
+                },
+            }
+            result[tag] = {"tag_info": new_info, "records": kept}
+        return result
 
     @staticmethod
     def _filter_by_period(
@@ -434,6 +461,7 @@ class BusFaultService:
         date_to: str = "",
         last_days: int | None = None,
         top_n: int = 10,
+        run_to_busfault: bool = False,
     ) -> dict[str, Any]:
         """Возвращает агрегированный отчёт для веб-страницы."""
         data = self._load()
@@ -471,6 +499,8 @@ class BusFaultService:
             data = self._filter_by_period(data, start_dt, end_dt)
         if tag_filter:
             data = self._filter_by_tag(data, tag_filter)
+        if run_to_busfault:
+            data = self._filter_run_to_busfault(data)
 
         if not data:
             return {
@@ -521,6 +551,7 @@ class BusFaultService:
                 "from": date_from,
                 "to": date_to,
                 "last_days": last_days,
+                "run_to_busfault": run_to_busfault,
             },
             "totals": {
                 "tags": len(data),

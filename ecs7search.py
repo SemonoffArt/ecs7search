@@ -263,6 +263,8 @@ def busfaults_analyze():
     date_to = request.args.get("to", "").strip()
     last_days_raw = request.args.get("last_days", "").strip()
     top_n_raw = request.args.get("top_n", "").strip()
+    run_to_bf_raw = request.args.get("run_to_busfault", "").strip().lower()
+    run_to_busfault = run_to_bf_raw in ("1", "true", "yes", "on")
 
     last_days = None
     if last_days_raw:
@@ -286,6 +288,7 @@ def busfaults_analyze():
         date_to=date_to,
         last_days=last_days,
         top_n=top_n,
+        run_to_busfault=run_to_busfault,
     )
     return jsonify(result)
 
