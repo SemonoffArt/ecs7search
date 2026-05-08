@@ -354,7 +354,12 @@
         reindex: document.getElementById("bf-reindex"),
         chips: document.querySelectorAll(".bf-chip"),
     };
-    let lastDays = null;
+    let lastDays = 30;
+
+    // Активируем кнопку "Месяц" по умолчанию
+    el.chips.forEach(chip => {
+        if (chip.dataset.days === "30") chip.classList.add("active");
+    });
 
     el.chips.forEach(chip => {
         chip.addEventListener("click", () => {
