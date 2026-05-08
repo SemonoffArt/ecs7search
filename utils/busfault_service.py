@@ -135,8 +135,18 @@ class BusFaultService:
     # ─── Аналитические функции ───────────────────────────────────
 
     @staticmethod
-    def _top_problematic(data: dict, top_n: int = 20) -> list[dict]:
+    def _top_problematic(
+        data: dict, top_n: int = 20, window_days: int = 0
+    ) -> list[dict]:
+        """Рейтинг тегов по частоте событий в пределах выбранного окна.
+
+        ``window_days`` — длительность выбранного пользователем периода (дней).
+        Используется как единый знаменатель для всех тегов, чтобы значения
+        freq_per_month были сопоставимы между собой в рамках выборки.
+        """
         rows = []
+        # Окно нормализации — минимум 1 день, чтобы избежать деления на 0
+        win_days = max(int(window_days), 1) if window_days else 0
         for tag, tag_data in data.items():
             info = tag_data.get("tag_info", {})
             stats = info.get("statistics", {})
@@ -144,16 +154,21 @@ class BusFaultService:
             dr = stats.get("date_range", {})
             date_from = dr.get("from", "")
             date_to = dr.get("to", "")
-            dt_from = _parse_dt(date_from)
-            dt_to = _parse_dt(date_to)
-            days = 0
-            freq = 0.0
-            if dt_from and dt_to:
-                days = (dt_to - dt_from).days
-                if days > 0:
-                    freq = round(count / (days / 30.0), 1)
-                else:
-                    freq = float(count)
+            if win_days > 0:
+                days = win_days
+                freq = round(count / (win_days / 30.0), 1)
+            else:
+                # Фоллбек: используем собственный диапазон тега, если окно неизвестно
+                dt_from = _parse_dt(date_from)
+                dt_to = _parse_dt(date_to)
+                days = 0
+                freq = 0.0
+                if dt_from and dt_to:
+                    days = (dt_to - dt_from).days
+                    if days > 0:
+                        freq = round(count / (days / 30.0), 1)
+                    else:
+                        freq = float(count)
             remote = info.get("Remote Station", "")
             if isinstance(remote, list):
                 remote_s = ", ".join(remote)
@@ -426,7 +441,21 @@ class BusFaultService:
         monthly = self._monthly_trend(data)
         daily = self._daily_trend(data)
         trend = self._trend_direction(monthly)
-        top_problematic = self._top_problematic(data, top_n=max(top_n, 20))
+
+        # Длительность окна для рейтинга (events/month). Приоритет:
+        # 1) явно выбранный пользователем период start_dt..end_dt
+        # 2) last_days
+        # 3) фактический диапазон отфильтрованных данных (мин. 1 день)
+        if start_dt and end_dt:
+            window_days = max((end_dt - start_dt).days, 1)
+        elif last_days is not None and last_days > 0:
+            window_days = max(int(last_days), 1)
+        else:
+            window_days = max(period.get("days", 0) or 0, 1)
+
+        top_problematic = self._top_problematic(
+            data, top_n=max(top_n, 20), window_days=window_days
+        )
         top_tags_monthly = self._top_tags_monthly(data, top_n=top_n)
         top_tags_weekly = self._top_tags_weekly(data, top_n=top_n)
         clusters = self._remote_station_clusters(data, top_n=10)
