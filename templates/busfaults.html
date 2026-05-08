@@ -52,6 +52,80 @@
                 <button type="button" class="btn btn-primary" id="bf-apply">🔎 Применить</button>
                 <button type="button" class="btn btn-reset" id="bf-reset">↺ Сброс</button>
                 <button type="button" class="btn btn-reindex" id="bf-reindex">🔄 Переиндексировать CSV</button>
+                <button type="button" class="btn btn-help" id="bf-help-btn" title="Показать инструкцию">❓</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Инструкция (модальное окно) -->
+    <div class="bf-help-overlay" id="bf-help-overlay">
+        <div class="bf-help-modal">
+            <div class="bf-help-header">
+                <h3>📖 Инструкция по копированию событий из ECS8</h3>
+                <button type="button" class="bf-help-close" id="bf-help-close" title="Закрыть">✕</button>
+            </div>
+            <div class="bf-help-content">
+            <h4>Общий принцип работы</h4>
+            <p>Для обновления базы событий ECS необходимо:</p>
+            <ol>
+                <li>Выгрузить события из SCADA в формате CSV.</li>
+                <li>Скопировать файлы в специальную папку со скриптом.</li>
+                <li>Запустить переиндексацию через веб-интерфейс анализатора.</li>
+            </ol>
+            <p>Скрипт автоматически обрабатывает <strong>все CSV-файлы</strong> в указанной папке.
+            Дублирование записей исключено — скрипт проверяет уникальность данных.</p>
+
+            <h4>1. Выгрузка событий из ECS8</h4>
+
+            <div class="bf-help-split">
+
+                <div class="bf-help-text">
+                    <ol>
+                        <li>Откройте <strong>Event Historian</strong>.</li>
+                        <li>Очистите поле <strong>Tag Filter</strong> (удалите всё содержимое).</li>
+                        <li>Установите уровень <strong>Severity</strong> в положение <strong>«urgent»</strong> (красный значок с крестом).</li>
+                        <li>Настройте чекбоксы (оставьте отмеченными только указанные, остальные снимите):
+                            <ul>
+                                <li>✅ <strong>Kind</strong> → <em>Process</em></li>
+                                <li>✅ <strong>Class</strong> → <em>Condition</em></li>
+                            </ul>
+                        </li>
+                        <li>В разделе <strong>Hierarchy</strong> снимите галочку с <strong>System</strong>.</li>
+                        <li>Нажмите кнопку <strong>Search</strong>.</li>
+                        <li>Нажмите кнопку <strong>Export</strong>.</li>
+                        <li>Выберите период выгрузки:
+                            <ul>
+                                <li><strong>Не более одного месяца</strong> (иначе ECS может не завершить операцию).</li>
+                                <li>Формат: <strong>CSV</strong>.</li>
+                            </ul>
+                        </li>
+                        <li>Дождитесь завершения обработки (несколько минут).
+                            <ul>
+                                <li>Система предложит выбрать место для сохранения файла.</li>
+                                <li><strong>Если через 5 минут окно сохранения не появилось</strong>:
+                                    <ul>
+                                        <li>Закройте окно ECS.</li>
+                                        <li>Откройте его снова.</li>
+                                        <li>Выберите меньший диапазон времени и повторите попытку.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="bf-help-img">
+                    <img src="{{ url_for('static', filename='images/busfaults_help_01.png') }}" alt="Настройки Event Historian">
+                </div>
+            </div>
+
+            <h4>2. Индексирование событий скриптом</h4>
+            <ol>
+                <li>Скопируйте выгруженные CSV-файлы в папку со скриптом:<br>
+                    <code>C:\Users\asutp\Desktop\7art\ecs7search\data\ecs8busfaults\</code></li>
+                <li>Откройте веб-страницу анализатора: <code>http://10.100.59.40:5942/busfaults</code></li>
+                <li>Нажмите кнопку <strong>«Переиндексировать CSV»</strong>.</li>
+            </ol>
+            <p>После этого скрипт обработает все новые файлы и обновит данные анализатора.</p>
             </div>
         </div>
     </div>
@@ -182,6 +256,12 @@
 .btn-reindex { background-color: #f39c12; color: #ffffff; }
 .btn-reindex:hover { background-color: #d88911; }
 .btn-reindex:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-help {
+    background-color: #3498db; color: #ffffff; font-size: 16px;
+    width: 36px; height: 36px; padding: 0; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+.btn-help:hover { background-color: #2980b9; }
 .bf-chart-box { position: relative; width: 100%; height: 340px; }
 .bf-chart-big { height: 480px; }
 .bf-check-wrap {
@@ -192,6 +272,52 @@
 }
 .bf-check-wrap:hover { background-color: #eceff1; }
 .bf-check-wrap input[type="checkbox"] { margin: 0; cursor: pointer; }
+.bf-help-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5); z-index: 9999;
+    align-items: center; justify-content: center;
+}
+.bf-help-overlay.active { display: flex; }
+.bf-help-modal {
+    background: #fff; border-radius: 12px;
+    width: 90%; max-width: 960px; max-height: 90vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.bf-help-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid #e0e4e7;
+}
+.bf-help-header h3 { margin: 0; font-size: 16px; color: #2c3e50; }
+.bf-help-close {
+    background: none; border: none; font-size: 22px; cursor: pointer;
+    color: #7f8c8d; padding: 4px 8px; border-radius: 4px;
+}
+.bf-help-close:hover { background: #eceff1; color: #2c3e50; }
+.bf-help-content {
+    padding: 16px 20px; font-size: 13px; line-height: 1.6;
+    color: #34495e; overflow-y: auto; flex: 1;
+}
+.bf-help-content h4 { margin: 14px 0 6px; font-size: 14px; color: #2c3e50; }
+.bf-help-content p { margin: 6px 0; }
+.bf-help-content ol, .bf-help-content ul { margin: 4px 0 4px 20px; }
+.bf-help-content code {
+    background: #eef1f3; padding: 2px 6px; border-radius: 4px;
+    font-size: 12px; color: #c0392b;
+}
+.bf-help-split {
+    display: flex; gap: 20px; align-items: stretch;
+}
+.bf-help-text { flex: 1; min-width: 0; }
+.bf-help-text ol, .bf-help-text ul { margin: 4px 0 4px 20px; }
+.bf-help-img {
+    flex: 0 0 auto; max-width: 45%;
+    align-self: flex-start;
+}
+.bf-help-img img {
+    max-width: 100%; height: auto; border: 1px solid #d5d8dc; border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -261,6 +387,22 @@
         if (e.key === "Enter") { el.apply.click(); }
     });
     el.run2bf.addEventListener("change", () => { loadData(); });
+
+    // ─── Модальное окно помощи ─────────────────────────────────
+    const helpOverlay = document.getElementById("bf-help-overlay");
+    const helpBtn = document.getElementById("bf-help-btn");
+    const helpClose = document.getElementById("bf-help-close");
+
+    helpBtn.addEventListener("click", () => { helpOverlay.classList.add("active"); });
+    helpClose.addEventListener("click", () => { helpOverlay.classList.remove("active"); });
+    helpOverlay.addEventListener("click", (e) => {
+        if (e.target === helpOverlay) helpOverlay.classList.remove("active");
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && helpOverlay.classList.contains("active")) {
+            helpOverlay.classList.remove("active");
+        }
+    });
 
     function showOnly(opts) {
         const ids = ["bf-summary-card", "bf-empty", "bf-monthly-card", "bf-daily-card",
