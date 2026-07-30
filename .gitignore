@@ -51,18 +51,18 @@ Desktop.ini
 ehthumbs.db
 
 # ── ECS7SEARCH: Generated data (regenerable) ───────────
-data/mimics/
-data/pdf/
-data/temp/
-data/FlsaProDb/
-!data/pdf/watermark.pdf
+data/zif1/mimics/
+data/zif1/pdf/
+data/zif1/temp/
+data/zif1/FlsaProDb/
+!data/zif1/pdf/watermark.pdf
 
 # ── ECS7SEARCH: Index files (regenerable) ──────────────
-# data/mimics_index.json
-# data/pdf_index.json
-# data/io_list.json
-# data/tags.json
-# data/equips1.json
+# data/zif1/mimics_index.json
+# data/zif1/pdf_index.json
+# data/zif1/io_list.json
+# data/zif1/tags.json
+# data/zif1/equips1.json
 
 # ── ECS7SEARCH: Source data (large / binary) ───────────
 *.g
@@ -71,8 +71,8 @@ data/FlsaProDb/
 *.ods
 
 # ── ECS7SEARCH: Bus Fault data ──────────────────────────
-data/bus_fault_events.json
-data/ecs8busfaults/
+data/zif1/bus_fault_events.json
+data/zif1/ecs8busfaults/
 temp/ecs7_events_busfault_extractor/
 
 # ── ECS7SEARCH: Misc artifacts ─────────────────────────

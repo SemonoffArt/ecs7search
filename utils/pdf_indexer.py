@@ -19,10 +19,14 @@ from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
+# Принудительно utf-8 для корректного вывода русского текста в консоль
+sys.stdout.reconfigure(encoding='utf-8')
+
 import fitz  # PyMuPDF
 
-# Шаблон тега ECS7: 3 цифры, 2-3 буквы, 2-3 цифры, далее буквы/цифры/подчёркивания
-RE_TAG = re.compile(r'\d{3}[A-Za-z]{2,3}\d{2,3}[A-Za-z0-9_]*')
+# Шаблон тега ECS7: 3 цифры, 2-3 буквы, 2-3 цифры, далее буквы/цифры/подчёркивания.
+# Допускает разделитель "-" между группами (например 040-IL-210).
+RE_TAG = re.compile(r'\d{3}[-]?[A-Za-z]{2,3}[-]?\d{2,3}[-]?[A-Za-z0-9_]*')
 
 
 def extract_tags_from_page(page: fitz.Page) -> dict[str, int]:
@@ -33,7 +37,7 @@ def extract_tags_from_page(page: fitz.Page) -> dict[str, int]:
     text = page.get_text("text")
     tags: dict[str, int] = {}
     for match in RE_TAG.finditer(text):
-        tag = match.group(0)
+        tag = match.group(0).replace('-', '')
         tags[tag] = tags.get(tag, 0) + 1
     return tags
 
@@ -154,13 +158,13 @@ def main():
     parser.add_argument(
         "directory",
         nargs="?",
-        default="./data/pdf/",
-        help="Путь к папке с PDF файлами (по умолчанию: ./data/pdf/)",
+        default="./data/zif1/pdf/",
+        help="Путь к папке с PDF файлами (по умолчанию: ./data/zif1/pdf/)",
     )
     parser.add_argument(
         "-o", "--output",
-        default="./data/pdf_index.json",
-        help="Путь к выходному JSON файлу (по умолчанию: ./data/pdf_index.json)",
+        default="./data/zif1/pdf_index.json",
+        help="Путь к выходному JSON файлу (по умолчанию: ./data/zif1/pdf_index.json)",
     )
     parser.add_argument(
         "--min-count",

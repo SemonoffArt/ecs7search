@@ -18,6 +18,8 @@ import os
 from pathlib import Path
 import fnmatch
 
+sys.stdout.reconfigure(encoding='utf-8')
+
 try:
     from PIL import Image, ImageDraw
 except ImportError:

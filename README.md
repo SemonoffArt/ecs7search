@@ -156,14 +156,15 @@ ecs7search/
 ├── 📁 templates/                 # HTML-шаблоны Jinja2
 ├── 📁 static/                    # CSS и изображения
 └── 📁 data/                      # Индексированные данные и источники
-    ├── mimics/                   # .g файлы + .png скриншоты
-    ├── pdf/                      # PDF-документы
-    ├── FlsaProDb/                # БД ECS .mdb
-    ├── mimics_index.json         # Индекс тегов мнемосхем
-    ├── pdf_index.json            # Индекс тегов PDF
-    ├── io_list.json              # Индекс сигналов I/O
-    ├── tags.json                 # Метаданные тегов
-    └── tags_without_screen_index.json  # Индекс тегов без экранов
+    └── 📁 zif1/                  # Данные установки ZIF-1
+        ├── mimics/               # .g файлы + .png скриншоты
+        ├── pdf/                  # PDF-документы
+        ├── FlsaProDb/            # БД ECS .mdb
+        ├── mimics_index.json     # Индекс тегов мнемосхем
+        ├── pdf_index.json        # Индекс тегов PDF
+        ├── io_list.json          # Индекс сигналов I/O
+        ├── tags.json             # Метаданные тегов
+        └── tags_without_screen_index.json  # Индекс тегов без экранов
 ```
 
 ---
@@ -184,19 +185,19 @@ ecs7search/
 
 ## ⚙️ Конфигурация
 
-Приложение использует файловую конфигурацию — все источники данных находятся в `data/`:
+Приложение использует файловую конфигурацию — все источники данных находятся в `data/zif1/`:
 
 | Файл                            | Описание                                   |
 |---------------------------------|--------------------------------------------|
-| `data/mimics/`                  | `.g` файлы SCADA + `.png` скриншоты        |
-| `data/mimics_index.json`        | Сгенерированный индекс тег → позиция       |
-| `data/pdf/`                     | Технические PDF-документы                  |
-| `data/pdf_index.json`           | Индекс тегов PDF                           |
-| `data/IO_list*.xlsx`            | Множественные списки I/O (поддерживается)  |
-| `data/io_list.json`             | Объединённый индекс сигналов I/O           |
-| `data/FlsaProDb/*.mdb`          | Базы данных тегов ABB FLSA Pro             |
-| `data/tags.json`                | Извлечённые метаданные тегов               |
-| `data/tags_without_screen_index.json` | Индекс тегов без экранов             |
+| `data/zif1/mimics/`                  | `.g` файлы SCADA + `.png` скриншоты        |
+| `data/zif1/mimics_index.json`        | Сгенерированный индекс тег → позиция       |
+| `data/zif1/pdf/`                     | Технические PDF-документы                  |
+| `data/zif1/pdf_index.json`           | Индекс тегов PDF                           |
+| `data/zif1/IO_list*.xlsx`            | Множественные списки I/O (поддерживается)  |
+| `data/zif1/io_list.json`             | Объединённый индекс сигналов I/O           |
+| `data/zif1/FlsaProDb/*.mdb`          | Базы данных тегов ABB FLSA Pro             |
+| `data/zif1/tags.json`                | Извлечённые метаданные тегов               |
+| `data/zif1/tags_without_screen_index.json` | Индекс тегов без экранов             |
 
 Все индексы можно перестроить на странице **Настройки** в веб-интерфейсе (кнопка ⚙️).
 

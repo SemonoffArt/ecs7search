@@ -28,17 +28,17 @@ from utils.service import SearchService
 
 PROJECT_DIR = Path(__file__).resolve().parent
 
-MIMICS_DIR = PROJECT_DIR / "data" / "mimics"
-INDEX_PATH = PROJECT_DIR / "data" / "mimics_index.json"
-TAGS_PATH = PROJECT_DIR / "data" / "tags.json"
-IO_LIST_PATH = PROJECT_DIR / "data" / "io_list.json"
-PDF_INDEX_PATH = PROJECT_DIR / "data" / "pdf_index.json"
-PDF_DIR = PROJECT_DIR / "data" / "pdf"
-MONKEY_IMAGE_PATH = PROJECT_DIR / "data" / "images" / "manky.png"
-TEMP_DIR = PROJECT_DIR / "data" / "temp"
-TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "tags_without_screen_index.json"
-BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "bus_fault_events.json"
-BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "ecs8busfaults"
+MIMICS_DIR = PROJECT_DIR / "data" / "zif1" / "mimics"
+INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "mimics_index.json"
+TAGS_PATH = PROJECT_DIR / "data" / "zif1" / "tags.json"
+IO_LIST_PATH = PROJECT_DIR / "data" / "zif1" / "io_list.json"
+PDF_INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "pdf_index.json"
+PDF_DIR = PROJECT_DIR / "data" / "zif1" / "pdf"
+MONKEY_IMAGE_PATH = PROJECT_DIR / "data" / "zif1" / "images" / "manky.png"
+TEMP_DIR = PROJECT_DIR / "data" / "zif1" / "temp"
+TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "tags_without_screen_index.json"
+BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "zif1" / "bus_fault_events.json"
+BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "zif1" / "ecs8busfaults"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
 # ─── Repository слой ─────────────────────────────────────────────
@@ -239,7 +239,7 @@ def indexing_status_endpoint():
 
 @app.route("/temp/<filename>")
 def serve_temp_image(filename):
-    """Отдача изображений из data/temp/."""
+    """Отдача изображений из data/zif1/temp/."""
     safe_path = Path(filename).name
     return send_from_directory(str(TEMP_DIR), safe_path)
 

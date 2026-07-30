@@ -4,6 +4,7 @@
 # Версия для работы с MS Access файлами напрямую
 #
 import logging
+import sys
 from pathlib import Path
 import pyodbc
 import time
@@ -13,6 +14,8 @@ from colorama import Style
 import re
 import yaml
 import csv
+
+sys.stdout.reconfigure(encoding='utf-8')
 
 # Абсолютный путь к директории с скриптом
 _PRG_DIR = Path(__file__).resolve().parent.parent

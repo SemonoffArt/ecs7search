@@ -10,11 +10,14 @@
 """
 
 import json
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
+
+sys.stdout.reconfigure(encoding='utf-8')
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 IO_LIST_PATHS = [

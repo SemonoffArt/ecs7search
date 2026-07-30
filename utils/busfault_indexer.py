@@ -1,12 +1,12 @@
 """Индексатор Bus Fault событий ECS8.
 
 Адаптировано из ``temp/ecs7_events_busfault_extractor/extract_bus_fault.py``.
-Обрабатывает все CSV-файлы в ``data/ecs8busfaults/``, извлекает события
+Обрабатывает все CSV-файлы в ``data/zif1/ecs8busfaults/``, извлекает события
 ``Bus Fault`` (переходы ``Running -> Bus Fault`` / ``Interval Start -> Bus Fault``),
 дедублицирует их и группирует по ``Tag Name`` с обогащением сведениями
 ``IP Address`` / ``Remote Station`` из md-файлов папки ``net/``.
 
-Результат сохраняется в ``data/bus_fault_events.json``.
+Результат сохраняется в ``data/zif1/bus_fault_events.json``.
 """
 
 from __future__ import annotations
@@ -87,7 +87,7 @@ def rebuild_bus_fault_index(
 
     Параметры:
         data_dir: папка с CSV-файлами (и подпапкой ``net/``).
-        output_path: итоговый JSON (``data/bus_fault_events.json``).
+        output_path: итоговый JSON (``data/zif1/bus_fault_events.json``).
         progress_cb: callable(progress:int, total:int, message:str).
 
     Возвращает словарь-отчёт с полями ``total_files``, ``total_records``,

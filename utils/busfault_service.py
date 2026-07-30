@@ -1,7 +1,7 @@
 """Service слой — анализ событий Bus Fault ECS8.
 
 Адаптировано из ``temp/ecs7_events_busfault_extractor/analyze_bus_fault.py``.
-Читает ``data/bus_fault_events.json`` и возвращает аналитические данные
+Читает ``data/zif1/bus_fault_events.json`` и возвращает аналитические данные
 для отображения на веб-странице (JSON-ответ AJAX).
 """
 

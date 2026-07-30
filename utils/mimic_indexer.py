@@ -27,6 +27,8 @@ import re
 import sys
 import time
 from pathlib import Path
+
+sys.stdout.reconfigure(encoding='utf-8')
 from typing import Dict, List, Optional
 
 
@@ -441,15 +443,15 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Примеры:
-  %(prog)s ./data/mimics                        # индексировать папку data/mimics
-  %(prog)s ./data/mimics -o ./data/index.json   # сохранить в index.json
-  %(prog)s ./data/mimics --no-recursive         # без рекурсии
+  %(prog)s ./data/zif1/mimics                        # индексировать папку data/zif1/mimics
+  %(prog)s ./data/zif1/mimics -o ./data/zif1/index.json   # сохранить в index.json
+  %(prog)s ./data/zif1/mimics --no-recursive         # без рекурсии
         """
     )
-    parser.add_argument('directory', nargs='?', default='./data/mimics/',
-                        help='Папка с .g файлами (по умолчанию: ./data/mimics/)')
-    parser.add_argument('-o', '--output', default='./data/mimics_index.json',
-                        help='Имя выходного JSON файла (по умолчанию: ./data/mimics_index.json)')
+    parser.add_argument('directory', nargs='?', default='./data/zif1/mimics/',
+                        help='Папка с .g файлами (по умолчанию: ./data/zif1/mimics/)')
+    parser.add_argument('-o', '--output', default='./data/zif1/mimics_index.json',
+                        help='Имя выходного JSON файла (по умолчанию: ./data/zif1/mimics_index.json)')
     parser.add_argument('--no-recursive', action='store_true',
                         help='Не сканировать подпапки рекурсивно')
 
