@@ -18,18 +18,22 @@ class ConfigService:
         project_dir: Path,
         mimics_dir: Path,
         pdf_dir: Path,
+        pdf_dir_2: Path,
         temp_dir: Path,
         index_path: Path,
         pdf_index_path: Path,
+        pdf_index_path_2: Path,
         tags_path: Path,
         io_list_path: Path,
     ) -> None:
         self._project_dir = project_dir
         self._mimics_dir = mimics_dir
         self._pdf_dir = pdf_dir
+        self._pdf_dir_2 = pdf_dir_2
         self._temp_dir = temp_dir
         self._index_path = index_path
         self._pdf_index_path = pdf_index_path
+        self._pdf_index_path_2 = pdf_index_path_2
         self._tags_path = tags_path
         self._io_list_path = io_list_path
 
@@ -41,6 +45,7 @@ class ConfigService:
             "project_dir": str(self._project_dir),
             "mimics_dir": str(self._mimics_dir),
             "pdf_dir": str(self._pdf_dir),
+            "pdf_dir_2": str(self._pdf_dir_2),
             "temp_dir": str(self._temp_dir),
         }
 
@@ -54,10 +59,18 @@ class ConfigService:
         }
 
     def get_pdf_stats(self) -> dict:
-        """Статистика по PDF индексам."""
+        """Статистика по PDF индексам (ZIF-1)."""
         index_data = self._load_json_safe(self._pdf_index_path)
         return {
             "total_files": self._safe_file_count(self._pdf_dir, "*.pdf"),
+            "metadata": index_data.get("metadata", {}),
+        }
+
+    def get_pdf2_stats(self) -> dict:
+        """Статистика по PDF индексам (ZIF-2)."""
+        index_data = self._load_json_safe(self._pdf_index_path_2)
+        return {
+            "total_files": self._safe_file_count(self._pdf_dir_2, "*.pdf"),
             "metadata": index_data.get("metadata", {}),
         }
 

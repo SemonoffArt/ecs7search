@@ -34,6 +34,8 @@ TAGS_PATH = PROJECT_DIR / "data" / "zif1" / "tags.json"
 IO_LIST_PATH = PROJECT_DIR / "data" / "zif1" / "io_list.json"
 PDF_INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "pdf_index.json"
 PDF_DIR = PROJECT_DIR / "data" / "zif1" / "pdf"
+PDF_DIR_2 = PROJECT_DIR / "data" / "zif2" / "pdf"
+PDF_INDEX_PATH_2 = PROJECT_DIR / "data" / "zif2" / "pdf_index.json"
 MONKEY_IMAGE_PATH = PROJECT_DIR / "data" / "zif1" / "images" / "manky.png"
 TEMP_DIR = PROJECT_DIR / "data" / "zif1" / "temp"
 TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "tags_without_screen_index.json"
@@ -47,6 +49,7 @@ index_repo = MimicIndexRepository(INDEX_PATH)
 tag_repo = TagDetailRepository(TAGS_PATH)
 io_list_repo = IOListRepository(IO_LIST_PATH)
 pdf_repo = PDFIndexRepository(PDF_INDEX_PATH)
+pdf_repo_2 = PDFIndexRepository(PDF_INDEX_PATH_2)
 
 # ─── Service слой ─────────────────────────────────────────────────
 
@@ -66,13 +69,22 @@ pdf_service = PDFSearchService(
     temp_dir=TEMP_DIR,
 )
 
+pdf_service_2 = PDFSearchService(
+    pdf_repo=pdf_repo_2,
+    pdf_dir=PDF_DIR_2,
+    monkey_image_path=MONKEY_IMAGE_PATH,
+    temp_dir=TEMP_DIR,
+)
+
 config_service = ConfigService(
     project_dir=PROJECT_DIR,
     mimics_dir=MIMICS_DIR,
     pdf_dir=PDF_DIR,
+    pdf_dir_2=PDF_DIR_2,
     temp_dir=TEMP_DIR,
     index_path=INDEX_PATH,
     pdf_index_path=PDF_INDEX_PATH,
+    pdf_index_path_2=PDF_INDEX_PATH_2,
     tags_path=TAGS_PATH,
     io_list_path=IO_LIST_PATH,
 )
@@ -82,8 +94,10 @@ busfault_service = BusFaultService(json_path=BUS_FAULT_EVENTS_PATH)
 indexing_service = IndexingService(
     mimics_dir=MIMICS_DIR,
     pdf_dir=PDF_DIR,
+    pdf_dir_2=PDF_DIR_2,
     index_path=INDEX_PATH,
     pdf_index_path=PDF_INDEX_PATH,
+    pdf_index_path_2=PDF_INDEX_PATH_2,
     io_list_path=IO_LIST_PATH,
     io_output_path=PROJECT_DIR / "data" / "io_list.json",
     tags_output_path=TAGS_PATH,
@@ -91,6 +105,7 @@ indexing_service = IndexingService(
     tag_repo=tag_repo,
     io_list_repo=io_list_repo,
     pdf_repo=pdf_repo,
+    pdf_repo_2=pdf_repo_2,
     busfault_dir=BUS_FAULT_DATA_DIR,
     busfault_output_path=BUS_FAULT_EVENTS_PATH,
     busfault_service=busfault_service,
@@ -114,12 +129,19 @@ def index():
             search_mimics=True,
             search_pdf=False,
             pdf_results=None,
+            zif="zif1",
         )
 
     query = request.form.get("query", "").strip()
     detailed = request.form.get("detailed") == "1"
     search_mimics = request.form.get("search_mimics") == "1"
     search_pdf = request.form.get("search_pdf") == "1"
+    zif = request.form.get("zif", "zif1")
+
+    if zif == "zif2":
+        search_mimics = False
+        search_pdf = True
+        detailed = False
 
     results = None
     pdf_results = None
@@ -135,7 +157,8 @@ def index():
 
     # Поиск по PDF
     if search_pdf:
-        matched_tags, pdf_messages = pdf_service.search(query)
+        svc = pdf_service_2 if zif == "zif2" else pdf_service
+        matched_tags, pdf_messages = svc.search(query)
         for msg in pdf_messages:
             if "Минимум" in msg or "Ничего" in msg:
                 flash(msg, "warning")
@@ -145,14 +168,14 @@ def index():
         if matched_tags:
             safe_query = "".join(c if c.isalnum() else "_" for c in query[:50])
             pdf_filename = f"{safe_query}_pdf_srh.pdf"
-            out_name, gen_messages = pdf_service.generate_pdf(matched_tags, pdf_filename)
+            out_name, gen_messages = svc.generate_pdf(matched_tags, pdf_filename)
 
             for msg in gen_messages:
                 if msg:
                     flash(msg, "warning")
 
             if out_name:
-                pdf_results = pdf_service.build_pdf_results(matched_tags, query)
+                pdf_results = svc.build_pdf_results(matched_tags, query)
                 if pdf_results:
                     pdf_results["pdf_filename"] = out_name
             else:
@@ -167,6 +190,7 @@ def index():
         detailed=detailed,
         search_mimics=search_mimics,
         search_pdf=search_pdf,
+        zif=zif,
         pdf_results=pdf_results,
     )
 
@@ -202,11 +226,12 @@ def settings():
     """Страница настроек — информация об индексах и конфигурации."""
     return render_template(
         "settings.html",
-        config=config_service.get_config(),
-        mimics_stats=config_service.get_mimics_stats(),
-        pdf_stats=config_service.get_pdf_stats(),
-        tags_stats=config_service.get_tags_stats(),
-        io_stats=config_service.get_io_stats(),
+    config=config_service.get_config(),
+    mimics_stats=config_service.get_mimics_stats(),
+    pdf_stats=config_service.get_pdf_stats(),
+    pdf2_stats=config_service.get_pdf2_stats(),
+    tags_stats=config_service.get_tags_stats(),
+    io_stats=config_service.get_io_stats(),
         indexing_status=indexing_status.status,
     )
 
@@ -217,6 +242,7 @@ def start_indexing(task: str):
     task_map = {
         "mimics": indexing_service.start_mimics_indexing,
         "pdf": indexing_service.start_pdf_indexing,
+        "pdf2": indexing_service.start_pdf2_indexing,
         "io_list": indexing_service.start_io_list_indexing,
         "mdb": indexing_service.start_mdb_tag_extraction,
         "busfaults": indexing_service.start_busfault_indexing,

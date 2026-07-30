@@ -96,8 +96,10 @@ class IndexingService:
         self,
         mimics_dir: Path,
         pdf_dir: Path,
+        pdf_dir_2: Path,
         index_path: Path,
         pdf_index_path: Path,
+        pdf_index_path_2: Path,
         io_list_path: Path,
         io_output_path: Path,
         tags_output_path: Path,
@@ -105,14 +107,17 @@ class IndexingService:
         tag_repo: TagDetailRepository | None = None,
         io_list_repo: IOListRepository | None = None,
         pdf_repo: PDFIndexRepository | None = None,
+        pdf_repo_2: PDFIndexRepository | None = None,
         busfault_dir: Path | None = None,
         busfault_output_path: Path | None = None,
         busfault_service=None,
     ) -> None:
         self._mimics_dir = mimics_dir
         self._pdf_dir = pdf_dir
+        self._pdf_dir_2 = pdf_dir_2
         self._index_path = index_path
         self._pdf_index_path = pdf_index_path
+        self._pdf_index_path_2 = pdf_index_path_2
         self._io_list_path = io_list_path
         self._io_output_path = io_output_path
         self._tags_output_path = tags_output_path
@@ -121,6 +126,7 @@ class IndexingService:
         self._tag_repo = tag_repo
         self._io_list_repo = io_list_repo
         self._pdf_repo = pdf_repo
+        self._pdf_repo_2 = pdf_repo_2
         # Bus Fault (ECS8) индексатор
         self._busfault_dir = busfault_dir
         self._busfault_output_path = busfault_output_path
@@ -200,6 +206,46 @@ class IndexingService:
             # Сбрасываем кэш PDF, чтобы поиск использовал новый индекс сразу
             if self._pdf_repo is not None:
                 self._pdf_repo.invalidate_cache()
+
+            indexing_status.complete(True, msg, result.get("metadata"))
+
+        except Exception as e:
+            indexing_status.complete(False, f"Ошибка: {e}")
+
+    def start_pdf2_indexing(self) -> dict:
+        """Запускает индексацию PDF (ZIF-2) в фоновом потоке."""
+        if indexing_status.is_running:
+            return {"success": False, "message": "Индексирование уже запущено"}
+
+        threading.Thread(
+            target=self._run_pdf2_indexing,
+            daemon=True,
+        ).start()
+
+        return {"success": True, "message": "Индексирование PDF (ZIF-2) запущено"}
+
+    def _run_pdf2_indexing(self) -> None:
+        total_files = len(list(self._pdf_dir_2.glob("*.pdf")))
+        indexing_status.start("Индексирование PDF (ZIF-2)", total_files)
+
+        try:
+            result = index_pdf_directory(
+                directory=self._pdf_dir_2,
+                verbose=False,
+            )
+
+            meta = result.get("metadata", {})
+            msg = (
+                f"Готово! Обработано {meta.get('total_files', 0)} файлов, "
+                f"найдено {meta.get('total_tags', 0)} тегов"
+            )
+
+            self._pdf_index_path_2.parent.mkdir(parents=True, exist_ok=True)
+            with open(self._pdf_index_path_2, "w", encoding="utf-8") as f:
+                json.dump(result, f, ensure_ascii=False, indent=2)
+
+            if self._pdf_repo_2 is not None:
+                self._pdf_repo_2.invalidate_cache()
 
             indexing_status.complete(True, msg, result.get("metadata"))
 
