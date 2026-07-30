@@ -8,11 +8,30 @@
 
 from __future__ import annotations
 
+import os
+import sys
 from pathlib import Path
 
 import fitz  # PyMuPDF
 
 from utils.repository import PDFIndexRepository
+
+
+def _cyrillic_font() -> tuple[str, str | None]:
+    """Возвращает (fontname, fontfile) для шрифта с кириллицей."""
+    if sys.platform == "win32":
+        arial = os.environ.get("WINDIR", "C:/Windows") + "/Fonts/arial.ttf"
+        if Path(arial).exists():
+            return ("Arial", arial)
+    else:
+        for candidate in (
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+            "/usr/share/fonts/TTF/DejaVuSans.ttf",
+            "/usr/share/fonts/noto/NotoSans-Regular.ttf",
+        ):
+            if Path(candidate).exists():
+                return ("DejaVuSans", candidate)
+    return ("helv", None)
 
 
 class PDFSearchService:
@@ -221,16 +240,16 @@ class PDFSearchService:
                     text_y = new_page.rect.height - margin - 5
                     
                     # Формируем текст с информацией
+                    fname, ffile = _cyrillic_font()
                     source_text = f"Source: {item['file']} (page {item['page']})"
                     tags_text = f"Tags: {', '.join(item['tags'])}"
-                    
-                    # Добавляем текст в правом нижнем углу
-                    text_x = new_page.rect.width - 50  # Отступ справа
                     
                     # Вставляем источник документа
                     new_page.insert_text(
                         (text_margin, text_y - 15),
                         source_text,
+                        fontname=fname,
+                        fontfile=ffile,
                         fontsize=8,
                         color=(0.3, 0.3, 0.3),
                         rotate=img_rotation
@@ -240,6 +259,8 @@ class PDFSearchService:
                     new_page.insert_text(
                         (text_margin, text_y),
                         tags_text,
+                        fontname=fname,
+                        fontfile=ffile,
                         fontsize=8,
                         color=(0.2, 0.4, 0.8),
                         rotate=img_rotation
