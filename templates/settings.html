@@ -265,6 +265,26 @@
             </div>
         </div>
 
+        <!-- Points ZIF-2 -->
+        <div class="instruction-card">
+            <div class="instruction-header">
+                <span class="instruction-icon">📊</span>
+                <span class="instruction-title">Индексировать Points.xlsx (ZIF-2)</span>
+            </div>
+            <div class="instruction-body">
+                <ol class="instruction-steps">
+                    <li>Скопируйте файл <code>Points.xlsx</code> в папку:
+                        <code class="path-code">{{ config.project_dir }}/data/zif2/</code>
+                    </li>
+                    <li>Нажмите кнопку <strong>«Индексировать Points»</strong> и дождитесь завершения процесса.</li>
+                    <li>Убедитесь, что на карточке <strong>«Теги ZIF-2»</strong> обновилась дата создания.</li>
+                </ol>
+                <button onclick="startIndexing('points')" class="btn btn-index" id="btn-index-points">
+                    📊 Индексировать Points
+                </button>
+            </div>
+        </div>
+
         <!-- MDB -->
         <div class="instruction-card">
             <div class="instruction-header">

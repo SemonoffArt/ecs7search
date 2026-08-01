@@ -129,6 +129,8 @@ indexing_service = IndexingService(
     busfault_dir=BUS_FAULT_DATA_DIR,
     busfault_output_path=BUS_FAULT_EVENTS_PATH,
     busfault_service=busfault_service,
+    points_index_path=POINTS_JSON_PATH,
+    point_repo=point_repo,
 )
 
 # ─── Flask приложение (router) ────────────────────────────────────
@@ -270,6 +272,7 @@ def start_indexing(task: str):
         "pdf2": indexing_service.start_pdf2_indexing,
         "io_list": indexing_service.start_io_list_indexing,
         "io_list2": indexing_service.start_io_list2_indexing,
+        "points": indexing_service.start_points_indexing,
         "mdb": indexing_service.start_mdb_tag_extraction,
         "busfaults": indexing_service.start_busfault_indexing,
     }

@@ -18,6 +18,7 @@ from utils.busfault_indexer import rebuild_bus_fault_index
 from utils.iolist_indexer import IO_LIST_PATHS, parse_io_list
 from utils.mimic_indexer import build_index
 from utils.pdf_indexer import index_pdf_directory
+from utils.points_indexer import parse_points
 from utils.ecs2json import TagsHelper
 from utils.repository import (
     IOListRepository,
@@ -112,6 +113,8 @@ class IndexingService:
         busfault_dir: Path | None = None,
         busfault_output_path: Path | None = None,
         busfault_service=None,
+        points_index_path: Path | None = None,
+        point_repo=None,
     ) -> None:
         self._mimics_dir = mimics_dir
         self._pdf_dir = pdf_dir
@@ -133,6 +136,9 @@ class IndexingService:
         self._busfault_dir = busfault_dir
         self._busfault_output_path = busfault_output_path
         self._busfault_service = busfault_service
+        # Points (ZIF-2)
+        self._points_index_path = points_index_path
+        self._point_repo = point_repo
 
     def start_mimics_indexing(self) -> dict:
         """Запускает индексацию мнемосхем в фоновом потоке."""
@@ -315,6 +321,50 @@ class IndexingService:
 
             msg = f"Готово! Загружено {total} записей IO List (ZIF-2)"
             indexing_status.complete(True, msg, {"total_records": total})
+
+        except Exception as e:
+            indexing_status.complete(False, f"Ошибка: {e}")
+
+    def start_points_indexing(self) -> dict:
+        """Запускает индексацию Points.xlsx (ZIF-2) в фоновом потоке."""
+        if indexing_status.is_running:
+            return {"success": False, "message": "Индексирование уже запущено"}
+
+        threading.Thread(
+            target=self._run_points_indexing,
+            daemon=True,
+        ).start()
+
+        return {"success": True, "message": "Индексирование Points (ZIF-2) запущено"}
+
+    def _run_points_indexing(self) -> None:
+        indexing_status.start("Индексирование Points (ZIF-2)")
+
+        try:
+            from pathlib import Path as _P
+
+            points_path = _P(__file__).resolve().parent.parent / "data" / "zif2" / "Points.xlsx"
+            result = parse_points(points_path)
+
+            meta = result.get("metadata", {})
+            if "error" in meta:
+                indexing_status.complete(False, f"Ошибка: {meta['error']}")
+                return
+
+            msg = (
+                f"Готово! Обработано {meta.get('total_points', 0)} точек, "
+                f"листов: {len(meta.get('sheet_names', []))}"
+            )
+
+            if self._points_index_path is not None:
+                self._points_index_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(self._points_index_path, "w", encoding="utf-8") as f:
+                    json.dump(result, f, ensure_ascii=False, indent=2)
+
+            if self._point_repo is not None:
+                self._point_repo.invalidate_cache()
+
+            indexing_status.complete(True, msg, meta)
 
         except Exception as e:
             indexing_status.complete(False, f"Ошибка: {e}")
