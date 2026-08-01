@@ -19,7 +19,13 @@ from utils.mimic_searcher import (
     get_image_for_file,
     draw_border_on_image,
 )
-from utils.repository import MimicIndexRepository, TagDetailRepository, IOListRepository
+from utils.repository import (
+    MimicIndexRepository,
+    TagDetailRepository,
+    IOListRepository,
+    PointDetailRepository,
+    ZIF2IOListRepository,
+)
 
 TAG_PATTERN = re.compile(r"^[A-Za-z0-9*_?]+$")
 
@@ -35,6 +41,8 @@ class SearchService:
         mimics_dir: Path,
         temp_dir: Path,
         max_results: int = 20,
+        point_repo: PointDetailRepository | None = None,
+        zif2_io_list_repo: ZIF2IOListRepository | None = None,
     ) -> None:
         self._index_repo = index_repo
         self._tag_repo = tag_repo
@@ -42,6 +50,8 @@ class SearchService:
         self._mimics_dir = mimics_dir
         self._temp_dir = temp_dir
         self._max_results = max_results
+        self._point_repo = point_repo
+        self._zif2_io_list_repo = zif2_io_list_repo
 
     # ─── Валидация ────────────────────────────────────────────────
 
@@ -57,7 +67,115 @@ class SearchService:
 
     # ─── Поиск ────────────────────────────────────────────────────
 
-    def execute(self, query: str, detailed: bool) -> tuple[dict | None, list[tuple[str, str]]]:
+    def execute_zif2(self, query: str, detailed: bool) -> tuple[dict | None, list[tuple[str, str]]]:
+        """Поиск тегов ZIF-2 из points.json."""
+        flashes: list[tuple[str, str]] = []
+
+        validation = self.validate_query(query)
+        if validation:
+            flashes.append(validation)
+            return None, flashes
+
+        if self._point_repo is None:
+            flashes.append(("Репозиторий точек ZIF-2 не инициализирован.", "danger"))
+            return None, flashes
+
+        search_query = query if ("*" in query or "?" in query) else f"*{query}*"
+
+        matched_from_points = set(self._point_repo.search(search_query))
+        matched_from_io = set()
+        if self._zif2_io_list_repo:
+            matched_from_io = set(self._zif2_io_list_repo.search(search_query))
+
+        def normalize(name: str) -> str:
+            return name.lstrip("_")
+
+        seen_normalized: set[str] = set()
+        all_matched_tags: list[str] = []
+
+        for name in sorted(matched_from_points | matched_from_io):
+            norm = normalize(name)
+            if norm not in seen_normalized:
+                seen_normalized.add(norm)
+                all_matched_tags.append(name)
+
+        if not all_matched_tags:
+            flashes.append((f"Ничего не найдено по запросу: {query}", "info"))
+            return None, flashes
+
+        tag_details = (
+            self._enrich_zif2_tag_details(all_matched_tags)
+            if detailed else []
+        )
+
+        return {
+            "query": query,
+            "total_tags": len(all_matched_tags),
+            "total_files": 0,
+            "images": [],
+            "skipped": [],
+            "tag_details": tag_details,
+            "index_metadata": {},
+        }, flashes
+
+    def _enrich_zif2_tag_details(
+        self,
+        tag_names: list[str],
+    ) -> list[dict]:
+        """Обогащает детали тегов ZIF-2 из points.json и IO list."""
+        details: list[dict] = []
+        for tag_name in tag_names:
+            rec = self._point_repo.get_flexible(tag_name) if self._point_repo else None
+
+            io_data = None
+            if self._zif2_io_list_repo:
+                io_data = self._zif2_io_list_repo.get(tag_name)
+
+            if rec is not None:
+                # Тег найден в points.json
+                enriched = {
+                    "Tag": rec.get("Designation", tag_name),
+                    "Groups": rec.get("FunctionalHierarchy", "—"),
+                    "DescEng": rec.get("DefaultText", ""),
+                    "DescRus": rec.get("Locale_ru-RU", ""),
+                    "Algorithms": {"PointType": rec.get("PointType", "—")} if rec.get("PointType") else None,
+                    "PLC": {
+                        "PLCNo": rec.get("IOType_0", ""),
+                        "FC": rec.get("IOType_6", ""),
+                    } if rec.get("IOType_0") else None,
+                    "_screens": [],
+                    "_io_list": {
+                        "Component": io_data.get("Шкаф", "") if io_data else "",
+                        "IOTerminal_Short1": io_data.get("Клеммник", "") if io_data else "",
+                        "IOAddress": io_data.get("IO-адрес", "") if io_data else "",
+                        "IOType": io_data.get("Тип", "") if io_data else "",
+                    } if io_data else None,
+                    "_signal_purpose": "",
+                }
+                details.append(enriched)
+            elif io_data is not None:
+                # Тег только в IO list
+                synth_rec = {
+                    "Tag": tag_name,
+                    "Groups": "—",
+                    "DescEng": "",
+                    "DescRus": "",
+                    "Algorithms": None,
+                    "PLC": None,
+                    "_screens": [],
+                    "_io_list": {
+                        "Component": io_data.get("Шкаф", ""),
+                        "IOTerminal_Short1": io_data.get("Клеммник", ""),
+                        "IOAddress": io_data.get("IO-адрес", ""),
+                        "IOType": io_data.get("Тип", ""),
+                    },
+                    "_signal_purpose": "",
+                }
+                details.append(synth_rec)
+
+        return details
+
+    # ─── Теги без экрана ──────────────────────────────────────────
         """
         Возвращает (results_dict, flashes).
         results_dict — данные для render_template или None.

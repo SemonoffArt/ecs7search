@@ -1,5 +1,5 @@
 """
-Repository слой — доступ к данным (индекс, tags.json).
+Repository слой — доступ к данным (индекс, tags.json, points.json).
 """
 
 from __future__ import annotations
@@ -101,6 +101,61 @@ class TagDetailRepository:
         return [name for name in sorted(all_names) if fnmatch.fnmatch(name, pattern)]
 
 
+class PointDetailRepository:
+    """Кэшированное хранилище метаданных тегов ZIF-2 из points.json."""
+
+    def __init__(self, points_path: Path) -> None:
+        self._points_path = points_path
+        self._cache: dict[str, dict[str, Any]] | None = None
+
+    def _load(self) -> dict[str, dict[str, Any]]:
+        if self._cache is not None:
+            return self._cache
+
+        if not self._points_path.exists():
+            self._cache = {}
+            return self._cache
+
+        try:
+            with open(self._points_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            self._cache = data.get("points", {})
+        except Exception:
+            self._cache = {}
+
+        return self._cache
+
+    def invalidate_cache(self) -> None:
+        self._cache = None
+
+    def get_flexible(self, tag_name: str) -> dict[str, Any] | None:
+        """Ищет запись по Designation с учётом вариаций с/без ведущего '_'."""
+        variants = [tag_name]
+        if tag_name.startswith("_"):
+            variants.append(tag_name[1:])
+        else:
+            variants.append("_" + tag_name)
+
+        for v in variants:
+            rec = self._load().get(v)
+            if rec is not None:
+                return rec
+        return None
+
+    def search(self, pattern: str) -> list[str]:
+        """Ищет теги по шаблону с поддержкой * и ?."""
+        all_tags = self._load()
+        all_names: set[str] = set()
+        for tag in all_tags:
+            all_names.add(tag)
+            if tag.startswith("_"):
+                all_names.add(tag[1:])
+            else:
+                all_names.add("_" + tag)
+
+        return [name for name in sorted(all_names) if fnmatch.fnmatch(name, pattern)]
+
+
 class IOListRepository:
     """Кэшированное хранилище данных IO списка (io_list.json)."""
 
@@ -145,6 +200,58 @@ class IOListRepository:
         """
         all_signals = self._load()
         return [name for name in sorted(all_signals) if fnmatch.fnmatch(name, pattern)]
+
+
+class ZIF2IOListRepository:
+    """Кэшированное хранилище данных IO списка ZIF-2 из Excel файлов."""
+
+    IO_FIELDS = ["Шкаф", "Клеммник", "IO-адрес", "Тип"]
+
+    def __init__(self, io_list_paths: list[Path]) -> None:
+        self._io_list_paths = io_list_paths
+        self._cache: dict[str, dict[str, Any]] | None = None
+
+    def _load(self) -> dict[str, dict[str, Any]]:
+        if self._cache is not None:
+            return self._cache
+
+        import pandas as pd
+
+        self._cache = {}
+        for path in self._io_list_paths:
+            if not path.exists():
+                continue
+            try:
+                df = pd.read_excel(path, header=1)
+                for _, row in df.iterrows():
+                    tag = str(row.get("Тэг", "")).strip()
+                    if not tag or tag == "nan":
+                        continue
+                    self._cache[tag] = {
+                        "Шкаф": str(row.get("Шкаф", "")),
+                        "Клеммник": str(row.get("Клеммник", "")),
+                        "IO-адрес": str(row.get("IO-адрес", "")),
+                        "Тип": str(row.get("Тип", "")),
+                    }
+            except Exception:
+                continue
+
+        return self._cache
+
+    def invalidate_cache(self) -> None:
+        self._cache = None
+
+    def get(self, tag_name: str) -> dict[str, Any] | None:
+        """Ищет запись по Тэг."""
+        rec = self._load().get(tag_name)
+        if rec is not None:
+            return {k: rec.get(k) for k in self.IO_FIELDS}
+        return None
+
+    def search(self, pattern: str) -> list[str]:
+        """Ищет Тэг по шаблону с поддержкой * и ?."""
+        all_tags = self._load()
+        return [name for name in sorted(all_tags) if fnmatch.fnmatch(name, pattern)]
 
 
 class PDFIndexRepository:

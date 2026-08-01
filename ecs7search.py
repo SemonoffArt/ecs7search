@@ -20,7 +20,9 @@ from utils.repository import (
     IOListRepository,
     MimicIndexRepository,
     PDFIndexRepository,
+    PointDetailRepository,
     TagDetailRepository,
+    ZIF2IOListRepository,
 )
 from utils.service import SearchService
 
@@ -43,6 +45,17 @@ BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "zif1" / "bus_fault_events.json"
 BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "zif1" / "ecs8busfaults"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
+# ZIF-2 paths
+POINTS_JSON_PATH = PROJECT_DIR / "data" / "zif2" / "points.json"
+ZIF2_IO_LIST_DIR = PROJECT_DIR / "data" / "zif2"
+ZIF2_IO_LIST_FILES = [
+    "IO-List-993.xlsx",
+    "IO-List-994.xlsx",
+    "IO-List-995.xlsx",
+    "IO-List-996.xlsx",
+    "IO-List-997.xlsx",
+]
+
 # ─── Repository слой ─────────────────────────────────────────────
 
 index_repo = MimicIndexRepository(INDEX_PATH)
@@ -50,6 +63,10 @@ tag_repo = TagDetailRepository(TAGS_PATH)
 io_list_repo = IOListRepository(IO_LIST_PATH)
 pdf_repo = PDFIndexRepository(PDF_INDEX_PATH)
 pdf_repo_2 = PDFIndexRepository(PDF_INDEX_PATH_2)
+point_repo = PointDetailRepository(POINTS_JSON_PATH)
+zif2_io_list_repo = ZIF2IOListRepository(
+    [ZIF2_IO_LIST_DIR / f for f in ZIF2_IO_LIST_FILES]
+)
 
 # ─── Service слой ─────────────────────────────────────────────────
 
@@ -60,6 +77,8 @@ search_service = SearchService(
     mimics_dir=MIMICS_DIR,
     temp_dir=TEMP_DIR,
     max_results=20,
+    point_repo=point_repo,
+    zif2_io_list_repo=zif2_io_list_repo,
 )
 
 pdf_service = PDFSearchService(
@@ -141,7 +160,7 @@ def index():
     if zif == "zif2":
         search_mimics = False
         search_pdf = True
-        detailed = False
+        detailed = True
 
     results = None
     pdf_results = None
@@ -149,6 +168,11 @@ def index():
     # Поиск по мимикам
     if search_mimics:
         results, flashes_list = search_service.execute(query, detailed)
+        for message, category in flashes_list:
+            flash(message, category)
+    elif zif == "zif2" and detailed:
+        # Поиск тегов ZIF-2 из points.json
+        results, flashes_list = search_service.execute_zif2(query, detailed)
         for message, category in flashes_list:
             flash(message, category)
     elif search_pdf:

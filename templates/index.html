@@ -72,7 +72,7 @@
     </div>
     <hr class="section-separator">
 
-    <!-- Расширенная информация по тегам -->
+    <!-- Расширенная информация по тегах -->
     {% if detailed and results.tag_details %}
     <div class="card">
         <div style="margin-bottom:15px; overflow-x:auto;">
@@ -80,13 +80,12 @@
                 <thead>
                     <tr>
                         <th>Tag</th>
-                        <th>Groups</th>
+                        <th>{% if zif == 'zif2' %}FunctionalHierarchy{% else %}Groups{% endif %}</th>
                         <th>Description</th>
-                        <th>Algorithms</th>
+                        <th>{% if zif == 'zif2' %}PointType{% else %}Algorithms{% endif %}</th>
                         <th>PLC</th>
                         <th>IO List</th>
-                        <th>Screens</th>
-
+                        {% if zif != 'zif2' %}<th>Screens</th>{% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -102,9 +101,13 @@
                         </td>
                         <td>
                             {% if detail.Algorithms %}
-                            <div>Conv: {{ detail.Algorithms.ConvAlg }}</div>
-                            <div>Calc: {{ detail.Algorithms.CalcAlg }}</div>
-                            <div>Block: {{ detail.Algorithms.BlockAlg }}</div>
+                                {% if detail.Algorithms.PointType %}
+                                <div>{{ detail.Algorithms.PointType }}</div>
+                                {% else %}
+                                <div>Conv: {{ detail.Algorithms.ConvAlg }}</div>
+                                <div>Calc: {{ detail.Algorithms.CalcAlg }}</div>
+                                <div>Block: {{ detail.Algorithms.BlockAlg }}</div>
+                                {% endif %}
                             {% else %}
                             —
                             {% endif %}
@@ -129,7 +132,6 @@
                         </td>
                         <td class="tag-io-list">
                             {% if detail._io_list %}
-                                <!-- <div><b>PLC:</b> {{ detail._io_list.PLC }}</div> -->
                                 <div><b>Comp:</b> {{ detail._io_list.Component }}</div>
                                 <div><b>Term:</b> {{ detail._io_list.IOTerminal_Short1 }}</div>
                                 <div><b>Addr:</b> {{ detail._io_list.IOAddress }}</div>
@@ -139,6 +141,7 @@
                             {% endif %}
                         </td>
 
+                        {% if zif != 'zif2' %}
                         <td>
                             {% if detail._screens and detail._screens|length > 0 %}
                                 {% for scr in detail._screens %}
@@ -148,6 +151,7 @@
                                 —
                             {% endif %}
                         </td>
+                        {% endif %}
 
                     </tr>
                     {% endfor %}
