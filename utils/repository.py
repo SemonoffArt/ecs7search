@@ -205,7 +205,7 @@ class IOListRepository:
 class ZIF2IOListRepository:
     """Кэшированное хранилище данных IO списка ZIF-2 из Excel файлов."""
 
-    IO_FIELDS = ["Шкаф", "Клеммник", "IO-адрес", "Тип"]
+    IO_FIELDS = ["Шкаф", "Клеммник", "IO-адрес", "Тип", "Описание"]
 
     def __init__(self, io_list_paths: list[Path]) -> None:
         self._io_list_paths = io_list_paths
@@ -227,11 +227,15 @@ class ZIF2IOListRepository:
                     tag = str(row.get("Тэг", "")).strip()
                     if not tag or tag == "nan":
                         continue
+                    description = str(row.get("Описание", ""))
+                    if description == "nan":
+                        description = ""
                     self._cache[tag] = {
                         "Шкаф": str(row.get("Шкаф", "")),
                         "Клеммник": str(row.get("Клеммник", "")),
                         "IO-адрес": str(row.get("IO-адрес", "")),
                         "Тип": str(row.get("Тип", "")),
+                        "Описание": description,
                     }
             except Exception:
                 continue

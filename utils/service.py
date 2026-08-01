@@ -132,11 +132,11 @@ class SearchService:
                 io_data = self._zif2_io_list_repo.get(tag_name)
 
             if rec is not None:
-                # Тег найден в points.json
+                io_desc = io_data.get("Описание", "") if io_data else ""
                 enriched = {
                     "Tag": rec.get("Designation", tag_name),
                     "Groups": rec.get("FunctionalHierarchy", "—"),
-                    "DescEng": rec.get("DefaultText", ""),
+                    "DescEng": rec.get("DefaultText", "") or io_desc,
                     "DescRus": rec.get("Locale_ru-RU", ""),
                     "Algorithms": {"PointType": rec.get("PointType", "—")} if rec.get("PointType") else None,
                     "PLC": {
@@ -154,11 +154,11 @@ class SearchService:
                 }
                 details.append(enriched)
             elif io_data is not None:
-                # Тег только в IO list
+                io_desc = io_data.get("Описание", "")
                 synth_rec = {
                     "Tag": tag_name,
                     "Groups": "—",
-                    "DescEng": "",
+                    "DescEng": io_desc,
                     "DescRus": "",
                     "Algorithms": None,
                     "PLC": None,
@@ -169,7 +169,7 @@ class SearchService:
                         "IOAddress": io_data.get("IO-адрес", ""),
                         "IOType": io_data.get("Тип", ""),
                     },
-                    "_signal_purpose": "",
+                    "_signal_purpose": io_desc,
                 }
                 details.append(synth_rec)
 
