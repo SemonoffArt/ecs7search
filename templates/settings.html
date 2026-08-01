@@ -246,6 +246,25 @@
             </div>
         </div>
 
+        <!-- IO List ZIF-2 -->
+        <div class="instruction-card">
+            <div class="instruction-header">
+                <span class="instruction-icon">📋</span>
+                <span class="instruction-title">Индексировать IO List (ZIF-2)</span>
+            </div>
+            <div class="instruction-body">
+                <ol class="instruction-steps">
+                    <li>Скопируйте актуальные файлы <code>IO-List-*.xlsx</code> в папку:
+                        <code class="path-code">{{ config.pdf_dir_2 }}/</code>
+                    </li>
+                    <li>Нажмите кнопку <strong>«Индексировать IO List (ZIF-2)»</strong> и дождитесь завершения процесса.</li>
+                </ol>
+                <button onclick="startIndexing('io_list2')" class="btn btn-index" id="btn-index-io2">
+                    📋 Индексировать IO List (ZIF-2)
+                </button>
+            </div>
+        </div>
+
         <!-- MDB -->
         <div class="instruction-card">
             <div class="instruction-header">

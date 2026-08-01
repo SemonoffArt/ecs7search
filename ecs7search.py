@@ -125,6 +125,7 @@ indexing_service = IndexingService(
     io_list_repo=io_list_repo,
     pdf_repo=pdf_repo,
     pdf_repo_2=pdf_repo_2,
+    zif2_io_list_repo=zif2_io_list_repo,
     busfault_dir=BUS_FAULT_DATA_DIR,
     busfault_output_path=BUS_FAULT_EVENTS_PATH,
     busfault_service=busfault_service,
@@ -268,6 +269,7 @@ def start_indexing(task: str):
         "pdf": indexing_service.start_pdf_indexing,
         "pdf2": indexing_service.start_pdf2_indexing,
         "io_list": indexing_service.start_io_list_indexing,
+        "io_list2": indexing_service.start_io_list2_indexing,
         "mdb": indexing_service.start_mdb_tag_extraction,
         "busfaults": indexing_service.start_busfault_indexing,
     }

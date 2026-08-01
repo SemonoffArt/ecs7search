@@ -108,6 +108,7 @@ class IndexingService:
         io_list_repo: IOListRepository | None = None,
         pdf_repo: PDFIndexRepository | None = None,
         pdf_repo_2: PDFIndexRepository | None = None,
+        zif2_io_list_repo=None,
         busfault_dir: Path | None = None,
         busfault_output_path: Path | None = None,
         busfault_service=None,
@@ -127,6 +128,7 @@ class IndexingService:
         self._io_list_repo = io_list_repo
         self._pdf_repo = pdf_repo
         self._pdf_repo_2 = pdf_repo_2
+        self._zif2_io_list_repo = zif2_io_list_repo
         # Bus Fault (ECS8) индексатор
         self._busfault_dir = busfault_dir
         self._busfault_output_path = busfault_output_path
@@ -284,6 +286,35 @@ class IndexingService:
                 self._io_list_repo.invalidate_cache()
 
             indexing_status.complete(True, msg, meta)
+
+        except Exception as e:
+            indexing_status.complete(False, f"Ошибка: {e}")
+
+    def start_io_list2_indexing(self) -> dict:
+        """Перезагружает IO List ZIF-2 из Excel файлов."""
+        if indexing_status.is_running:
+            return {"success": False, "message": "Индексирование уже запущено"}
+
+        threading.Thread(
+            target=self._run_io_list2_indexing,
+            daemon=True,
+        ).start()
+
+        return {"success": True, "message": "Индексирование IO List (ZIF-2) запущено"}
+
+    def _run_io_list2_indexing(self) -> None:
+        indexing_status.start("Индексирование IO List (ZIF-2)")
+
+        try:
+            if self._zif2_io_list_repo is not None:
+                self._zif2_io_list_repo.invalidate_cache()
+                # Прогреваем кэш — считываем данные
+                total = len(self._zif2_io_list_repo._load())
+            else:
+                total = 0
+
+            msg = f"Готово! Загружено {total} записей IO List (ZIF-2)"
+            indexing_status.complete(True, msg, {"total_records": total})
 
         except Exception as e:
             indexing_status.complete(False, f"Ошибка: {e}")
