@@ -8,6 +8,8 @@ ecs7search Web UI — Flask-приложение для поиска тегов 
 Архитектура: router → service → repository
 """
 
+import logging
+from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, send_from_directory, url_for
@@ -41,7 +43,9 @@ PDF_DIR_2 = PROJECT_DIR / "data" / "zif2" / "pdf"
 PDF_INDEX_PATH_2 = PROJECT_DIR / "data" / "zif2" / "pdf_index.json"
 MONKEY_IMAGE_PATH = PROJECT_DIR / "data" / "zif1" / "images" / "manky.png"
 TEMP_DIR = PROJECT_DIR / "data" / "zif1" / "temp"
-USER_ACTIONS_LOG_PATH = PROJECT_DIR / "logs" / "user_actions.log"
+LOGS_DIR = PROJECT_DIR / "logs"
+USER_ACTIONS_LOG_PATH = LOGS_DIR / "user_actions.log"
+APP_LOG_PATH = LOGS_DIR / "app.log"
 TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "tags_without_screen_index.json"
 BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "zif1" / "bus_fault_events.json"
 BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "zif1" / "ecs8busfaults"
@@ -141,6 +145,38 @@ app = Flask(__name__)
 app.secret_key = "ecs7search-secret-key-change-me"
 
 audit_logger = AuditLogger(USER_ACTIONS_LOG_PATH)
+
+
+# ─── Логирование работы приложения ─────────────────────────────
+
+def setup_logging() -> None:
+    """Настраивает общее логирование приложения в logs/app.log и консоль."""
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
+
+    formatter = logging.Formatter(
+        "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+
+    file_handler = RotatingFileHandler(
+        APP_LOG_PATH, maxBytes=5 * 1024 * 1024, backupCount=5, encoding="utf-8"
+    )
+    file_handler.setFormatter(formatter)
+    file_handler.setLevel(logging.INFO)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+    if not any(isinstance(h, RotatingFileHandler) for h in root_logger.handlers):
+        root_logger.addHandler(file_handler)
+    if not any(isinstance(h, logging.StreamHandler) for h in root_logger.handlers):
+        root_logger.addHandler(console_handler)
+
+
+setup_logging()
+app.logger.info("Приложение запущено, логи: %s", APP_LOG_PATH)
 
 
 def client_ip() -> str:
