@@ -291,7 +291,8 @@
 let pollingInterval = null;
 
 function startIndexing(task) {
-    const btn = document.getElementById(`btn-index-${task === 'io_list' ? 'io' : task}`);
+    const btnId = task === 'io_list' ? 'io' : task === 'io_list2' ? 'io2' : task;
+    const btn = document.getElementById(`btn-index-${btnId}`);
     btn.disabled = true;
     btn.dataset.originalText = btn.textContent.trim();
     btn.textContent = 'Запуск...';
