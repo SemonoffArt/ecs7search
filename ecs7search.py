@@ -12,6 +12,7 @@ from pathlib import Path
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, send_from_directory, url_for
 
+from utils.audit_logger import AuditLogger
 from utils.busfault_service import BusFaultService
 from utils.config_service import ConfigService
 from utils.indexing_service import IndexingService, indexing_status
@@ -40,6 +41,7 @@ PDF_DIR_2 = PROJECT_DIR / "data" / "zif2" / "pdf"
 PDF_INDEX_PATH_2 = PROJECT_DIR / "data" / "zif2" / "pdf_index.json"
 MONKEY_IMAGE_PATH = PROJECT_DIR / "data" / "zif1" / "images" / "manky.png"
 TEMP_DIR = PROJECT_DIR / "data" / "zif1" / "temp"
+USER_ACTIONS_LOG_PATH = PROJECT_DIR / "logs" / "user_actions.log"
 TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "tags_without_screen_index.json"
 BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "zif1" / "bus_fault_events.json"
 BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "zif1" / "ecs8busfaults"
@@ -138,11 +140,22 @@ indexing_service = IndexingService(
 app = Flask(__name__)
 app.secret_key = "ecs7search-secret-key-change-me"
 
+audit_logger = AuditLogger(USER_ACTIONS_LOG_PATH)
+
+
+def client_ip() -> str:
+    """Возвращает реальный IP клиента с учётом прокси (X-Forwarded-For)."""
+    forwarded = request.headers.get("X-Forwarded-For")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.remote_addr or "-"
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     """Главная страница с формой поиска."""
     if request.method == "GET":
+        audit_logger.log(client_ip(), "open_index")
         return render_template(
             "index.html",
             results=None,
@@ -164,6 +177,16 @@ def index():
         search_mimics = False
         search_pdf = True
         detailed = True
+
+    audit_logger.log(
+        client_ip(),
+        "search",
+        query=query,
+        zif=zif,
+        search_mimics=search_mimics,
+        search_pdf=search_pdf,
+        detailed=detailed,
+    )
 
     results = None
     pdf_results = None
@@ -230,6 +253,7 @@ def tags_without_screen():
     формируется из предварительно сохранённого tags_without_screen_index.json.
     """
     results = search_service.load_tags_without_screens(TAGS_WITHOUT_SCREEN_INDEX_PATH)
+    audit_logger.log(client_ip(), "view_tags_without_screen")
     return render_template("tags_without_screen.html", results=results)
 
 
@@ -237,6 +261,7 @@ def tags_without_screen():
 def tags_without_screen_scan():
     """Запускает сканирование .g файлов и пересоздаёт индекс."""
     index_data = search_service.scan_tags_without_screens(TAGS_WITHOUT_SCREEN_INDEX_PATH)
+    audit_logger.log(client_ip(), "scan_tags_without_screen")
     meta = index_data.get("metadata", {})
     flash(
         f"Сканирование завершено: проверено тегов — {meta.get('total_candidates', 0)}, "
@@ -251,6 +276,7 @@ def tags_without_screen_scan():
 @app.route("/settings")
 def settings():
     """Страница настроек — информация об индексах и конфигурации."""
+    audit_logger.log(client_ip(), "view_settings")
     return render_template(
         "settings.html",
     config=config_service.get_config(),
@@ -281,6 +307,7 @@ def start_indexing(task: str):
         flash(f"Неизвестная задача: {task}", "danger")
         return {"success": False, "message": f"Неизвестная задача: {task}"}
 
+    audit_logger.log(client_ip(), "start_indexing", task=task)
     result = task_map[task]()
     flash(result.get("message", ""), "success" if result.get("success") else "warning")
     return result
@@ -302,6 +329,7 @@ def serve_temp_image(filename):
 @app.route("/busfaults")
 def busfaults():
     """Страница аналитики ECS8 Bus Fault."""
+    audit_logger.log(client_ip(), "view_busfaults")
     return render_template(
         "busfaults.html",
         file_exists=busfault_service.exists(),
@@ -336,6 +364,17 @@ def busfaults_analyze():
             top_n = max(1, min(50, int(top_n_raw)))
         except ValueError:
             top_n = 10
+
+    audit_logger.log(
+        client_ip(),
+        "busfault_analyze",
+        tag=tag_filter,
+        date_from=date_from,
+        date_to=date_to,
+        last_days=last_days,
+        top_n=top_n,
+        run_to_busfault=run_to_busfault,
+    )
 
     result = busfault_service.analyze(
         tag_filter=tag_filter,
