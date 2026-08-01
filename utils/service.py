@@ -175,7 +175,9 @@ class SearchService:
 
         return details
 
-    # ─── Теги без экрана ──────────────────────────────────────────
+    # ─── Поиск ZIF-1 ─────────────────────────────────────────────
+
+    def execute(self, query: str, detailed: bool) -> tuple[dict | None, list[tuple[str, str]]]:
         """
         Возвращает (results_dict, flashes).
         results_dict — данные для render_template или None.
