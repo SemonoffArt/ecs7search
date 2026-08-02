@@ -1,6 +1,6 @@
 [project]
 name = "ecs7search"
-version = "0.1.2"
+version = "1.0.0"
 description = "SCADA ECS7 Mimic Files Search Tool — Web UI"
 requires-python = ">=3.10"
 dependencies = [
