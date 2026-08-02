@@ -522,9 +522,22 @@ footer {
     background-color: #34495e;
 }
 
+.print-manky {
+    display: none;
+}
+
 @media print {
     .no-print {
         display: none !important;
+    }
+    .print-manky {
+        display: block !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        opacity: 0.5;
+        z-index: 9999;
     }
     .navbar,
     footer,
