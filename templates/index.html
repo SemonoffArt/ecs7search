@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="card">
+<div class="card no-print">
     <div class="section-title">🔎 Поиск тега</div>
     <hr class="section-separator">
 
@@ -46,6 +46,7 @@
 <!-- Сообщения (flash) -->
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
+    <div class="no-print">
         {% for category, message in messages %}
             {% set banner_class = "status-banner-info" %}
             {% if category == "danger" %}
@@ -59,22 +60,23 @@
                 {{ message }}
             </div>
         {% endfor %}
+    </div>
     {% endif %}
 {% endwith %}
 
 <!-- Результаты поиска -->
 <!-- {% if results %} -->
 <div class="card">
-    <div class="section-title">
+    <div class="section-title no-print">
         Результаты поиска: <code>{{ results.query }}</code>
         <span class="badge badge-info">{{ results.total_tags }} тегов</span>
         <span class="badge badge-ok">{{ results.total_files }} файлов</span>
     </div>
-    <hr class="section-separator">
+    <hr class="section-separator no-print">
 
     <!-- Расширенная информация по тегах -->
     {% if detailed and results.tag_details %}
-    <div class="card">
+    <div class="card card-printable">
         <div style="margin-bottom:15px; overflow-x:auto;">
             <table class="tag-detail-table">
                 <thead>
@@ -158,12 +160,13 @@
                 </tbody>
             </table>
         </div>
+        <button type="button" class="btn btn-print no-print" onclick="window.print()">🖨 Печать</button>
     </div>    
     {% endif %}
 
     <!-- Результаты поиска по PDF -->
     {% if pdf_results %}
-    <div class="card">
+    <div class="card no-print">
         <div class="section-title">
             📄 Результаты поиска в PDF: <code>{{ pdf_results.query }}</code>
             <span class="badge badge-info">{{ pdf_results.total_tags }} тегов</span>
@@ -217,7 +220,7 @@
         </div>
     </div>
     {% endif %}
-    <div class="card">
+    <div class="card no-print">
         <!-- Дата создания индекса мимиков -->
         {% if results.index_metadata %}
         <div style="font-size:11px; color:#888; margin-bottom:8px;">

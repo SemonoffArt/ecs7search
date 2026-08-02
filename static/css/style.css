@@ -505,3 +505,62 @@ footer {
     font-size: 14px;
     white-space: nowrap;
 }
+
+.btn-print {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 18px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    border: 1px solid #34495e;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.btn-print:hover {
+    background-color: #34495e;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    .navbar,
+    footer,
+    #btn-back-to-top,
+    #btn-scroll-to-bottom,
+    .modal-overlay {
+        display: none !important;
+    }
+    .card,
+    .card-printable {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: none !important;
+        margin: 0 !important;
+    }
+    .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    body {
+        background: white !important;
+        padding: 10mm;
+    }
+    .tag-detail-table {
+        width: 100%;
+        font-size: 11px;
+        border-collapse: collapse;
+    }
+    .tag-detail-table th {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+        border: 1px solid #ccc;
+    }
+    .tag-detail-table td {
+        border: 1px solid #ddd;
+        padding: 3px 5px;
+    }
+}

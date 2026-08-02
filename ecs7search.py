@@ -144,6 +144,15 @@ indexing_service = IndexingService(
 app = Flask(__name__)
 app.secret_key = "ecs7search-secret-key-change-me"
 
+VERSION_PATH = PROJECT_DIR / "VERSION"
+app_version = VERSION_PATH.read_text(encoding="utf-8").strip() if VERSION_PATH.exists() else "0.0.0"
+
+
+@app.context_processor
+def inject_version() -> dict:
+    return {"app_version": app_version}
+
+
 audit_logger = AuditLogger(USER_ACTIONS_LOG_PATH)
 
 
