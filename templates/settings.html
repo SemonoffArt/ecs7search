@@ -267,6 +267,9 @@
 
     <!-- Инструкции по индексированию -->
     <div class="indexing-instructions">
+        <!-- ЗИФ1 -->
+        <div class="indexing-group">ЗИФ1</div>
+
         <!-- Мнемосхемы -->
         <div class="instruction-card">
             <div class="instruction-header">
@@ -307,26 +310,6 @@
             </div>
         </div>
 
-        <!-- PDF ZIF-2 -->
-        <div class="instruction-card">
-            <div class="instruction-header">
-                <span class="instruction-icon">📄</span>
-                <span class="instruction-title">Индексировать PDF (ZIF-2)</span>
-            </div>
-            <div class="instruction-body">
-                <ol class="instruction-steps">
-                    <li>Скопируйте актуальные PDF-файлы электросхем в папку:
-                        <code class="path-code">{{ config.pdf_dir_2 }}</code>
-                    </li>
-                    <li>Нажмите кнопку <strong>«Индексировать PDF (ZIF-2)»</strong> и дождитесь завершения процесса.</li>
-                    <li>Убедитесь, что на карточке <strong>«Индекс PDF (ZIF-2)»</strong> обновилась дата создания.</li>
-                </ol>
-                <button onclick="startIndexing('pdf2')" class="btn btn-index" id="btn-index-pdf2">
-                    📄 Индексировать PDF (ZIF-2)
-                </button>
-            </div>
-        </div>
-
         <!-- IO List -->
         <div class="instruction-card">
             <div class="instruction-header">
@@ -343,6 +326,49 @@
                 </ol>
                 <button onclick="startIndexing('io_list')" class="btn btn-index" id="btn-index-io">
                     📋 Индексировать IO List
+                </button>
+            </div>
+        </div>
+
+        <!-- MDB -->
+        <div class="instruction-card">
+            <div class="instruction-header">
+                <span class="instruction-icon">🗄️</span>
+                <span class="instruction-title">Извлечь теги из MDB</span>
+            </div>
+            <div class="instruction-body">
+                <ol class="instruction-steps">
+                    <li>Скопируйте актуальные MDB-файлы базы данных ECS в папку:
+                        <code class="path-code">{{ config.project_dir }}/data/zif1/FlsaProDb/</code>
+                    </li>
+                    <li>Нажмите кнопку <strong>«Извлечь теги из MDB»</strong> и дождитесь завершения процесса.</li>
+                    <li>Убедитесь, что на карточке <strong>«Теги»</strong> обновилась дата создания.</li>
+                </ol>
+                <button onclick="startIndexing('mdb')" class="btn btn-index btn-index-mdb" id="btn-index-mdb">
+                    🗄️ Извлечь теги из MDB
+                </button>
+            </div>
+        </div>
+
+        <!-- ЗИФ2 -->
+        <div class="indexing-group">ЗИФ2</div>
+
+        <!-- PDF ZIF-2 -->
+        <div class="instruction-card">
+            <div class="instruction-header">
+                <span class="instruction-icon">📄</span>
+                <span class="instruction-title">Индексировать PDF (ZIF-2)</span>
+            </div>
+            <div class="instruction-body">
+                <ol class="instruction-steps">
+                    <li>Скопируйте актуальные PDF-файлы электросхем в папку:
+                        <code class="path-code">{{ config.pdf_dir_2 }}</code>
+                    </li>
+                    <li>Нажмите кнопку <strong>«Индексировать PDF (ZIF-2)»</strong> и дождитесь завершения процесса.</li>
+                    <li>Убедитесь, что на карточке <strong>«Индекс PDF (ZIF-2)»</strong> обновилась дата создания.</li>
+                </ol>
+                <button onclick="startIndexing('pdf2')" class="btn btn-index" id="btn-index-pdf2">
+                    📄 Индексировать PDF (ZIF-2)
                 </button>
             </div>
         </div>
@@ -378,30 +404,10 @@
                         <code class="path-code">{{ config.project_dir }}/data/zif2/</code>
                     </li>
                     <li>Нажмите кнопку <strong>«Индексировать Points»</strong> и дождитесь завершения процесса.</li>
-                    <li>Убедитесь, что на карточке <strong>«Теги ZIF-2»</strong> обновилась дата создания.</li>
+                    <li>Убедитесь, что на карточке <strong>«Точки (Points)»</strong> обновилась дата создания.</li>
                 </ol>
                 <button onclick="startIndexing('points')" class="btn btn-index" id="btn-index-points">
                     📊 Индексировать Points
-                </button>
-            </div>
-        </div>
-
-        <!-- MDB -->
-        <div class="instruction-card">
-            <div class="instruction-header">
-                <span class="instruction-icon">🗄️</span>
-                <span class="instruction-title">Извлечь теги из MDB</span>
-            </div>
-            <div class="instruction-body">
-                <ol class="instruction-steps">
-                    <li>Скопируйте актуальные MDB-файлы базы данных ECS в папку:
-                        <code class="path-code">{{ config.project_dir }}/data/zif1/FlsaProDb/</code>
-                    </li>
-                    <li>Нажмите кнопку <strong>«Извлечь теги из MDB»</strong> и дождитесь завершения процесса.</li>
-                    <li>Убедитесь, что на карточке <strong>«Теги»</strong> обновилась дата создания.</li>
-                </ol>
-                <button onclick="startIndexing('mdb')" class="btn btn-index btn-index-mdb" id="btn-index-mdb">
-                    🗄️ Извлечь теги из MDB
                 </button>
             </div>
         </div>
@@ -645,6 +651,20 @@ document.addEventListener('DOMContentLoaded', () => {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 16px;
     margin-top: 16px;
+}
+
+.indexing-group {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #1976d2;
+    margin-top: 4px;
+}
+
+.indexing-group:first-child {
+    margin-top: 0;
 }
 
 .instruction-card {
