@@ -47,8 +47,8 @@ LOGS_DIR = PROJECT_DIR / "logs"
 USER_ACTIONS_LOG_PATH = LOGS_DIR / "user_actions.log"
 APP_LOG_PATH = LOGS_DIR / "app.log"
 TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "tags_without_screen_index.json"
-BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "zif1" / "bus_fault_events.json"
-BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "zif1" / "ecs8busfaults"
+BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "zif2" / "bus_fault_events.json"
+BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "zif2" / "ecs8busfaults"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
 # ZIF-2 paths

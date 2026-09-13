@@ -23,4 +23,4 @@ No tests, no lint, no typecheck, no CI configured anywhere.
 - **Data split**: source files (`.g`, `.mdb`, `.xlsx`, PDFs) are gitignored under `data/zif1/`. JSON indices (`mimics_index.json`, `pdf_index.json`, `tags.json`, `io_list.json`) are tracked in git but their commented-out lines in `.gitignore` suggest they were historically ignored too.
 - **UV is the required package manager**; `pip install -r requirements.txt` is a fallback.
 - **Search supports wildcards**: `*` and `?` in queries.
-- **Bus fault analytics** (ECS8) uses CSV event exports dropped into `data/zif1/ecs8busfaults/`.
+- **Bus fault analytics** (ECS8) uses CSV event exports dropped into `data/zif2/ecs8busfaults/`.

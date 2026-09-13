@@ -71,8 +71,8 @@ data/zif1/FlsaProDb/
 *.ods
 
 # ── ECS7SEARCH: Bus Fault data ──────────────────────────
-data/zif1/bus_fault_events.json
-data/zif1/ecs8busfaults/
+data/zif2/bus_fault_events.json
+data/zif2/ecs8busfaults/
 temp/ecs7_events_busfault_extractor/
 
 # ── ECS7SEARCH: Misc artifacts ─────────────────────────
