@@ -6,7 +6,7 @@
 и списком листов (PLC), где тег встречается.
 
 Запуск:
-    uv run utils/iolist_searcher.py
+    uv run utils/iolist_indexer.py
 """
 
 import json
@@ -21,10 +21,10 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 IO_LIST_PATHS = [
-    PROJECT_DIR / "data" / "IO_list.xlsx",
-    PROJECT_DIR / "data" / "IO_list_992CS111A01(desorb).xlsx",
+    PROJECT_DIR / "data" / "zif1" / "IO_list.xlsx",
+    PROJECT_DIR / "data" / "zif1" / "IO_list_992CS111A01(desorb).xlsx",
 ]
-OUTPUT_PATH = PROJECT_DIR / "data" / "io_list.json"
+OUTPUT_PATH = PROJECT_DIR / "data" / "zif1" / "io_list.json"
 
 # Колонки, которые переносим в JSON (SignalCode — ключ)
 VALUE_COLUMNS = [

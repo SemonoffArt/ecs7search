@@ -2,12 +2,12 @@
 """
 Индексатор PDF документов SCADA ECS7
 
-Сканирует PDF файлы в ./data/pdf/, извлекает теги ECS7
+Сканирует PDF файлы в ./data/zif1/pdf/, извлекает теги ECS7
 из текста на каждой странице и сохраняет индекс в JSON.
 
 Запуск:
     uv run utils/pdf_indexer.py
-    uv run utils/pdf_indexer.py ./data/pdf -o data/pdf_index.json
+    uv run utils/pdf_indexer.py ./data/zif1/pdf -o data/zif1/pdf_index.json
 """
 
 import argparse

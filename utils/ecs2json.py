@@ -22,7 +22,8 @@ _PRG_DIR = Path(__file__).resolve().parent.parent
 _UTL_DIR = _PRG_DIR / 'utils'
 
 _DATA_DIR = _PRG_DIR / 'data'
-_TAG_DB_DIR = _DATA_DIR / 'FlsaProDb'
+_ZIF_DIR = _DATA_DIR / 'zif1'
+_TAG_DB_DIR = _ZIF_DIR / 'FlsaProDb'
 
 
 _PLCNAME = {0: 'spare', 1: '991', 2: '992', 3: '990'}
@@ -238,7 +239,7 @@ class TagsHelper(object):
         self.index_time = 0
         self.index_date = ""
         self.pages_without_tags = ""
-        self.mimic_dir = _DATA_DIR / 'ECS2261'
+        self.mimic_dir = _ZIF_DIR / 'mimics'
         self.update()
         logger.info(f"Init class TagsHelper")
 
@@ -361,7 +362,7 @@ class TagsHelper(object):
 
     def find_tag_on_mimic(self, mimic, tag) -> bool:
         """Проверяет наличие тега на мнемосхеме"""
-        mim = _DATA_DIR / 'ECS2261' / mimic
+        mim = _ZIF_DIR / 'mimics' / mimic
         if not mim.is_file():
             err_msg = f"Cannot find file: {mim} "
             logger.error(err_msg)
@@ -435,9 +436,10 @@ class TagsHelper(object):
             }
             equips.append(equip)
         data = {"equips": equips}
-        with open( _DATA_DIR / "equips1.json", "w", encoding="utf-8") as f:
+        output_path = _ZIF_DIR / "equips1.json"
+        with open(output_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
-        print(f"{Fore.YELLOW}Оборудование сохранено в: {Fore.GREEN}  {_DATA_DIR / 'equips1.json'}  {Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}Оборудование сохранено в: {Fore.GREEN}  {output_path}  {Style.RESET_ALL}")
 
     def save_json(self, tags=None):
         """Сохраняет теги в JSON файл с метаданными"""
@@ -452,9 +454,10 @@ class TagsHelper(object):
             },
             "tags": tags,
         }
-        with open(_DATA_DIR / "tags.json", "w", encoding="utf-8") as f:
+        output_path = _ZIF_DIR / "tags.json"
+        with open(output_path, "w", encoding="utf-8") as f:
             json.dump(output, f, ensure_ascii=False, indent=4)
-        print(f"{Fore.YELLOW}Теги сохранены в:{Fore.GREEN}  {_DATA_DIR / 'tags.json'}  {Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}Теги сохранены в:{Fore.GREEN}  {output_path}  {Style.RESET_ALL}")
 
 
 
