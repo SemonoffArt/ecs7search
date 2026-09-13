@@ -8,6 +8,8 @@
     <!-- Информация об индексах -->
     <div class="section-subtitle">📊 Состояние индексов</div>
 
+    <!-- ЗИФ1 -->
+    <div class="stats-group">ЗИФ1</div>
     <div class="stats-grid">
         <!-- Mimics Index -->
         <div class="stat-card">
@@ -34,7 +36,7 @@
             </div>
         </div>
 
-        <!-- PDF Index -->
+        <!-- PDF Index (ZIF-1) -->
         <div class="stat-card">
             <div class="stat-card-title">📄 Индекс PDF</div>
             <div class="stat-card-body">
@@ -59,9 +61,53 @@
             </div>
         </div>
 
+        <!-- Tags Index (ZIF-1) -->
+        <div class="stat-card">
+            <div class="stat-card-title">🏷️ Теги MDB</div>
+            <div class="stat-card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Всего тегов:</span>
+                    <span class="stat-value">{{ tags_stats.total_tags }}</span>
+                </div>
+                {% if tags_stats.indexed_at %}
+                <div class="stat-row">
+                    <span class="stat-label">Создан:</span>
+                    <span class="stat-value">{{ tags_stats.indexed_at }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- IO List (ZIF-1) -->
+        <div class="stat-card">
+            <div class="stat-card-title">📋 IO List</div>
+            <div class="stat-card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Записей:</span>
+                    <span class="stat-value">{{ io_stats.total_records }}</span>
+                </div>
+                {% if io_stats.total_files %}
+                <div class="stat-row">
+                    <span class="stat-label">Файлов:</span>
+                    <span class="stat-value">{{ io_stats.total_files }}</span>
+                </div>
+                {% endif %}
+                {% if io_stats.generated_at %}
+                <div class="stat-row">
+                    <span class="stat-label">Создан:</span>
+                    <span class="stat-value">{{ io_stats.generated_at }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗИФ2 -->
+    <div class="stats-group">ЗИФ2</div>
+    <div class="stats-grid">
         <!-- PDF Index (ZIF-2) -->
         <div class="stat-card">
-            <div class="stat-card-title">📄 Индекс PDF (ZIF-2)</div>
+            <div class="stat-card-title">📄 Индекс PDF</div>
             <div class="stat-card-body">
                 <div class="stat-row">
                     <span class="stat-label">PDF файлов:</span>
@@ -84,35 +130,50 @@
             </div>
         </div>
 
-        <!-- Tags Index -->
+        <!-- Points (ZIF-2) -->
         <div class="stat-card">
-            <div class="stat-card-title">🏷️ Теги</div>
+            <div class="stat-card-title">📊 Точки (Points)</div>
             <div class="stat-card-body">
                 <div class="stat-row">
-                    <span class="stat-label">Всего тегов:</span>
-                    <span class="stat-value">{{ tags_stats.total_tags }}</span>
+                    <span class="stat-label">Точек:</span>
+                    <span class="stat-value">{{ points_stats.total_points }}</span>
                 </div>
-                {% if tags_stats.indexed_at %}
+                {% if points_stats.generated_at %}
                 <div class="stat-row">
                     <span class="stat-label">Создан:</span>
-                    <span class="stat-value">{{ tags_stats.indexed_at }}</span>
+                    <span class="stat-value">{{ points_stats.generated_at }}</span>
                 </div>
                 {% endif %}
             </div>
         </div>
 
-        <!-- IO List -->
+        <!-- IO List (ZIF-2) -->
         <div class="stat-card">
             <div class="stat-card-title">📋 IO List</div>
             <div class="stat-card-body">
                 <div class="stat-row">
                     <span class="stat-label">Записей:</span>
-                    <span class="stat-value">{{ io_stats.total_records }}</span>
+                    <span class="stat-value">{{ io2_stats.total_records }}</span>
                 </div>
-                {% if io_stats.generated_at %}
+            </div>
+        </div>
+
+        <!-- BusFaults (ZIF-2) -->
+        <div class="stat-card">
+            <div class="stat-card-title">⚡ BusFaults</div>
+            <div class="stat-card-body">
                 <div class="stat-row">
-                    <span class="stat-label">Создан:</span>
-                    <span class="stat-value">{{ io_stats.generated_at }}</span>
+                    <span class="stat-label">Тегов:</span>
+                    <span class="stat-value">{{ busfault_stats.total_tags }}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Событий:</span>
+                    <span class="stat-value">{{ busfault_stats.total_records }}</span>
+                </div>
+                {% if busfault_stats.updated_at %}
+                <div class="stat-row">
+                    <span class="stat-label">Обновлён:</span>
+                    <span class="stat-value">{{ busfault_stats.updated_at }}</span>
                 </div>
                 {% endif %}
             </div>

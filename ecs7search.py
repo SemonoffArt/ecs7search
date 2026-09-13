@@ -118,6 +118,7 @@ config_service = ConfigService(
     io_list2_dir=ZIF2_IO_LIST_DIR,
     busfault_dir=BUS_FAULT_DATA_DIR,
     busfault_events_path=BUS_FAULT_EVENTS_PATH,
+    io_list2_repo=zif2_io_list_repo,
 )
 
 busfault_service = BusFaultService(json_path=BUS_FAULT_EVENTS_PATH)
@@ -336,6 +337,9 @@ def settings():
     pdf2_stats=config_service.get_pdf2_stats(),
     tags_stats=config_service.get_tags_stats(),
     io_stats=config_service.get_io_stats(),
+    io2_stats=config_service.get_io2_stats(),
+    points_stats=config_service.get_points_stats(),
+    busfault_stats=config_service.get_busfault_stats(),
         indexing_status=indexing_status.status,
     )
 

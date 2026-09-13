@@ -345,6 +345,14 @@ footer {
     color: #2c3e50;
     margin-bottom: 12px;
 }
+.stats-group {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #1976d2;
+    margin: 4px 0 8px;
+}
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
