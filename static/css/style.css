@@ -383,6 +383,14 @@ footer {
 .config-table {
     font-size: 13px;
 }
+.config-group {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #1976d2;
+    margin: 10px 0 2px;
+}
 .config-row {
     display: flex;
     align-items: center;

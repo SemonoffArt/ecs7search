@@ -129,6 +129,10 @@
             <span class="config-label">Проект:</span>
             <code class="config-value">{{ config.project_dir }}</code>
         </div>
+    </div>
+
+    <div class="config-group">ЗИФ1</div>
+    <div class="config-table">
         <div class="config-row">
             <span class="config-label">Экраны:</span>
             <code class="config-value">{{ config.mimics_dir }}</code>
@@ -138,8 +142,44 @@
             <code class="config-value">{{ config.pdf_dir }}</code>
         </div>
         <div class="config-row">
+            <span class="config-label">Теги (tags.json):</span>
+            <code class="config-value">{{ config.tags_path }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">IO List:</span>
+            <code class="config-value">{{ config.io_list_path }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">Базы MDB:</span>
+            <code class="config-value">{{ config.mdb_dir }}</code>
+        </div>
+        <div class="config-row">
             <span class="config-label">Временные:</span>
             <code class="config-value">{{ config.temp_dir }}</code>
+        </div>
+    </div>
+
+    <div class="config-group">ЗИФ2</div>
+    <div class="config-table">
+        <div class="config-row">
+            <span class="config-label">PDF:</span>
+            <code class="config-value">{{ config.pdf_dir_2 }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">IO List (Excel):</span>
+            <code class="config-value">{{ config.io_list2_dir }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">Points:</span>
+            <code class="config-value">{{ config.points_path }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">BusFaults (CSV):</span>
+            <code class="config-value">{{ config.busfault_dir }}</code>
+        </div>
+        <div class="config-row">
+            <span class="config-label">BusFaults (JSON):</span>
+            <code class="config-value">{{ config.busfault_events_path }}</code>
         </div>
     </div>
 

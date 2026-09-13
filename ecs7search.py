@@ -47,6 +47,7 @@ LOGS_DIR = PROJECT_DIR / "logs"
 USER_ACTIONS_LOG_PATH = LOGS_DIR / "user_actions.log"
 APP_LOG_PATH = LOGS_DIR / "app.log"
 TAGS_WITHOUT_SCREEN_INDEX_PATH = PROJECT_DIR / "data" / "zif1" / "tags_without_screen_index.json"
+MDB_DIR = PROJECT_DIR / "data" / "zif1" / "FlsaProDb"
 BUS_FAULT_EVENTS_PATH = PROJECT_DIR / "data" / "zif2" / "bus_fault_events.json"
 BUS_FAULT_DATA_DIR = PROJECT_DIR / "data" / "zif2" / "ecs8busfaults"
 TEMP_DIR.mkdir(parents=True, exist_ok=True)
@@ -112,6 +113,11 @@ config_service = ConfigService(
     pdf_index_path_2=PDF_INDEX_PATH_2,
     tags_path=TAGS_PATH,
     io_list_path=IO_LIST_PATH,
+    mdb_dir=MDB_DIR,
+    points_path=POINTS_JSON_PATH,
+    io_list2_dir=ZIF2_IO_LIST_DIR,
+    busfault_dir=BUS_FAULT_DATA_DIR,
+    busfault_events_path=BUS_FAULT_EVENTS_PATH,
 )
 
 busfault_service = BusFaultService(json_path=BUS_FAULT_EVENTS_PATH)

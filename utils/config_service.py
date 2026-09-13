@@ -25,6 +25,11 @@ class ConfigService:
         pdf_index_path_2: Path,
         tags_path: Path,
         io_list_path: Path,
+        mdb_dir: Path | None = None,
+        points_path: Path | None = None,
+        io_list2_dir: Path | None = None,
+        busfault_dir: Path | None = None,
+        busfault_events_path: Path | None = None,
     ) -> None:
         self._project_dir = project_dir
         self._mimics_dir = mimics_dir
@@ -36,18 +41,33 @@ class ConfigService:
         self._pdf_index_path_2 = pdf_index_path_2
         self._tags_path = tags_path
         self._io_list_path = io_list_path
+        self._mdb_dir = mdb_dir
+        self._points_path = points_path
+        self._io_list2_dir = io_list2_dir
+        self._busfault_dir = busfault_dir
+        self._busfault_events_path = busfault_events_path
 
     # ─── Публичные методы ─────────────────────────────────────────
 
     def get_config(self) -> dict[str, str]:
         """Возвращает словарь с путями конфигурации."""
-        return {
+        config = {
             "project_dir": str(self._project_dir),
             "mimics_dir": str(self._mimics_dir),
             "pdf_dir": str(self._pdf_dir),
             "pdf_dir_2": str(self._pdf_dir_2),
             "temp_dir": str(self._temp_dir),
+            "tags_path": str(self._tags_path),
+            "io_list_path": str(self._io_list_path),
+            "mdb_dir": str(self._mdb_dir) if self._mdb_dir else "",
+            "points_path": str(self._points_path) if self._points_path else "",
+            "io_list2_dir": str(self._io_list2_dir) if self._io_list2_dir else "",
+            "busfault_dir": str(self._busfault_dir) if self._busfault_dir else "",
+            "busfault_events_path": (
+                str(self._busfault_events_path) if self._busfault_events_path else ""
+            ),
         }
+        return config
 
     def get_mimics_stats(self) -> dict:
         """Статистика по индексам мнемосхем."""
